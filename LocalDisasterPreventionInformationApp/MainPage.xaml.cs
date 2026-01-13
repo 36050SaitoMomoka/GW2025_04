@@ -14,7 +14,7 @@
             count++;
 
             if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+                CounterBtn.Text = $"Clicked {count} time";//KANATO
             else
                 CounterBtn.Text = $"Clicked {count} times"; //test
 
