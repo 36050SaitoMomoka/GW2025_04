@@ -1,59 +1,91 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LocalDisasterPreventionInformationApp.Pages.Top.TopPage"
-             Title="地域防災情報アプリ">
+             x:Class="LocalDisasterPreventionInformationApp.Pages.Top.TopPage">
 
     <Grid Padding="10">
 
-        <!-- 行設定 -->
         <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
 
-            <!-- メニュー -->
-            <HorizontalStackLayout Grid.Row="0" Spacing="10">
+            <!-- ヘッダー上部の背景（Row 0） -->
+            <BoxView Grid.Row="0"
+                     Color="#F2F2F2"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand" />
 
-                <!-- ハンバーガーメニュー -->
-                <ImageButton x:Name="menuButton"
-             Source="hamburger.png"
-             WidthRequest="30"
-             HeightRequest="30"
-             Clicked="OnMenuButtonClicked" />
+            <!-- ヘッダー下部の背景（Row 1） -->
+            <BoxView Grid.Row="1"
+                     Color="#F2F2F2"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand" />
 
-                <!-- 選択されたページ名 -->
-                <Label x:Name="selectedMenuLabel"
-           Text="トップページ"
-           FontSize="20"
-           VerticalOptions="Center" />
+            <!-- フッターの背景（Row 4） -->
+            <BoxView Grid.Row="4"
+                     Color="#F2F2F2"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand" />
 
-            </HorizontalStackLayout>
-            <!-- 右上アイコン -->
-            <HorizontalStackLayout Grid.Row="1"
-                                   HorizontalOptions="End"
-                                   Spacing="15">
-                <ImageButton Source="chat.png" Clicked="OnChatClicked" WidthRequest="30" HeightRequest="30" />
-                <ImageButton Source="notification.png" Clicked="OnNotificationClicked" WidthRequest="30" HeightRequest="30" />
-                <ImageButton Source="setting.png" Clicked="OnSettingsClicked" WidthRequest="30" HeightRequest="30" />
-            </HorizontalStackLayout>
+            <!-- Row 0: 大きなアプリタイトル + 右上アイコン -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Padding="0,0,0,10">
 
-            <!-- ルート検索ボタン -->
+                <Label Grid.Column="0"
+                       Text="地域防災情報アプリ"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+
+                <HorizontalStackLayout x:Name="topRightIcons" Grid.Column="1"
+                                       Spacing="10"
+                                       VerticalOptions="Center">
+                    <ImageButton Aspect="AspectFit" Source="chat.png" WidthRequest="100" HeightRequest="100" Clicked="OnChatClicked" />
+                    <ImageButton Aspect="AspectFit" Source="notification.png" WidthRequest="100" HeightRequest="100" Clicked="OnNotificationClicked" />
+                    <ImageButton Aspect="AspectFit" Source="setting.png" WidthRequest="100" HeightRequest="100" Clicked="OnSettingsClicked" />
+                </HorizontalStackLayout>
+
+            </Grid>
+
+            <!-- Row 1: ハンバーガー + トップページ -->
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto" Padding="0,5">
+
+                <ImageButton Aspect="AspectFit" Grid.Column="0"
+                             x:Name="menuButton"
+                             Source="hamburger.png"
+                             WidthRequest="100"
+                             HeightRequest="100"
+                             Clicked="OnMenuButtonClicked" />
+
+                <Label Grid.Column="1"
+                       x:Name="selectedMenuLabel"
+                       Text="トップページ"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Margin="10,0,0,0" />
+
+            </Grid>
+
+            <!-- Row 2: ルート検索ボタン -->
             <Button Grid.Row="2"
+                    x:Name="routeSearchButton"
                     Text="ルート検索"
                     Clicked="OnRouteSearchClicked"
                     HorizontalOptions="Center"
-                    Margin="0,20" />
+                    Margin="0,10" />
 
-            <!-- Leaflet 用 WebView -->
+            <!-- Row 3: 地図 -->
             <WebView Grid.Row="3"
                      x:Name="mapWebView"
                      Source="map.html"
-                     HeightRequest="300" />
+                     VerticalOptions="FillAndExpand" />
 
-            <!-- ニュース -->
+            <!-- Row 4: ニュース（フッター） -->
             <Label Grid.Row="4"
                    x:Name="newsLabel"
                    Text="災害速報や災害に関するニュースなど"
                    FontSize="16"
                    HorizontalOptions="Center"
+                   Margin="0,10"
                    Opacity="0" />
 
         </Grid>
