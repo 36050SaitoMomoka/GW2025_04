@@ -14,17 +14,10 @@
 
                 <!-- ハンバーガーメニュー -->
                 <ImageButton x:Name="menuButton"
-                 Source="hamburger_icon.png"
-                 WidthRequest="30"
-                 HeightRequest="30">
-                    <ImageButton.ContextFlyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem Text="トップページ" Clicked="OnMenuItemClicked" />
-                            <MenuFlyoutItem Text="災害速報" Clicked="OnMenuItemClicked" />
-                            <MenuFlyoutItem Text="ハザードマップ" Clicked="OnMenuItemClicked" />
-                        </MenuFlyout>
-                    </ImageButton.ContextFlyout>
-                </ImageButton>
+             Source="hamburger.png"
+             WidthRequest="30"
+             HeightRequest="30"
+             Clicked="OnMenuButtonClicked" />
 
                 <!-- 選択されたページ名 -->
                 <Label x:Name="selectedMenuLabel"
@@ -37,9 +30,9 @@
             <HorizontalStackLayout Grid.Row="1"
                                    HorizontalOptions="End"
                                    Spacing="15">
-                <ImageButton Source="chat_icon.png" Clicked="OnChatClicked" WidthRequest="30" HeightRequest="30" />
-                <ImageButton Source="notification_icon.png" Clicked="OnNotificationClicked" WidthRequest="30" HeightRequest="30" />
-                <ImageButton Source="settings_icon.png" Clicked="OnSettingsClicked" WidthRequest="30" HeightRequest="30" />
+                <ImageButton Source="chat.png" Clicked="OnChatClicked" WidthRequest="30" HeightRequest="30" />
+                <ImageButton Source="notification.png" Clicked="OnNotificationClicked" WidthRequest="30" HeightRequest="30" />
+                <ImageButton Source="settings.png" Clicked="OnSettingsClicked" WidthRequest="30" HeightRequest="30" />
             </HorizontalStackLayout>
 
             <!-- ルート検索ボタン -->

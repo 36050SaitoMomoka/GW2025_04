@@ -59,7 +59,7 @@ public partial class TopPage : ContentPage {
     }
 
     //選択されたメニュー名を表示
-    private void OnMenuItemClicked(object sender, EventArgs e) {
+    private void OnMenuButtonClicked(object sender, EventArgs e) {
         if (sender is MenuFlyoutItem item) {
             selectedMenuLabel.Text = item.Text;
 
