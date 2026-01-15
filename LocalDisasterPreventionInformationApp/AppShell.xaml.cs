@@ -17,6 +17,9 @@
 
             // マイページ
             Routing.RegisterRoute("mypage", typeof(Pages.My.MyPage));
+
+            //設定
+            Routing.RegisterRoute("setting", typeof(Pages.Setting.SettingPage));
         }
     }
 }

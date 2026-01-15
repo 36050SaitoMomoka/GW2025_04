@@ -4,29 +4,33 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:top="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Top"
-    xmlns:disaster="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Disaster"
     xmlns:friends="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Friends"
-    xmlns:stock="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Stock"
     xmlns:notification="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Notification"
     xmlns:setting="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Setting"
-    xmlns:hazard="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Hazard">
+    xmlns:stock="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Stock"
+    xmlns:hazard="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Hazard"
+    xmlns:disaster="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Disaster">
 
-    <TabBar>
+    <!-- 最初に表示されるトップページ -->
+    <FlyoutItem Title="トップページ">
+        <ShellContent ContentTemplate="{DataTemplate top:TopPage}" />
+    </FlyoutItem>
 
-        <ShellContent Title="Top" ContentTemplate="{DataTemplate top:TopPage}" Route="TopPage" />
+    <!-- 必要に応じて他のページも追加 -->
+    <FlyoutItem Title="災害速報">
+        <ShellContent ContentTemplate="{DataTemplate disaster:DisasterPage}" />
+    </FlyoutItem>
 
-        <ShellContent Title="Disaster" ContentTemplate="{DataTemplate disaster:DisasterPage}" Route="DisasterPage" />
+    <FlyoutItem Title="チャット">
+        <ShellContent ContentTemplate="{DataTemplate friends:ChatPage}" />
+    </FlyoutItem>
 
-        <ShellContent Title="Hazard Map" ContentTemplate="{DataTemplate hazard:HazardMapPage}" Route="HazardMapPage" />
+    <FlyoutItem Title="通知">
+        <ShellContent ContentTemplate="{DataTemplate notification:NotificationPage}" />
+    </FlyoutItem>
 
-        <ShellContent Title="Stock" ContentTemplate="{DataTemplate stock:StockPage}" Route="StockPage" />
-
-        <ShellContent Title="Friends" ContentTemplate="{DataTemplate friends:FriendsPage}" Route="FriendsPage" />
-
-        <ShellContent Title="Notification" ContentTemplate="{DataTemplate notification:NotificationPage}" Route="NotificationPage" />
-
-        <ShellContent Title="Setting" ContentTemplate="{DataTemplate setting:SettingPage}" Route="SettingPage" />
-
-    </TabBar>
+    <FlyoutItem Title="設定">
+        <ShellContent ContentTemplate="{DataTemplate setting:SettingPage}" />
+    </FlyoutItem>
 
 </Shell>

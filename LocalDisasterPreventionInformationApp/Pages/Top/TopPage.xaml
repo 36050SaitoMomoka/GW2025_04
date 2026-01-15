@@ -32,7 +32,7 @@
                                    Spacing="15">
                 <ImageButton Source="chat.png" Clicked="OnChatClicked" WidthRequest="30" HeightRequest="30" />
                 <ImageButton Source="notification.png" Clicked="OnNotificationClicked" WidthRequest="30" HeightRequest="30" />
-                <ImageButton Source="settings.png" Clicked="OnSettingsClicked" WidthRequest="30" HeightRequest="30" />
+                <ImageButton Source="setting.png" Clicked="OnSettingsClicked" WidthRequest="30" HeightRequest="30" />
             </HorizontalStackLayout>
 
             <!-- ルート検索ボタン -->
