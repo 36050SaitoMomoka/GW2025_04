@@ -3,12 +3,30 @@
     x:Class="LocalDisasterPreventionInformationApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:LocalDisasterPreventionInformationApp"
-    Title="LocalDisasterPreventionInformationApp">
+    xmlns:top="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Top"
+    xmlns:disaster="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Disaster"
+    xmlns:friends="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Friends"
+    xmlns:stock="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Stock"
+    xmlns:notification="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Notification"
+    xmlns:setting="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Setting"
+    xmlns:hazard="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Hazard">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <ShellContent Title="Top" ContentTemplate="{DataTemplate top:TopPage}" Route="TopPage" />
+
+        <ShellContent Title="Disaster" ContentTemplate="{DataTemplate disaster:DisasterPage}" Route="DisasterPage" />
+
+        <ShellContent Title="Hazard Map" ContentTemplate="{DataTemplate hazard:HazardMapPage}" Route="HazardMapPage" />
+
+        <ShellContent Title="Stock" ContentTemplate="{DataTemplate stock:StockPage}" Route="StockPage" />
+
+        <ShellContent Title="Friends" ContentTemplate="{DataTemplate friends:FriendsPage}" Route="FriendsPage" />
+
+        <ShellContent Title="Notification" ContentTemplate="{DataTemplate notification:NotificationPage}" Route="NotificationPage" />
+
+        <ShellContent Title="Setting" ContentTemplate="{DataTemplate setting:SettingPage}" Route="SettingPage" />
+
+    </TabBar>
 
 </Shell>

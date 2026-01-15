@@ -2,11 +2,67 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LocalDisasterPreventionInformationApp.Pages.Top.TopPage"
-             Title="TopPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="地域防災情報アプリ">
+
+    <Grid Padding="10">
+
+        <!-- 行設定 -->
+        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+            <!-- メニュー -->
+            <HorizontalStackLayout Grid.Row="0" Spacing="10">
+
+                <!-- ハンバーガーメニュー -->
+                <ImageButton x:Name="menuButton"
+                 Source="hamburger_icon.png"
+                 WidthRequest="30"
+                 HeightRequest="30">
+                    <ImageButton.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="トップページ" Clicked="OnMenuItemClicked" />
+                            <MenuFlyoutItem Text="災害速報" Clicked="OnMenuItemClicked" />
+                            <MenuFlyoutItem Text="ハザードマップ" Clicked="OnMenuItemClicked" />
+                        </MenuFlyout>
+                    </ImageButton.ContextFlyout>
+                </ImageButton>
+
+                <!-- 選択されたページ名 -->
+                <Label x:Name="selectedMenuLabel"
+           Text="トップページ"
+           FontSize="20"
+           VerticalOptions="Center" />
+
+            </HorizontalStackLayout>
+            <!-- 右上アイコン -->
+            <HorizontalStackLayout Grid.Row="1"
+                                   HorizontalOptions="End"
+                                   Spacing="15">
+                <ImageButton Source="chat_icon.png" Clicked="OnChatClicked" WidthRequest="30" HeightRequest="30" />
+                <ImageButton Source="notification_icon.png" Clicked="OnNotificationClicked" WidthRequest="30" HeightRequest="30" />
+                <ImageButton Source="settings_icon.png" Clicked="OnSettingsClicked" WidthRequest="30" HeightRequest="30" />
+            </HorizontalStackLayout>
+
+            <!-- ルート検索ボタン -->
+            <Button Grid.Row="2"
+                    Text="ルート検索"
+                    Clicked="OnRouteSearchClicked"
+                    HorizontalOptions="Center"
+                    Margin="0,20" />
+
+            <!-- Leaflet 用 WebView -->
+            <WebView Grid.Row="3"
+                     x:Name="mapWebView"
+                     Source="map.html"
+                     HeightRequest="300" />
+
+            <!-- ニュース -->
+            <Label Grid.Row="4"
+                   x:Name="newsLabel"
+                   Text="災害速報や災害に関するニュースなど"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   Opacity="0" />
+
+        </Grid>
+    </Grid>
 </ContentPage>

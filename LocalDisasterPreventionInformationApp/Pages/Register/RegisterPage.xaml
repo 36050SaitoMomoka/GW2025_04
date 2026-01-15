@@ -2,11 +2,60 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LocalDisasterPreventionInformationApp.Pages.Register.RegisterPage"
-             Title="RegisterPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="会員登録">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- 上部バー -->
+        <Grid Grid.Row="0" HeightRequest="80" BackgroundColor="#EEEEEE">
+            <Label Text="アプリへようこそ"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- 中央フォーム（次へボタンもここに含める） -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <Entry x:Name="nameEntry"
+                       Placeholder="氏名"
+                       ClearButtonVisibility="WhileEditing" />
+
+                <Entry x:Name="furiganaEntry"
+                       Placeholder="フリガナ"
+                       ClearButtonVisibility="WhileEditing" />
+
+                <Entry x:Name="emailEntry"
+                       Placeholder="メールアドレス"
+                       Keyboard="Email"
+                       ClearButtonVisibility="WhileEditing" />
+
+                <Entry x:Name="phoneEntry"
+                       Placeholder="電話番号"
+                       Keyboard="Telephone"
+                       ClearButtonVisibility="WhileEditing" />
+
+                <Entry x:Name="addressEntry"
+                       Placeholder="住所"
+                       ClearButtonVisibility="WhileEditing" />
+
+                <!-- ★ 次へボタンは下部バーの上に配置 ★ -->
+                <Button Text="次へ"
+                        Clicked="OnNextClicked"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Margin="0,20,0,20" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- 下部バー（空のスペース） -->
+        <Grid Grid.Row="2" HeightRequest="60" BackgroundColor="#EEEEEE">
+            <!-- 何も表示しない -->
+        </Grid>
+
+    </Grid>
 </ContentPage>
