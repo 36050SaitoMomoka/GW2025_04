@@ -7,54 +7,60 @@
     <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- 上部バー -->
-        <Grid Grid.Row="0" HeightRequest="80" BackgroundColor="#EEEEEE">
-            <Label Text="アプリへようこそ"
+        <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#F5F5F5">
+            <Label Text="地域防災情報アプリへようこそ！&#10;会員情報のご登録をお願いします。"
                    FontSize="24"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center" />
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
         </Grid>
 
-        <!-- 中央フォーム（次へボタンもここに含める） -->
+        <!-- 中央フォーム -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="15">
 
                 <Entry x:Name="nameEntry"
                        Placeholder="氏名"
-                       ClearButtonVisibility="WhileEditing" />
+                       ClearButtonVisibility="WhileEditing" 
+                       WidthRequest="300"/>
 
                 <Entry x:Name="furiganaEntry"
                        Placeholder="フリガナ"
-                       ClearButtonVisibility="WhileEditing" />
+                       ClearButtonVisibility="WhileEditing" 
+                       WidthRequest="300"/>
 
                 <Entry x:Name="emailEntry"
                        Placeholder="メールアドレス"
                        Keyboard="Email"
-                       ClearButtonVisibility="WhileEditing" />
+                       ClearButtonVisibility="WhileEditing" 
+                       WidthRequest="300"/>
 
                 <Entry x:Name="phoneEntry"
-                       Placeholder="電話番号"
+                       Placeholder="電話番号(ハイフンなし）"
                        Keyboard="Telephone"
-                       ClearButtonVisibility="WhileEditing" />
+                       ClearButtonVisibility="WhileEditing" 
+                       WidthRequest="300"/>
 
                 <Entry x:Name="addressEntry"
                        Placeholder="住所"
-                       ClearButtonVisibility="WhileEditing" />
+                       ClearButtonVisibility="WhileEditing" 
+                       WidthRequest="300"/>
 
-                <!-- ★ 次へボタンは下部バーの上に配置 ★ -->
                 <Button Text="次へ"
                         Clicked="OnNextClicked"
                         BackgroundColor="#2196F3"
                         TextColor="White"
                         CornerRadius="8"
                         HeightRequest="50"
-                        Margin="0,20,0,20" />
+                        Margin="0,20,0,20" 
+                        WidthRequest="100"/>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- 下部バー（空のスペース） -->
-        <Grid Grid.Row="2" HeightRequest="60" BackgroundColor="#EEEEEE">
-            <!-- 何も表示しない -->
+        <!-- 下部バー -->
+        <Grid Grid.Row="2" HeightRequest="80" BackgroundColor="#F5F5F5">
         </Grid>
 
     </Grid>

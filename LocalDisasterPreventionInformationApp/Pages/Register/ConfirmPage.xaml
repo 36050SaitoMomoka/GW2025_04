@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LocalDisasterPreventionInformationApp.Pages.Register.ConfirmPage"
+             Title="入力内容の確認">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- 上部バー -->
+        <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#F5F5F5">
+            <Label Text="以下の内容でよろしいですか？"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+        </Grid>
+
+        <!-- 中央内容 -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <Label x:Name="nameLabel" FontSize="20" />
+                <Label x:Name="furiganaLabel" FontSize="20" />
+                <Label x:Name="emailLabel" FontSize="20" />
+                <Label x:Name="phoneLabel" FontSize="20" />
+                <Label x:Name="addressLabel" FontSize="20" />
+
+                <Button Text="登録"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        WidthRequest="150"
+                        HorizontalOptions="Center"
+                        Clicked="OnSubmitClicked"/>
+
+                <Button Text="戻る"
+                        BackgroundColor="#CCCCCC"
+                        TextColor="Black"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        WidthRequest="150"
+                        HorizontalOptions="Center"
+                        Clicked="OnBackClicked"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- 下部バー -->
+        <Grid Grid.Row="2" HeightRequest="80" BackgroundColor="#F5F5F5"/>
+    </Grid>
+</ContentPage>

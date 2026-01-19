@@ -9,26 +9,39 @@
     xmlns:setting="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Setting"
     xmlns:stock="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Stock"
     xmlns:hazard="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Hazard"
-    xmlns:disaster="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Disaster">
+    xmlns:disaster="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Disaster"
+    xmlns:register="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Register">
 
-    <!-- 最初に表示されるトップページ -->
+    <!-- ★ RegisterPage（最初の登録画面） -->
+    <ShellContent Route="RegisterPage"
+                  ContentTemplate="{DataTemplate register:RegisterPage}" />
+
+    <!-- ★ ConfirmPage（確認画面） -->
+    <ShellContent Route="ConfirmPage" ContentTemplate="{DataTemplate register:ConfirmPage}" />
+
+    <!-- ★ トップページ（メインメニュー） -->
     <FlyoutItem Title="トップページ">
-        <ShellContent ContentTemplate="{DataTemplate top:TopPage}" />
+        <ShellContent
+            Route="TopPage"
+            ContentTemplate="{DataTemplate top:TopPage}" />
     </FlyoutItem>
 
-    <!-- 必要に応じて他のページも追加 -->
+    <!-- 災害速報 -->
     <FlyoutItem Title="災害速報">
         <ShellContent ContentTemplate="{DataTemplate disaster:DisasterPage}" />
     </FlyoutItem>
 
+    <!-- チャット -->
     <FlyoutItem Title="チャット">
         <ShellContent ContentTemplate="{DataTemplate friends:ChatPage}" />
     </FlyoutItem>
 
+    <!-- 通知 -->
     <FlyoutItem Title="通知">
         <ShellContent ContentTemplate="{DataTemplate notification:NotificationPage}" />
     </FlyoutItem>
 
+    <!-- 設定 -->
     <FlyoutItem Title="設定">
         <ShellContent ContentTemplate="{DataTemplate setting:SettingPage}" />
     </FlyoutItem>
