@@ -31,19 +31,9 @@
         <ShellContent ContentTemplate="{DataTemplate disaster:DisasterPage}" />
     </FlyoutItem>
 
-    <!-- チャット -->
-    <FlyoutItem Title="チャット">
-        <ShellContent ContentTemplate="{DataTemplate friends:ChatPage}" />
-    </FlyoutItem>
-
-    <!-- 通知 -->
-    <FlyoutItem Title="通知">
-        <ShellContent ContentTemplate="{DataTemplate notification:NotificationPage}" />
-    </FlyoutItem>
-
-    <!-- 設定 -->
-    <FlyoutItem Title="設定">
-        <ShellContent ContentTemplate="{DataTemplate setting:SettingPage}" />
+    <!-- ハザードマップ -->
+    <FlyoutItem Title="ハザードマップ">
+        <ShellContent ContentTemplate="{DataTemplate hazard:HazardMapPage}" />
     </FlyoutItem>
 
 </Shell>

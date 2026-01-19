@@ -9,23 +9,23 @@ namespace LocalDisasterPreventionInformationApp.Pages.Register;
 [QueryProperty(nameof(Address), "address")]
 public partial class ConfirmPage : ContentPage {
     public string Name {
-        set => nameLabel.Text = $"氏名：{value}";
+        set => nameLabel.Text = value;
     }
 
     public string Furigana {
-        set => furiganaLabel.Text = $"フリガナ：{value}";
+        set => furiganaLabel.Text = value;
     }
 
     public string Email {
-        set => emailLabel.Text = $"メールアドレス：{value}";
+        set => emailLabel.Text = value;
     }
 
     public string Phone {
-        set => phoneLabel.Text = $"電話番号：{value}";
+        set => phoneLabel.Text = value;
     }
 
     public string Address {
-        set => addressLabel.Text = $"住所：{value}";
+        set => addressLabel.Text = value;
     }
 
     public ConfirmPage() {
