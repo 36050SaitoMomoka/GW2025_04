@@ -7,23 +7,21 @@ namespace LocalDisasterPreventionInformationApp {
         public AppShell() {
             InitializeComponent();
 
-            // チャット
-            Routing.RegisterRoute("chat", typeof(Pages.Friends.ChatPage));
+            //ヘッダー・フッター紐づけ
+            BindingContext = new AppShellViewModel();
 
-            // 安否ボタン一覧
-            Routing.RegisterRoute("safety", typeof(Pages.Friends.SafetyListPage));
+            //ページ遷移用
+            Routing.RegisterRoute("chat", typeof(Pages.Friends.ChatPage));                  // チャット
 
-            // 商品登録
-            Routing.RegisterRoute("product", typeof(Pages.Stock.ProductRegisterPage));
+            Routing.RegisterRoute("safety", typeof(Pages.Friends.SafetyListPage));          // 安否ボタン一覧
 
-            // 多言語対応
-            Routing.RegisterRoute("language", typeof(Pages.Language.LanguagePage));
+            Routing.RegisterRoute("product", typeof(Pages.Stock.ProductRegisterPage));      // 商品登録
 
-            // マイページ
-            Routing.RegisterRoute("mypage", typeof(Pages.My.MyPage));
+            Routing.RegisterRoute("language", typeof(Pages.Language.LanguagePage));         // 多言語対応
 
-            //設定
-            Routing.RegisterRoute("setting", typeof(Pages.Setting.SettingPage));
+            Routing.RegisterRoute("mypage", typeof(Pages.My.MyPage));                       // マイページ
+
+            Routing.RegisterRoute("setting", typeof(Pages.Setting.SettingPage));            //設定
         }
     }
 }
