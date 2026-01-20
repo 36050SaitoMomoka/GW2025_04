@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LocalDisasterPreventionInformationApp.Models {
+
+    //全国避難所情報テーブル
     public class Shelter {
         [PrimaryKey]
         public string ShelterId { get; set; }  //避難所ID(APIのIDをそのまま)

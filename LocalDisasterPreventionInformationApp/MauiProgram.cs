@@ -3,6 +3,8 @@ using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Pages;
 using LocalDisasterPreventionInformationApp.Pages.Hazard;
 using LocalDisasterPreventionInformationApp.Pages.Stock;
+using LocalDisasterPreventionInformationApp.Services;
+using LocalDisasterPreventionInformationApp.Pages.Register;
 
 namespace LocalDisasterPreventionInformationApp
 {
@@ -22,16 +24,20 @@ namespace LocalDisasterPreventionInformationApp
             //DIの注入
             builder.Services.AddSingleton<AppDatabase>(s => {
                 string dbPath = Path.Combine(FileSystem.AppDataDirectory, "app.db3");
-                return new AppDatabase(dbPath);
+                var db = new AppDatabase(dbPath);
+
+                //非同期で初期化
+                _ = db.InitializeAsync();
+
+                return db;
             });
 
-            //後で追加
-            //builder.Services.AddSingleton<ShelterServices>();
+            builder.Services.AddHttpClient<ShelterService>();
 
             //DBを使うページ登録
-            builder.Services.AddSingleton<HazardMapPage>();
-            builder.Services.AddSingleton<ProductRegisterPage>();
-            builder.Services.AddSingleton<StockPage>();
+            builder.Services.AddTransient<HazardMapPage>();
+            builder.Services.AddTransient<ProductRegisterPage>();
+            builder.Services.AddTransient<StockPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LocalDisasterPreventionInformationApp.Models {
+
+    //在庫テーブル
     public class Stock {
 
         [PrimaryKey,AutoIncrement]

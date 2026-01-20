@@ -1,4 +1,6 @@
-﻿namespace LocalDisasterPreventionInformationApp {
+﻿using LocalDisasterPreventionInformationApp.Services;
+
+namespace LocalDisasterPreventionInformationApp {
     public partial class AppShell : Shell {
         public AppShell() {
             InitializeComponent();
