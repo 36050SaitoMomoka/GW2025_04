@@ -12,28 +12,49 @@
     xmlns:disaster="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Disaster"
     xmlns:register="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Register">
 
-    <!-- ▼ RegisterPage（最初の登録画面） -->
+    <!-- 会員登録ページ -->
     <ShellContent Route="RegisterPage"
                   ContentTemplate="{DataTemplate register:RegisterPage}" />
 
-    <!-- ▼ ConfirmPage -->
+    <!-- 会員登録確認ページ -->
     <ShellContent Route="ConfirmPage"
                   ContentTemplate="{DataTemplate register:ConfirmPage}" />
 
-    <!-- ▼ トップページ -->
+    <!-- ハンバーガーメニュー用 -->
+    <!-- トップページ -->
     <FlyoutItem Title="トップページ">
         <ShellContent Route="TopPage"
                       ContentTemplate="{DataTemplate top:TopPage}" />
     </FlyoutItem>
 
-    <!-- ▼ 災害速報 -->
+    <!-- 災害速報 -->
     <FlyoutItem Title="災害速報">
-        <ShellContent ContentTemplate="{DataTemplate disaster:DisasterPage}" />
+        <ShellContent Route="DisasterPage"
+                       ContentTemplate="{DataTemplate disaster:DisasterPage}" />
     </FlyoutItem>
 
-    <!-- ▼ ハザードマップ -->
+    <!-- ハザードマップ -->
     <FlyoutItem Title="ハザードマップ">
-        <ShellContent ContentTemplate="{DataTemplate hazard:HazardMapPage}" />
+        <ShellContent Route="HazardMapPage"
+                      ContentTemplate="{DataTemplate hazard:HazardMapPage}" />
     </FlyoutItem>
 
+    <!-- 備蓄管理 -->
+    <FlyoutItem Title="備蓄管理">
+        <ShellContent Route="StockPage"
+                      ContentTemplate="{DataTemplate stock:StockPage}" />
+    </FlyoutItem>
+    <!-- ハンバーガーメニュー用ここまで -->
+
+    <!-- 友達一覧ページ -->
+    <ShellContent Route="FriendsPage"
+                  ContentTemplate="{DataTemplate friends:FriendsPage}" />
+
+    <!-- 通知ページ -->
+    <ShellContent Route="NotificationPage"
+                  ContentTemplate="{DataTemplate notification:NotificationPage}" />
+
+    <!-- 設定ページ -->
+    <ShellContent Route="SettingPage"
+                  ContentTemplate="{DataTemplate setting:SettingPage}" />
 </Shell>

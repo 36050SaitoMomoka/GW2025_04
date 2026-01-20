@@ -91,13 +91,16 @@
 	  <MauiXaml Update="Pages\HazardMap\HazardMapPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Language\LanguagePage.xaml">
+	  <MauiXaml Update="Pages\Setting\FontPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Setting\LanguagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MenuPopup\MenuPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\My\MyPage.xaml">
+	  <MauiXaml Update="Pages\Setting\MyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Notification\NotificationPage.xaml">

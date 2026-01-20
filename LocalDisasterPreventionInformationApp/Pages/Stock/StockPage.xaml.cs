@@ -1,15 +1,15 @@
-using LocalDisasterPreventionInformationApp.Database;
+using LocalDisasterPreventionInformationApp.Pages.Base;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Stock;
 
-public partial class StockPage : ContentPage
-{
-
-	private readonly AppDatabase _db;
-
-	public StockPage(AppDatabase db)
-	{
-		InitializeComponent();
-		_db = db;
-	}
+//ContentPage‚ğŒp³
+public partial class StockPage : ContentPage {
+    public StockPage() {
+        InitializeComponent();
+        //PageTitle‚ğu”õ’~ŠÇ—v‚É‚·‚é
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+        if (vm != null) {
+            vm.PageTitle = "”õ’~ŠÇ—";
+        }
+    }
 }

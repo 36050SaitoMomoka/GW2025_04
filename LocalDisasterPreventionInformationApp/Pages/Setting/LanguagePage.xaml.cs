@@ -1,15 +1,15 @@
 using LocalDisasterPreventionInformationApp.Pages.Base;
 
-namespace LocalDisasterPreventionInformationApp.Pages.Top;
+namespace LocalDisasterPreventionInformationApp.Pages.Setting;
 
 //ContentPageを継承
-public partial class TopPage : ContentPage {
-    public TopPage() {
+public partial class LanguagePage : ContentPage {
+    public LanguagePage() {
         InitializeComponent();
-        //PageTitleを「トップページ」にする
+        //PageTitleを「言語選択」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
-            vm.PageTitle = "トップページ";
+            vm.PageTitle = "言語選択";
         }
     }
 }
