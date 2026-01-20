@@ -33,6 +33,7 @@ namespace LocalDisasterPreventionInformationApp
             });
 
             builder.Services.AddHttpClient<ShelterService>();
+            builder.Services.AddSingleton<AppShell>();
 
             //DBを使うページ登録
             builder.Services.AddTransient<HazardMapPage>();
