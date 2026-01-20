@@ -12,26 +12,26 @@
     xmlns:disaster="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Disaster"
     xmlns:register="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Register">
 
-    <!-- ★ RegisterPage（最初の登録画面） -->
+    <!-- ▼ RegisterPage（最初の登録画面） -->
     <ShellContent Route="RegisterPage"
                   ContentTemplate="{DataTemplate register:RegisterPage}" />
 
-    <!-- ★ ConfirmPage（確認画面） -->
-    <ShellContent Route="ConfirmPage" ContentTemplate="{DataTemplate register:ConfirmPage}" />
+    <!-- ▼ ConfirmPage -->
+    <ShellContent Route="ConfirmPage"
+                  ContentTemplate="{DataTemplate register:ConfirmPage}" />
 
-    <!-- ★ トップページ（メインメニュー） -->
+    <!-- ▼ トップページ -->
     <FlyoutItem Title="トップページ">
-        <ShellContent
-            Route="TopPage"
-            ContentTemplate="{DataTemplate top:TopPage}" />
+        <ShellContent Route="TopPage"
+                      ContentTemplate="{DataTemplate top:TopPage}" />
     </FlyoutItem>
 
-    <!-- 災害速報 -->
+    <!-- ▼ 災害速報 -->
     <FlyoutItem Title="災害速報">
         <ShellContent ContentTemplate="{DataTemplate disaster:DisasterPage}" />
     </FlyoutItem>
 
-    <!-- ハザードマップ -->
+    <!-- ▼ ハザードマップ -->
     <FlyoutItem Title="ハザードマップ">
         <ShellContent ContentTemplate="{DataTemplate hazard:HazardMapPage}" />
     </FlyoutItem>
