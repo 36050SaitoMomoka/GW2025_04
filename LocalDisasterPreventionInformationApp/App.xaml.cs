@@ -1,10 +1,15 @@
 ﻿using Microsoft.Maui.Storage;
 using LocalDisasterPreventionInformationApp.Pages.Register;
+using LocalDisasterPreventionInformationApp.Services;
 
 namespace LocalDisasterPreventionInformationApp {
     public partial class App : Application {
-        public App() {
+
+        private readonly ShelterService _shelterService;
+
+        public App(ShelterService shelterService) {
             InitializeComponent();
+            _shelterService = shelterService;
         }
 
         protected override Window CreateWindow(IActivationState? activationState) {
@@ -13,6 +18,11 @@ namespace LocalDisasterPreventionInformationApp {
             // 初回起動時
             if (isFirstLaunch) {
                 Preferences.Set("IsFirstLaunch", false);
+
+                //初回起動時にのみDBにデータ追加
+                Task.Run(async () => {
+                    await _shelterService.FetchAndSaveShelterAsync();
+                });
 
                 var shell = new AppShell();
                 shell.GoToAsync("//RegisterPage");      // 会員登録ページへ遷移

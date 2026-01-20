@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using SQLite;
 
 namespace LocalDisasterPreventionInformationApp.Models {
+
+    //商品テーブル
     public class Product {
 
         [PrimaryKey, AutoIncrement]

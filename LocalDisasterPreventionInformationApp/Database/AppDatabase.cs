@@ -12,11 +12,13 @@ namespace LocalDisasterPreventionInformationApp.Database {
 
         public AppDatabase(string dbPath) {
             _db = new SQLiteAsyncConnection(dbPath);
+        }
 
+        public async Task InitializeAsync() {
             //テーブル作成
-            _db.CreateTableAsync<Product>().Wait();
-            _db.CreateTableAsync<Stock>().Wait();
-            _db.CreateTableAsync<Shelter>().Wait();
+            await _db.CreateTableAsync<Product>();
+            await _db.CreateTableAsync<Stock>();
+            await _db.CreateTableAsync<Shelter>();
         }
 
         //===================
