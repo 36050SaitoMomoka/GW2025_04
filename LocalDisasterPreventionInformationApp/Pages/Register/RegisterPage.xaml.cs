@@ -21,8 +21,6 @@ public partial class RegisterPage : ContentPage {
             return;
         }
 
-        Preferences.Set("IsFirstLaunch", false);
-
-        await Shell.Current.GoToAsync("//TopPage");
+        await Shell.Current.GoToAsync($"///ConfirmPage?name={name}&furigana={furigana}&email={email}&phone={phone}&address={address}");
     }
 }
