@@ -58,7 +58,7 @@
 
     <!-- 備蓄管理 -->
     <FlyoutItem Title="備蓄管理">
-        <ShellContent Route="DisasterPage"
-                       ContentTemplate="{DataTemplate disaster:DisasterPage}" />
+        <ShellContent Route="StockPage"
+                       ContentTemplate="{DataTemplate stock:StockPage}" />
     </FlyoutItem>
 </Shell>
