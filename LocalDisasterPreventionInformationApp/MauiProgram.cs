@@ -24,6 +24,8 @@ namespace LocalDisasterPreventionInformationApp
             //DIの注入
             builder.Services.AddSingleton<AppDatabase>(s => {
                 string dbPath = Path.Combine(FileSystem.AppDataDirectory, "app.db3");
+                //DBファイルのファイルパス確認
+                //System.Diagnostics.Debug.WriteLine("DB PATH = " + dbPath);
                 var db = new AppDatabase(dbPath);
 
                 return db;

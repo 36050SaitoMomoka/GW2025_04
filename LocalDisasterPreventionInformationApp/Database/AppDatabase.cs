@@ -82,8 +82,13 @@ namespace LocalDisasterPreventionInformationApp.Database {
         public Task<Shelter> GetShelterAsync(string id)
             => _db.Table<Shelter>().Where(x => x.ShelterId == id).FirstOrDefaultAsync();
 
-        public Task<int> SaveShelterAsync(Shelter item)
-            => _db.InsertOrReplaceAsync(item);
+        public async Task<int> SaveShelterAsync(Shelter item) {
+            var existing = await GetShelterAsync(item.ShelterId);
+            if (existing != null)
+                return 0;
+
+            return await _db.InsertAsync(item);
+        }
 
         public Task<int> DeleteShelterAsync(Shelter item)
             => _db.DeleteAsync(item);
