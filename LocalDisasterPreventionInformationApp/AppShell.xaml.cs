@@ -10,8 +10,6 @@ namespace LocalDisasterPreventionInformationApp {
             //ヘッダー・フッター紐づけ
             BindingContext = new AppShellViewModel();
 
-            BindingContext = this;
-
             //ページ遷移用
             Routing.RegisterRoute("chat", typeof(Pages.Friends.ChatPage));                  // チャット
 
