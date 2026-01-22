@@ -7,10 +7,9 @@
 
     <Grid RowDefinitions="Auto,*,Auto">
 
-        <!-- ▼ 共通ヘッダー -->
+        <!-- 共通ヘッダー -->
         <Grid Grid.Row="0" BackgroundColor="#F5F5F5" Padding="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -24,44 +23,53 @@
 
                 <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
                     <ImageButton Source="chat.png"
-                                 WidthRequest="50" HeightRequest="50"
-                                 Command="{Binding ChatCommand}" />
+                                 BackgroundColor="Transparent"
+                                 WidthRequest="60" HeightRequest="60"
+                                 Command="{Binding FriendsCommand}" />
                     <ImageButton Source="notification.png"
-                                 WidthRequest="50" HeightRequest="50"
+                                 BackgroundColor="Transparent"
+                                 WidthRequest="60" HeightRequest="60"
                                  Command="{Binding NotificationCommand}" />
                     <ImageButton Source="setting.png"
-                                 WidthRequest="50" HeightRequest="50"
+                                 BackgroundColor="Transparent"
+                                 WidthRequest="60" HeightRequest="60"
                                  Command="{Binding SettingCommand}" />
                 </HorizontalStackLayout>
             </Grid>
 
-            <!-- ハンバーガー + ページ名 -->
-            <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto" Margin="0,10,0,0">
+            <!-- ハンバーガー + ページ名 + ルート検索 -->
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" Margin="0,10,0,0">
+
+                <!-- ハンバーガー -->
                 <ImageButton Source="hamburger.png"
-                             WidthRequest="50" HeightRequest="50"
+                             BackgroundColor="Transparent"
+                             WidthRequest="80" HeightRequest="80"
                              Command="{Binding OpenMenuCommand}" />
 
+                <!-- ページ名 -->
                 <Label Grid.Column="1"
                        Text="{Binding PageTitle}"
                        FontSize="20"
                        VerticalOptions="Center"
                        Margin="10,0,0,0" />
-            </Grid>
 
-            <!-- ルート検索ボタン -->
-            <Button Grid.Row="2"
-                    Text="ルート検索"
-                    Command="{Binding RouteSearchCommand}"
-                    HorizontalOptions="End"
-                    Margin="0,10"/>
+                <!-- ルート検索ボタン -->
+                <Button Grid.Column="2"
+                        Text="ルート検索"
+                        WidthRequest="150"
+                        HeightRequest="40"
+                        VerticalOptions="Center"
+                        Margin="10,0,0,0"
+                        Command="{Binding RouteSearchCommand}" />
+            </Grid>
         </Grid>
 
-        <!-- ▼ ページごとの中身 -->
+        <!-- ページごとの中身 -->
         <ContentPresenter x:Name="ContentArea"
                           Grid.Row="1" 
                           Content="{Binding Source={x:Reference BaseRoot}, Path=InnerContent}" />
 
-        <!-- ▼ 共通フッター -->
+        <!-- 共通フッター -->
         <Grid Grid.Row="2" BackgroundColor="#F5F5F5" HeightRequest="80">
             <Label Text="{Binding NewsText}"
                    FontSize="16"

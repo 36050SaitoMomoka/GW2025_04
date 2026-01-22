@@ -1,15 +1,15 @@
 using LocalDisasterPreventionInformationApp.Pages.Base;
 
-namespace LocalDisasterPreventionInformationApp.Pages.Friends;
+namespace LocalDisasterPreventionInformationApp.Pages.Setting;
 
 //ContentPageを継承
-public partial class ChatPage : ContentPage {
-    public ChatPage() {
+public partial class FontPage : ContentPage {
+    public FontPage() {
         InitializeComponent();
-        //PageTitleを「友達一覧」にする
+        //PageTitleを「フォント選択」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
-            vm.PageTitle = "友達一覧";
+            vm.PageTitle = "フォント選択";
         }
     }
 }

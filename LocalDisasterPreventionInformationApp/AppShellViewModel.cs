@@ -35,32 +35,36 @@ namespace LocalDisasterPreventionInformationApp {
         }
 
         // ヘッダーのボタン用
-        public ICommand ChatCommand { get; }
+        public ICommand FriendsCommand { get; }
         public ICommand NotificationCommand { get; }
         public ICommand SettingCommand { get; }
         public ICommand OpenMenuCommand { get; }
         public ICommand RouteSearchCommand { get; }
 
         public AppShellViewModel() {
-            // コマンドの中身
-            ChatCommand = new Command(() => {
-                Shell.Current.DisplayAlert("Chat", "Chat ボタンが押されました", "OK");
+            // チャットページへ
+            FriendsCommand = new Command(async () => {
+                await Shell.Current.GoToAsync("///FriendsPage");
             });
 
-            NotificationCommand = new Command(() => {
-                Shell.Current.DisplayAlert("通知", "通知ボタンが押されました", "OK");
+            //通知ページへ
+            NotificationCommand = new Command(async () => {
+                await Shell.Current.GoToAsync("///NotificationPage");
             });
 
-            SettingCommand = new Command(() => {
-                Shell.Current.DisplayAlert("設定", "設定ボタンが押されました", "OK");
+            //設定ページへ
+            SettingCommand = new Command(async () => {
+                await Shell.Current.GoToAsync("///SettingPage");
             });
 
+            //ハンバーガーメニューを開く
             OpenMenuCommand = new Command(() => {
-                Shell.Current.DisplayAlert("メニュー", "ハンバーガーメニューが押されました", "OK");
+                Shell.Current.FlyoutIsPresented = true;
             });
 
-            RouteSearchCommand = new Command(() => {
-                Shell.Current.DisplayAlert("ルート検索", "ルート検索ボタンが押されました", "OK");
+            //ルート検索をする（トップページへ遷移しルートを検索する）
+            RouteSearchCommand = new Command(async() => {
+                await Shell.Current.GoToAsync("///TopPage");
             });
 
             // ニュースの初期化

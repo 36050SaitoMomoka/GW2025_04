@@ -25,5 +25,10 @@ public partial class BasePage : ContentView {
 
         // Shell ‚Ì BindingContext ‚ðˆø‚«Œp‚®
         BindingContext = Shell.Current.BindingContext;
+
+        // ƒy[ƒW‘¤‚Ì BindingContext ‚ð BasePage ‚É“`‚¦‚é
+        this.BindingContextChanged += (s, e) => {
+            ContentArea.BindingContext = BindingContext;
+        };
     }
 }

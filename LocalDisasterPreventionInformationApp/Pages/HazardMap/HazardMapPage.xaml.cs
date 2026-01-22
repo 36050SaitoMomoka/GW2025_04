@@ -1,15 +1,15 @@
-using LocalDisasterPreventionInformationApp.Database;
+using LocalDisasterPreventionInformationApp.Pages.Base;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Hazard;
 
-public partial class HazardMapPage : ContentPage
-{
-
-	private readonly AppDatabase _db;
-
-	public HazardMapPage(AppDatabase db)
-	{
-		InitializeComponent();
-		_db = db;
-	}
+//ContentPageを継承
+public partial class HazardMapPage : ContentPage {
+    public HazardMapPage() {
+        InitializeComponent();
+        //PageTitleを「ハザードマップ」にする
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+        if (vm != null) {
+            vm.PageTitle = "ハザードマップ";
+        }
+    }
 }

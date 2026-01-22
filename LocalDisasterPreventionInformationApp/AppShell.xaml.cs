@@ -10,6 +10,8 @@ namespace LocalDisasterPreventionInformationApp {
             //ヘッダー・フッター紐づけ
             BindingContext = new AppShellViewModel();
 
+            BindingContext = this;
+
             //ページ遷移用
             Routing.RegisterRoute("chat", typeof(Pages.Friends.ChatPage));                  // チャット
 
@@ -17,11 +19,11 @@ namespace LocalDisasterPreventionInformationApp {
 
             Routing.RegisterRoute("product", typeof(Pages.Stock.ProductRegisterPage));      // 商品登録
 
-            Routing.RegisterRoute("language", typeof(Pages.Language.LanguagePage));         // 多言語対応
+            Routing.RegisterRoute("language", typeof(Pages.Setting.LanguagePage));          // 多言語対応
 
-            Routing.RegisterRoute("mypage", typeof(Pages.My.MyPage));                       // マイページ
+            Routing.RegisterRoute("setting", typeof(Pages.Setting.FontPage));               //フォント選択
 
-            Routing.RegisterRoute("setting", typeof(Pages.Setting.SettingPage));            //設定
+            Routing.RegisterRoute("mypage", typeof(Pages.Setting.MyPage));                  // マイページ
         }
     }
 }
