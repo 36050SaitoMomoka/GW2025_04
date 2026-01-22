@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http.Json;
+﻿using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
-using LocalDisasterPreventionInformationApp.Database;
-using System.Text.Json;
 using LocalDisasterPreventionInformationApp.Models.GeoJson;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net.Http.Json;
+using System.Reflection.PortableExecutable;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace LocalDisasterPreventionInformationApp.Services {
     public class ShelterService {
@@ -37,16 +39,16 @@ namespace LocalDisasterPreventionInformationApp.Services {
 
             foreach (var f in root.features) {
 
-                var address = f.properties.address ?? "";
+                var address = f.properties.Address ?? "";
 
                 var s = new Shelter {
-                    ShelterId = f.properties.id,
-                    Name = f.properties.name,
-                    Address = f.properties.address,
-                    Prefecture = ExtractPrefecture(f.properties.address),
-                    City = ExtractCity(f.properties.address),
-                    Latitude = f.geometry.coordinates[1],
+                    ShelterId = f.properties.CommonID,
+                    Name = f.properties.FacilityName,
+                    Address = f.properties.Address,
+                    Prefecture = ExtractPrefecture(f.properties.PrefAndCity),
+                    City = ExtractCity(f.properties.PrefAndCity),
                     Longitude = f.geometry.coordinates[0],
+                    Latitude = f.geometry.coordinates[1],
                 };
 
                 await _db.SaveShelterAsync(s);
@@ -83,15 +85,19 @@ namespace LocalDisasterPreventionInformationApp.Services {
                 return "";
 
             var pref = ExtractPrefecture(address);
-            var rest = address.Replace(pref, "");
+            var rest = address.Substring(pref.Length).Trim();
 
             // 郡 → 町 のパターン
+            // 郡 → 村 のパターン
             var gunIdx = rest.IndexOf("郡");
-                if (gunIdx > 0) {
+                if (gunIdx >= 0) {
                     var townIdx = rest.IndexOf("町", gunIdx);
+                    var villageIdx = rest.IndexOf("村", gunIdx);
 
-                    if (townIdx > 0)
-                      return rest.Substring(0, townIdx + 1);
+                    int endIdx = new[] { townIdx, villageIdx }.Where(i => i >= 0).DefaultIfEmpty(-1).Min();
+
+                    if (endIdx >= 0)
+                      return rest.Substring(0, endIdx + 1);
                 }
 
             // 市 / 区 / 町 / 村 のパターン
@@ -100,7 +106,7 @@ namespace LocalDisasterPreventionInformationApp.Services {
             foreach (var m in markers) {
                 var idx = rest.IndexOf(m);
 
-                if (idx > 0)
+                if (idx >= 0)
                     return rest.Substring(0, idx + 1);
             }
 

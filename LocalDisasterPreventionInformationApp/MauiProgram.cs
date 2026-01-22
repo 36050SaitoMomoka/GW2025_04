@@ -26,9 +26,6 @@ namespace LocalDisasterPreventionInformationApp
                 string dbPath = Path.Combine(FileSystem.AppDataDirectory, "app.db3");
                 var db = new AppDatabase(dbPath);
 
-                //非同期で初期化
-                _ = db.InitializeAsync();
-
                 return db;
             });
 

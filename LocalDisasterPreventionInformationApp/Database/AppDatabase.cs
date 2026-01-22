@@ -12,6 +12,7 @@ namespace LocalDisasterPreventionInformationApp.Database {
 
         public AppDatabase(string dbPath) {
             _db = new SQLiteAsyncConnection(dbPath);
+            _ = InitializeAsync();
         }
 
         public async Task InitializeAsync() {
@@ -53,7 +54,7 @@ namespace LocalDisasterPreventionInformationApp.Database {
             // 同じ商品IDかつ同じ消費期限の在庫を探す
             var existing = await _db.Table<Stock>()
                                     .Where(x => x.ProductId == stock.ProductId &&
-                                                x.ExpirationDate == stock.ExpirationDate)
+                                                x.ExpirationDate.Date == stock.ExpirationDate.Date)
                                     .FirstOrDefaultAsync();
 
             //同じ商品IDかつ同じ消費期限の場合

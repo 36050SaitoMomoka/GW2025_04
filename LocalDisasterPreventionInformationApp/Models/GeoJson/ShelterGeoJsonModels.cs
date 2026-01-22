@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace LocalDisasterPreventionInformationApp.Models.GeoJson {
@@ -18,13 +19,22 @@ namespace LocalDisasterPreventionInformationApp.Models.GeoJson {
 
     //座標データ
     public class ShelterGeometry {
+        public string type { get; set; }
         public List<double> coordinates { get; set; }
     }
 
     //避難所の属性（名前・住所など）
     public class ShelterProperties {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
+        [JsonPropertyName("共通ID")]
+        public string CommonID { get; set; }
+
+        [JsonPropertyName("都道府県名及び市町村名")]
+        public string PrefAndCity { get; set; }
+
+        [JsonPropertyName("施設・場所名")]
+        public string FacilityName { get; set; }
+
+        [JsonPropertyName("住所")]
+        public string Address { get; set; }
     }
 }
