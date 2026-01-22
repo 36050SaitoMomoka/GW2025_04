@@ -64,7 +64,7 @@ namespace LocalDisasterPreventionInformationApp {
 
             //ルート検索をする（トップページへ遷移しルートを検索する）
             RouteSearchCommand = new Command(async() => {
-                //後で
+                await Shell.Current.GoToAsync("///TopPage");
             });
 
             // ニュースの初期化

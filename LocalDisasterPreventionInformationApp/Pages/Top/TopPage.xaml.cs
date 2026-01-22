@@ -6,9 +6,14 @@ namespace LocalDisasterPreventionInformationApp.Pages.Top;
 public partial class TopPage : ContentPage {
     public TopPage() {
         InitializeComponent();
-        //PageTitleを「トップページ」にする
-        var vm = Shell.Current.BindingContext as AppShellViewModel;
-        if (vm != null) {
+    }
+
+    //PageTitleを「トップページ」にする
+    protected override void OnAppearing() {
+        base.OnAppearing();
+
+        //前のページタイトルが残る問題を防ぐ
+        if (Shell.Current.BindingContext is AppShellViewModel vm) {
             vm.PageTitle = "トップページ";
         }
     }
