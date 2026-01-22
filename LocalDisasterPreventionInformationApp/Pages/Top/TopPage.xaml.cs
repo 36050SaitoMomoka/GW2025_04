@@ -1,11 +1,16 @@
+using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Pages.Base;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Top;
 
 //ContentPageを継承
 public partial class TopPage : ContentPage {
-    public TopPage() {
+
+    private readonly AppDatabase _db;
+
+    public TopPage(AppDatabase db) {
         InitializeComponent();
+        _db = db;
     }
 
     //PageTitleを「トップページ」にする
