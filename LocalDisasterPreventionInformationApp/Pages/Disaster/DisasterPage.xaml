@@ -8,56 +8,78 @@
     <base:BasePage>
         <base:BasePage.InnerContent>
 
-            <VerticalStackLayout Padding="20" Spacing="15">
+            <Grid RowDefinitions="Auto,Auto,Auto,2,*,2"
+                      ColumnDefinitions="*,*"
+                      Padding="20">
 
                 <!-- 現在地表示 -->
-                <Label x:Name="LocationLabel"
+                <Label Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       x:Name="LocationLabel"
                        Text="現在地：---"
                        FontSize="40"
                        HorizontalOptions="Start"/>
 
                 <!-- 災害名 -->
-                <Label x:Name="DisasterLabel"
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       x:Name="DisasterLabel"
                        Text="災害名"
                        FontSize="30"
-                       HorizontalOptions="Center"/>
+                       HorizontalOptions="End"
+                       Padding="20"/>
 
                 <!-- 規模表示 -->
-                <Label x:Name="ScaleLabel"
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       x:Name="ScaleLabel"
                        Text="規模"
                        FontSize="25"
-                       HorizontalOptions="Center"/>
+                       HorizontalOptions="Start"
+                       Padding="20"/>
 
-                <Grid HeightRequest="15">
-                    <!-- コメント表示 -->
+                <!-- コメント表示 -->
+                <Border Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        Background="White"
+                        HeightRequest="80"
+                        StrokeShape="RoundRectangle 8">
                     <Label x:Name="CommentLabel"
-                       Text="コメント"
-                       FontSize="20"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Start"
-                           LineBreakMode="WordWrap"/>
-                </Grid>
+                              Text="コメント"
+                              FontSize="20"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center"/>
+                </Border>
 
                 <!-- 横線 -->
-                <BoxView HeightRequest="2"
+                <BoxView Grid.Row="3"
+                         Grid.ColumnSpan="2"
+                         HeightRequest="2"
                          Color="Gray"
                          HorizontalOptions="Fill"/>
 
-                <Grid HeightRequest="30">
-                    <!-- 全国の災害情報表示 -->
+                <!-- 全国の災害情報表示 -->
+                <Border Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        StrokeThickness="0"
+                        Background="White"
+                        StrokeShape="RoundRectangle 8">
                     <Label x:Name="NationwideLabel"
                        Text="全国の災害情報"
                        FontSize="20"
-                       HorizontalOptions="Start"/>
-                </Grid>
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                </Border>
 
                 <!-- 横線 -->
-                <BoxView HeightRequest="2"
+                <BoxView Grid.Row="5"
+                         Grid.ColumnSpan="2"
+                         HeightRequest="2"
                          Color="Gray"
                          HorizontalOptions="Fill"/>
-
-            </VerticalStackLayout>
-
+            </Grid>
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>
