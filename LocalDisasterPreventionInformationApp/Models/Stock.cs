@@ -11,7 +11,7 @@ namespace LocalDisasterPreventionInformationApp.Models {
     public class Stock {
 
         [PrimaryKey,AutoIncrement]
-        public int Id { get; set; }  //在庫ID
+        public int StockId { get; set; }  //在庫ID
 
         [NotNull]
         public int ProductId { get; set; }  //商品ID
