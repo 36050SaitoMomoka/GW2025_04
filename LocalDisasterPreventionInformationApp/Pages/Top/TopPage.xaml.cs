@@ -9,22 +9,15 @@ namespace LocalDisasterPreventionInformationApp.Pages.Top;
 
 //ContentPageÇåpè≥
 public partial class TopPage : ContentPage {
-<<<<<<< HEAD
     private readonly AppDatabase _db;
     private readonly List<Location> allLocations = new();
-=======
-
-    private readonly AppDatabase _db;
->>>>>>> 36185872bf9e7e2aa3ce2066bd5ced65cf6b8c7a
 
     public TopPage(AppDatabase db) {
         InitializeComponent();
         _db = db;
-<<<<<<< HEAD
+
         BindingContext = new LocationViewModel();
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-=======
->>>>>>> 36185872bf9e7e2aa3ce2066bd5ced65cf6b8c7a
     }
 
     protected override async void OnAppearing() {

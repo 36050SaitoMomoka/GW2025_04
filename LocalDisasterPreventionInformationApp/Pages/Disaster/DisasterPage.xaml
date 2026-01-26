@@ -7,45 +7,57 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            
+
             <VerticalStackLayout Padding="20" Spacing="15">
 
-                <!-- Œ»Ý’n•\Ž¦ -->
+                <!-- ç¾åœ¨åœ°è¡¨ç¤º -->
                 <Label x:Name="LocationLabel"
-                       Text="Œ»Ý’nF---"
-                       FontSize="28"
+                       Text="ç¾åœ¨åœ°ï¼š---"
+                       FontSize="40"
                        HorizontalOptions="Start"/>
 
-                <!-- ÐŠQ–¼E‹K–Í•\Ž¦ -->
+                <!-- ç½å®³å -->
                 <Label x:Name="DisasterLabel"
-                       Text="ÐŠQ–¼E‹K–Í"
-                       FontSize="24"
+                       Text="ç½å®³å"
+                       FontSize="30"
                        HorizontalOptions="Center"/>
 
-                <!-- ƒRƒƒ“ƒg•\Ž¦ -->
-                <Label x:Name="CommentLabel"
-                       Text="ƒRƒƒ“ƒg"
+                <!-- è¦æ¨¡è¡¨ç¤º -->
+                <Label x:Name="ScaleLabel"
+                       Text="è¦æ¨¡"
+                       FontSize="25"
+                       HorizontalOptions="Center"/>
+
+                <Grid HeightRequest="15">
+                    <!-- ã‚³ãƒ¡ãƒ³ãƒˆè¡¨ç¤º -->
+                    <Label x:Name="CommentLabel"
+                       Text="ã‚³ãƒ¡ãƒ³ãƒˆ"
                        FontSize="20"
-                       HorizontalOptions="Center"/>
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                           LineBreakMode="WordWrap"/>
+                </Grid>
 
-                <!-- ‰¡ü -->
+                <!-- æ¨ªç·š -->
                 <BoxView HeightRequest="2"
                          Color="Gray"
                          HorizontalOptions="Fill"/>
 
-                <!-- ‘S‘‚ÌÐŠQî•ñ•\Ž¦ -->
-                <Label x:Name="NationwideLabel"
-                       Text="‘S‘‚ÌÐŠQî•ñ"
+                <Grid HeightRequest="30">
+                    <!-- å…¨å›½ã®ç½å®³æƒ…å ±è¡¨ç¤º -->
+                    <Label x:Name="NationwideLabel"
+                       Text="å…¨å›½ã®ç½å®³æƒ…å ±"
                        FontSize="20"
                        HorizontalOptions="Start"/>
+                </Grid>
 
-                <!-- ‰¡ü -->
+                <!-- æ¨ªç·š -->
                 <BoxView HeightRequest="2"
                          Color="Gray"
                          HorizontalOptions="Fill"/>
-                
+
             </VerticalStackLayout>
-            
+
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>
