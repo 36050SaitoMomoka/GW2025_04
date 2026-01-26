@@ -7,9 +7,45 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            <Grid>
-                <WebView Source="map.html" />
-            </Grid>
+            
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <!-- 現在地表示 -->
+                <Label x:Name="LocationLabel"
+                       Text="現在地：---"
+                       FontSize="28"
+                       HorizontalOptions="Start"/>
+
+                <!-- 災害名・規模表示 -->
+                <Label x:Name="DisasterLabel"
+                       Text="災害名・規模"
+                       FontSize="24"
+                       HorizontalOptions="Center"/>
+
+                <!-- コメント表示 -->
+                <Label x:Name="CommentLabel"
+                       Text="コメント"
+                       FontSize="20"
+                       HorizontalOptions="Center"/>
+
+                <!-- 横線 -->
+                <BoxView HeightRequest="2"
+                         Color="Gray"
+                         HorizontalOptions="Fill"/>
+
+                <!-- 全国の災害情報表示 -->
+                <Label x:Name="NationwideLabel"
+                       Text="全国の災害情報"
+                       FontSize="20"
+                       HorizontalOptions="Start"/>
+
+                <!-- 横線 -->
+                <BoxView HeightRequest="2"
+                         Color="Gray"
+                         HorizontalOptions="Fill"/>
+                
+            </VerticalStackLayout>
+            
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>

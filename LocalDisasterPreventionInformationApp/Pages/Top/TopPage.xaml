@@ -1,4 +1,4 @@
-<ContentPage
+﻿<ContentPage
     x:Class="LocalDisasterPreventionInformationApp.Pages.Top.TopPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -8,7 +8,28 @@
     <base:BasePage>
         <base:BasePage.InnerContent>
             <Grid>
-                <WebView Source="map.html" />
+                <WebView x:Name="MapWebView" Source="map.html" />
+
+                <Border Background="#AAFFFFFF"
+                        StrokeThickness="0"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Margin="10"
+                        Padding="20"
+                        WidthRequest="200"
+                        HeightRequest="240">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Picker Title="都道府県を選択" x:Name="PrefecturePicker"/>
+                        <Picker Title="市区町村を選択" x:Name="CityPicker"/>
+                        <Button Text="実行"
+                                Margin="0,15,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
             </Grid>
         </base:BasePage.InnerContent>
     </base:BasePage>

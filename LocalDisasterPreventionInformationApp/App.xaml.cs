@@ -13,6 +13,7 @@ namespace LocalDisasterPreventionInformationApp {
         }
 
         protected override Window CreateWindow(IActivationState? activationState) {
+
             bool isFirstLaunch = Preferences.Get("IsFirstLaunch", true);        // 初回起動かどうか
 
             // 初回起動時
