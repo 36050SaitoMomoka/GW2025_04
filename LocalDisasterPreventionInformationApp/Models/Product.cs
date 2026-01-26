@@ -11,7 +11,7 @@ namespace LocalDisasterPreventionInformationApp.Models {
     public class Product {
 
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }  //商品ID
+        public int ProductId { get; set; }  //商品ID
 
         [NotNull]
         public string Name { get; set; }  //商品名
