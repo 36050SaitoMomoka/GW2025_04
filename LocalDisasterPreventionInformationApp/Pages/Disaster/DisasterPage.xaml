@@ -7,45 +7,79 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            
-            <VerticalStackLayout Padding="20" Spacing="15">
 
-                <!-- Œ»Ý’n•\Ž¦ -->
-                <Label x:Name="LocationLabel"
-                       Text="Œ»Ý’nF---"
-                       FontSize="28"
+            <Grid RowDefinitions="Auto,Auto,Auto,2,*,2"
+                      ColumnDefinitions="*,*"
+                      Padding="20">
+
+                <!-- ç¾åœ¨åœ°è¡¨ç¤º -->
+                <Label Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       x:Name="LocationLabel"
+                       Text="ç¾åœ¨åœ°ï¼š---"
+                       FontSize="40"
                        HorizontalOptions="Start"/>
 
-                <!-- ÐŠQ–¼E‹K–Í•\Ž¦ -->
-                <Label x:Name="DisasterLabel"
-                       Text="ÐŠQ–¼E‹K–Í"
-                       FontSize="24"
-                       HorizontalOptions="Center"/>
+                <!-- ç½å®³å -->
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       x:Name="DisasterLabel"
+                       Text="ç½å®³å"
+                       FontSize="30"
+                       HorizontalOptions="End"
+                       Padding="20"/>
 
-                <!-- ƒRƒƒ“ƒg•\Ž¦ -->
-                <Label x:Name="CommentLabel"
-                       Text="ƒRƒƒ“ƒg"
-                       FontSize="20"
-                       HorizontalOptions="Center"/>
+                <!-- è¦æ¨¡è¡¨ç¤º -->
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       x:Name="ScaleLabel"
+                       Text="è¦æ¨¡"
+                       FontSize="25"
+                       HorizontalOptions="Start"
+                       Padding="20"/>
 
-                <!-- ‰¡ü -->
-                <BoxView HeightRequest="2"
+                <!-- ã‚³ãƒ¡ãƒ³ãƒˆè¡¨ç¤º -->
+                <Border Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        Background="White"
+                        HeightRequest="80"
+                        StrokeShape="RoundRectangle 8">
+                    <Label x:Name="CommentLabel"
+                              Text="ã‚³ãƒ¡ãƒ³ãƒˆ"
+                              FontSize="20"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center"/>
+                </Border>
+
+                <!-- æ¨ªç·š -->
+                <BoxView Grid.Row="3"
+                         Grid.ColumnSpan="2"
+                         HeightRequest="2"
                          Color="Gray"
                          HorizontalOptions="Fill"/>
 
-                <!-- ‘S‘‚ÌÐŠQî•ñ•\Ž¦ -->
-                <Label x:Name="NationwideLabel"
-                       Text="‘S‘‚ÌÐŠQî•ñ"
+                <!-- å…¨å›½ã®ç½å®³æƒ…å ±è¡¨ç¤º -->
+                <Border Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        StrokeThickness="0"
+                        Background="White"
+                        StrokeShape="RoundRectangle 8">
+                    <Label x:Name="NationwideLabel"
+                       Text="å…¨å›½ã®ç½å®³æƒ…å ±"
                        FontSize="20"
-                       HorizontalOptions="Start"/>
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                </Border>
 
-                <!-- ‰¡ü -->
-                <BoxView HeightRequest="2"
+                <!-- æ¨ªç·š -->
+                <BoxView Grid.Row="5"
+                         Grid.ColumnSpan="2"
+                         HeightRequest="2"
                          Color="Gray"
                          HorizontalOptions="Fill"/>
-                
-            </VerticalStackLayout>
-            
+            </Grid>
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>
