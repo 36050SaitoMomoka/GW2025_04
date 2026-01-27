@@ -6,6 +6,9 @@ public partial class RegisterPage : ContentPage {
     }
 
     private async void OnNextClicked(object sender, EventArgs e) {
+
+        Preferences.Get("IsRegistered",true);
+
         string name = nameEntry.Text?.Trim();
         string furigana = furiganaEntry.Text?.Trim();
         string email = emailEntry.Text?.Trim();

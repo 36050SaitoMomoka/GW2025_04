@@ -1,11 +1,15 @@
 ﻿using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Services;
+using System.Diagnostics;
 
 namespace LocalDisasterPreventionInformationApp {
     public partial class AppShell : Shell {
 
-        public AppShell() {
+        private readonly ShelterService _shelterService;
+
+        public AppShell(ShelterService shelterService) {
             InitializeComponent();
+            _shelterService = shelterService;
 
             //ヘッダー・フッター紐づけ
             BindingContext = new AppShellViewModel();
@@ -22,6 +26,26 @@ namespace LocalDisasterPreventionInformationApp {
             Routing.RegisterRoute("setting", typeof(Pages.Setting.FontPage));               //フォント選択
 
             Routing.RegisterRoute("mypage", typeof(Pages.Setting.MyPage));                  // マイページ
+
+        }
+
+        protected override async void OnAppearing() {
+            base.OnAppearing();
+
+            //bool isRegistered = Preferences.Get("IsRegistered", false);
+            bool isRegistered = false;
+
+            if (!isRegistered) {
+
+                // 初回起動時だけ避難所データを読み込みデータ追加
+                await _shelterService.FetchAndSaveShelterAsync();
+
+                // RegisterPage へ遷移
+                await GoToAsync("//RegisterPage");
+            } else {
+                // 2回目以降
+                await GoToAsync("//TopPage");
+            }
         }
     }
 }

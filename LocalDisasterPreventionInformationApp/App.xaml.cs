@@ -5,33 +5,15 @@ using LocalDisasterPreventionInformationApp.Services;
 namespace LocalDisasterPreventionInformationApp {
     public partial class App : Application {
 
-        private readonly ShelterService _shelterService;
+        private readonly AppShell _appShell;
 
-        public App(ShelterService shelterService) {
+        public App(AppShell appShell) {
             InitializeComponent();
-            _shelterService = shelterService;
+            _appShell = appShell;
         }
 
         protected override Window CreateWindow(IActivationState? activationState) {
-
-            bool isFirstLaunch = Preferences.Get("IsFirstLaunch", true);        // 初回起動かどうか
-
-            // 初回起動時
-            if (isFirstLaunch) {
-                Preferences.Set("IsFirstLaunch", false);
-
-                //初回起動時にのみDBにデータ追加
-                Task.Run(async () => {
-                    await _shelterService.FetchAndSaveShelterAsync();
-                });
-
-                var shell = new AppShell();
-                shell.GoToAsync("//RegisterPage");      // 会員登録ページへ遷移
-                return new Window(shell);
-            } else {
-                // 通常起動
-                return new Window(new AppShell());
-            }
+            return new Window(_appShell);
         }
     }
 }
