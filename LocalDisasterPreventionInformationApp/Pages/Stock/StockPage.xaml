@@ -55,7 +55,8 @@
                     <Button Text="登録"
                             HorizontalOptions="End"
                             WidthRequest="120"
-                            Margin="0,10,0,0"/>
+                            Margin="0,10,0,0"
+                            Clicked="OnRegisterClicked"/>
                 </Grid>
             </Grid>
         </base:BasePage.InnerContent>

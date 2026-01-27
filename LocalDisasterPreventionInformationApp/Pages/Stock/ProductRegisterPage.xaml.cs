@@ -12,4 +12,8 @@ public partial class ProductRegisterPage : ContentPage {
             vm.PageTitle = "備蓄管理";
         }
     }
+
+    private async void OnSubmitClicked(object sender, EventArgs e) {
+        await Shell.Current.GoToAsync("..");        //１つ前のページに戻る
+    }
 }
