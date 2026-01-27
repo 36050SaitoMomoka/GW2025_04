@@ -7,9 +7,84 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            <Grid>
-                <WebView Source="map.html" />
-            </Grid>
+
+            <VerticalStackLayout Padding="20"
+                                 Spacing="15"
+                                 HorizontalOptions="Center">
+
+                <Grid ColumnDefinitions="120,Auto"
+                      RowDefinitions="Auto,Auto,Auto,Auto,AUto,Auto,Auto"
+                      ColumnSpacing="0"
+                      RowSpacing="20"
+                      HorizontalOptions="Center">
+
+                    <!-- 商品名 -->
+                    <Label Text="商品名：" 
+                       Grid.Row="0" Grid.Column="0"
+                       VerticalOptions="Center" 
+                       HorizontalTextAlignment="End"/>
+
+                    <Entry Grid.Row="0" Grid.Column="1"
+                       Placeholder="商品名を入力"
+                       WidthRequest="200"/>
+
+                    <!-- 登録日 -->
+                    <Label Text="登録日：" 
+                       Grid.Row="1" Grid.Column="0"
+                       VerticalOptions="Center" 
+                       HorizontalTextAlignment="End"/>
+
+                    <Entry Grid.Row="1" Grid.Column="1"
+                       Placeholder="YYYY/MM/DD"
+                       WidthRequest="200"/>
+
+                    <!-- 消費期限 -->
+                    <Label Text="消費期限：" 
+                       Grid.Row="2" Grid.Column="0"
+                       VerticalOptions="Center" 
+                       HorizontalTextAlignment="End"/>
+
+                    <Entry Grid.Row="2" Grid.Column="1"
+                       Placeholder="消費期限を入力"
+                       WidthRequest="200"/>
+
+                    <!-- 賞味期限 -->
+                    <Label Text="賞味期限：" 
+                       Grid.Row="3" Grid.Column="0"
+                       VerticalOptions="Center" 
+                       HorizontalTextAlignment="End"/>
+
+                    <Entry Grid.Row="3" Grid.Column="1"
+                       Placeholder="賞味期限を入力"
+                       WidthRequest="200"/>
+
+                    <!-- 数量 -->
+                    <Label Text="数量：" 
+                       Grid.Row="4" Grid.Column="0"
+                       VerticalOptions="Center" 
+                       HorizontalTextAlignment="End"/>
+
+                    <Entry Grid.Row="4" Grid.Column="1"
+                       Placeholder="数量を入力"
+                       WidthRequest="200"/>
+
+                    <!-- カテゴリ -->
+                    <Label Text="カテゴリ：" 
+                       Grid.Row="5" Grid.Column="0"
+                       VerticalOptions="Center" 
+                       HorizontalTextAlignment="End"/>
+
+                    <Entry Grid.Row="5" Grid.Column="1"
+                       Placeholder="カテゴリを選択"
+                       WidthRequest="200"/>
+                </Grid>
+
+                <!-- 登録ボタン -->
+                <Button Text="登録"
+                        HorizontalOptions="Center"
+                        WidthRequest="120"
+                        Clicked="OnSubmitClicked"/>
+                </VerticalStackLayout>
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>
