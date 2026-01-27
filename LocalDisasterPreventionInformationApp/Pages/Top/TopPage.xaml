@@ -27,7 +27,10 @@
                         <Picker Title="都道府県を選択" x:Name="PrefecturePicker"/>
                         <Picker Title="市区町村を選択" x:Name="CityPicker"/>
                         <Button Text="実行"
-                                Margin="0,15,0,0"/>
+                                x:Name="ExecuteButton"
+                                Margin="0,15,0,0"
+                                IsEnabled="False"
+                                Clicked="OnExecuteClicked"/>
                     </VerticalStackLayout>
                 </Border>
             </Grid>
