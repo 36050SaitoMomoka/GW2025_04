@@ -32,21 +32,20 @@ namespace LocalDisasterPreventionInformationApp {
         protected override async void OnAppearing() {
             base.OnAppearing();
 
-            bool isFirstLaunch = Preferences.Get("IsFirstLaunch", true);
+            //bool isRegistered = Preferences.Get("IsRegistered", false);
+            bool isRegistered = false;
 
-            if (isFirstLaunch) {
-                Preferences.Set("IsFirstLaunch", false);
+            if (!isRegistered) {
 
-                // 初回起動時だけ避難所データを読み込む
+                // 初回起動時だけ避難所データを読み込みデータ追加
                 await _shelterService.FetchAndSaveShelterAsync();
 
                 // RegisterPage へ遷移
                 await GoToAsync("//RegisterPage");
+            } else {
+                // 2回目以降
+                await GoToAsync("//TopPage");
             }
-            //} else {
-            //    // 2回目以降
-            //    await GoToAsync("//TopPage");
-            //}
         }
     }
 }
