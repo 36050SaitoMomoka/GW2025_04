@@ -9,7 +9,6 @@ namespace LocalDisasterPreventionInformationApp.Pages.Top;
 
 //ContentPage‚ğŒp³
 public partial class TopPage : ContentPage {
-
     private readonly AppDatabase _db;
     private readonly List<Location> allLocations = new();
 
