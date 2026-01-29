@@ -24,7 +24,8 @@
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry Grid.Row="0" Grid.Column="1"
+                    <Entry x:Name="ProductNameEntry"
+                       Grid.Row="0" Grid.Column="1"
                        Placeholder="商品名を入力"
                        WidthRequest="200"/>
 
@@ -34,7 +35,8 @@
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry Grid.Row="1" Grid.Column="1"
+                    <Entry x:Name="RegisterDateEntry"
+                       Grid.Row="1" Grid.Column="1"
                        Placeholder="YYYY/MM/DD"
                        WidthRequest="200"/>
 
@@ -44,7 +46,8 @@
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry Grid.Row="2" Grid.Column="1"
+                    <Entry x:Name="ExpirationEntry"
+                       Grid.Row="2" Grid.Column="1"
                        Placeholder="消費期限を入力"
                        WidthRequest="200"/>
 
@@ -54,7 +57,8 @@
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry Grid.Row="3" Grid.Column="1"
+                    <Entry x:Name="BestBeforeEntry"
+                       Grid.Row="3" Grid.Column="1"
                        Placeholder="賞味期限を入力"
                        WidthRequest="200"/>
 
@@ -64,7 +68,8 @@
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry Grid.Row="4" Grid.Column="1"
+                    <Entry x:Name="QuantityEntry"
+                       Grid.Row="4" Grid.Column="1"
                        Placeholder="数量を入力"
                        WidthRequest="200"/>
 
@@ -74,7 +79,8 @@
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry Grid.Row="5" Grid.Column="1"
+                    <Entry x:Name="CategoryEntry"
+                       Grid.Row="5" Grid.Column="1"
                        Placeholder="カテゴリを選択"
                        WidthRequest="200"/>
                 </Grid>

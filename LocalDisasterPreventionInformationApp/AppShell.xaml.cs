@@ -1,15 +1,22 @@
 ﻿using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Services;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 
 namespace LocalDisasterPreventionInformationApp {
     public partial class AppShell : Shell {
 
         private readonly ShelterService _shelterService;
+        private readonly AppDatabase _db;
+        private bool _initialized = false;
 
-        public AppShell(ShelterService shelterService) {
+        public AppShell(ShelterService shelterService, AppDatabase db) {
             InitializeComponent();
             _shelterService = shelterService;
+            _db = db;
+            
+
+            CheckData(); //TEST
 
             //ヘッダー・フッター紐づけ
             BindingContext = new AppShellViewModel();
@@ -29,11 +36,30 @@ namespace LocalDisasterPreventionInformationApp {
 
         }
 
+        //TEST
+        private async void CheckData() {
+            var products = await _db.GetProductsAsync();
+            Debug.WriteLine($"Product 件数： {products.Count}");
+
+            foreach (var p in products) {
+                Debug.WriteLine($"ID = {p.ProductId}, Name = {p.Name}");
+            }
+        }
+
         protected override async void OnAppearing() {
+
             base.OnAppearing();
 
-            //bool isRegistered = Preferences.Get("IsRegistered", false);
-            bool isRegistered = false;
+            if (_initialized)
+                return;
+
+            _initialized = true;
+
+            //TEST
+            Preferences.Set("IsRegistered", false);
+
+            bool isRegistered = Preferences.Get("IsRegistered", false);
+
 
             if (!isRegistered) {
 

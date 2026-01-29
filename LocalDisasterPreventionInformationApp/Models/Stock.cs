@@ -16,7 +16,6 @@ namespace LocalDisasterPreventionInformationApp.Models {
         [NotNull]
         public int ProductId { get; set; }  //商品ID
 
-        [NotNull]
         public DateTime ExpirationDate { get; set; }  //消費期限
 
         [NotNull]
