@@ -29,13 +29,16 @@ public partial class ProductRegisterPage : ContentPage {
         var product = (await _db.GetProductsAsync())
             .First(p => p.Name == ProductNameEntry.Text);
 
-        //var stock = new Stock {
-        //    ProductId = product.ProductId,
-        //    ExpirationDate = DateTime.Parse(ExpirationEntry.Text),
-        //    Quantity = int.Parse(QuantityEntry.Text),
-        //};
+        var exp = DateTime.ParseExact(ExpirationEntry.Text, "yyyyMMdd", null);
+        var qty = int.Parse(QuantityEntry.Text);
 
-        //await _db.AddOrUpdateStockAsync(stock);
+        var stock = new LocalDisasterPreventionInformationApp.Models.Stock {
+            ProductId = product.ProductId,
+            ExpirationDate = exp,
+            Quantity = qty,
+        };
+
+        await _db.AddOrUpdateStockAsync(stock);
 
         await Shell.Current.GoToAsync("..");        //１つ前のページに戻る
     }

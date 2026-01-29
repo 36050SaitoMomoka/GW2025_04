@@ -12,7 +12,6 @@ namespace LocalDisasterPreventionInformationApp.Database {
 
         public AppDatabase(string dbPath) {
             _db = new SQLiteAsyncConnection(dbPath);
-            _ = InitializeAsync();
         }
 
         public async Task InitializeAsync() {
@@ -22,6 +21,7 @@ namespace LocalDisasterPreventionInformationApp.Database {
             await _db.CreateTableAsync<Product>();
             await _db.CreateTableAsync<Stock>();
             await _db.CreateTableAsync<Shelter>();
+            //テーブル削除するときはフルパスで指定
         }
 
         //=====================
@@ -116,7 +116,7 @@ namespace LocalDisasterPreventionInformationApp.Database {
             // 同じ商品IDかつ同じ消費期限の在庫を探す
             var existing = await _db.Table<Stock>()
                                     .Where(x => x.ProductId == stock.ProductId &&
-                                                x.ExpirationDate.Date == stock.ExpirationDate.Date)
+                                                x.ExpirationDate == stock.ExpirationDate)
                                     .FirstOrDefaultAsync();
 
             //同じ商品IDかつ同じ消費期限の場合
