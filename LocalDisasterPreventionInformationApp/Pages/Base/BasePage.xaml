@@ -8,7 +8,7 @@
     <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- 共通ヘッダー -->
-        <Grid Grid.Row="0" BackgroundColor="#F5F5F5" Padding="20">
+        <Grid x:Name="HeaderArea" Grid.Row="0" BackgroundColor="#F5F5F5" Padding="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -70,7 +70,7 @@
                           Content="{Binding Source={x:Reference BaseRoot}, Path=InnerContent}" />
 
         <!-- 共通フッター -->
-        <Grid Grid.Row="2" BackgroundColor="#F5F5F5" HeightRequest="80">
+        <Grid x:Name="FooterArea" Grid.Row="2" BackgroundColor="#F5F5F5" HeightRequest="80">
             <Label Text="{Binding NewsText}"
                    FontSize="16"
                    VerticalOptions="Center"
