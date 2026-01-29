@@ -1,27 +1,14 @@
 ﻿using System.ComponentModel;
+using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Windows.Input;
+using System.Xml.Linq;
+using HtmlAgilityPack;
+using static System.Net.WebRequestMethods;
 
 namespace LocalDisasterPreventionInformationApp {
     public class AppShellViewModel : INotifyPropertyChanged {
-        // ニュースとして表示するテキスト一覧（後で変更）
-        private readonly List<string> newsItems = new()
-        {
-            "群馬県で震度5弱の地震が発生しました。",
-            "太田市内の避難所が開設されました。",
-            "気象庁が余震に注意を呼びかけています。"
-        };
-
-        private int newsIndex = 0;      // 現在表示しているニュースのインデックス
-
-        private string newsText;
-        public string NewsText {
-            get => newsText;
-            set {
-                if (newsText == value) return;
-                newsText = value;
-                OnPropertyChanged(nameof(NewsText));        // UIに変更を通知
-            }
-        }
 
         // ページタイトル
         private string pageTitle;
@@ -31,6 +18,19 @@ namespace LocalDisasterPreventionInformationApp {
                 if (pageTitle == value) return;
                 pageTitle = value;
                 OnPropertyChanged(nameof(PageTitle));
+            }
+        }
+
+        // ニュース切り替え用
+        private List<NewsItem> newsItems = new();
+        private int newsIndex = 0;
+
+        private string newsText;
+        public string NewsText {
+            get => newsText;
+            set {
+                newsText = value;
+                OnPropertyChanged(nameof(NewsText));
             }
         }
 
@@ -63,25 +63,61 @@ namespace LocalDisasterPreventionInformationApp {
             });
 
             //ルート検索をする（トップページへ遷移しルートを検索する）
-            RouteSearchCommand = new Command(async() => {
+            RouteSearchCommand = new Command(async () => {
                 await Shell.Current.GoToAsync("///TopPage");
             });
 
-            // ニュースの初期化
-            NewsText = newsItems[0];
-            StartNewsCycle();
+            _ = LoadWarnAsync();
         }
 
-        // ニュース切り替え開始
-        private void StartNewsCycle() {
-            RunNewsAnimation();
+        // Yahooニュース検索結果を取得
+        private async Task LoadWarnAsync() {
+            try {
+                newsItems = new List<NewsItem>();
+
+                string url = "https://news.yahoo.co.jp/search?p=警報&ei=utf-8";
+
+                using var http = new HttpClient();
+                string html = await http.GetStringAsync(url);
+
+                var doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
+                // Yahooニュース検索結果のタイトルを取得
+                var nodes = doc.DocumentNode.SelectNodes("//a[contains{@href,'/articles/')]");
+
+                if (nodes != null) {
+                    foreach (var node in nodes) {
+                        string title = node.InnerText.Trim();
+                        string link = node.GetAttributeValue("href", "");
+
+                        newsItems.Add(new NewsItem {
+                            Title = title,
+                            Link = link,
+                        });
+                    }
+                }
+
+                if (newsItems.Count > 0) {
+                    newsIndex = 0;
+                    newsText = newsItems[0].Title;
+                    StartNewsCycle();
+                } else {
+                    newsText = "ニュースがありません。";
+                }
+            }
+            catch (Exception ex) {
+                newsText = $"取得エラー：{ex.Message}";
+            }
         }
+
+        private void StartNewsCycle() => RunNewsAnimation();
 
         // ５秒ごとにニュースを切り替える
         private void RunNewsAnimation() {
             Dispatcher.GetForCurrentThread().DispatchDelayed(TimeSpan.FromSeconds(5), () => {
                 newsIndex = (newsIndex + 1) % newsItems.Count;
-                NewsText = newsItems[newsIndex];
+                NewsText = newsItems[newsIndex].Title;
 
                 RunNewsAnimation();
             });
@@ -91,5 +127,10 @@ namespace LocalDisasterPreventionInformationApp {
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string name)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+
+    public class NewsItem {
+        public string Title { get; set; }
+        public string Link { get; set; }
     }
 }

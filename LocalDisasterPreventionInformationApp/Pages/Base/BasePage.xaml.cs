@@ -24,11 +24,12 @@ public partial class BasePage : ContentView {
         InitializeComponent();
 
         // Shell ‚Ì BindingContext ‚ðˆø‚«Œp‚®
-        BindingContext = Shell.Current.BindingContext;
+        HeaderArea.BindingContext = Shell.Current.BindingContext;
+        FooterArea.BindingContext = Shell.Current.BindingContext;
 
         // ƒy[ƒW‘¤‚Ì BindingContext ‚ð BasePage ‚É“`‚¦‚é
         this.BindingContextChanged += (s, e) => {
-            ContentArea.BindingContext = BindingContext;
+            ContentArea.BindingContext = this.BindingContext;
         };
     }
 }
