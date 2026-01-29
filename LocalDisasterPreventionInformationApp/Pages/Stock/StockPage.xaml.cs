@@ -13,7 +13,7 @@ public partial class StockPage : ContentPage {
         }
     }
 
-    private async void OnRegisterClicked(object sender,EventArgs e) {
+    private async void OnRegisterClicked(object sender, EventArgs e) {
         await Shell.Current.GoToAsync("product");
     }
 }

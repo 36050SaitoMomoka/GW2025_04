@@ -33,6 +33,7 @@ public partial class ConfirmPage : ContentPage {
     }
 
     private async void OnSubmitClicked(object sender, EventArgs e) {
+        Preferences.Set("IsRegistered", true);
         await Shell.Current.GoToAsync("//TopPage");
     }
 
