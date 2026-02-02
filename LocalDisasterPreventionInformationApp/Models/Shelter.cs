@@ -29,5 +29,8 @@ namespace LocalDisasterPreventionInformationApp.Models {
 
         [NotNull]
         public double Latitude { get; set; }  //緯度
+
+        [Ignore]
+        public double Distance { get; set; }    //計算用
     }
 }
