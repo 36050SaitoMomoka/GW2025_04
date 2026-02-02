@@ -17,29 +17,51 @@
 </head>
 <body>
 
-<div id="map"></div>
+    <div id="map"></div>
 
-<script>
-    // 地図の初期表示（日本の中心あたり）
-    var map = L.map('map').setView([35.0, 135.0], 5);
+    <script>
+        // 地図の初期表示（日本の中心あたり）
+        var map = L.map('map').setView([35.0, 135.0], 5);
 
-    // OpenStreetMap タイル
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
-    }).addTo(map);
+        // OpenStreetMap タイル
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
 
-    // C# から呼ばれる関数
-    function drawRoute(coords) {
-        // coords は [ [lon,lat], [lon,lat], ... ] の形式
-        var latlngs = coords.map(c => [c[1], c[0]]); // Leaflet は [lat,lon]
+        // C# から呼ばれる関数
+        function drawRoute(coords) {
+            // coords は [ [lon,lat], [lon,lat], ... ] の形式
+            var latlngs = coords.map(c => [c[1], c[0]]); // Leaflet は [lat,lon]
 
-        // ルート描画
-        var polyline = L.polyline(latlngs, { color: 'red', weight: 4 }).addTo(map);
+            // ルート描画
+            var polyline = L.polyline(latlngs, { color: 'red', weight: 4 }).addTo(map);
 
-        // 地図をルートに合わせる
-        map.fitBounds(polyline.getBounds());
-    }
-</script>
+            // 地図をルートに合わせる
+            map.fitBounds(polyline.getBounds());
+        }
 
+        // 現在地を中心にする
+        function setCurrentLocation(lat, lng) {
+            // 地図の中心を現在地に移動
+            map.setView([lat, lng], 15);
+
+            // 現在地マーカー（青い〇）
+            L.circleMarker([lat, lng], {
+                radius: 8,
+                color: 'blue',
+                fillColor: '#30f',
+                fillOpacity: 0.8
+            }).addTo(map).bindPopup("現在地");
+        }
+
+        // 避難所ピンを表示
+        function addShelterMarkers(shelters) {
+            shelters.forEach(s => {
+                L.marker([s.Latitude, s.Longitude])
+                    .addTo(map)
+                    .bingPopup(s.Name + "<br>" + s.Address);
+            });
+        }
+    </script>
 </body>
 </html>

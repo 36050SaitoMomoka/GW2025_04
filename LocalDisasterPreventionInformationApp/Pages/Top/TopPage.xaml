@@ -8,16 +8,18 @@
     <base:BasePage>
         <base:BasePage.InnerContent>
             <Grid>
-                <WebView x:Name="MapWebView" Source="map.html" />
+                <WebView x:Name="MapWebView" Source="map.html" Navigated="MapWebView_Navigated"/>
 
-                <Border Background="#AAFFFFFF"
-                        StrokeThickness="0"
-                        HorizontalOptions="End"
-                        VerticalOptions="Start"
-                        Margin="10"
-                        Padding="20"
-                        WidthRequest="200"
-                        HeightRequest="240">
+                <!-- 通常時の操作パネル -->
+                <Border x:Name="SearchPanel"
+                            Background="#AAFFFFFF"
+                            StrokeThickness="0"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            Margin="10"
+                            Padding="20"
+                            WidthRequest="200"
+                            HeightRequest="240">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
@@ -30,10 +32,50 @@
                                 x:Name="ExecuteButton"
                                 Margin="0,15,0,0"
                                 IsEnabled="False"
-                                Clicked="OnExecuteClicked"/>
+                                />
+                        <!--Clicked="OnExecuteClicked"後で追加-->
                     </VerticalStackLayout>
                 </Border>
+
+                <!-- 現在地付近の10件リストパネル -->
+                <Border x:Name="NearbyListPanel"
+                            Background="#AAFFFFFF"
+                            StrokeThickness="0"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            Margin="10"
+                            Padding="20"
+                            WidthRequest="250"
+                            HeightRequest="350"
+                            IsVisible="False">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout>
+                        <Label Text="近くの避難所（10件）" FontAttributes="Bold"/>
+
+                        <CollectionView x:Name="NearbySheltersList"
+                                            HeightRequest="250">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="5"
+                                                     BackgroundColor="{Binding IsSelected,Converter={StaticResource BoolToColorConver}}">
+                                        <Label Text="{Binding Shelter.Name}"/>
+                                        <Label Text="{Binding Distance,StringFormat='{0:F2}km'}"
+                                                   FontSize="12" TextColor="Gray"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!-- <Button Text="閉じる" Clicked="OnCloseNearbyList"/> -->
+                    </VerticalStackLayout>
+                </Border>
+
             </Grid>
+
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>

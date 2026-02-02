@@ -2,6 +2,8 @@ using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
 using System.Text;
+using Microsoft.Maui.Devices.Sensors;   // GPS
+using System.Text.Json;                 // JSON変換用
 
 namespace LocalDisasterPreventionInformationApp.Pages.Top;
 
@@ -11,101 +13,64 @@ public partial class TopPage : ContentPage {
     public TopPage(AppDatabase db) {
         InitializeComponent();
         _db = db;
-
-        // Shift-JIS読み込み対応
-        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-        // Pickerイベント
-        PrefecturePicker.SelectedIndexChanged += OnPrefectureChanged;
-        CityPicker.SelectedIndexChanged += OnCityChanged;
-
-        ExecuteButton.IsEnabled = false;
     }
 
     protected override async void OnAppearing() {
         base.OnAppearing();
+
         // PageTitle を設定
         if (Shell.Current.BindingContext is AppShellViewModel vm) {
             vm.PageTitle = "トップページ";
         }
     }
 
-    // DBから都道府県一覧を取得
-    private async Task LoadPrefecturesAsync() {
+    private async void MapWebView_Navigated(object sender, WebNavigatedEventArgs e) {
+        // 現在地と避難所データを取得してleafletに渡す
+        await LoadSheltersAndShowPinsAsync();
+    }
+
+    //現在地取得 → DB取得 → 距離計算 → 上位10件 → leafletに渡す
+    private async Task LoadSheltersAndShowPinsAsync() {
+        // GPSで現在地を取得
+        var location = await Geolocation.GetLocationAsync();
+        double currentLat = location.Latitude;
+        double currentLng = location.Longitude;
+
+        // DBから避難所一覧を取得
         var shelters = await _db.GetSheltersAsync();
 
-        //都道府県一覧をセット
-        var prefectures = shelters
-            .Select(x => x.Prefecture)
-            .Distinct()
-            .ToList();
-
-        PrefecturePicker.ItemsSource = prefectures;
-    }
-
-    //都道府県選択
-    private async void OnPrefectureChanged(object sender, EventArgs e) {
-        string prefecture = PrefecturePicker.SelectedItem?.ToString();
-        if (prefecture == null)
-            return;
-
-        var shelters = await _db.GetSheltersAsync();
-
-        var cities = shelters
-            .Where(s => s.Prefecture == prefecture)
-            .Select(s => s.City)
-            .Distinct()
-            .OrderBy(s => s)
-            .ToList();
-
-        CityPicker.ItemsSource = cities;
-        CityPicker.SelectedIndex = -1;
-
-        UpdateExecuteButtonState();
-    }
-
-    // 市区町村選択
-    private void OnCityChanged(object sender, EventArgs e) {
-        UpdateExecuteButtonState();
-    }
-
-    private void UpdateExecuteButtonState() {
-        ExecuteButton.IsEnabled =
-            PrefecturePicker.SelectedIndex >= 0 &&
-            CityPicker.SelectedIndex >= 0;
-    }
-
-    //実行　→　ShelterDB　→Leaflet
-    private async void OnExecuteClicked(object sender, EventArgs e) {
-        string prefecture = PrefecturePicker.SelectedItem?.ToString();
-        string city = CityPicker.SelectedItem?.ToString();
-
-        if (prefecture == null || city == null)
-            return;
-
-        // Shelter DBから該当避難所を取得
-        var shelters = await _db.GetSheltersAsync();
-        var targetShelters = shelters
-            .Where(s => s.Prefecture == prefecture && s.City == city)
-            .ToList();
-
-        if(targetShelters.Count == 0) {
-            await DisplayAlert("情報なし", "避難所が見つかりませんでした。", "OK");
-            return;
+        // 現在地との距離を計算
+        foreach (var s in shelters) {
+            s.Distance = HaversineDistance(currentLat, currentLng, s.Latitude, s.Longitude);
         }
 
-        //マーカー追加
-        foreach (var s in targetShelters) {
-            string js = $"addShelterMarker({s.Latitude},{s.Longitude},'{EscapeJs(s.Name)}');";
-            await MapWebView.EvaluateJavaScriptAsync(js);
-        }
+        // 距離が近い順に上位10件を取得
+        var nearest10 = shelters.OrderBy(s => s.Distance).Take(10).ToList();
 
-        //最初の避難所へ移動
-        var first = targetShelters.First();
-        string moveJs = $"moveToLocation({first.Latitude},{first.Longitude});";
-        await MapWebView.EvaluateJavaScriptAsync(moveJs);
+        // 現在地をleafletに送る
+        await MapWebView.EvaluateJavaScriptAsync($"setCurrentLocation({currentLat},{currentLng});");
+
+        // JSON変換
+        var json = JsonSerializer.Serialize(nearest10);
+
+        // WebViewにピン追加命令を送る
+        await MapWebView.EvaluateJavaScriptAsync($"addShelterMarkers({json});");
     }
 
-    private static string EscapeJs(string text)
-        => text.Replace("", "\\'");
+    // 距離計算
+    private double HaversineDistance(double lat1,double lon1,double lat2,double lon2) {
+        double R = 6371; // 地球の半径（km）
+        double dLat = (lat2 - lat1) * Math.PI / 180;
+        double dLon = (lon2 - lon1) * Math.PI / 180;
+
+        double a =
+            Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+            Math.Cos(lat1 * Math.PI / 180) *
+            Math.Cos(lat2 * Math.PI / 180) *
+            Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+        double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        return R * c;
+    }
+
 }
