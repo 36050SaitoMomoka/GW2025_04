@@ -93,15 +93,6 @@
                 </Grid>
 
                 <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                    <Button Text="登録"
-                        BackgroundColor="#2196F3"
-                        TextColor="White"
-                        CornerRadius="8"
-                        HeightRequest="50"
-                        WidthRequest="150"
-                        HorizontalOptions="Center"
-                        Clicked="OnSubmitClicked"/>
-
                     <Button Text="戻る"
                         BackgroundColor="#CCCCCC"
                         TextColor="Black"
@@ -110,6 +101,15 @@
                         WidthRequest="150"
                         HorizontalOptions="Center"
                         Clicked="OnBackClicked"/>
+
+                    <Button Text="登録"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        WidthRequest="150"
+                        HorizontalOptions="Center"
+                        Clicked="OnSubmitClicked"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

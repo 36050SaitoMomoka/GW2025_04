@@ -84,20 +84,26 @@ namespace LocalDisasterPreventionInformationApp.Database {
         //=====================
         //  商品テーブル
         //=====================
-        public async Task<int> AddProductIfNotExistsAsync(string productName) {
+        public async Task<Product> AddProductIfNotExistsAsync(string productName,string category) {
             // 同じ名前の商品があるか確認
             var existing = await _db.Table<Product>()
                                     .Where(x => x.Name == productName)
                                     .FirstOrDefaultAsync();
 
-            //既に登録済み
             if (existing != null) {
-                return 0;
+                //既存商品(カテゴリが異なる場合はエラー)
+                if(existing.Category != category) {
+                    throw new InvalidOperationException(
+                        $"この商品は既に「{existing.Category}」として登録されています。");
+                }
+                return existing;  //既存商品を返す
             }
 
             // 新規追加
-            var newProduct = new Product { Name = productName };
-            return await _db.InsertAsync(newProduct);
+            var newProduct = new Product { Name = productName,Category = category };
+
+            await _db.InsertAsync(newProduct);
+            return newProduct;
         }
 
         //商品一覧を取得

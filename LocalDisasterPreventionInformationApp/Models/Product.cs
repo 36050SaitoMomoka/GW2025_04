@@ -15,5 +15,8 @@ namespace LocalDisasterPreventionInformationApp.Models {
 
         [NotNull]
         public string Name { get; set; }  //商品名
+
+        [NotNull]
+        public string Category { get; set; }  //カテゴリ
     }
 }

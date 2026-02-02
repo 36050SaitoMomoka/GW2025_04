@@ -37,6 +37,11 @@ public partial class StockPage : ContentPage {
         }
     }
 
+    protected override void OnAppearing() {
+        base.OnAppearing();
+        LoadData();
+    }
+
     private async void LoadData() {
         var products = await _db.GetProductsAsync();
         var stocks = await _db.GetStocksAsync();
@@ -58,8 +63,15 @@ public partial class StockPage : ContentPage {
                 ExpirationDateRaw = s.ExpirationDate
             });
 
-            //ä˙å¿Ç™ãﬂÇ¢è§ïi
-            if ((s.ExpirationDate - DateTime.Now).TotalDays <= 30) {
+            var today = DateTime.Today;
+
+            //ä˙å¿êÿÇÍ(ç°ì˙ÇÊÇËëO)
+            if (s.ExpirationDate < today) {
+                ExpiringItems.Add(new {
+                    Message = $"{p.Name}ÇÃä˙å¿Ç™êÿÇÍÇƒÇ¢Ç‹Ç∑({s.ExpirationDate:yyyy/MM/dd})"
+                });
+                //ä˙å¿Ç™ãﬂÇ¢è§ïi
+            } else if ((s.ExpirationDate - today).TotalDays <= 30) {
                 ExpiringItems.Add(new {
                     Message = $"{p.Name}ÇÃä˙å¿Ç™ãﬂÇ¢Ç≈Ç∑({s.ExpirationDate:yyyy/MM/dd})"
                 });

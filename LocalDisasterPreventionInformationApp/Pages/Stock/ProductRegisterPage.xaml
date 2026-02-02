@@ -29,68 +29,63 @@
                        Placeholder="商品名を入力"
                        WidthRequest="200"/>
 
-                    <!-- 登録日 -->
-                    <Label Text="登録日：" 
+                    <!-- 消費期限 -->
+                    <Label Text="消費期限：" 
                        Grid.Row="1" Grid.Column="0"
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry x:Name="RegisterDateEntry"
-                       Grid.Row="1" Grid.Column="1"
-                       Placeholder="YYYY/MM/DD"
-                       WidthRequest="200"/>
-
-                    <!-- 消費期限 -->
-                    <Label Text="消費期限：" 
-                       Grid.Row="2" Grid.Column="0"
-                       VerticalOptions="Center" 
-                       HorizontalTextAlignment="End"/>
-
                     <Entry x:Name="ExpirationEntry"
-                       Grid.Row="2" Grid.Column="1"
+                       Grid.Row="1" Grid.Column="1"
                        Placeholder="消費期限を入力"
-                       WidthRequest="200"/>
-
-                    <!-- 賞味期限 -->
-                    <Label Text="賞味期限：" 
-                       Grid.Row="3" Grid.Column="0"
-                       VerticalOptions="Center" 
-                       HorizontalTextAlignment="End"/>
-
-                    <Entry x:Name="BestBeforeEntry"
-                       Grid.Row="3" Grid.Column="1"
-                       Placeholder="賞味期限を入力"
                        WidthRequest="200"/>
 
                     <!-- 数量 -->
                     <Label Text="数量：" 
-                       Grid.Row="4" Grid.Column="0"
+                       Grid.Row="2" Grid.Column="0"
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
                     <Entry x:Name="QuantityEntry"
-                       Grid.Row="4" Grid.Column="1"
+                       Grid.Row="2" Grid.Column="1"
                        Placeholder="数量を入力"
                        WidthRequest="200"/>
 
                     <!-- カテゴリ -->
                     <Label Text="カテゴリ：" 
-                       Grid.Row="5" Grid.Column="0"
+                       Grid.Row="3" Grid.Column="0"
                        VerticalOptions="Center" 
                        HorizontalTextAlignment="End"/>
 
-                    <Entry x:Name="CategoryEntry"
-                       Grid.Row="5" Grid.Column="1"
-                       Placeholder="カテゴリを選択"
-                       WidthRequest="200"/>
+                    <Picker x:Name="CategoryPicker"
+                       Grid.Row="3" Grid.Column="1"
+                       WidthRequest="200">
+                        <Picker.Items>
+                            <x:String>食品</x:String>
+                            <x:String>飲料</x:String>
+                            <x:String>日用品</x:String>
+                            <x:String>医薬品</x:String>
+                            <x:String>その他</x:String>
+                        </Picker.Items>
+                    </Picker>
                 </Grid>
 
-                <!-- 登録ボタン -->
-                <Button Text="登録"
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                    <!-- 戻るボタン -->
+                    <Button Text="戻る"
+                        BackgroundColor="#CCCCCC"
+                        TextColor="Black"
+                        HorizontalOptions="Center"
+                        WidthRequest="120"
+                        Clicked="OnBackClicked"/>
+
+                    <!-- 登録ボタン -->
+                    <Button Text="登録"
                         HorizontalOptions="Center"
                         WidthRequest="120"
                         Clicked="OnSubmitClicked"/>
-                </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>

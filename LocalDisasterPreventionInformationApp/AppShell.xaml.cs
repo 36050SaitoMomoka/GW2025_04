@@ -43,7 +43,7 @@ namespace LocalDisasterPreventionInformationApp {
             Debug.WriteLine($"Product 件数： {products.Count}");
 
             foreach (var p in products) {
-                Debug.WriteLine($"ID = {p.ProductId}, Name = {p.Name}");
+                Debug.WriteLine($"ID = {p.ProductId}, Name = {p.Name}, Category = {p.Category}");
             }
         }
 

@@ -12,18 +12,24 @@
                   RowDefinitions="Auto,Auto,*,Auto"
                   Padding="10">
                 <!-- 期限が近い商品 -->
-                <CollectionView Grid.Row="0"
-                                ItemsSource="{Binding ExpiringItems}"
-                                SelectionMode="None">
-                    <CollectionView.ItemTemplate>
+                <VerticalStackLayout Grid.Row="0"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Start"
+                                     Spacing="4">
+                    <BindableLayout.ItemsSource>
+                        <Binding Path="ExpiringItems"/>
+                    </BindableLayout.ItemsSource>
+
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Label Text="{Binding Message}"
                                    TextColor="Red"
                                    FontSize="16"
-                                   Margin="0,2"/>
+                                   Margin="0,2"
+                                   HorizontalOptions="Center"/>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
 
                 <!-- 並べ替え -->
                 <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Margin="0,10">
@@ -46,23 +52,23 @@
                                 <!--Label Text="{Binding Category}"/-->
                                 <Label Grid.Column="1" Text="{Binding ProductName}"/>
                                 <Grid Grid.Column="2" ColumnDefinitions="Auto,Auto" ColumnSpacing="10"/>
-                                    <Label Grid.Column="0"
+                                <Label Grid.Column="0"
                                         Text="{Binding Quantity}"
                                         VerticalOptions="Center"
                                         HorizontalOptions="Center"/>
-                                    <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                        <Button Text="+"
+                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                    <Button Text="+"
                                             WidthRequest="30"
                                             HeightRequest="30"
                                             Command="{Binding Source={x:Reference ThisPage},Path=IncreaseCommand}"
                                             CommandParameter="{Binding}"/>
-                                        <Button Text="-"
+                                    <Button Text="-"
                                             WidthRequest="30"
                                             HeightRequest="30"
                                             Command="{Binding Source={x:Reference ThisPage},Path=DecreaseCommand}"
                                             CommandParameter="{Binding}"/>
                                 </VerticalStackLayout>
-                                
+
                                 <Label Grid.Column="3" Text="{Binding ExpireDate}"/>
                             </Grid>
                         </DataTemplate>

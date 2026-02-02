@@ -22,14 +22,42 @@ public partial class ProductRegisterPage : ContentPage {
 
     private async void OnSubmitClicked(object sender, EventArgs e) {
 
+        string name = ProductNameEntry.Text?.Trim();
+        string expire = ExpirationEntry.Text?.Trim();
+        string quantity = QuantityEntry.Text?.Trim();
+        string category = CategoryPicker.SelectedItem?.ToString();
+
+        if (string.IsNullOrEmpty(name) ||
+            string.IsNullOrEmpty(expire) ||
+            string.IsNullOrEmpty(quantity) ||
+            string.IsNullOrEmpty(category)) {
+            await DisplayAlert("エラー", "すべての項目を入力してください。", "OK");
+            return;
+        }
+
+        //日付チェック(存在しない日付はエラー)
+        DateTime exp;
+        if (!DateTime.TryParseExact(
+                expire,
+                "yyyyMMdd",
+                null,
+                System.Globalization.DateTimeStyles.None,
+                out exp)) {
+            await DisplayAlert("エラー","日付が正しくありません","OK");
+            return;
+        }
+
         //商品登録
-        await _db.AddProductIfNotExistsAsync(ProductNameEntry.Text);
+        Product product;
 
-        //在庫
-        var product = (await _db.GetProductsAsync())
-            .First(p => p.Name == ProductNameEntry.Text);
+        try {
+            product = await _db.AddProductIfNotExistsAsync(name, category);
+        }
+        catch (InvalidOperationException ex) {
+            await DisplayAlert("エラー", ex.Message, "OK");
+            return;
+        }
 
-        var exp = DateTime.ParseExact(ExpirationEntry.Text, "yyyyMMdd", null);
         var qty = int.Parse(QuantityEntry.Text);
 
         var stock = new LocalDisasterPreventionInformationApp.Models.Stock {
@@ -41,5 +69,9 @@ public partial class ProductRegisterPage : ContentPage {
         await _db.AddOrUpdateStockAsync(stock);
 
         await Shell.Current.GoToAsync("..");        //１つ前のページに戻る
+    }
+
+    private async void OnBackClicked(object sender, EventArgs e) {
+        await Shell.Current.GoToAsync("//StockPage");
     }
 }
