@@ -50,7 +50,7 @@ namespace LocalDisasterPreventionInformationApp {
         //TEST
         private async void CheckStockData() {
             var stocks = await _db.GetStocksAsync();
-            Debug.WriteLine($"Product 件数： {stocks.Count}");
+            Debug.WriteLine($"Stock 件数： {stocks.Count}");
 
             foreach (var s in stocks) {
                 Debug.WriteLine($"ID = {s.StockId}, pID = {s.ProductId}, Date = {s.ExpirationDate}, Qua = {s.Quantity}");

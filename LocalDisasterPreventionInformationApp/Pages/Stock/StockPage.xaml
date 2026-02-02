@@ -1,5 +1,6 @@
 <ContentPage
     x:Class="LocalDisasterPreventionInformationApp.Pages.Stock.StockPage"
+    x:Name="ThisPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:base="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Base"
@@ -7,7 +8,8 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            <Grid RowDefinitions="Auto,Auto,*,Auto"
+            <Grid x:Name="Inner" BindingContext ="{x:Reference ThisPage}"
+                  RowDefinitions="Auto,Auto,*,Auto"
                   Padding="10">
                 <!-- 期限が近い商品 -->
                 <CollectionView Grid.Row="0"
@@ -41,9 +43,26 @@
                         <DataTemplate>
                             <Grid ColumnDefinitions="2*,2*,1*,1*"
                                   Padding="5">
-                                <Label Text="{Binding Category}"/>
+                                <!--Label Text="{Binding Category}"/-->
                                 <Label Grid.Column="1" Text="{Binding ProductName}"/>
-                                <Label Grid.Column="2" Text="{Binding Quantity}"/>
+                                <Grid Grid.Column="2" ColumnDefinitions="Auto,Auto" ColumnSpacing="10"/>
+                                    <Label Grid.Column="0"
+                                        Text="{Binding Quantity}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                        <Button Text="+"
+                                            WidthRequest="30"
+                                            HeightRequest="30"
+                                            Command="{Binding Source={x:Reference ThisPage},Path=IncreaseCommand}"
+                                            CommandParameter="{Binding}"/>
+                                        <Button Text="-"
+                                            WidthRequest="30"
+                                            HeightRequest="30"
+                                            Command="{Binding Source={x:Reference ThisPage},Path=DecreaseCommand}"
+                                            CommandParameter="{Binding}"/>
+                                </VerticalStackLayout>
+                                
                                 <Label Grid.Column="3" Text="{Binding ExpireDate}"/>
                             </Grid>
                         </DataTemplate>

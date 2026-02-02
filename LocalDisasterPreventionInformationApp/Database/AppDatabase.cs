@@ -134,7 +134,7 @@ namespace LocalDisasterPreventionInformationApp.Database {
             // 同じ商品ID＋同じ消費期限の在庫を探す
             var existing = await _db.Table<Stock>()
                                     .Where(x => x.ProductId == productId &&
-                                                x.ExpirationDate.Date == expirationDate.Date)
+                                                x.ExpirationDate == expirationDate)
                                     .FirstOrDefaultAsync();
 
             if (existing == null)
@@ -145,7 +145,8 @@ namespace LocalDisasterPreventionInformationApp.Database {
 
             // 数量が0以下なら削除する運用も自然
             if (existing.Quantity <= 0) {
-                return await _db.DeleteAsync(existing);
+                existing.Quantity = 0;
+                return await _db.UpdateAsync(existing);
             }
 
             // 更新

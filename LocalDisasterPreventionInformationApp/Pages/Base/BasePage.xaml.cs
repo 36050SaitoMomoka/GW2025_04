@@ -28,8 +28,8 @@ public partial class BasePage : ContentView {
         FooterArea.BindingContext = Shell.Current.BindingContext;
 
         // ƒy[ƒW‘¤‚Ì BindingContext ‚ð BasePage ‚É“`‚¦‚é
-        this.BindingContextChanged += (s, e) => {
-            ContentArea.BindingContext = this.BindingContext;
-        };
+        //this.BindingContextChanged += (s, e) => {
+        //    ContentArea.BindingContext = this.BindingContext;
+        //};
     }
 }
