@@ -3,12 +3,14 @@ using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
 using System.Text;
 using Microsoft.Maui.Devices.Sensors;   // GPS
-using System.Text.Json;                 // JSON変換用
+using System.Text.Json;
+using System.Threading.Tasks;                 // JSON変換用
 
 namespace LocalDisasterPreventionInformationApp.Pages.Top;
 
 public partial class TopPage : ContentPage {
     private readonly AppDatabase _db;
+    private List<NearbyShelterItem> _nearest10;
 
     public TopPage(AppDatabase db) {
         InitializeComponent();
@@ -25,8 +27,11 @@ public partial class TopPage : ContentPage {
     }
 
     private async void MapWebView_Navigated(object sender, WebNavigatedEventArgs e) {
-        // 現在地と避難所データを取得してleafletに渡す
-        await LoadSheltersAndShowPinsAsync();
+        // 初回ロード時だけ地図を描写
+        if (e.Url.Contains("map.html")) {
+            // 現在地と避難所データを取得してleafletに渡す
+            await LoadSheltersAndShowPinsAsync();
+        }
     }
 
     //現在地取得 → DB取得 → 距離計算 → 上位10件 → leafletに渡す
@@ -47,6 +52,15 @@ public partial class TopPage : ContentPage {
         // 距離が近い順に上位10件を取得
         var nearest10 = shelters.OrderBy(s => s.Distance).Take(10).ToList();
 
+        // _nearest10に変換して保持
+        _nearest10 = nearest10
+            .Select(s => new NearbyShelterItem {
+                Shelter = s,
+                Distance = s.Distance,
+                IsSelected = false
+            })
+            .ToList();
+
         // 現在地をleafletに送る
         await MapWebView.EvaluateJavaScriptAsync($"setCurrentLocation({currentLat},{currentLng});");
 
@@ -55,10 +69,13 @@ public partial class TopPage : ContentPage {
 
         // WebViewにピン追加命令を送る
         await MapWebView.EvaluateJavaScriptAsync($"addShelterMarkers({json});");
+
+        // 10件リスト
+        NearbySheltersList.ItemsSource = _nearest10;
     }
 
     // 距離計算
-    private double HaversineDistance(double lat1,double lon1,double lat2,double lon2) {
+    private double HaversineDistance(double lat1, double lon1, double lat2, double lon2) {
         double R = 6371; // 地球の半径（km）
         double dLat = (lat2 - lat1) * Math.PI / 180;
         double dLon = (lon2 - lon1) * Math.PI / 180;
@@ -71,6 +88,29 @@ public partial class TopPage : ContentPage {
 
         double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
         return R * c;
+    }
+
+    private async void NearbySheltersList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+        if (e.CurrentSelection.FirstOrDefault() is NearbyShelterItem item) {
+            double lat = item.Shelter.Latitude;
+            double lng = item.Shelter.Longitude;
+
+            // 地図を移動
+            await MapWebView.EvaluateJavaScriptAsync($"moveToShelter({lat},{lng});");
+
+            // リストの背景色を更新
+            foreach (var s in _nearest10)
+                s.IsSelected = (s == item);
+
+            NearbySheltersList.ItemsSource = null;
+            NearbySheltersList.ItemsSource = _nearest10;
+        }
+    }
+
+    public class NearbyShelterItem {
+        public Shelter Shelter { get; set; }
+        public double Distance { get; set; }
+        public bool IsSelected { get; set; }
     }
 
 }

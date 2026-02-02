@@ -8,37 +8,12 @@
     <base:BasePage>
         <base:BasePage.InnerContent>
             <Grid>
-                <WebView x:Name="MapWebView" Source="map.html" Navigated="MapWebView_Navigated"/>
+                <WebView x:Name="MapWebView"
+                         Source="map.html" 
+                         Navigated="MapWebView_Navigated"/>
 
                 <!-- 通常時の操作パネル -->
-                <Border x:Name="SearchPanel"
-                            Background="#AAFFFFFF"
-                            StrokeThickness="0"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start"
-                            Margin="10"
-                            Padding="20"
-                            WidthRequest="200"
-                            HeightRequest="240">
-
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="10"/>
-                    </Border.StrokeShape>
-
-                    <VerticalStackLayout Spacing="8">
-                        <Picker Title="都道府県を選択" x:Name="PrefecturePicker"/>
-                        <Picker Title="市区町村を選択" x:Name="CityPicker"/>
-                        <Button Text="実行"
-                                x:Name="ExecuteButton"
-                                Margin="0,15,0,0"
-                                IsEnabled="False"
-                                />
-                        <!--Clicked="OnExecuteClicked"後で追加-->
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- 現在地付近の10件リストパネル -->
-                <Border x:Name="NearbyListPanel"
+                <Border x:Name="RightPanel"
                             Background="#AAFFFFFF"
                             StrokeThickness="0"
                             HorizontalOptions="End"
@@ -46,18 +21,34 @@
                             Margin="10"
                             Padding="20"
                             WidthRequest="250"
-                            HeightRequest="350"
-                            IsVisible="False">
+                            HeightRequest="500">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
 
-                    <VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="15">
+
+                        <!-- 検索パネル -->
+                        <VerticalStackLayout Spacing="8">
+                            <Picker Title="都道府県を選択" x:Name="PrefecturePicker"/>
+                            <Button Text="実行"
+                                x:Name="ExecuteButton"
+                                Margin="0,15,0,0"
+                                IsEnabled="False"
+                                />
+                            <!--Clicked="OnExecuteClicked"後で追加-->
+                        </VerticalStackLayout>
+
+                        <BoxView HeightRequest="1" BackgroundColor="#CCCCCC"/>
+
                         <Label Text="近くの避難所（10件）" FontAttributes="Bold"/>
 
                         <CollectionView x:Name="NearbySheltersList"
-                                            HeightRequest="250">
+                                        SelectionMode="Single"
+                                        SelectionChanged="NearbySheltersList_SelectionChanged"
+                                        HeightRequest="250">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout Padding="5"
@@ -69,8 +60,6 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-
-                        <!-- <Button Text="閉じる" Clicked="OnCloseNearbyList"/> -->
                     </VerticalStackLayout>
                 </Border>
 

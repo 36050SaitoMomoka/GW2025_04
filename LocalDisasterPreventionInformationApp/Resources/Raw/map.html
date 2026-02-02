@@ -45,11 +45,11 @@
             // 地図の中心を現在地に移動
             map.setView([lat, lng], 15);
 
-            // 現在地マーカー（青い〇）
+            // 現在地マーカー（赤い〇）
             L.circleMarker([lat, lng], {
                 radius: 8,
-                color: 'blue',
-                fillColor: '#30f',
+                color: 'red',
+                fillColor: 'red',
                 fillOpacity: 0.8
             }).addTo(map).bindPopup("現在地");
         }
@@ -57,10 +57,16 @@
         // 避難所ピンを表示
         function addShelterMarkers(shelters) {
             shelters.forEach(s => {
-                L.marker([s.Latitude, s.Longitude])
-                    .addTo(map)
-                    .bingPopup(s.Name + "<br>" + s.Address);
+                var marker = L.marker([s.Latitude, s.Longitude]).addTo(map);
+
+                // クリック時の処理(エラー防止)
+                marker.on('click', function () { });
             });
+        }
+
+        // 指定した避難所へ移動＋ズーム
+        function moveToShelter(lat, lng) {
+            map.setView([lat, lng], 17);
         }
     </script>
 </body>
