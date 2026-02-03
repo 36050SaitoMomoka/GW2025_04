@@ -11,6 +11,8 @@ public partial class StockPage : ContentPage {
 
     private readonly AppDatabase _db;
 
+    private string _currentSort = "消費期限";
+
     public ObservableCollection<object> Items { get; set; }
            = new ObservableCollection<object>();
 
@@ -19,6 +21,7 @@ public partial class StockPage : ContentPage {
 
     public ICommand IncreaseCommand { get; }
     public ICommand DecreaseCommand { get; }
+    public ICommand DeleteCommand { get; }
 
     public StockPage(AppDatabase db) {
         InitializeComponent();
@@ -26,8 +29,14 @@ public partial class StockPage : ContentPage {
 
         IncreaseCommand = new Command<object>(IncreaseQuantity);
         DecreaseCommand = new Command<object>(DecreaseQuantity);
+        DeleteCommand = new Command<object>(DeleteRecord);
 
         Inner.BindingContext = this;
+
+        //Pickerの初期選択を「消費期限」にする
+        SortPicker.SelectedIndex = 2;
+        _currentSort = "消費期限";
+
         LoadData();
 
         //PageTitleを「備蓄管理」にする
@@ -48,8 +57,27 @@ public partial class StockPage : ContentPage {
         Items.Clear();
         ExpiringItems.Clear();
 
-        //期限が近い順に並べ替える
-        var sortedStocks = stocks.OrderBy(s => s.ExpirationDate).ToList();
+        // 並べ替え
+        IEnumerable<Models.Stock> sortedStocks = stocks;
+
+        switch (_currentSort) {
+            case "商品名":
+                sortedStocks = stocks
+                    .OrderBy(s => products.First(p => p.ProductId == s.ProductId).Name,
+                    StringComparer.Create(new System.Globalization.CultureInfo("ja-JP"),true));
+                break;
+
+            case "カテゴリ":
+                sortedStocks = stocks
+                    .OrderBy(s => products.First(p => p.ProductId == s.ProductId).Category);
+                break;
+
+            case "消費期限":
+            default:
+                sortedStocks = stocks.OrderBy(s => s.ExpirationDate);
+                break;
+        }
+
 
         foreach (var s in sortedStocks) {
             var p = products.First(x => x.ProductId == s.ProductId);
@@ -79,6 +107,7 @@ public partial class StockPage : ContentPage {
         }
     }
 
+    //数量増やすボタン
     private async void IncreaseQuantity(object item) {
         var stock = item as StockItemViewModel;
         if (stock == null) return;
@@ -98,6 +127,7 @@ public partial class StockPage : ContentPage {
         Items[index] = stock;
     }
 
+    //数量減らすボタン
     private async void DecreaseQuantity(object item) {
         var stock = item as StockItemViewModel;
         if (stock == null || stock.Quantity <= 0) return;
@@ -114,6 +144,50 @@ public partial class StockPage : ContentPage {
         // 画面更新
         var index = Items.IndexOf(item);
         Items[index] = stock;
+    }
+
+    //削除ボタン
+    private async void DeleteRecord(object item) {
+        var stock = item as StockItemViewModel;
+        if (stock == null)
+            return;
+
+        // 確認ダイアログ
+        bool answer = await DisplayAlert(
+            "確認",
+            $"{stock.ProductName}（{stock.ExpireDate}）を削除しますか？",
+            "キャンセル",
+            "削除する"
+        );
+
+        if (answer)
+            return;
+
+        // DB から削除
+        await _db.DeleteStockAsync(new Models.Stock {
+            StockId = stock.StockId
+        });
+
+        // 画面から削除
+        Items.Remove(stock);
+
+        //期限が近い商品からも削除
+        var target = ExpiringItems
+            .FirstOrDefault(x => x.GetType().GetProperty("Message")?.GetValue(x)?.ToString()
+            .Contains(stock.ProductName) == true);
+
+        if (target != null)
+            ExpiringItems.Remove(target);
+    }
+
+    //並べ替え
+    private void OnSortChanged(object sender,EventArgs e) {
+        var picker = sender as Picker;
+        if (picker == null) return;
+
+        _currentSort = picker.SelectedItem?.ToString() ?? "消費期限";
+
+        LoadData();
     }
 
     private async void OnRegisterClicked(object sender, EventArgs e) {
