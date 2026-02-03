@@ -87,6 +87,7 @@ public partial class StockPage : ContentPage {
                 ProductId = s.ProductId,
                 ProductName = p.Name,
                 Quantity = s.Quantity,
+                Category = p.Category,
                 ExpireDate = s.ExpirationDate.ToString("yyyy/MM/dd"),
                 ExpirationDateRaw = s.ExpirationDate
             });

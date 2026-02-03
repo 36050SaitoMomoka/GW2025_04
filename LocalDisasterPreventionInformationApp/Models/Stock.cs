@@ -41,6 +41,7 @@ namespace LocalDisasterPreventionInformationApp.Models {
             }
         }
 
+        public string Category { get; set; }
         public string ExpireDate { get; set; }
         public DateTime ExpirationDateRaw { get; set; }
 
