@@ -2,21 +2,56 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="LocalDisasterPreventionInformationApp.Pages.Startup.StartupPage"
-    BackgroundColor="White">
+    BackgroundColor="White"
+    Loaded="ContentPage_Loaded">
 
     <Grid>
-        <ActivityIndicator 
-            IsRunning="True"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Color="Gray" />
+        <!-- 丸いゲージ -->
+        <Grid VerticalOptions="Center" HorizontalOptions="Center">
 
-        <Label 
-            Text="初回起動の準備をしています..."
-            VerticalOptions="End"
-            HorizontalOptions="Center"
-            Margin="0,0,0,80"
-            TextColor="Gray" />
+            <!-- 外枠の円 -->
+            <Ellipse
+                WidthRequest="150"
+                HeightRequest="150"
+                Stroke="LightGray"
+                StrokeThickness="10"/>
+
+            <!-- アニメーションする円弧（ゲージ） -->
+            <Path
+                x:Name="GaugePath"
+                Stroke="DodgerBlue"
+                StrokeThickness="10"
+                StrokeLineCap="Round">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure x:Name="ArcFigure"
+                                    StartPoint="75,10">
+                            <ArcSegment x:Name="ArcSegment"
+                                        Size="65,65"
+                                        SweepDirection="Clockwise"
+                                        Point="75,10"
+                                        IsLargeArc="False"/>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+
+            <!-- ％表示 -->
+            <Label x:Name="PercentLabel"
+                   Text="0%"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="Black"/>
+        </Grid>
+
+        <!-- 下部のLOADING... -->
+        <Label Text="LOADING..."
+               FontSize="18"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,80"
+               TextColor="Gray"/>
     </Grid>
-
 </ContentPage>
