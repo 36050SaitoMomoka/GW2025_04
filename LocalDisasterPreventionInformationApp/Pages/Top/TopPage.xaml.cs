@@ -24,6 +24,9 @@ public partial class TopPage : ContentPage {
         if (Shell.Current.BindingContext is AppShellViewModel vm) {
             vm.PageTitle = "ƒgƒbƒvƒy[ƒW";
         }
+
+        // “s“¹•{Œ§‚ðPicker‚ÉƒZƒbƒg
+        await LoadPrefecturesAsync();
     }
 
     private async void MapWebView_Navigated(object sender, WebNavigatedEventArgs e) {
@@ -32,6 +35,19 @@ public partial class TopPage : ContentPage {
             // Œ»Ý’n‚Æ”ð“ïŠƒf[ƒ^‚ðŽæ“¾‚µ‚Äleaflet‚É“n‚·
             await LoadSheltersAndShowPinsAsync();
         }
+    }
+
+    // “s“¹•{Œ§“Ç‚Ýž‚Ý
+    private async Task LoadPrefecturesAsync() {
+        var shelters = await _db.GetSheltersAsync();
+
+        // “s“¹•{Œ§ˆê——‚ðd•¡‚È‚µ‚ÅŽæ“¾
+        var prefectures = shelters
+            .Select(s => s.Prefecture)
+            .Distinct()
+            .ToList();
+
+        PrefecturePicker.ItemsSource = prefectures;
     }
 
     //Œ»Ý’nŽæ“¾ ¨ DBŽæ“¾ ¨ ‹——£ŒvŽZ ¨ ãˆÊ10Œ ¨ leaflet‚É“n‚·
@@ -113,4 +129,29 @@ public partial class TopPage : ContentPage {
         public bool IsSelected { get; set; }
     }
 
+    private void PrefecturePicker_SelectedIndexChanged(object sender, EventArgs e) {
+        ExecuteButton.IsEnabled = PrefecturePicker.SelectedIndex >= 0;
+        ExitButton.IsEnabled = PrefecturePicker.SelectedIndex >= 0;
+    }
+
+    private async void ExecuteButton_Clicked(object sender, TappedEventArgs e) {
+        if (PrefecturePicker.SelectedItem is not string selectedPrefecture)
+            return;
+
+        // DB‚©‚ç‘I‘ð‚³‚ê‚½“s“¹•{Œ§‚Ì”ð“ïŠ‚ðŽæ“¾
+        var shelters = await _db.GetSheltersAsync();
+        var filtered = shelters
+            .Where(s => s.Prefecture == selectedPrefecture)
+            .ToList();
+
+        // JSON‚É•ÏŠ·
+        var json = JsonSerializer.Serialize(filtered);
+
+        // WebView‚Éƒsƒ“’Ç‰Á–½—ß
+        await MapWebView.EvaluateJavaScriptAsync($"addShelterMarkers({json});");
+    }
+
+    private void ExitButton_Clicked(object sender, TappedEventArgs e) {
+
+    }
 }

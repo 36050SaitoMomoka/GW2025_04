@@ -20,7 +20,7 @@
                             VerticalOptions="Start"
                             Margin="10"
                             Padding="20"
-                            WidthRequest="250"
+                            WidthRequest="290"
                             HeightRequest="500">
 
                     <Border.StrokeShape>
@@ -31,15 +31,66 @@
                     <VerticalStackLayout Spacing="15">
 
                         <!-- 検索パネル -->
-                        <VerticalStackLayout Spacing="8">
-                            <Picker Title="都道府県を選択" x:Name="PrefecturePicker"/>
-                            <Button Text="実行"
-                                x:Name="ExecuteButton"
-                                Margin="0,15,0,0"
-                                IsEnabled="False"
-                                />
-                            <!--Clicked="OnExecuteClicked"後で追加-->
-                        </VerticalStackLayout>
+                        <Grid ColumnDefinitions="150,Auto,Auto"
+                              ColumnSpacing="8">
+                            <Picker Title="都道府県を選択"
+                                    x:Name="PrefecturePicker"
+                                    HeightRequest="60"
+                                    WidthRequest="150"
+                                    HorizontalOptions="Start"
+                                    Grid.Column="0"
+                                    SelectedIndexChanged="PrefecturePicker_SelectedIndexChanged"/>
+
+                            <Border Grid.Column="1"
+                                    Stroke="#888888"
+                                    StrokeThickness="2"
+                                    BackgroundColor="Transparent"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 10"
+                                    WidthRequest="35"
+                                    HeightRequest="35"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="End">
+
+                                <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Image x:Name="ExecuteButton"
+                                             Source="execute.png" 
+                                             WidthRequest="30"
+                                             HeightRequest="30"
+                                             BackgroundColor="Transparent" 
+                                             IsEnabled="False">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ExecuteButton_Clicked"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Border>
+
+                            <Border Grid.Column="2"
+                                    Stroke="#888888"
+                                    StrokeThickness="2"
+                                    BackgroundColor="Transparent"
+                                    Padding="4"
+                                    StrokeShape="RoundRectangle 10"
+                                    WidthRequest="35"
+                                    HeightRequest="35"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="End">
+
+                                <Grid HorizontalOptions="Center" VerticalOptions="End">
+                                    <Image x:Name="ExitButton" 
+                                           Source="exit.png"
+                                           WidthRequest="28"
+                                           HeightRequest="28"
+                                           BackgroundColor="Transparent"
+                                           IsEnabled="False">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ExitButton_Clicked"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Border>
+                        </Grid>
 
                         <BoxView HeightRequest="1" BackgroundColor="#CCCCCC"/>
 
