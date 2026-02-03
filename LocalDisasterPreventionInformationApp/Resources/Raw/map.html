@@ -40,10 +40,17 @@
             map.fitBounds(polyline.getBounds());
         }
 
+        var currentLocationMarker = null;
+
         // 現在地を中心にする
         function setCurrentLocation(lat, lng) {
             // 地図の中心を現在地に移動
             map.setView([lat, lng], 15);
+
+            // 既存の現在地マーカーを削除
+            if (currentLocationMarker) {
+                map.removeLayer(currentLocationMarker);
+            }
 
             // 現在地マーカー（赤い〇）
             L.circleMarker([lat, lng], {
@@ -54,19 +61,61 @@
             }).addTo(map).bindPopup("現在地");
         }
 
+        var prefectureMarkers = [];
+        var nearbyMarkers = [];
+
         // 避難所ピンを表示
         function addShelterMarkers(shelters) {
+            // 既存の都道府県ピンを削除
+            prefectureMarkers.forEach(m => map.removeLayer(m));
+            prefectureMarkers = [];
+
+            // 現在地付近の10件ピンを削除
+            nearbyMarkers.forEach(m => map.removeLayer(m));
+            nearbyMarkers = [];
+
+            var latlngs = [];
+
             shelters.forEach(s => {
                 var marker = L.marker([s.Latitude, s.Longitude]).addTo(map);
+
+                // 都道府県ピンとして保存
+                prefectureMarkers.push(marker);
+
+                latlngs.push([s.Latitude, s.Longitude]);
 
                 // クリック時の処理(エラー防止)
                 marker.on('click', function () { });
             });
+
+            // ピンがある範囲に地図を合わせる
+            if (latlngs.length > 0) {
+                var bounds = L.latLngBounds(latlngs);
+                map.fitBounds(bounds);
+            }
         }
 
         // 指定した避難所へ移動＋ズーム
         function moveToShelter(lat, lng) {
             map.setView([lat, lng], 17);
+        }
+
+        // 初期10件ピン追加
+        function addNearbyMarkers(shelters) {
+            // 初期10件は毎回消して書き直す
+            nearbyMarkers.forEach(m => map.removeLayer(m));
+            nearbyMarkers = [];
+
+            shelters.forEach(s => {
+                var marker = L.marker([s.Latitude, s.Longitude]).addTo(map);
+                nearbyMarkers.push(marker);
+            });
+        }
+
+        // 都道府県ピンを削除
+        function clearPrefectureMarkers() {
+            prefectureMarkers.forEach(m => map.removeLayer(m));
+            prefectureMarkers = [];
         }
     </script>
 </body>
