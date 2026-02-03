@@ -11,6 +11,7 @@ namespace LocalDisasterPreventionInformationApp.Pages.Top;
 public partial class TopPage : ContentPage {
     private readonly AppDatabase _db;
     private List<NearbyShelterItem> _nearest10;
+    private List<NearbyShelterItem> _currentList;
 
     public TopPage(AppDatabase db) {
         InitializeComponent();
@@ -84,7 +85,7 @@ public partial class TopPage : ContentPage {
         var json = JsonSerializer.Serialize(nearest10);
 
         // WebViewにピン追加命令を送る
-        await MapWebView.EvaluateJavaScriptAsync($"addShelterMarkers({json});");
+        await MapWebView.EvaluateJavaScriptAsync($"addNearbyMarkers({json});");
 
         // 10件リスト
         NearbySheltersList.ItemsSource = _nearest10;
@@ -119,7 +120,7 @@ public partial class TopPage : ContentPage {
                 s.IsSelected = (s == item);
 
             NearbySheltersList.ItemsSource = null;
-            NearbySheltersList.ItemsSource = _nearest10;
+            NearbySheltersList.ItemsSource = _currentList;
         }
     }
 
@@ -129,9 +130,27 @@ public partial class TopPage : ContentPage {
         public bool IsSelected { get; set; }
     }
 
-    private void PrefecturePicker_SelectedIndexChanged(object sender, EventArgs e) {
+    private async void PrefecturePicker_SelectedIndexChanged(object sender, EventArgs e) {
         ExecuteButton.IsEnabled = PrefecturePicker.SelectedIndex >= 0;
         ExitButton.IsEnabled = PrefecturePicker.SelectedIndex >= 0;
+
+        if(PrefecturePicker.SelectedItem is string prefecture) {
+            var shelters = await _db.GetSheltersAsync();
+
+            var cities = shelters
+                .Where(s => s.Prefecture == prefecture)
+                .Select(s => s.City)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+
+            CityPicker.ItemsSource = cities;
+            CityPicker.IsEnabled = true;
+        }
+    }
+
+    private void CityPicker_SelectedIndexChanged(object sender, EventArgs e) {
+        ExecuteButton.IsEnabled = CityPicker.SelectedIndex >= 0;
     }
 
     private async void ExecuteButton_Clicked(object sender, TappedEventArgs e) {
@@ -140,9 +159,38 @@ public partial class TopPage : ContentPage {
 
         // DBから選択された都道府県の避難所を取得
         var shelters = await _db.GetSheltersAsync();
+
+        string prefecture = PrefecturePicker.SelectedItem as string;
+        string city = CityPicker.SelectedItem as string;
+
         var filtered = shelters
-            .Where(s => s.Prefecture == selectedPrefecture)
+            .Where(s => s.Prefecture == prefecture)
+            .Where(s => city == null || s.City == city)
             .ToList();
+
+        // 現在地を再取得
+        var location = await Geolocation.GetLocationAsync();
+        double currentLat = location.Latitude;
+        double currentLng = location.Longitude;
+
+        // 距離を計算
+        foreach (var s in filtered) {
+            s.Distance = HaversineDistance(currentLat, currentLng, s.Latitude, s.Longitude);
+        }
+
+        // リストを都道府県の避難所一覧に切り替える
+        var listItems = filtered
+            .OrderBy(s=>s.Distance)
+            .Select(s => new NearbyShelterItem {
+                Shelter = s,
+                Distance = s.Distance,
+                IsSelected = false
+            })
+            .ToList();
+
+        // リストを更新
+        _currentList = listItems;
+        NearbySheltersList.ItemsSource = listItems;
 
         // JSONに変換
         var json = JsonSerializer.Serialize(filtered);
@@ -151,7 +199,20 @@ public partial class TopPage : ContentPage {
         await MapWebView.EvaluateJavaScriptAsync($"addShelterMarkers({json});");
     }
 
-    private void ExitButton_Clicked(object sender, TappedEventArgs e) {
+    private async void ExitButton_Clicked(object sender, TappedEventArgs e) {
+        // 都道府県ピンを削除
+        await MapWebView.EvaluateJavaScriptAsync("clearPrefectureMarkers();");
 
+        // 現在地付近の10件を再描画
+        await LoadSheltersAndShowPinsAsync();
+
+        // Pickerを未選択に戻す
+        PrefecturePicker.SelectedIndex = -1;
+        CityPicker.SelectedIndex = -1;
+
+        // ボタンを無効化
+        ExecuteButton.IsEnabled = false;
+        ExitButton.IsEnabled = false;
     }
+
 }
