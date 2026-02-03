@@ -2,12 +2,14 @@ using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Stock;
 
 //ContentPageを継承
-public partial class StockPage : ContentPage {
+public partial class StockPage : ContentPage , INotifyPropertyChanged{
 
     private readonly AppDatabase _db;
 
@@ -181,6 +183,21 @@ public partial class StockPage : ContentPage {
             ExpiringItems.Remove(target);
     }
 
+    //並べ替えタイトル
+    private string _selectedSortName = "消費期限順";
+    public string SelectedSortName {
+        get => _selectedSortName;
+        set {
+            _selectedSortName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public new event PropertyChangedEventHandler PropertyChanged;
+    protected new void OnPropertyChanged([CallerMemberName] string name = null) {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+
     //並べ替え
     private void OnSortChanged(object sender,EventArgs e) {
         var picker = sender as Picker;
@@ -188,7 +205,16 @@ public partial class StockPage : ContentPage {
 
         _currentSort = picker.SelectedItem?.ToString() ?? "消費期限";
 
-        LoadData();
+        //タイトル更新
+        if(_currentSort == "商品名") {
+            SelectedSortName = "商品別";
+        }else if(_currentSort == "カテゴリ") {
+            SelectedSortName = "カテゴリ別";
+        } else {
+            SelectedSortName = "消費期限順";
+        }
+
+            LoadData();
     }
 
     private async void OnRegisterClicked(object sender, EventArgs e) {
