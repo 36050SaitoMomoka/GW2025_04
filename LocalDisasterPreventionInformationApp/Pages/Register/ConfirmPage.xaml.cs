@@ -17,11 +17,15 @@ public partial class ConfirmPage : ContentPage {
     }
 
     public string Email {
-        set => emailLabel.Text = value;
+        set {
+            emailLabel.Text = string.IsNullOrWhiteSpace(value) ? "---" : value;
+        }
     }
 
     public string Phone {
-        set => phoneLabel.Text = value;
+        set {
+            phoneLabel.Text = string.IsNullOrWhiteSpace(value) ? "---" : value;
+        }
     }
 
     public string Address {

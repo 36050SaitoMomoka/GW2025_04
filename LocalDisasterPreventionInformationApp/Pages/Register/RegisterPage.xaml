@@ -18,50 +18,114 @@
 
         <!-- 中央フォーム -->
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="20" Spacing="15">
+            <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
 
-                <Entry x:Name="nameEntry"
-                       Placeholder="氏名"
-                       ClearButtonVisibility="WhileEditing" 
-                       WidthRequest="300"/>
+                <!-- 氏名（必須） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <Label Text="氏名" FontSize="16"/>
+                    <Entry x:Name="nameEntry"/>
+                    <Label x:Name="nameError" TextColor="Red" FontSize="12" IsVisible="False"/>
+                </VerticalStackLayout>
 
-                <Entry x:Name="furiganaEntry"
-                       Placeholder="フリガナ"
-                       ClearButtonVisibility="WhileEditing" 
-                       WidthRequest="300"/>
+                <!-- フリガナ（必須） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <HorizontalStackLayout>
+                    <Label Text="フリガナ" FontSize="16"/>
+                    <Label Text="カタカナで入力してください。" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                    </HorizontalStackLayout>
+                    <Entry x:Name="furiganaEntry"/>
+                    <Label x:Name="furiganaError" TextColor="Red" FontSize="12" IsVisible="False"/>
+                </VerticalStackLayout>
 
-                <Entry x:Name="emailEntry"
-                       Placeholder="メールアドレス"
-                       Keyboard="Email"
-                       ClearButtonVisibility="WhileEditing" 
-                       WidthRequest="300"/>
+                <!-- メールアドレス（任意） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <HorizontalStackLayout>
+                        <Label Text="メールアドレス" FontSize="16"/>
+                        <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                    </HorizontalStackLayout>
+                    <Entry x:Name="emailEntry" TextChanged="OnEmailFilter" Keyboard="Email"/>
+                </VerticalStackLayout>
 
-                <Entry x:Name="phoneEntry"
-                       Placeholder="電話番号(ハイフンなし）"
-                       Keyboard="Telephone"
-                       ClearButtonVisibility="WhileEditing" 
-                       WidthRequest="300"/>
+                <!-- 電話番号（任意） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <HorizontalStackLayout>
+                        <Label Text="電話番号（ハイフンなし）" FontSize="16"/>
+                        <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                    </HorizontalStackLayout>
+                    <Entry x:Name="phoneEntry" TextChanged="OnPhoneFilter" Keyboard="Telephone"/>
+                </VerticalStackLayout>
 
-                <Entry x:Name="addressEntry"
-                       Placeholder="住所"
-                       ClearButtonVisibility="WhileEditing" 
-                       WidthRequest="300"/>
+                <!-- 郵便番号（必須） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <Label Text="郵便番号（7桁）" FontSize="16"/>
+                    <Entry x:Name="zipEntry" Keyboard="Numeric" TextChanged="onZipChanged"/>
+                    <Label x:Name="zipError" TextColor="Red" FontSize="12" IsVisible="False"/>
+                </VerticalStackLayout>
 
+                <!-- 都道府県（自動入力・タップ不可） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <HorizontalStackLayout>
+                        <Label Text="都道府県" FontSize="16"/>
+                        <Label Text="自動入力" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                    </HorizontalStackLayout>
+                    <Entry x:Name="prefEntry"
+                           IsEnabled="False"
+                           BackgroundColor="White"
+                           TextColor="Black"
+                           Placeholder="郵便番号から自動入力"/>
+                </VerticalStackLayout>
+
+                <!-- 市区町村（自動入力・タップ不可） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <HorizontalStackLayout>
+                        <Label Text="市区町村" FontSize="16"/>
+                        <Label Text="自動入力" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                    </HorizontalStackLayout>
+                    <Entry x:Name="cityEntry"
+                           IsEnabled="False"
+                           BackgroundColor="White"
+                           TextColor="Black"
+                           Placeholder="郵便番号から自動入力"/>
+                </VerticalStackLayout>
+
+                <!-- 町域（必須） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <Label Text="町域" FontSize="16"/>
+                    <Entry x:Name="townEntry"/>
+                    <Label x:Name="townError" TextColor="Red" FontSize="12" IsVisible="False"/>
+                </VerticalStackLayout>
+
+                <!-- 番地（必須） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <Label Text="番地" FontSize="16"/>
+                    <Entry x:Name="addressLineEntry"/>
+                    <Label x:Name="addressError" TextColor="Red" FontSize="12" IsVisible="False"/>
+                </VerticalStackLayout>
+
+                <!-- 建物名（任意） -->
+                <VerticalStackLayout WidthRequest="300">
+                    <HorizontalStackLayout>
+                        <Label Text="建物名・部屋番号" FontSize="16"/>
+                        <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                    </HorizontalStackLayout>
+                    <Entry x:Name="buildingEntry"/>
+                </VerticalStackLayout>
+
+                <!-- 次へボタン -->
                 <Button Text="次へ"
                         Clicked="OnNextClicked"
                         BackgroundColor="#2196F3"
                         TextColor="White"
                         CornerRadius="8"
                         HeightRequest="50"
-                        Margin="0,20,0,20" 
-                        WidthRequest="100"/>
+                        Margin="0,20,0,20"
+                        WidthRequest="100"
+                        HorizontalOptions="Center"/>
 
             </VerticalStackLayout>
         </ScrollView>
 
         <!-- 下部バー -->
-        <Grid Grid.Row="2" HeightRequest="80" BackgroundColor="#F5F5F5">
-        </Grid>
-
+        <Grid Grid.Row="2" HeightRequest="80" BackgroundColor="#F5F5F5"/>
     </Grid>
 </ContentPage>
