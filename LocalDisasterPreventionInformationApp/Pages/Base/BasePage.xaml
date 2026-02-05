@@ -25,15 +25,15 @@
                     <ImageButton Source="chat.png"
                                  BackgroundColor="Transparent"
                                  WidthRequest="60" HeightRequest="60"
-                                 Command="{Binding FriendsCommand}" />
+                                 Command="{Binding LanguageCommand}" />
                     <ImageButton Source="notification.png"
                                  BackgroundColor="Transparent"
                                  WidthRequest="60" HeightRequest="60"
-                                 Command="{Binding NotificationCommand}" />
+                                 Command="{Binding FontCommand}" />
                     <ImageButton Source="setting.png"
                                  BackgroundColor="Transparent"
                                  WidthRequest="60" HeightRequest="60"
-                                 Command="{Binding SettingCommand}" />
+                                 Command="{Binding MyPageCommand}" />
                 </HorizontalStackLayout>
             </Grid>
 

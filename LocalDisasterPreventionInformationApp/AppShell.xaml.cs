@@ -27,7 +27,7 @@ namespace LocalDisasterPreventionInformationApp {
 
             Routing.RegisterRoute("language", typeof(Pages.Setting.LanguagePage));          // 多言語対応
 
-            Routing.RegisterRoute("setting", typeof(Pages.Setting.FontPage));               //フォント選択
+            Routing.RegisterRoute("font", typeof(Pages.Setting.FontPage));               //フォント選択
 
             Routing.RegisterRoute("mypage", typeof(Pages.Setting.MyPage));                  // マイページ
 

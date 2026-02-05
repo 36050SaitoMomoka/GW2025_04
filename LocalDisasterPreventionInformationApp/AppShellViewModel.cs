@@ -35,26 +35,26 @@ namespace LocalDisasterPreventionInformationApp {
         }
 
         // ヘッダーのボタン用
-        public ICommand FriendsCommand { get; }
-        public ICommand NotificationCommand { get; }
-        public ICommand SettingCommand { get; }
+        public ICommand LanguageCommand { get; }
+        public ICommand FontCommand { get; }
+        public ICommand MyPageCommand { get; }
         public ICommand OpenMenuCommand { get; }
         public ICommand RouteSearchCommand { get; }
 
         public AppShellViewModel() {
-            // チャットページへ
-            FriendsCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("///FriendsPage");
+            // 言語選択ページへ
+            LanguageCommand = new Command(async () => {
+                await Shell.Current.GoToAsync("language");
             });
 
-            //通知ページへ
-            NotificationCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("///NotificationPage");
+            //フォント選択ページへ
+            FontCommand = new Command(async () => {
+                await Shell.Current.GoToAsync("font");
             });
 
-            //設定ページへ
-            SettingCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("///SettingPage");
+            //マイページへ
+            MyPageCommand = new Command(async () => {
+                await Shell.Current.GoToAsync("mypage");
             });
 
             //ハンバーガーメニューを開く

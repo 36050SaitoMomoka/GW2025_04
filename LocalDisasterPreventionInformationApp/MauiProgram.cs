@@ -6,6 +6,7 @@ using LocalDisasterPreventionInformationApp.Pages.Stock;
 using LocalDisasterPreventionInformationApp.Pages.Top;
 using LocalDisasterPreventionInformationApp.Services;
 using LocalDisasterPreventionInformationApp.Pages.Register;
+using LocalDisasterPreventionInformationApp.Pages.Setting;
 
 namespace LocalDisasterPreventionInformationApp
 {
@@ -39,6 +40,8 @@ namespace LocalDisasterPreventionInformationApp
             builder.Services.AddTransient<StockPage>();
             builder.Services.AddTransient<TopPage>();
             builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<ConfirmPage>();
+            builder.Services.AddTransient<MyPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
