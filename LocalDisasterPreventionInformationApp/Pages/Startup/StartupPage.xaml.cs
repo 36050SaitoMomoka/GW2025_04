@@ -86,12 +86,17 @@ public partial class StartupPage : ContentPage {
         await Task.Delay(200);
         await this.FadeTo(0, 600);
 
+        //TEST
+        Preferences.Set("IsRegistered", false);
+
         // ‘JˆÚ
         bool isRegistered = Preferences.Get("IsRegistered", false);
 
         if (!isRegistered)
+            // RegisterPage‚Ö
             await Shell.Current.GoToAsync("//RegisterPage");
         else
+            // ‰ïˆõ“o˜^Ï‚İ ¨ TopPage‚Ö
             await Shell.Current.GoToAsync("//TopPage");
     }
 
