@@ -1,3 +1,4 @@
+using LocalDisasterPreventionInformationApp.Database;
 using Microsoft.Maui.Controls;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Register;
@@ -8,6 +9,8 @@ namespace LocalDisasterPreventionInformationApp.Pages.Register;
 [QueryProperty(nameof(Phone), "phone")]
 [QueryProperty(nameof(Address), "address")]
 public partial class ConfirmPage : ContentPage {
+    private readonly AppDatabase _db;
+
     public string Name {
         set => nameLabel.Text = value;
     }
@@ -32,7 +35,7 @@ public partial class ConfirmPage : ContentPage {
         set => addressLabel.Text = value;
     }
 
-    public ConfirmPage() {
+    public ConfirmPage(AppDatabase db) {
         InitializeComponent();
     }
 

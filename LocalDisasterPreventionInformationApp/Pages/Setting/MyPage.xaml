@@ -8,9 +8,9 @@
 
     <Grid RowDefinitions="Auto,*,Auto">
 
-        <!-- ã•”ƒo[ -->
+        <!-- ä¸Šéƒ¨ãƒãƒ¼ -->
         <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#F5F5F5">
-            <Label Text="’nˆæ–hÐî•ñƒAƒvƒŠ‚Ö‚æ‚¤‚±‚»I&#10;‰ïˆõî•ñ‚Ì‚²“o˜^‚ð‚¨Šè‚¢‚µ‚Ü‚·B"
+            <Label Text="åœ°åŸŸé˜²ç½æƒ…å ±ã‚¢ãƒ—ãƒªã¸ã‚ˆã†ã“ãï¼&#10;ä¼šå“¡æƒ…å ±ã®ã”ç™»éŒ²ã‚’ãŠé¡˜ã„ã—ã¾ã™ã€‚"
                FontSize="24"
                HorizontalOptions="Center"
                VerticalOptions="Center"
@@ -18,13 +18,13 @@
                VerticalTextAlignment="Center"/>
         </Grid>
 
-        <!-- ’†‰›i•\Ž¦ê—pj -->
+        <!-- ä¸­å¤®ï¼ˆè¡¨ç¤ºå°‚ç”¨ï¼‰ -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="20">
 
-                <!-- •ÒWƒ{ƒ^ƒ“iî•ñˆê——ƒuƒƒbƒN‚Ìˆê”Ôã‚É‘‚­j -->
+                <!-- ç·¨é›†ãƒœã‚¿ãƒ³ï¼ˆæƒ…å ±ä¸€è¦§ãƒ–ãƒ­ãƒƒã‚¯ã®ä¸€ç•ªä¸Šã«æ›¸ãï¼‰ -->
                 <HorizontalStackLayout HorizontalOptions="End">
-                    <Button Text="•ÒW"
+                    <Button Text="ç·¨é›†"
                     FontSize="12"
                     Padding="10,5"
                     BackgroundColor="#2196F3"
@@ -33,44 +33,44 @@
                     Command="{Binding EditProfileCommand}" />
                 </HorizontalStackLayout>
 
-                <!-- î•ñˆê——ƒuƒƒbƒN -->
+                <!-- æƒ…å ±ä¸€è¦§ãƒ–ãƒ­ãƒƒã‚¯ -->
                 <VerticalStackLayout Spacing="25">
 
-                    <!-- Ž–¼ƒuƒƒbƒN -->
+                    <!-- æ°åãƒ–ãƒ­ãƒƒã‚¯ -->
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto">
 
-                        <!-- €–Ú–¼ -->
+                        <!-- é …ç›®å -->
                         <Label Grid.Row="0"
-                       Text="Ž–¼"
+                       Text="æ°å"
                        FontSize="14"
                        FontAttributes="Bold"
                        TextColor="#444" />
 
-                        <!-- ƒtƒŠƒKƒi -->
+                        <!-- ãƒ•ãƒªã‚¬ãƒŠ -->
                         <Label Grid.Row="1"
                        Margin="10,0,0,0"
                        Text="{Binding Furigana}"
                        FontSize="12"
                        TextColor="#666" />
 
-                        <!-- Ž–¼ -->
+                        <!-- æ°å -->
                         <Label Grid.Row="2"
                        Margin="10,0,0,0"
                        Text="{Binding UserName}"
                        FontSize="20"
                        FontAttributes="Bold" />
 
-                        <!-- ‰ºü -->
+                        <!-- ä¸‹ç·š -->
                         <BoxView Grid.Row="3"
                          HeightRequest="1"
                          BackgroundColor="#ccc"
                          HorizontalOptions="Fill" />
                     </Grid>
 
-                    <!-- ƒ[ƒ‹ -->
+                    <!-- ãƒ¡ãƒ¼ãƒ« -->
                     <Grid RowDefinitions="Auto,Auto,Auto">
                         <Label Grid.Row="0"
-                       Text="ƒ[ƒ‹ƒAƒhƒŒƒX"
+                       Text="ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"
                        FontSize="14"
                        FontAttributes="Bold"
                        TextColor="#444" />
@@ -86,10 +86,10 @@
                          HorizontalOptions="Fill" />
                     </Grid>
 
-                    <!-- “d˜b”Ô† -->
+                    <!-- é›»è©±ç•ªå· -->
                     <Grid RowDefinitions="Auto,Auto,Auto">
                         <Label Grid.Row="0"
-                       Text="“d˜b”Ô†"
+                       Text="é›»è©±ç•ªå·"
                        FontSize="14"
                        FontAttributes="Bold"
                        TextColor="#444" />
@@ -105,7 +105,7 @@
                          HorizontalOptions="Fill" />
                     </Grid>
 
-                    <!-- ZŠˆê—— -->
+                    <!-- ä½æ‰€ä¸€è¦§ -->
                     <CollectionView ItemsSource="{Binding AddressList}"
                             SelectionMode="None">
                         <CollectionView.ItemTemplate>
@@ -137,7 +137,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- ‰º•”ƒo[ -->
+        <!-- ä¸‹éƒ¨ãƒãƒ¼ -->
         <Grid Grid.Row="2" HeightRequest="80" BackgroundColor="#F5F5F5">
         </Grid>
 
