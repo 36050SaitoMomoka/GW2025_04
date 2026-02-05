@@ -24,10 +24,22 @@ namespace LocalDisasterPreventionInformationApp.Services {
         //GeoJSONを読み込んでDBに保存
         public async Task<int> FetchAndSaveShelterAsync() {
 
+            string json = null;
+
             // Resources/Rawに置いたGeoJSONを読み込む
+#if ANDROID
+            //Android向け
+            using var stream = Android.App.Application.Context.Assets.Open("mergeFromCity_2.geojson");
+            using var reader = new StreamReader(stream);
+            json = reader.ReadToEnd();
+#endif
+
+#if WINDOWS
+            //Windows向け
             using var stream = await FileSystem.OpenAppPackageFileAsync("mergeFromCity_2.geojson");
             using var reader = new StreamReader(stream);
-            string json = await reader.ReadToEndAsync();
+            json = await reader.ReadToEndAsync();
+#endif
 
             //GeoJSONをC#モデルに変換
             var root = JsonSerializer.Deserialize<ShelterGeoJsonRoot>(json);
