@@ -5,142 +5,126 @@
     xmlns:base="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Base"
     Shell.NavBarIsVisible="False">
 
+    <base:BasePage>
+        <base:BasePage.InnerContent>
+            <Grid>
+                <!-- 中央（表示専用） -->
+                <ScrollView Grid.Row="1">
+                    <VerticalStackLayout Padding="20" Spacing="20">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+                        <!-- 編集ボタン（情報一覧ブロックの一番上に書く） -->
+                        <HorizontalStackLayout HorizontalOptions="End">
+                            <Button Text="編集"
+                                    FontSize="12"
+                                    Padding="10,5"
+                                    BackgroundColor="#2196F3"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Command="{Binding EditProfileCommand}" />
+                        </HorizontalStackLayout>
 
-        <!-- 上部バー -->
-        <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#F5F5F5">
-            <Label Text="地域防災情報アプリへようこそ！&#10;会員情報のご登録をお願いします。"
-               FontSize="24"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"/>
-        </Grid>
+                        <!-- 情報一覧ブロック -->
+                        <VerticalStackLayout Spacing="25">
 
-        <!-- 中央（表示専用） -->
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="20" Spacing="20">
+                            <!-- 氏名ブロック -->
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto">
 
-                <!-- 編集ボタン（情報一覧ブロックの一番上に書く） -->
-                <HorizontalStackLayout HorizontalOptions="End">
-                    <Button Text="編集"
-                    FontSize="12"
-                    Padding="10,5"
-                    BackgroundColor="#2196F3"
-                    TextColor="White"
-                    CornerRadius="8"
-                    Command="{Binding EditProfileCommand}" />
-                </HorizontalStackLayout>
+                                <!-- 項目名 -->
+                                <Label Grid.Row="0"
+                                       Text="氏名"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="#444" />
 
-                <!-- 情報一覧ブロック -->
-                <VerticalStackLayout Spacing="25">
+                                <!-- フリガナ -->
+                                <Label Grid.Row="1"
+                                       Margin="10,0,0,0"
+                                       Text="{Binding Furigana}"
+                                       FontSize="12"
+                                       TextColor="#666" />
 
-                    <!-- 氏名ブロック -->
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+                                <!-- 氏名 -->
+                                <Label Grid.Row="2"
+                                       Margin="10,0,0,0"
+                                       Text="{Binding UserName}"
+                                       FontSize="20"
+                                       FontAttributes="Bold" />
 
-                        <!-- 項目名 -->
-                        <Label Grid.Row="0"
-                       Text="氏名"
-                       FontSize="14"
-                       FontAttributes="Bold"
-                       TextColor="#444" />
+                                <!-- 下線 -->
+                                <BoxView Grid.Row="3"
+                                         HeightRequest="1"
+                                         BackgroundColor="#ccc"
+                                         HorizontalOptions="Fill" />
+                            </Grid>
 
-                        <!-- フリガナ -->
-                        <Label Grid.Row="1"
-                       Margin="10,0,0,0"
-                       Text="{Binding Furigana}"
-                       FontSize="12"
-                       TextColor="#666" />
+                            <!-- メール -->
+                            <Grid RowDefinitions="Auto,Auto,Auto">
+                                <Label Grid.Row="0"
+                                       Text="メールアドレス"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="#444" />
 
-                        <!-- 氏名 -->
-                        <Label Grid.Row="2"
-                       Margin="10,0,0,0"
-                       Text="{Binding UserName}"
-                       FontSize="20"
-                       FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                                       Margin="10,0,0,0"
+                                       Text="{Binding Email}"
+                                       FontSize="18" />
 
-                        <!-- 下線 -->
-                        <BoxView Grid.Row="3"
-                         HeightRequest="1"
-                         BackgroundColor="#ccc"
-                         HorizontalOptions="Fill" />
-                    </Grid>
+                                <BoxView Grid.Row="2"
+                                         HeightRequest="1"
+                                         BackgroundColor="#ccc"
+                                         HorizontalOptions="Fill" />
+                            </Grid>
 
-                    <!-- メール -->
-                    <Grid RowDefinitions="Auto,Auto,Auto">
-                        <Label Grid.Row="0"
-                       Text="メールアドレス"
-                       FontSize="14"
-                       FontAttributes="Bold"
-                       TextColor="#444" />
+                            <!-- 電話番号 -->
+                            <Grid RowDefinitions="Auto,Auto,Auto">
+                                <Label Grid.Row="0"
+                                       Text="電話番号"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="#444" />
 
-                        <Label Grid.Row="1"
-                       Margin="10,0,0,0"
-                       Text="{Binding Email}"
-                       FontSize="18" />
+                                <Label Grid.Row="1"
+                                       Margin="10,0,0,0"
+                                       Text="{Binding Phone}"
+                                       FontSize="18" />
 
-                        <BoxView Grid.Row="2"
-                         HeightRequest="1"
-                         BackgroundColor="#ccc"
-                         HorizontalOptions="Fill" />
-                    </Grid>
+                                <BoxView Grid.Row="2"
+                                         HeightRequest="1"
+                                         BackgroundColor="#ccc"
+                                         HorizontalOptions="Fill" />
+                            </Grid>
 
-                    <!-- 電話番号 -->
-                    <Grid RowDefinitions="Auto,Auto,Auto">
-                        <Label Grid.Row="0"
-                       Text="電話番号"
-                       FontSize="14"
-                       FontAttributes="Bold"
-                       TextColor="#444" />
+                            <!-- 住所一覧 -->
+                            <CollectionView ItemsSource="{Binding AddressList}"
+                                            SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid RowDefinitions="Auto,Auto,Auto">
 
-                        <Label Grid.Row="1"
-                       Margin="10,0,0,0"
-                       Text="{Binding Phone}"
-                       FontSize="18" />
+                                            <Label Grid.Row="0"
+                                                   Text="{Binding AddressType}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#444" />
 
-                        <BoxView Grid.Row="2"
-                         HeightRequest="1"
-                         BackgroundColor="#ccc"
-                         HorizontalOptions="Fill" />
-                    </Grid>
+                                            <Label Grid.Row="1"
+                                                   Margin="10,0,0,0"
+                                                   Text="{Binding Address}"
+                                                   FontSize="18" />
 
-                    <!-- 住所一覧 -->
-                    <CollectionView ItemsSource="{Binding AddressList}"
-                            SelectionMode="None">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid RowDefinitions="Auto,Auto,Auto">
-
-                                    <Label Grid.Row="0"
-                                   Text="{Binding AddressType}"
-                                   FontSize="14"
-                                   FontAttributes="Bold"
-                                   TextColor="#444" />
-
-                                    <Label Grid.Row="1"
-                                   Margin="10,0,0,0"
-                                   Text="{Binding Address}"
-                                   FontSize="18" />
-
-                                    <BoxView Grid.Row="2"
-                                     HeightRequest="1"
-                                     BackgroundColor="#ccc"
-                                     HorizontalOptions="Fill" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                </VerticalStackLayout>
-
-            </VerticalStackLayout>
-        </ScrollView>
-
-        <!-- 下部バー -->
-        <Grid Grid.Row="2" HeightRequest="80" BackgroundColor="#F5F5F5">
-        </Grid>
-
-    </Grid>
-
+                                            <BoxView Grid.Row="2"
+                                                     HeightRequest="1"
+                                                     BackgroundColor="#ccc"
+                                                     HorizontalOptions="Fill" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+        </base:BasePage.InnerContent>
+    </base:BasePage>
 </ContentPage>

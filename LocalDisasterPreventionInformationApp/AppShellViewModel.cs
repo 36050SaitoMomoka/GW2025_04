@@ -67,49 +67,49 @@ namespace LocalDisasterPreventionInformationApp {
                 await Shell.Current.GoToAsync("///TopPage");
             });
 
-            _ = LoadWarnAsync();
+          //_ = LoadWarnAsync();
         }
 
         // Yahooニュース検索結果を取得
-        private async Task LoadWarnAsync() {
-            try {
-                newsItems = new List<NewsItem>();
+//        private async Task LoadWarnAsync() {
+//            try {
+//                newsItems = new List<NewsItem>();
 
-                string url = "https://news.yahoo.co.jp/search?p=警報&ei=utf-8";
+//                string url = "https://news.yahoo.co.jp/search?p=警報&ei=utf-8";
 
-                using var http = new HttpClient();
-                string html = await http.GetStringAsync(url);
+//                using var http = new HttpClient();
+////                string html = await http.GetStringAsync(url);
 
-                var doc = new HtmlDocument();
-                doc.LoadHtml(html);
+//                var doc = new HtmlDocument();
+////                doc.LoadHtml(html);
 
-                // Yahooニュース検索結果のタイトルを取得
-                var nodes = doc.DocumentNode.SelectNodes("//a[contains{@href,'/articles/')]");
+//                // Yahooニュース検索結果のタイトルを取得
+//                var nodes = doc.DocumentNode.SelectNodes("//a[contains{@href,'/articles/')]");
 
-                if (nodes != null) {
-                    foreach (var node in nodes) {
-                        string title = node.InnerText.Trim();
-                        string link = node.GetAttributeValue("href", "");
+//                if (nodes != null) {
+//                    foreach (var node in nodes) {
+//                        string title = node.InnerText.Trim();
+//                        string link = node.GetAttributeValue("href", "");
 
-                        newsItems.Add(new NewsItem {
-                            Title = title,
-                            Link = link,
-                        });
-                    }
-                }
+//                        newsItems.Add(new NewsItem {
+//                            Title = title,
+//                            Link = link,
+//                        });
+//                    }
+//                }
 
-                if (newsItems.Count > 0) {
-                    newsIndex = 0;
-                    newsText = newsItems[0].Title;
-                    StartNewsCycle();
-                } else {
-                    newsText = "ニュースがありません。";
-                }
-            }
-            catch (Exception ex) {
-                newsText = $"取得エラー：{ex.Message}";
-            }
-        }
+//                if (newsItems.Count > 0) {
+//                    newsIndex = 0;
+//                    newsText = newsItems[0].Title;
+//                    StartNewsCycle();
+//                } else {
+//                    newsText = "ニュースがありません。";
+//                }
+//            }
+//            catch (Exception ex) {
+//                newsText = $"取得エラー：{ex.Message}";
+//            }
+//        }
 
         private void StartNewsCycle() => RunNewsAnimation();
 
