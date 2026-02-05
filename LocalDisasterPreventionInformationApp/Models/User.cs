@@ -19,10 +19,9 @@ namespace LocalDisasterPreventionInformationApp.Models {
         [NotNull]
         public string Furigana { get; set; }  //フリガナ
 
-        [NotNull]
+        //電話番号とメアドはNULL許容
         public string PhoneNumber { get; set; }  //電話番号
 
-        [NotNull]
         public string Email { get; set; }  //メールアドレス
     }
 }

@@ -60,7 +60,7 @@ public partial class ProductRegisterPage : ContentPage {
 
         var qty = int.Parse(QuantityEntry.Text);
 
-        var stock = new LocalDisasterPreventionInformationApp.Models.Stock {
+        var stock = new Models.Stock {
             ProductId = product.ProductId,
             ExpirationDate = exp,
             Quantity = qty,
