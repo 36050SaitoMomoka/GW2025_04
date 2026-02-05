@@ -29,7 +29,10 @@
 
                 <!-- フリガナ（必須） -->
                 <VerticalStackLayout WidthRequest="300">
+                    <HorizontalStackLayout>
                     <Label Text="フリガナ" FontSize="16"/>
+                    <Label Text="カタカナで入力してください。" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                    </HorizontalStackLayout>
                     <Entry x:Name="furiganaEntry"/>
                     <Label x:Name="furiganaError" TextColor="Red" FontSize="12" IsVisible="False"/>
                 </VerticalStackLayout>
@@ -40,7 +43,7 @@
                         <Label Text="メールアドレス" FontSize="16"/>
                         <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
-                    <Entry x:Name="emailEntry" Keyboard="Email"/>
+                    <Entry x:Name="emailEntry" TextChanged="OnEmailFilter" Keyboard="Email"/>
                 </VerticalStackLayout>
 
                 <!-- 電話番号（任意） -->
@@ -49,7 +52,7 @@
                         <Label Text="電話番号（ハイフンなし）" FontSize="16"/>
                         <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
-                    <Entry x:Name="phoneEntry" Keyboard="Telephone"/>
+                    <Entry x:Name="phoneEntry" TextChanged="OnPhoneFilter" Keyboard="Telephone"/>
                 </VerticalStackLayout>
 
                 <!-- 郵便番号（必須） -->

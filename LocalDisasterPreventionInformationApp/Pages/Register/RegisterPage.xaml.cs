@@ -1,6 +1,8 @@
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Register;
 
@@ -121,10 +123,10 @@ public partial class RegisterPage : ContentPage {
         if (!Validate())
             return;
 
-        string name = Normalize(nameEntry.Text);
-        string furigana = Normalize(furiganaEntry.Text);
-        string email = Normalize(emailEntry.Text);
-        string phone = Normalize(phoneEntry.Text);
+        string name = NormalizeName(nameEntry.Text);
+        string furigana = NomalizeFurigana(furiganaEntry.Text);
+        string email = NomalizeEmail(emailEntry.Text);
+        string phone = NormalizePhone(phoneEntry.Text);
 
         string fullAddress = BuildFullAddress();
 
@@ -132,23 +134,186 @@ public partial class RegisterPage : ContentPage {
             $"//ConfirmPage?name={name}&furigana={furigana}&email={email}&phone={phone}&address={fullAddress}");
     }
 
+    // 氏名正規化
+    private string NormalizeName(string input) {
+        if (string.IsNullOrWhiteSpace(input))
+            return "";
+
+        // 全角→半角
+        input = input.Normalize(NormalizationForm.FormKC);
+
+        // スペース削除（半角・全角）
+        input = input.Replace(" ", "").Replace("　", "");
+
+        return input;
+    }
+
+    // フリガナ正規化
+    private string NomalizeFurigana(string input) {
+        if (string.IsNullOrWhiteSpace(input))
+            return "";
+
+        // スペース削除
+        input = input.Replace(" ", "").Replace("　", "");
+
+        var sb = new StringBuilder();
+
+        foreach (char c in input) {
+            // ひらがな → カタカナ（Unicode ひらがな全域）
+            if (c >= '\u3041' && c <= '\u3096') {
+                sb.Append((char)(c + 0x60)); // ひらがな→カタカナ
+            } else {
+                sb.Append(c);
+            }
+        }
+
+        // 半角カナ → 全角カナ
+        string result = sb.ToString().Normalize(NormalizationForm.FormKC);
+
+        return result;
+    }
+
+    // メールアドレス正規化
+    private string _lastValidEmail = "";
+
+    private void OnEmailFilter(object sender, TextChangedEventArgs e) {
+        var text = emailEntry.Text;
+
+        if (string.IsNullOrEmpty(text)) {
+            _lastValidEmail = "";
+            return;
+        }
+
+        // 半角 ASCII のみ許可（0x21?0x7E）
+        bool isValid = text.All(c =>
+            c >= 0x21 && c <= 0x7E &&  // ASCII
+            c != ' ' && c != '　'      // 半角/全角スペース禁止
+        );
+
+        if (!isValid) {
+            // 入力前の状態に戻す（＝入力できないように見える）
+            emailEntry.Text = _lastValidEmail;
+            return;
+        }
+
+        _lastValidEmail = text;
+    }
+
+    private string NomalizeEmail(string input) {
+        if (string.IsNullOrWhiteSpace(input))
+            return "";
+
+        // 全角 → 半角
+        input = input.Normalize(NormalizationForm.FormKC);
+
+        // 前後の空白除去
+        input = input.Trim();
+
+        // 全角スペース除去
+        input = input.Replace("　", "");
+
+        // 小文字に統一
+        input = input.ToLowerInvariant();
+
+        return input;
+    }
+
+    // 電話番号正規化
+    private string _lastValidPhone = "";
+
+    private void OnPhoneFilter(object sender, TextChangedEventArgs e) {
+        var text = phoneEntry.Text;
+
+        if (string.IsNullOrEmpty(text)) {
+            _lastValidPhone = "";
+            return;
+        }
+
+        // 数字のみ許可（全角数字も許可）
+        bool isValid = text.All(c => char.IsDigit(c));
+
+        if (!isValid) {
+            phoneEntry.Text = _lastValidPhone;
+            return;
+        }
+
+        _lastValidPhone = text;
+    }
+
+    string NormalizePhone(string input) {
+        if (string.IsNullOrWhiteSpace(input)) return "";
+
+        // 半角化
+        string num = input.Normalize(NormalizationForm.FormKC);
+
+        // 数字以外除去
+        num = new string(num.Where(char.IsDigit).ToArray());
+
+        // --- 優先判定（特殊番号） ---
+
+        // 0120（フリーダイヤル）
+        if (num.StartsWith("0120") && num.Length == 10)
+            return $"{num[..4]}-{num.Substring(4, 3)}-{num.Substring(7)}";
+
+        // 0570（ナビダイヤル）
+        if (num.StartsWith("0570") && num.Length == 10)
+            return $"{num[..4]}-{num.Substring(4, 2)}-{num.Substring(6)}";
+
+        // --- 携帯電話（090/080/070/060） ---
+        if ((num.StartsWith("090") || num.StartsWith("080") ||
+             num.StartsWith("070") || num.StartsWith("060")) &&
+             num.Length == 11)
+            return $"{num[..3]}-{num.Substring(3, 4)}-{num.Substring(7)}";
+
+        // --- IP電話（050） ---
+        if (num.StartsWith("050") && num.Length == 11)
+            return $"{num[..3]}-{num.Substring(3, 4)}-{num.Substring(7)}";
+
+        // --- 固定電話（関東圏のみ対応） ---
+
+        // 市外局番 4桁（例：0276 太田市）
+        string[] area4 = { "0276", "0285", "0297", "0299", "0466", "0476", "0479" };
+        if (num.Length == 10 && area4.Any(a => num.StartsWith(a)))
+            return $"{num[..4]}-{num.Substring(4, 2)}-{num.Substring(6)}";
+
+        // 市外局番 3桁（例：027, 028, 029, 03, 04, 045, 046, 047, 048, 049）
+        string[] area3 = { "027", "028", "029", "03", "04", "045", "046", "047", "048", "049" };
+        if (num.Length == 10 && area3.Any(a => num.StartsWith(a)))
+            return $"{num[..3]}-{num.Substring(3, 3)}-{num.Substring(6)}";
+
+        // 市外局番 2桁（03, 06）
+        if (num.Length == 10 && (num.StartsWith("03") || num.StartsWith("06")))
+            return $"{num[..2]}-{num.Substring(2, 4)}-{num.Substring(6)}";
+
+        // --- それ以外は整形しない ---
+        return num;
+    }
+
     // 住所正規化
     private string NormalizeAddressLine(string input) {
         if (string.IsNullOrWhiteSpace(input))
             return "";
 
+        // 全角 → 半角
         input = input.Normalize(NormalizationForm.FormKC);
-        input = input.Trim();
+
+        // スペース削除（半角・全角）
+        input = input.Replace(" ", "").Replace("　", "");
 
         // 「丁目」「番地」「号」「の」などをハイフンに統一
         input = input.Replace("丁目", "-")
                      .Replace("番地", "-")
                      .Replace("号", "")
-                     .Replace("の", "-")
-                     .Replace("?", "-")   // 全角ハイフン
-                     .Replace("ー", "-")   // 長音をハイフン扱い
+                     .Replace("の", "-");
+
+        // 長音記号をハイフンに統一
+        input = input.Replace("ー", "-")
                      .Replace("―", "-")
+                     .Replace("?", "-")
                      .Replace("‐", "-");
+
+        // 住所に不要な記号を削除
+        input = Regex.Replace(input, @"[!@#$%^&*+=~|\\/?<>]", "");
 
         // 連続ハイフンを1つにまとめる
         input = Regex.Replace(input, "-+", "-");
