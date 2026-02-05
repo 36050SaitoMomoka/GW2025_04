@@ -38,6 +38,7 @@ namespace LocalDisasterPreventionInformationApp
             builder.Services.AddTransient<ProductRegisterPage>();
             builder.Services.AddTransient<StockPage>();
             builder.Services.AddTransient<TopPage>();
+            builder.Services.AddTransient<RegisterPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
