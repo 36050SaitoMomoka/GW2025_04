@@ -86,6 +86,8 @@ public partial class StartupPage : ContentPage {
         await Task.Delay(200);
         await this.FadeTo(0, 600);
 
+        Debug.WriteLine($"[TEST] Shelter Œ”F {shelters.Count}");
+
         //TEST
         Preferences.Set("IsRegistered", false);
 

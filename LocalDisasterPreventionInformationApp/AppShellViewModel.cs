@@ -9,6 +9,28 @@ using static System.Net.WebRequestMethods;
 
 namespace LocalDisasterPreventionInformationApp {
     public class AppShellViewModel : INotifyPropertyChanged {
+        // 言語一覧
+        public List<string> LanguageList { get; } = new()
+        {
+            "日本語",
+            "English",
+            "한국어",
+            "中文"
+        };
+
+        // 選択された言語
+        private string selectedLanguage;
+        public string SelectedLanguage {
+            get => selectedLanguage;
+            set {
+                if (selectedLanguage == value) return;
+                selectedLanguage = value;
+                OnPropertyChanged();
+
+                // ③ 言語を保存
+                Preferences.Set("SelectedLanguage", selectedLanguage);
+            }
+        }
 
         // ページタイトル
         private string pageTitle;
@@ -35,17 +57,15 @@ namespace LocalDisasterPreventionInformationApp {
         }
 
         // ヘッダーのボタン用
-        public ICommand LanguageCommand { get; }
         public ICommand FontCommand { get; }
         public ICommand MyPageCommand { get; }
         public ICommand OpenMenuCommand { get; }
         public ICommand RouteSearchCommand { get; }
 
         public AppShellViewModel() {
-            // 言語選択ページへ
-            LanguageCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("language");
-            });
+
+            // 前回選んだ言語を復元（初期値：日本語）
+            SelectedLanguage = Preferences.Get("SelectedLanguage", "日本語");
 
             //フォント選択ページへ
             FontCommand = new Command(async () => {
@@ -69,6 +89,8 @@ namespace LocalDisasterPreventionInformationApp {
 
           //_ = LoadWarnAsync();
         }
+
+
 
         // Yahooニュース検索結果を取得
 //        private async Task LoadWarnAsync() {
@@ -125,8 +147,10 @@ namespace LocalDisasterPreventionInformationApp {
 
         // プロパティ変更通知
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        private void OnPropertyChanged([CallerMemberName] string name = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 
     public class NewsItem {
