@@ -119,8 +119,9 @@ public partial class TopPage : ContentPage {
             foreach (var s in _nearest10)
                 s.IsSelected = (s == item);
 
+            var current = NearbySheltersList.ItemsSource;
             NearbySheltersList.ItemsSource = null;
-            NearbySheltersList.ItemsSource = _currentList;
+            NearbySheltersList.ItemsSource = current;
         }
     }
 
