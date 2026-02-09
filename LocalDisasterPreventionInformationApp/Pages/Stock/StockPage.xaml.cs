@@ -99,12 +99,12 @@ public partial class StockPage : ContentPage , INotifyPropertyChanged{
             //期限切れ(今日より前)
             if (s.ExpirationDate < today) {
                 ExpiringItems.Add(new {
-                    Message = $"{p.Name}の期限が切れています({s.ExpirationDate:yyyy/MM/dd})"
+                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}の期限が切れています"
                 });
                 //期限が近い商品
             } else if ((s.ExpirationDate - today).TotalDays <= 30) {
                 ExpiringItems.Add(new {
-                    Message = $"{p.Name}の期限が近いです({s.ExpirationDate:yyyy/MM/dd})"
+                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}の期限が近いです"
                 });
             }
         }

@@ -11,35 +11,41 @@
             <Grid x:Name="Inner" BindingContext ="{x:Reference ThisPage}"
                   RowDefinitions="Auto,Auto,*,Auto"
                   Padding="10">
-                <!-- 期限が近い商品 -->
-                <VerticalStackLayout Grid.Row="0"
+                <!-- 期限が近い・期限切れ商品 -->
+                <Border Stroke="Gray"
+                        StrokeThickness="1"
+                        BackgroundColor="Transparent"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 8"
+                        HeightRequest="130">
+                    <VerticalStackLayout Grid.Row="0"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Start"
                                      Spacing="4">
-                    <BindableLayout.ItemsSource>
-                        <Binding Path="ExpiringItems"/>
-                    </BindableLayout.ItemsSource>
+                        <BindableLayout.ItemsSource>
+                            <Binding Path="ExpiringItems"/>
+                        </BindableLayout.ItemsSource>
 
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding Message}"
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding Message}"
                                    TextColor="Red"
                                    FontSize="16"
                                    Margin="0,2"
-                                   HorizontalOptions="Center"/>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </VerticalStackLayout>
+                                   HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </Border>
 
                 <!-- 並べ替え -->
-                <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Margin="0,10">
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto" Margin="0,10">
                     <Label Text="{Binding SelectedSortName}"
                            VerticalOptions="Center"
-                           FontSize="18"
-                           Margin="200,0,0,0"/>
+                           FontSize="25"
+                           Margin="100,0,40,0"/>
                     <Picker x:Name="SortPicker"
                             Grid.Column="1"
-                            Title="並べ替え"
                             WidthRequest="150"
                             SelectedIndexChanged="OnSortChanged">
                         <Picker.Items>
@@ -59,7 +65,7 @@
                         <VerticalStackLayout Spacing="0">
 
                             <!-- ヘッダー行 -->
-                            <Grid ColumnDefinitions="150,230,230,200,90" Padding="5" BackgroundColor="#EEEEEE">
+                            <Grid ColumnDefinitions="1.66*,2.55*,2.55*,2.22*,1*" Padding="5" BackgroundColor="#EEEEEE">
                                 <Label Grid.Column="0" Text="商品名" FontAttributes="Bold" HorizontalOptions="Center"/>
                                 <Label Grid.Column="1" Text="数量" FontAttributes="Bold" HorizontalOptions="Center" />
                                 <Label Grid.Column="2" Text="消費期限" FontAttributes="Bold" HorizontalOptions="Center" />
@@ -75,7 +81,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <VerticalStackLayout Spacing="0">
-                                <Grid ColumnDefinitions="150,230,230,200,90" Padding="5">
+                                <Grid ColumnDefinitions="1.66*,2.55*,2.55*,2.22*,1*" Padding="5">
                                     <!-- ★ 縦線（商品名と数量の間） -->
                                     <BoxView Grid.Column="1"
                                         WidthRequest="1"
@@ -180,7 +186,7 @@
                                          HeightRequest="30"
                                          Command="{Binding Source={x:Reference ThisPage}, Path=DeleteCommand}"
                                          CommandParameter="{Binding}"/>
-                                    </Grid>
+                                </Grid>
 
                                 <!-- 商品間の区切り線 -->
                                 <BoxView HeightRequest="0.5"

@@ -36,9 +36,10 @@
                        HorizontalTextAlignment="End"/>
 
                     <Entry x:Name="ExpirationEntry"
-                       Grid.Row="1" Grid.Column="1"
-                       Placeholder="消費期限を入力"
-                       WidthRequest="200"/>
+                           Grid.Row="1" Grid.Column="1"
+                           Placeholder="消費期限を入力"
+                           WidthRequest="200"
+                           TextChanged="OnExpirationChanged"/>
 
                     <!-- 数量 -->
                     <Label Text="数量：" 
@@ -49,7 +50,9 @@
                     <Entry x:Name="QuantityEntry"
                        Grid.Row="2" Grid.Column="1"
                        Placeholder="数量を入力"
-                       WidthRequest="200"/>
+                       WidthRequest="200"
+                           Keyboard="Numeric"
+                           TextChanged="OnQuantityChanged"/>
 
                     <!-- カテゴリ -->
                     <Label Text="カテゴリ：" 
