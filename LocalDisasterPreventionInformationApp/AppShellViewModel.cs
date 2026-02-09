@@ -12,10 +12,10 @@ namespace LocalDisasterPreventionInformationApp {
         // 言語一覧
         public List<string> LanguageList { get; } = new()
         {
-            "日本語",
-            "English",
-            "한국어",
-            "中文"
+            "　　日本語",
+            "　　English",
+            "　　한국어",
+            "　　中文"
         };
 
         // 選択された言語

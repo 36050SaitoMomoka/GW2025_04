@@ -26,40 +26,28 @@
                             StrokeThickness="1"
                             Background="Transparent"
                             StrokeShape="RoundRectangle 25"
-                            Padding="12"
-                            HeightRequest="55"
+                            WidthRequest="140"
+                            HeightRequest="35"
                             VerticalOptions="Center">
 
                         <Grid>
 
-                            <!-- 表示用（アイコン + 選択中の言語） -->
+                            <!-- アイコン -->
                             <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                                 <Image Source="language.png"
                                        WidthRequest="28"
-                                       HeightRequest="28"
+                                       HeightRequest="35"
                                        VerticalOptions="Center" />
-
-                                <Label Text="{Binding SelectedLanguage}"
-                                       FontSize="18"
-                                       VerticalOptions="Center"
-                                       TextColor="Black" />
-                                
-                                <!-- ▼ アイコン -->
-                                <Label Text="▼"
-                                       FontSize="16"
-                                       VerticalOptions="Center"
-                                       TextColor="#555555"
-                                       Margin="5,0,0,0" />
-
                             </HorizontalStackLayout>
 
+                            <!-- 言語選択 -->
                             <Picker ItemsSource="{Binding LanguageList}"
                                     SelectedItem="{Binding SelectedLanguage}"
-                                    BackgroundColor="Transparent"
-                                    TextColor="Transparent"
-                                    Title="言語を選択"
-                                    Opacity="0"
-                                    ZIndex="10" />
+                                    BackgroundColor="#00FFFFFF"
+                                    TextColor="Black"
+                                    WidthRequest="140"
+                                    HeightRequest="35"
+                                    ZIndex="100"/>
                         </Grid>
                     </Border>
                     <ImageButton Source="notification.png"
