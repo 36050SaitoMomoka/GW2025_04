@@ -28,6 +28,9 @@ public partial class TopPage : ContentPage {
 
         // “s“¹•{Œ§‚ðPicker‚ÉƒZƒbƒg
         await LoadPrefecturesAsync();
+
+        // ‰Šúó‘Ô‚Å‚ÍŽs‹æ’¬‘ºPicker‚ð‰Ÿ‚¹‚È‚¢‚æ‚¤‚É‚·‚é
+        CityPicker.IsEnabled = false;
     }
 
     private async void MapWebView_Navigated(object sender, WebNavigatedEventArgs e) {
@@ -132,10 +135,20 @@ public partial class TopPage : ContentPage {
     }
 
     private async void PrefecturePicker_SelectedIndexChanged(object sender, EventArgs e) {
-        ExecuteButton.IsEnabled = PrefecturePicker.SelectedIndex >= 0;
-        ExitButton.IsEnabled = PrefecturePicker.SelectedIndex >= 0;
 
-        if(PrefecturePicker.SelectedItem is string prefecture) {
+        // “s“¹•{Œ§‚ª–¢‘I‘ð‚È‚çŽs‹æ’¬‘º Picker ‚ð–³Œø‰»
+        if (PrefecturePicker.SelectedIndex < 0) {
+            CityPicker.ItemsSource = null;
+            CityPicker.IsEnabled = false;
+            ExecuteButton.IsEnabled = false;
+            ExitButton.IsEnabled = false;
+            return;
+        }
+
+        ExecuteButton.IsEnabled = true;
+        ExitButton.IsEnabled = true;
+
+        if (PrefecturePicker.SelectedItem is string prefecture) {
             var shelters = await _db.GetSheltersAsync();
 
             var cities = shelters
@@ -146,7 +159,7 @@ public partial class TopPage : ContentPage {
                 .ToList();
 
             CityPicker.ItemsSource = cities;
-            CityPicker.IsEnabled = true;
+            CityPicker.IsEnabled = true;   // “s“¹•{Œ§‚ª‘I‚Î‚ê‚½‚Ì‚Å—LŒø‰»
         }
     }
 
