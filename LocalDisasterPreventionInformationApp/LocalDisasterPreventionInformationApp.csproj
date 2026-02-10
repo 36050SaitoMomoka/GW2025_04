@@ -75,7 +75,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidAsset Update="Platforms\Android\Assets\mergeFromCity_2.geojson">
+	  <AndroidAsset Update="Platforms\Android\Assets\mergefromcity_2.geojson">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
 	  </AndroidAsset>
@@ -85,7 +85,7 @@
 	  <MauiAsset Update="Resources\Raw\Locations.txt">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </MauiAsset>
-	  <MauiAsset Update="Resources\Raw\mergeFromCity_2.geojson">
+	  <MauiAsset Update="Resources\Raw\mergefromcity_2.geojson">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </MauiAsset>
 	</ItemGroup>

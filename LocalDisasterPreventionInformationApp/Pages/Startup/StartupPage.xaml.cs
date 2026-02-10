@@ -1,6 +1,7 @@
 using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Services;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Startup;
 
@@ -27,11 +28,25 @@ public partial class StartupPage : ContentPage {
         ArcSegment.IsLargeArc = false;
     }
 
-    private async void ContentPage_Loaded(object sender, EventArgs e) {
-        Debug.WriteLine($"[Startup] Loaded 発火: {_globalWatch.ElapsedMilliseconds} ms");
+    //private async void ContentPage_Loaded(object sender, EventArgs e) {
+    //    Debug.WriteLine($"[Startup] Loaded 発火: {_globalWatch.ElapsedMilliseconds} ms");
 
-        await Task.Delay(50); // 描画安定待ち
+    //    await Task.Delay(50); // 描画安定待ち
 
+    //    await RunStartupProcessAsync();
+    //}
+
+    private bool _startupRunning = false;
+
+    protected override async void OnAppearing() {
+        base.OnAppearing();
+
+        if (_startupRunning)
+            return;
+
+        _startupRunning = true;
+
+        await Task.Delay(50); //UI安定待ち
         await RunStartupProcessAsync();
     }
 
@@ -43,17 +58,30 @@ public partial class StartupPage : ContentPage {
 
         var sw = new Stopwatch();
 
-        // DB 初期化
-        sw.Restart();
-        await _db.InitializeAsync();
-        sw.Stop();
-        Debug.WriteLine($"[Startup] DB 初期化: {sw.ElapsedMilliseconds} ms");
+        //DB初期化（初回起動時のみ）
+        if (!Preferences.Get("DbInitialized", false)) {
+            sw.Restart();
+            await _db.InitializeAsync();
+            sw.Stop();
+            Debug.WriteLine($"[Startup] DB 初期化: {sw.ElapsedMilliseconds} ms");
+            Preferences.Set("DbInitialized", true);
+        }
+
+        // 避難所データ追加
+        if (!Preferences.Get("ShelterDataLoaded",false)) {
+
+            await Task.Run(async () => {
+                await _shelterService.FetchAndSaveShelterAsync();
+            });
+            Preferences.Set("ShelterDataLoaded", true);
+        }
 
         // 避難所データ読み込み
         sw.Restart();
         var shelters = await _db.GetSheltersAsync();
         sw.Stop();
         Debug.WriteLine($"[Startup] 避難所データ読み込み: {sw.ElapsedMilliseconds} ms");
+
 
         // 位置情報取得
         sw.Restart();
