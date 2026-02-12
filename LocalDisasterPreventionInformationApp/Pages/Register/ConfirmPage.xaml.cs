@@ -1,5 +1,6 @@
 using LocalDisasterPreventionInformationApp.Database;
 using Microsoft.Maui.Controls;
+//using Windows.System;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Register;
 
@@ -37,9 +38,26 @@ public partial class ConfirmPage : ContentPage {
 
     public ConfirmPage(AppDatabase db) {
         InitializeComponent();
+        _db = db;
     }
 
     private async void OnSubmitClicked(object sender, EventArgs e) {
+
+        //Userテーブルへ保存
+        //var user = new Models.User {
+        //    Name = nameLabel.Text,
+        //    Furigana = furiganaLabel.Text,
+        //    PhoneNumber = phoneLabel.Text == "---" ? null : phoneLabel.Text,
+        //    Email = emailLabel.Text == "---" ? null : emailLabel.Text
+        //};
+        //await _db.SaveUserAsync(user);
+
+        //UserAddressテーブルへ保存
+        //var address = new Models.UserAddress {
+
+        //};
+        //await _db.AddAddressIfNotExistsAsync(address);
+
         Preferences.Set("IsRegistered", true);
         await Shell.Current.GoToAsync("//TopPage");
     }
