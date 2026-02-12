@@ -42,6 +42,7 @@ namespace LocalDisasterPreventionInformationApp
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<ConfirmPage>();
             builder.Services.AddTransient<MyPage>();
+            builder.Services.AddTransient<EditProfilePage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

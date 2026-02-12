@@ -32,7 +32,7 @@
                             <!-- フリガナ -->
                             <!-- 後で変更→Text="{Binding Furigana}"　フリガナを入れるときに半角スペースを頭に入れてほしい -->
                             <Label Grid.Row="0" Grid.Column="2"
-                                   Text="フリガナ後で変更"
+                                   Text="{Binding Furigana}"
                                    FontSize="18"
                                    TextColor="#666"
                                    Margin="0,0,0,-20"
