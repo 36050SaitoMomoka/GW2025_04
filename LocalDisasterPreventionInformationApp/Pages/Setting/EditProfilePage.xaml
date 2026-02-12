@@ -1,12 +1,184 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LocalDisasterPreventionInformationApp.Pages.Setting.EditProfilePage"
-             Title="EditProfilePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="LocalDisasterPreventionInformationApp.Pages.Setting.EditProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Base"
+    Shell.NavBarIsVisible="False">
+
+    <base:BasePage>
+        <base:BasePage.InnerContent>
+            <Grid RowDefinitions="*,Auto">
+
+                <ScrollView Grid.Row="0">
+                    <VerticalStackLayout Padding="20" Spacing="40">
+
+                        <!-- 情報一覧 -->
+                        <Grid WidthRequest="700"
+                              ColumnDefinitions="Auto,Auto,*,Auto"
+                              RowDefinitions="Auto,20,Auto,20,Auto,20,Auto,20,Auto,20,Auto">
+
+                            <!-- フリガナ -->
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="フリガナ"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" 
+                                   HorizontalOptions="Center"
+                                   Margin="0,0,0,-10"
+                                   VerticalOptions="End"/>
+
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text=" ： "
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" 
+                                   Margin="0,0,0,-10"
+                                   VerticalOptions="End"/>
+
+                            <Entry Grid.Row="0" Grid.Column="2"
+                                   Text="{Binding Furigana}"
+                                   FontSize="18"
+                                   TextColor="#000" 
+                                   Margin="0,0,0,-20"
+                                   VerticalOptions="End"/>
+
+                            <!-- 氏名 -->
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="氏名"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" 
+                                   HorizontalOptions="Center"/>
+
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Text=" ： "
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" />
+
+                            <Entry Grid.Row="2" Grid.Column="2"
+                                   Text="{Binding UserName}"
+                                   FontSize="26"
+                                   TextColor="#000" />
+
+                            <!-- 下線 -->
+                            <BoxView Grid.Row="3" Grid.ColumnSpan="3"
+                                     HeightRequest="2"
+                                     BackgroundColor="#bbb" />
+
+
+                            <!-- メールアドレス -->
+                            <Label Grid.Row="4" Grid.Column="0"
+                                   Text="メールアドレス"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" 
+                                   HorizontalOptions="Center"/>
+
+                            <Label Grid.Row="4" Grid.Column="1"
+                                   Text=" ： "
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" />
+
+                            <Entry Grid.Row="4" Grid.Column="2"
+                                   Text="{Binding Email}"
+                                   FontSize="26"
+                                   TextColor="#000" />
+
+                            <!-- 下線 -->
+                            <BoxView Grid.Row="5" Grid.ColumnSpan="3"
+                                     HeightRequest="2"
+                                     BackgroundColor="#bbb" />
+
+
+                            <!-- 電話番号 -->
+                            <Label Grid.Row="6" Grid.Column="0"
+                                   Text="電話番号"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" 
+                                   HorizontalOptions="Center"/>
+
+                            <Label Grid.Row="6" Grid.Column="1"
+                                   Text=" ： "
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" />
+
+                            <Entry Grid.Row="6" Grid.Column="2"
+                                   Text="{Binding Phone}"
+                                   FontSize="26"
+                                   TextColor="#000" />
+
+                            <!-- 下線 -->
+                            <BoxView Grid.Row="7" Grid.ColumnSpan="3"
+                                     HeightRequest="2"
+                                     BackgroundColor="#bbb" />
+
+
+                            <!-- 住所 -->
+                            <Label Grid.Row="8" Grid.Column="0"
+                                   Text="住所"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333"
+                                   HorizontalOptions="Center"/>
+
+                            <Label Grid.Row="8" Grid.Column="1"
+                                   Text=" ： "
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#333" />
+
+                            <Entry Grid.Row="8" Grid.Column="2"
+                                   Text="{Binding Address}"
+                                   FontSize="26"
+                                   TextColor="#000" />
+
+                            <!-- 下線 -->
+                            <BoxView Grid.Row="9" Grid.ColumnSpan="3"
+                                     HeightRequest="2"
+                                     BackgroundColor="#bbb" />
+
+                            <!-- 住所追加ボタン -->
+                            <Button Grid.Row="8" Grid.Column="3"
+                                    Text="+"
+                                    FontSize="20"
+                                    BackgroundColor="#2196F3"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    Margin="5,0,0,0"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <Grid Grid.Row="1"
+                      Padding="20"
+                      ColumnDefinitions="*,Auto,Auto,*">
+                    <!-- 破棄ボタン -->
+                    <Button
+                        Text="破棄"
+                        FontSize="20"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        Grid.Column="1"
+                        CornerRadius="10"
+                        WidthRequest="120"
+                        Margin="10,0"/>
+
+                    <!-- 確定ボタン -->
+                    <Button
+                        Text="確定"
+                        FontSize="20"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        Grid.Column="2"
+                        CornerRadius="10"
+                        WidthRequest="120"
+                        Margin="10,0"/>
+                </Grid>
+            </Grid>
+        </base:BasePage.InnerContent>
+    </base:BasePage>
 </ContentPage>

@@ -20,7 +20,7 @@ public partial class MyPage : ContentPage {
     }
 
     // ï“èWÉ{É^Éì
-    private async Task OnEditButtonClick(object sender, EventArgs e) {
-        await Shell.Current.GoToAsync(nameof(EditProfilePage));
+    private async void OnEditButtonClick(object sender, EventArgs e) {
+        await Shell.Current.GoToAsync("editprofilepage");
     }
 }
