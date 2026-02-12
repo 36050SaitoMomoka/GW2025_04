@@ -14,7 +14,7 @@
 
                         <!-- 情報一覧 -->
                         <Grid WidthRequest="700"
-                              ColumnDefinitions="Auto,Auto,*,Auto"
+                              ColumnDefinitions="Auto,Auto,Auto,*,Auto"
                               RowDefinitions="Auto,20,Auto,20,Auto,20,Auto,20,Auto,20,Auto">
 
                             <!-- フリガナ -->
@@ -35,7 +35,7 @@
                                    Margin="0,0,0,-10"
                                    VerticalOptions="End"/>
 
-                            <Entry Grid.Row="0" Grid.Column="2"
+                            <Entry Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Furigana}"
                                    FontSize="18"
                                    TextColor="#000" 
@@ -56,13 +56,13 @@
                                    FontAttributes="Bold"
                                    TextColor="#333" />
 
-                            <Entry Grid.Row="2" Grid.Column="2"
+                            <Entry Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding UserName}"
                                    FontSize="26"
                                    TextColor="#000" />
 
                             <!-- 下線 -->
-                            <BoxView Grid.Row="3" Grid.ColumnSpan="3"
+                            <BoxView Grid.Row="3" Grid.ColumnSpan="4"
                                      HeightRequest="2"
                                      BackgroundColor="#bbb" />
 
@@ -81,13 +81,13 @@
                                    FontAttributes="Bold"
                                    TextColor="#333" />
 
-                            <Entry Grid.Row="4" Grid.Column="2"
+                            <Entry Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Email}"
                                    FontSize="26"
                                    TextColor="#000" />
 
                             <!-- 下線 -->
-                            <BoxView Grid.Row="5" Grid.ColumnSpan="3"
+                            <BoxView Grid.Row="5" Grid.ColumnSpan="4"
                                      HeightRequest="2"
                                      BackgroundColor="#bbb" />
 
@@ -106,13 +106,13 @@
                                    FontAttributes="Bold"
                                    TextColor="#333" />
 
-                            <Entry Grid.Row="6" Grid.Column="2"
+                            <Entry Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Phone}"
                                    FontSize="26"
                                    TextColor="#000" />
 
                             <!-- 下線 -->
-                            <BoxView Grid.Row="7" Grid.ColumnSpan="3"
+                            <BoxView Grid.Row="7" Grid.ColumnSpan="4"
                                      HeightRequest="2"
                                      BackgroundColor="#bbb" />
 
@@ -132,17 +132,23 @@
                                    TextColor="#333" />
 
                             <Entry Grid.Row="8" Grid.Column="2"
+                                   Text="{Binding Addresstype}"
+                                   FontSize="26"
+                                   TextColor="#000"
+                                   WidthRequest="100"/>
+
+                            <Entry Grid.Row="8" Grid.Column="3"
                                    Text="{Binding Address}"
                                    FontSize="26"
                                    TextColor="#000" />
 
                             <!-- 下線 -->
-                            <BoxView Grid.Row="9" Grid.ColumnSpan="3"
+                            <BoxView Grid.Row="9" Grid.ColumnSpan="4"
                                      HeightRequest="2"
                                      BackgroundColor="#bbb" />
 
                             <!-- 住所追加ボタン -->
-                            <Button Grid.Row="8" Grid.Column="3"
+                            <Button Grid.Row="8" Grid.Column="4"
                                     Text="+"
                                     FontSize="20"
                                     BackgroundColor="#2196F3"

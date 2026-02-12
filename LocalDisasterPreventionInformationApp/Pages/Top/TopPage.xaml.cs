@@ -229,4 +229,48 @@ public partial class TopPage : ContentPage {
         ExitButton.IsEnabled = false;
     }
 
+    // マーカークリック時
+    private void MapWebView_Navigating(object sender, WebNavigatingEventArgs e) {
+        if (e.Url.StartsWith("js://shelterClicked")) {
+            e.Cancel = true;
+
+            var uri = new Uri(e.Url);
+            var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+            double lat = double.Parse(query["lat"]);
+            double lng = double.Parse(query["lng"]);
+
+            // リスト側を選択状態にする
+            SelectShelterInList(lat, lng);
+        }
+    }
+
+    // リストの選択を変更する
+    private void SelectShelterInList(double lat, double lng) {
+        if (_currentList == null && _nearest10 == null)
+            return;
+
+        // 現在表示しているリストを取得
+        var list = _currentList ?? _nearest10;
+
+        // 緯度・経度が一致する避難所を探す
+        var item = list.FirstOrDefault(s =>
+            Math.Abs(s.Shelter.Latitude - lat) < 0.00001 &&
+            Math.Abs(s.Shelter.Longitude - lng) < 0.00001);
+
+        if (item != null) {
+            // 選択状態を更新
+            foreach (var s in list)
+                s.IsSelected = (s == item);
+
+            NearbySheltersList.ItemsSource = null;
+            NearbySheltersList.ItemsSource = list;
+
+            // CollectionView の選択状態も変更
+            NearbySheltersList.SelectedItem = item;
+
+            // 地図も移動
+            _ = MapWebView.EvaluateJavaScriptAsync($"moveToShelter({lat},{lng});");
+        }
+    }
 }
