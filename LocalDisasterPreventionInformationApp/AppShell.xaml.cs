@@ -23,7 +23,7 @@ namespace LocalDisasterPreventionInformationApp {
 
             Routing.RegisterRoute("fontpage", typeof(Pages.Setting.FontPage));              // フォント選択
 
-            Routing.RegisterRoute("mypage", typeof(Pages.Setting.MyPage));                  // マイページ
+            Routing.RegisterRoute("mypage", typeof(Pages.Setting.MyPage));                  // マイページz
         }
 
         protected override async void OnAppearing() {

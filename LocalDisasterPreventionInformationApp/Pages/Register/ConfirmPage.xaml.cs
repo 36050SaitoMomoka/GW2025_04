@@ -104,7 +104,7 @@ public partial class ConfirmPage : ContentPage {
         //Preferences.Set("IsRegistered", true);
         await Shell.Current.GoToAsync("//TopPage");
 
-        //データが入ったか確認
+        // TEST データが入ったか確認
         await _db.RunUserDataChecks();
     }
 
