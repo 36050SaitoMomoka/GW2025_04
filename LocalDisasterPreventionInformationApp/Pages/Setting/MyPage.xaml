@@ -20,7 +20,8 @@
                                     BackgroundColor="#2196F3"
                                     TextColor="White"
                                     CornerRadius="12"
-                                    Command="{Binding EditProfileCommand}" />
+                                    Command="{Binding EditProfileCommand}" 
+                                    Clicked="OnEditButtonClick"/>
                         </HorizontalStackLayout>
 
                         <!-- 情報一覧 -->

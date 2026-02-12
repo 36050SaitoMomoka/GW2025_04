@@ -1,5 +1,6 @@
 using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Pages.Base;
+using System.Threading.Tasks;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Setting;
 
@@ -16,5 +17,10 @@ public partial class MyPage : ContentPage {
         if (vm != null) {
             vm.PageTitle = "マイページ";
         }
+    }
+
+    // 編集ボタン
+    private async Task OnEditButtonClick(object sender, EventArgs e) {
+        await Shell.Current.GoToAsync(nameof(EditProfilePage));
     }
 }
