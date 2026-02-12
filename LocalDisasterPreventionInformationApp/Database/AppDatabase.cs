@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LocalDisasterPreventionInformationApp.Database {
     public class AppDatabase {
@@ -189,5 +190,23 @@ namespace LocalDisasterPreventionInformationApp.Database {
 
         public Task<int> DeleteShelterAsync(Shelter item)
             => _db.DeleteAsync(item);
+
+
+        //UserとUserAddressにデータが入ったか確認
+        public async Task RunUserDataChecks() {
+            // User テーブル
+            var users = await _db.Table<User>().ToListAsync();
+            Debug.WriteLine($"[TEST] User 件数：{users.Count}");
+            foreach (var u in users) {
+                Debug.WriteLine($"[TEST] User: ID={u.UserId}, Name={u.Name}, Furi={u.Furigana}, Email={u.Email}, Phone={u.PhoneNumber}");
+            }
+
+            // UserAddress テーブル
+            var addresses = await _db.Table<UserAddress>().ToListAsync();
+            Debug.WriteLine($"[TEST] Address 件数：{addresses.Count}");
+            foreach (var a in addresses) {
+                Debug.WriteLine($"[TEST] Address: ID={a.AddressId}, Postal={a.PostalCode}, Address={a.Address}, Lat={a.Latitude}, Lng={a.Longitude}");
+            }
+        }
     }
 }

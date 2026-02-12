@@ -22,10 +22,8 @@ namespace LocalDisasterPreventionInformationApp.Models {
         [NotNull]
         public string Address { get; set; }  //住所
 
-        [NotNull]
-        public double Longitude { get; set; }  //経度
+        public double? Longitude { get; set; }  //経度
 
-        [NotNull]
-        public double Latitude { get; set; }  //緯度
+        public double? Latitude { get; set; }  //緯度
     }
 }

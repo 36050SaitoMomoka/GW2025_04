@@ -131,7 +131,7 @@ public partial class RegisterPage : ContentPage {
         string fullAddress = BuildFullAddress();
 
         await Shell.Current.GoToAsync(
-            $"//ConfirmPage?name={name}&furigana={furigana}&email={email}&phone={phone}&address={fullAddress}");
+            $"//ConfirmPage?name={name}&furigana={furigana}&email={email}&phone={phone}&address={fullAddress}&postal={zipEntry.Text}");
     }
 
     // éÅñºê≥ãKâª
