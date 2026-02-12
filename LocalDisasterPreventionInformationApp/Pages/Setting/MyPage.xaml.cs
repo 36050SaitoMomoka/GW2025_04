@@ -79,6 +79,6 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
 
     // ï“èWÉ{É^Éì
     private async void OnEditButtonClick(object sender, EventArgs e) {
-        await Shell.Current.GoToAsync(nameof(EditProfilePage));
+        await Shell.Current.GoToAsync("editprofilepage");
     }
 }
