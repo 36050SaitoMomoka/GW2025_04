@@ -110,6 +110,11 @@
                 var marker = L.marker([s.Latitude, s.Longitude]).addTo(map);
                 nearbyMarkers.push(marker);
             });
+
+            // マーカーをクリック
+            marker.on('click', function () {
+                window.location.href = `js://shelterClicked?lat=${s.Latitude}&lng=${s.Longitude}`;
+            });
         }
 
         // 都道府県ピンを削除

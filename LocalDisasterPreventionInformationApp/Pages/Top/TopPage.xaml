@@ -10,7 +10,8 @@
             <Grid>
                 <WebView x:Name="MapWebView"
                          Source="map.html" 
-                         Navigated="MapWebView_Navigated"/>
+                         Navigated="MapWebView_Navigated"
+                         Navigating="MapWebView_Navigating"/>
 
                 <!-- 通常時の操作パネル -->
                 <Border x:Name="RightPanel"
