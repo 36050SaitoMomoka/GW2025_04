@@ -8,7 +8,58 @@
     <base:BasePage>
         <base:BasePage.InnerContent>
             <Grid>
-                <WebView Source="map.html" />
+                <Grid RowDefinitions="Auto, *" Padding="10">
+
+                    <!-- 上部バー -->
+                    <Grid
+                    ColumnDefinitions="*, Auto"
+                    Padding="5"
+                    BackgroundColor="#F5F5F5"
+                    Margin="0,0,0,10">
+
+                        <!-- ハザードマップ名 -->
+                        <Label
+                        Text="{Binding HazardMapTitle}"
+                        FontSize="20"
+                        VerticalOptions="Center"
+                        TextColor="Black" />
+
+                        <!-- ピッカー -->
+                        <Picker
+                        Grid.Column="1"
+                        Title="災害種別"
+                        ItemsSource="{Binding HazardList}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedHazard}"
+                        WidthRequest="160"
+                        HorizontalOptions="End" />
+                    </Grid>
+
+                    <!-- 地図 -->
+                    <Border
+                    Grid.Row="1"
+                    Stroke="Gray"
+                    StrokeThickness="2"
+                    BackgroundColor="White"
+                    Padding="10"
+                    Margin="0,0,0,10"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+
+                        <!-- 後で地図を入れる -->
+                        <Grid BackgroundColor="#DDDDDD">
+                            <Label
+                            Text="ここに地図が表示されます"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            TextColor="Black" />
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+
             </Grid>
         </base:BasePage.InnerContent>
     </base:BasePage>

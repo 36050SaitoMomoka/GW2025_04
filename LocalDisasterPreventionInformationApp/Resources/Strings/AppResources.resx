@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+	</resheader>
+
+	<!-- 会員登録画面 -->
+	<data name="Reg_Welcome" xml:space="preserve">
+    <value>地域防災情報アプリへようこそ！会員情報のご登録をお願いします。</value>
+  </data>
+
+	<data name="Reg_Name" xml:space="preserve">
+    <value>氏名</value>
+  </data>
+
+	<data name="Reg_Furigana" xml:space="preserve">
+    <value>フリガナ</value>
+  </data>
+
+	<data name="Reg_FuriganaHint" xml:space="preserve">
+    <value>カタカナで入力してください。</value>
+  </data>
+
+	<data name="Reg_Email" xml:space="preserve">
+    <value>メールアドレス</value>
+  </data>
+
+	<data name="Reg_Phone" xml:space="preserve">
+    <value>電話番号（ハイフンなし）</value>
+  </data>
+
+	<data name="Reg_Zip" xml:space="preserve">
+    <value>郵便番号（7桁）</value>
+  </data>
+
+	<data name="Reg_Prefecture" xml:space="preserve">
+    <value>都道府県</value>
+  </data>
+
+	<data name="Reg_AutoFromZip" xml:space="preserve">
+    <value>郵便番号から自動入力</value>
+  </data>
+
+	<data name="Reg_City" xml:space="preserve">
+    <value>市区町村</value>
+  </data>
+
+	<data name="Reg_Town" xml:space="preserve">
+    <value>町域</value>
+  </data>
+
+	<data name="Reg_Address" xml:space="preserve">
+    <value>番地</value>
+  </data>
+
+	<data name="Reg_Building" xml:space="preserve">
+    <value>建物名・部屋番号</value>
+  </data>
+
+	<data name="Reg_Optional" xml:space="preserve">
+    <value>任意</value>
+  </data>
+
+	<data name="Reg_AutoFill" xml:space="preserve">
+    <value>自動入力</value>
+  </data>
+
+	<data name="Reg_Empty" xml:space="preserve">
+    <value>未入力です</value>
+  </data>
+
+	<data name="Reg_Confirm" xml:space="preserve">
+    <value>以下の内容でよろしですか？</value>
+  </data>
+
+	<!-- ヘッダー -->
+	<data name="Header_AppTitle" xml:space="preserve">
+    <value>地域防災情報アプリ</value>
+  </data>
+
+	<data name="Header_RouteSearch" xml:space="preserve">
+    <value>ルート検索</value>
+  </data>
+
+	<data name="Header_Top" xml:space="preserve">
+    <value>トップページ</value>
+  </data>
+
+	<data name="Header_HazardMap" xml:space="preserve">
+    <value>ハザードマップ</value>
+  </data>
+
+	<data name="Header_Stock" xml:space="preserve">
+    <value>備蓄管理</value>
+  </data>
+
+	<data name="Header_MyPage" xml:space="preserve">
+    <value>マイページ</value>
+  </data>
+
+	<data name="Header_Font" xml:space="preserve">
+    <value>フォント選択</value>
+  </data>
+
+	<!-- メニュー -->
+	<data name="Menu_Top" xml:space="preserve">
+    <value>トップページ</value>
+  </data>
+
+	<data name="Menu_HazardMap" xml:space="preserve">
+    <value>ハザードマップ</value>
+  </data>
+
+	<data name="Menu_Stock" xml:space="preserve">
+    <value>備蓄管理</value>
+  </data>
+
+	<!-- ボタン -->
+	<data name="Btn_Next" xml:space="preserve">
+    <value>次へ</value>
+  </data>
+
+	<data name="Btn_Register" xml:space="preserve">
+    <value>登録</value>
+  </data>
+
+	<data name="Btn_Back" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+
+	<data name="Btn_AddProduct" xml:space="preserve">
+    <value>商品登録→</value>
+  </data>
+
+	<data name="Btn_Edit" xml:space="preserve">
+    <value>編集</value>
+  </data>
+
+	<!-- 備蓄管理 -->
+	<data name="Stock_ExpireOrder" xml:space="preserve">
+    <value>消費期限順</value>
+  </data>
+
+	<data name="Stock_CategoryOrder" xml:space="preserve">
+    <value>カテゴリ別</value>
+  </data>
+
+	<data name="Stock_NameOrder" xml:space="preserve">
+    <value>商品名別</value>
+  </data>
+
+	<data name="Stock_Others" xml:space="preserve">
+    <value>その他</value>
+  </data>
+
+	<data name="Stock_Sort" xml:space="preserve">
+    <value>並べ替え</value>
+  </data>
+
+	<data name="Stock_ProductName" xml:space="preserve">
+    <value>商品名</value>
+  </data>
+
+	<data name="Stock_Quantity" xml:space="preserve">
+    <value>数量</value>
+  </data>
+
+	<data name="Stock_Expire" xml:space="preserve">
+    <value>消費期限</value>
+  </data>
+
+	<data name="Stock_Category" xml:space="preserve">
+    <value>カテゴリ</value>
+  </data>
+
+	<data name="Stock_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+
+</root>

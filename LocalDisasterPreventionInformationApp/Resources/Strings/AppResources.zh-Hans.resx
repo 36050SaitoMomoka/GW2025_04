@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+	</resheader>
+
+	<!-- 会員登録画面 -->
+	<data name="Reg_Welcome" xml:space="preserve">
+    <value>欢迎使用地区防灾信息应用！请注册您的会员信息。</value>
+  </data>
+
+	<data name="Reg_Name" xml:space="preserve">
+    <value>姓名</value>
+  </data>
+
+	<data name="Reg_Furigana" xml:space="preserve">
+    <value>注音</value>
+  </data>
+
+	<data name="Reg_FuriganaHint" xml:space="preserve">
+    <value>请用片假名输入。</value>
+  </data>
+
+	<data name="Reg_Email" xml:space="preserve">
+    <value>电子邮箱</value>
+  </data>
+
+	<data name="Reg_Phone" xml:space="preserve">
+    <value>电话号码（不带连字符）</value>
+  </data>
+
+	<data name="Reg_Zip" xml:space="preserve">
+    <value>邮政编码（7位数）</value>
+  </data>
+
+	<data name="Reg_Prefecture" xml:space="preserve">
+    <value>都道府县</value>
+  </data>
+
+	<data name="Reg_AutoFromZip" xml:space="preserve">
+    <value>根据邮政编码自动填充</value>
+  </data>
+
+	<data name="Reg_City" xml:space="preserve">
+    <value>市区町村</value>
+  </data>
+
+	<data name="Reg_Town" xml:space="preserve">
+    <value>町域</value>
+  </data>
+
+	<data name="Reg_Address" xml:space="preserve">
+    <value>门牌号</value>
+  </data>
+
+	<data name="Reg_Building" xml:space="preserve">
+    <value>建筑物名称・房间号</value>
+  </data>
+
+	<data name="Reg_Optional" xml:space="preserve">
+    <value>可选</value>
+  </data>
+
+	<data name="Reg_AutoFill" xml:space="preserve">
+    <value>自动填充</value>
+  </data>
+
+	<data name="Reg_Empty" xml:space="preserve">
+    <value>未填写</value>
+  </data>
+
+	<data name="Reg_Confirm" xml:space="preserve">
+    <value>以下内容是否正确？</value>
+  </data>
+
+	<!-- ヘッダー -->
+	<data name="Header_AppTitle" xml:space="preserve">
+    <value>地区防灾信息应用</value>
+  </data>
+
+	<data name="Header_RouteSearch" xml:space="preserve">
+    <value>路线搜索</value>
+  </data>
+
+	<data name="Header_Top" xml:space="preserve">
+    <value>首页</value>
+  </data>
+
+	<data name="Header_HazardMap" xml:space="preserve">
+    <value>灾害地图</value>
+  </data>
+
+	<data name="Header_Stock" xml:space="preserve">
+    <value>物资储备管理</value>
+  </data>
+
+	<data name="Header_MyPage" xml:space="preserve">
+    <value>我的页面</value>
+  </data>
+
+	<data name="Header_Font" xml:space="preserve">
+    <value>字体选择</value>
+  </data>
+
+	<!-- メニュー -->
+	<data name="Menu_Top" xml:space="preserve">
+    <value>首页</value>
+  </data>
+
+	<data name="Menu_HazardMap" xml:space="preserve">
+    <value>灾害地图</value>
+  </data>
+
+	<data name="Menu_Stock" xml:space="preserve">
+    <value>物资储备管理</value>
+  </data>
+
+	<!-- ボタン -->
+	<data name="Btn_Next" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+
+	<data name="Btn_Register" xml:space="preserve">
+    <value>注册</value>
+  </data>
+
+	<data name="Btn_Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
+
+	<data name="Btn_AddProduct" xml:space="preserve">
+    <value>商品注册→</value>
+  </data>
+
+	<data name="Btn_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+
+	<!-- 備蓄管理 -->
+	<data name="Stock_ExpireOrder" xml:space="preserve">
+    <value>按保质期排序</value>
+  </data>
+
+	<data name="Stock_CategoryOrder" xml:space="preserve">
+    <value>按类别排序</value>
+  </data>
+
+	<data name="Stock_NameOrder" xml:space="preserve">
+    <value>按商品名称排序</value>
+  </data>
+
+	<data name="Stock_Others" xml:space="preserve">
+    <value>其他</value>
+  </data>
+
+	<data name="Stock_Sort" xml:space="preserve">
+    <value>排序</value>
+  </data>
+
+	<data name="Stock_ProductName" xml:space="preserve">
+    <value>商品名称</value>
+  </data>
+
+	<data name="Stock_Quantity" xml:space="preserve">
+    <value>数量</value>
+  </data>
+
+	<data name="Stock_Expire" xml:space="preserve">
+    <value>保质期</value>
+  </data>
+
+	<data name="Stock_Category" xml:space="preserve">
+    <value>类别</value>
+  </data>
+
+	<data name="Stock_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+
+</root>

@@ -42,6 +42,8 @@
                                        Text="{Binding Furigana}"
                                        FontSize="12"
                                        TextColor="#666" />
+                                
+                                
 
                                 <!-- 氏名 -->
                                 <Label Grid.Row="2"
@@ -100,7 +102,13 @@
                                             SelectionMode="None">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid RowDefinitions="Auto,Auto,Auto">
+                                        <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+
+                                            <Label Grid.Row="0"
+                                                   Text="電話番号"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#444" />
 
                                             <Label Grid.Row="0"
                                                    Text="{Binding AddressType}"

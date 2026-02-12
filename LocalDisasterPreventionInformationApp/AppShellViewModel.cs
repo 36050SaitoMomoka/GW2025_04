@@ -5,6 +5,8 @@ using System.Text.Json;
 using System.Windows.Input;
 using System.Xml.Linq;
 using HtmlAgilityPack;
+using System.Globalization;
+using LocalDisasterPreventionInformationApp.Resources.Strings;
 using static System.Net.WebRequestMethods;
 
 namespace LocalDisasterPreventionInformationApp {
@@ -27,9 +29,30 @@ namespace LocalDisasterPreventionInformationApp {
                 selectedLanguage = value;
                 OnPropertyChanged();
 
-                // ③ 言語を保存
+                // 言語を保存
                 Preferences.Set("SelectedLanguage", selectedLanguage);
+                SetCulture(selectedLanguage);
             }
+        }
+
+        // 言語を切り替えるメソッド
+        private void SetCulture(string lang) {
+            CultureInfo culture = lang switch {
+                "　　English" => new CultureInfo("en"),
+                "　　한국어" => new CultureInfo("ko"),
+                "　　中文" => new CultureInfo("zh-Hans"),
+                _ => new CultureInfo("ja")
+            };
+
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+
+            // .resxに適用
+            AppResources.Culture = culture;
+
+            // UI更新
+            OnPropertyChanged(nameof(PageTitle));
+            OnPropertyChanged(nameof(NewsText));
         }
 
         // ページタイトル
@@ -65,11 +88,12 @@ namespace LocalDisasterPreventionInformationApp {
         public AppShellViewModel() {
 
             // 前回選んだ言語を復元（初期値：日本語）
-            SelectedLanguage = Preferences.Get("SelectedLanguage", "日本語");
+            SelectedLanguage = Preferences.Get("SelectedLanguage", "　　日本語");
+            SetCulture(SelectedLanguage);
 
             //フォント選択ページへ
             FontCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("font");
+                await Shell.Current.GoToAsync("fontpage");
             });
 
             //マイページへ
@@ -89,49 +113,6 @@ namespace LocalDisasterPreventionInformationApp {
 
           //_ = LoadWarnAsync();
         }
-
-
-
-        // Yahooニュース検索結果を取得
-//        private async Task LoadWarnAsync() {
-//            try {
-//                newsItems = new List<NewsItem>();
-
-//                string url = "https://news.yahoo.co.jp/search?p=警報&ei=utf-8";
-
-//                using var http = new HttpClient();
-////                string html = await http.GetStringAsync(url);
-
-//                var doc = new HtmlDocument();
-////                doc.LoadHtml(html);
-
-//                // Yahooニュース検索結果のタイトルを取得
-//                var nodes = doc.DocumentNode.SelectNodes("//a[contains{@href,'/articles/')]");
-
-//                if (nodes != null) {
-//                    foreach (var node in nodes) {
-//                        string title = node.InnerText.Trim();
-//                        string link = node.GetAttributeValue("href", "");
-
-//                        newsItems.Add(new NewsItem {
-//                            Title = title,
-//                            Link = link,
-//                        });
-//                    }
-//                }
-
-//                if (newsItems.Count > 0) {
-//                    newsIndex = 0;
-//                    newsText = newsItems[0].Title;
-//                    StartNewsCycle();
-//                } else {
-//                    newsText = "ニュースがありません。";
-//                }
-//            }
-//            catch (Exception ex) {
-//                newsText = $"取得エラー：{ex.Message}";
-//            }
-//        }
 
         private void StartNewsCycle() => RunNewsAnimation();
 
