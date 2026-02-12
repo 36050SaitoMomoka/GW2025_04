@@ -115,6 +115,9 @@
 	  <MauiXaml Update="Pages\Register\ConfirmPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Setting\EditProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Setting\FontPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
