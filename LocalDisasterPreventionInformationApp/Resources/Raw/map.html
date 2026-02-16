@@ -124,19 +124,25 @@
         // ルート描画
         var routeControl = null;
 
-        function showRoute(fromLat, fromLng, toLat, toLng) {
+        function showRoute(fromLat, fromLng, toLat, toLng, mode) {
             if (routeControl) {
                 map.removeControl(routeControl);
             }
+
+            // mode に応じて OSRM のプロファイルを切り替える
+            var profile = mode || "driving";  // デフォルトは車
 
             routeControl = L.Routing.control({
                 waypoints: [
                     L.latLng(fromLat, fromLng),
                     L.latLng(toLat, toLng)
                 ],
+                router: L.Routing.osrmv1({
+                    serviceUrl: `https://router.project-osrm.org/route/v1/${profile}/`
+                }),
                 routeWhileDragging: false,
                 show: false,
-                createMarker: function(){ return null; }
+                createMarker: function () { return null; }
             }).addTo(map);
         }
     </script>

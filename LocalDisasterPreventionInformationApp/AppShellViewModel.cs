@@ -52,7 +52,6 @@ namespace LocalDisasterPreventionInformationApp {
 
             // UI更新
             OnPropertyChanged(nameof(PageTitle));
-            OnPropertyChanged(nameof(NewsText));
         }
 
         // ページタイトル
@@ -63,19 +62,6 @@ namespace LocalDisasterPreventionInformationApp {
                 if (pageTitle == value) return;
                 pageTitle = value;
                 OnPropertyChanged(nameof(PageTitle));
-            }
-        }
-
-        // ニュース切り替え用
-        private List<NewsItem> newsItems = new();
-        private int newsIndex = 0;
-
-        private string newsText;
-        public string NewsText {
-            get => newsText;
-            set {
-                newsText = value;
-                OnPropertyChanged(nameof(NewsText));
             }
         }
 
@@ -110,20 +96,6 @@ namespace LocalDisasterPreventionInformationApp {
             RouteSearchCommand = new Command(async () => {
                 await Shell.Current.GoToAsync("//TopPage?route=1");
             });
-
-          //_ = LoadWarnAsync();
-        }
-
-        private void StartNewsCycle() => RunNewsAnimation();
-
-        // ５秒ごとにニュースを切り替える
-        private void RunNewsAnimation() {
-            Dispatcher.GetForCurrentThread().DispatchDelayed(TimeSpan.FromSeconds(5), () => {
-                newsIndex = (newsIndex + 1) % newsItems.Count;
-                NewsText = newsItems[newsIndex].Title;
-
-                RunNewsAnimation();
-            });
         }
 
         // プロパティ変更通知
@@ -132,10 +104,17 @@ namespace LocalDisasterPreventionInformationApp {
         private void OnPropertyChanged([CallerMemberName] string name = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-    }
 
-    public class NewsItem {
-        public string Title { get; set; }
-        public string Link { get; set; }
+        // ルート検索用
+        public List<string> RouteModes { get; } = new() { "driving", "walking", "cycling" };
+
+        private string selectedRouteMode = "driving";
+        public string SelectedRouteMode {
+            get => selectedRouteMode;
+            set {
+                selectedRouteMode = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

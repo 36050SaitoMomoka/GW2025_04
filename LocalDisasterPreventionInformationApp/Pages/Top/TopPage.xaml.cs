@@ -49,14 +49,14 @@ public partial class TopPage : ContentPage {
 
             // ルート検索フラグが立っていたら、このタイミングでだけ実行
             if (DoRouteSearch == "1") {
-                await RouteToNearestShelterAsync();
+                await RouteToNearestShelterAsync(((AppShellViewModel)BindingContext).SelectedRouteMode);
                 DoRouteSearch = null;
             }
         }
     }
 
     // 最寄り避難所へのルート検索
-    public async Task RouteToNearestShelterAsync() {
+    public async Task RouteToNearestShelterAsync(string mode = "driving") {
         var location = await Geolocation.GetLocationAsync();
         if (location == null)
             return;
@@ -72,7 +72,7 @@ public partial class TopPage : ContentPage {
         double toLng = nearest.Shelter.Longitude;
 
         await MapWebView.EvaluateJavaScriptAsync(
-            $"showRoute({currentLat}, {currentLng}, {toLat}, {toLng});");
+            $"showRoute({currentLat}, {currentLng}, {toLat}, {toLng}, '{mode}');");
 
         NearbySheltersList.SelectedItem = nearest;
     }
