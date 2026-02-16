@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
     <style>
         html, body, #map {
             height: 100%;
@@ -110,17 +113,31 @@
                 var marker = L.marker([s.Latitude, s.Longitude]).addTo(map);
                 nearbyMarkers.push(marker);
             });
-
-            // マーカーをクリック
-            marker.on('click', function () {
-                window.location.href = `js://shelterClicked?lat=${s.Latitude}&lng=${s.Longitude}`;
-            });
         }
 
         // 都道府県ピンを削除
         function clearPrefectureMarkers() {
             prefectureMarkers.forEach(m => map.removeLayer(m));
             prefectureMarkers = [];
+        }
+
+        // ルート描画
+        var routeControl = null;
+
+        function showRoute(fromLat, fromLng, toLat, toLng) {
+            if (routeControl) {
+                map.removeControl(routeControl);
+            }
+
+            routeControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(fromLat, fromLng),
+                    L.latLng(toLat, toLng)
+                ],
+                routeWhileDragging: false,
+                show: false,
+                createMarker: function(){ return null; }
+            }).addTo(map);
         }
     </script>
 </body>

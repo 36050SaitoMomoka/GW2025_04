@@ -7,8 +7,10 @@ using System.Text.Json;
 using System.Threading.Tasks;                 // JSON変換用
 
 namespace LocalDisasterPreventionInformationApp.Pages.Top;
-
+[QueryProperty(nameof(DoRouteSearch), "route")]
 public partial class TopPage : ContentPage {
+    public string DoRouteSearch { get; set; }
+
     private readonly AppDatabase _db;
     private List<NearbyShelterItem> _nearest10;
     private List<NearbyShelterItem> _currentList;
@@ -20,6 +22,12 @@ public partial class TopPage : ContentPage {
 
     protected override async void OnAppearing() {
         base.OnAppearing();
+
+        // WebView強制リロード
+        MapWebView.Source = null;
+        MapWebView.Source = new UrlWebViewSource {
+            Url = "map.html?ts=" + DateTime.Now.Ticks
+        };
 
         // PageTitle を設定
         if (Shell.Current.BindingContext is AppShellViewModel vm) {
@@ -38,7 +46,35 @@ public partial class TopPage : ContentPage {
         if (e.Url.Contains("map.html")) {
             // 現在地と避難所データを取得してleafletに渡す
             await LoadSheltersAndShowPinsAsync();
+
+            // ルート検索フラグが立っていたら、このタイミングでだけ実行
+            if (DoRouteSearch == "1") {
+                await RouteToNearestShelterAsync();
+                DoRouteSearch = null;
+            }
         }
+    }
+
+    // 最寄り避難所へのルート検索
+    public async Task RouteToNearestShelterAsync() {
+        var location = await Geolocation.GetLocationAsync();
+        if (location == null)
+            return;
+
+        double currentLat = location.Latitude;
+        double currentLng = location.Longitude;
+
+        if (_nearest10 == null || _nearest10.Count == 0)
+            return;
+
+        var nearest = _nearest10.OrderBy(s => s.Distance).First();
+        double toLat = nearest.Shelter.Latitude;
+        double toLng = nearest.Shelter.Longitude;
+
+        await MapWebView.EvaluateJavaScriptAsync(
+            $"showRoute({currentLat}, {currentLng}, {toLat}, {toLng});");
+
+        NearbySheltersList.SelectedItem = nearest;
     }
 
     // 都道府県読み込み
@@ -194,7 +230,7 @@ public partial class TopPage : ContentPage {
 
         // リストを都道府県の避難所一覧に切り替える
         var listItems = filtered
-            .OrderBy(s=>s.Distance)
+            .OrderBy(s => s.Distance)
             .Select(s => new NearbyShelterItem {
                 Shelter = s,
                 Distance = s.Distance,
@@ -227,50 +263,5 @@ public partial class TopPage : ContentPage {
         // ボタンを無効化
         ExecuteButton.IsEnabled = false;
         ExitButton.IsEnabled = false;
-    }
-
-    // マーカークリック時
-    private void MapWebView_Navigating(object sender, WebNavigatingEventArgs e) {
-        if (e.Url.StartsWith("js://shelterClicked")) {
-            e.Cancel = true;
-
-            var uri = new Uri(e.Url);
-            var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
-
-            double lat = double.Parse(query["lat"]);
-            double lng = double.Parse(query["lng"]);
-
-            // リスト側を選択状態にする
-            SelectShelterInList(lat, lng);
-        }
-    }
-
-    // リストの選択を変更する
-    private void SelectShelterInList(double lat, double lng) {
-        if (_currentList == null && _nearest10 == null)
-            return;
-
-        // 現在表示しているリストを取得
-        var list = _currentList ?? _nearest10;
-
-        // 緯度・経度が一致する避難所を探す
-        var item = list.FirstOrDefault(s =>
-            Math.Abs(s.Shelter.Latitude - lat) < 0.00001 &&
-            Math.Abs(s.Shelter.Longitude - lng) < 0.00001);
-
-        if (item != null) {
-            // 選択状態を更新
-            foreach (var s in list)
-                s.IsSelected = (s == item);
-
-            NearbySheltersList.ItemsSource = null;
-            NearbySheltersList.ItemsSource = list;
-
-            // CollectionView の選択状態も変更
-            NearbySheltersList.SelectedItem = item;
-
-            // 地図も移動
-            _ = MapWebView.EvaluateJavaScriptAsync($"moveToShelter({lat},{lng});");
-        }
     }
 }

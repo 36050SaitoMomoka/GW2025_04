@@ -108,7 +108,7 @@ namespace LocalDisasterPreventionInformationApp {
 
             //ルート検索をする（トップページへ遷移しルートを検索する）
             RouteSearchCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("///TopPage");
+                await Shell.Current.GoToAsync("//TopPage?route=1");
             });
 
           //_ = LoadWarnAsync();

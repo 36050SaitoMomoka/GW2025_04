@@ -68,6 +68,7 @@ public partial class StartupPage : ContentPage {
         }
 
         // 避難所データ追加
+        Preferences.Set("ShelterDataLoaded", true);  //タブレット用
         if (!Preferences.Get("ShelterDataLoaded",false)) {
 
             await Task.Run(async () => {
