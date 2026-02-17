@@ -125,12 +125,13 @@
         var routeControl = null;
 
         function showRoute(fromLat, fromLng, toLat, toLng, mode) {
+
             if (routeControl) {
                 map.removeControl(routeControl);
             }
 
-            // mode に応じて OSRM のプロファイルを切り替える
-            var profile = mode || "driving";  // デフォルトは車
+            // mode が undefined の場合は driving を使う
+            var profile = mode || "driving";
 
             routeControl = L.Routing.control({
                 waypoints: [

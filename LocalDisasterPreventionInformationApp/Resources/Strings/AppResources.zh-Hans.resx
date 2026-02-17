@@ -82,6 +82,13 @@
     <value>以下内容是否正确？</value>
   </data>
 
+	<data name="Reg_FuriganaLabel" xml:space="preserve">
+  <value>注音</value>
+</data>
+
+	<data name="Reg_AddressType" xml:space="preserve">
+  <value>地址类型</value>
+</data>
 	<!-- ヘッダー -->
 	<data name="Header_AppTitle" xml:space="preserve">
     <value>地区防灾信息应用</value>
@@ -145,6 +152,13 @@
     <value>编辑</value>
   </data>
 
+	<data name="Btn_Discard" xml:space="preserve">
+  <value>丢弃</value>
+</data>
+
+	<data name="Btn_Confirm" xml:space="preserve">
+  <value>确定</value>
+</data>
 	<!-- 備蓄管理 -->
 	<data name="Stock_ExpireOrder" xml:space="preserve">
     <value>按保质期排序</value>
@@ -185,5 +199,23 @@
 	<data name="Stock_Delete" xml:space="preserve">
     <value>删除</value>
   </data>
+	
+	<!-- トップページ -->
+	<data name="Top_ShelterList" xml:space="preserve">
+  <value>避难所列表</value>
+</data>
+
+	<!-- ハザードマップ -->
+	<data name="Hazard_Earthquake" xml:space="preserve">
+  <value>地震灾害地图</value>
+</data>
+
+	<data name="Hazard_Tsunami" xml:space="preserve">
+  <value>海啸灾害地图</value>
+</data>
+
+	<data name="Hazard_FloodLandslide" xml:space="preserve">
+  <value>泥石流·洪水灾害地图</value>
+</data>
 
 </root>

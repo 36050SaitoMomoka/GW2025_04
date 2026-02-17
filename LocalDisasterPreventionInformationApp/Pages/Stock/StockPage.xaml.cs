@@ -1,15 +1,17 @@
 using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Input;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Stock;
 
 //ContentPageを継承
-public partial class StockPage : ContentPage , INotifyPropertyChanged{
+public partial class StockPage : ContentPage, INotifyPropertyChanged {
 
     private readonly AppDatabase _db;
 
@@ -29,6 +31,8 @@ public partial class StockPage : ContentPage , INotifyPropertyChanged{
         InitializeComponent();
         _db = db;
 
+        BindingContext = Shell.Current.BindingContext;
+
         IncreaseCommand = new Command<object>(IncreaseQuantity);
         DecreaseCommand = new Command<object>(DecreaseQuantity);
         DeleteCommand = new Command<object>(DeleteRecord);
@@ -44,9 +48,35 @@ public partial class StockPage : ContentPage , INotifyPropertyChanged{
         //PageTitleを「備蓄管理」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
-            vm.PageTitle = "備蓄管理";
+            vm.PageTitle = vm.Header_Stock;
+
+            // 言語切り替え時にも Picker を更新
+            vm.PropertyChanged += (s, e) => {
+                if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
+                    SetSortPickerItems(vm);
+                }
+            };
+
+            // 初回セット
+            SetSortPickerItems(vm);
         }
     }
+
+    // ProductRegisterPage と同じ方式で作る
+    private void SetSortPickerItems(AppShellViewModel vm) {
+        SortPicker.ItemsSource = new List<string> {
+        vm.Stock_CategoryOrder,
+        vm.Stock_ExpireOrder,
+        vm.Stock_NameOrder,
+        vm.Stock_Others
+        };
+
+        // 最初から一つ選ばれた状態にする
+        if(SortPicker.ItemsSource is IList list && list.Count > 0) {
+            SortPicker.SelectedIndex = 0;
+        }
+    }
+
 
     protected override void OnAppearing() {
         base.OnAppearing();
@@ -66,7 +96,7 @@ public partial class StockPage : ContentPage , INotifyPropertyChanged{
             case "商品名":
                 sortedStocks = stocks
                     .OrderBy(s => products.First(p => p.ProductId == s.ProductId).Name,
-                    StringComparer.Create(new System.Globalization.CultureInfo("ja-JP"),true));
+                    StringComparer.Create(new System.Globalization.CultureInfo("ja-JP"), true));
                 break;
 
             case "カテゴリ":
@@ -199,22 +229,22 @@ public partial class StockPage : ContentPage , INotifyPropertyChanged{
     }
 
     //並べ替え
-    private void OnSortChanged(object sender,EventArgs e) {
+    private void OnSortChanged(object sender, EventArgs e) {
         var picker = sender as Picker;
         if (picker == null) return;
 
         _currentSort = picker.SelectedItem?.ToString() ?? "消費期限";
 
         //タイトル更新
-        if(_currentSort == "商品名") {
+        if (_currentSort == "商品名") {
             SelectedSortName = "商品別";
-        }else if(_currentSort == "カテゴリ") {
+        } else if (_currentSort == "カテゴリ") {
             SelectedSortName = "カテゴリ別";
         } else {
             SelectedSortName = "消費期限順";
         }
 
-            LoadData();
+        LoadData();
     }
 
     private async void OnRegisterClicked(object sender, EventArgs e) {

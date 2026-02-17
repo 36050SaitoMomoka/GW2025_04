@@ -7,6 +7,7 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
+
             <Grid RowDefinitions="*,Auto">
 
                 <ScrollView Grid.Row="0">
@@ -19,10 +20,10 @@
 
                             <!-- フリガナ -->
                             <Label Grid.Row="0" Grid.Column="0"
-                                   Text="フリガナ"
+                                   Text="{Binding Reg_Furigana}"
                                    FontSize="18"
                                    FontAttributes="Bold"
-                                   TextColor="#333" 
+                                   TextColor="#333"
                                    HorizontalOptions="Center"
                                    Margin="0,0,0,-10"
                                    VerticalOptions="End"/>
@@ -31,95 +32,89 @@
                                    Text=" ： "
                                    FontSize="18"
                                    FontAttributes="Bold"
-                                   TextColor="#333" 
+                                   TextColor="#333"
                                    Margin="0,0,0,-10"
                                    VerticalOptions="End"/>
 
                             <Entry Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Furigana}"
                                    FontSize="18"
-                                   TextColor="#000" 
+                                   TextColor="#000"
                                    Margin="0,0,0,-20"
                                    VerticalOptions="End"/>
 
                             <!-- 氏名 -->
                             <Label Grid.Row="2" Grid.Column="0"
-                                   Text="氏名"
+                                   Text="{Binding Reg_Name}"
                                    FontSize="22"
                                    FontAttributes="Bold"
-                                   TextColor="#333" 
+                                   TextColor="#333"
                                    HorizontalOptions="Center"/>
 
                             <Label Grid.Row="2" Grid.Column="1"
                                    Text=" ： "
                                    FontSize="22"
                                    FontAttributes="Bold"
-                                   TextColor="#333" />
+                                   TextColor="#333"/>
 
                             <Entry Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding UserName}"
                                    FontSize="26"
-                                   TextColor="#000" />
+                                   TextColor="#000"/>
 
-                            <!-- 下線 -->
                             <BoxView Grid.Row="3" Grid.ColumnSpan="4"
                                      HeightRequest="2"
-                                     BackgroundColor="#bbb" />
-
+                                     BackgroundColor="#bbb"/>
 
                             <!-- メールアドレス -->
                             <Label Grid.Row="4" Grid.Column="0"
-                                   Text="メールアドレス"
+                                   Text="{Binding Reg_Email}"
                                    FontSize="22"
                                    FontAttributes="Bold"
-                                   TextColor="#333" 
+                                   TextColor="#333"
                                    HorizontalOptions="Center"/>
 
                             <Label Grid.Row="4" Grid.Column="1"
                                    Text=" ： "
                                    FontSize="22"
                                    FontAttributes="Bold"
-                                   TextColor="#333" />
+                                   TextColor="#333"/>
 
                             <Entry Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Email}"
                                    FontSize="26"
-                                   TextColor="#000" />
+                                   TextColor="#000"/>
 
-                            <!-- 下線 -->
                             <BoxView Grid.Row="5" Grid.ColumnSpan="4"
                                      HeightRequest="2"
-                                     BackgroundColor="#bbb" />
-
+                                     BackgroundColor="#bbb"/>
 
                             <!-- 電話番号 -->
                             <Label Grid.Row="6" Grid.Column="0"
-                                   Text="電話番号"
+                                   Text="{Binding Reg_Phone}"
                                    FontSize="22"
                                    FontAttributes="Bold"
-                                   TextColor="#333" 
+                                   TextColor="#333"
                                    HorizontalOptions="Center"/>
 
                             <Label Grid.Row="6" Grid.Column="1"
                                    Text=" ： "
                                    FontSize="22"
                                    FontAttributes="Bold"
-                                   TextColor="#333" />
+                                   TextColor="#333"/>
 
                             <Entry Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Phone}"
                                    FontSize="26"
-                                   TextColor="#000" />
+                                   TextColor="#000"/>
 
-                            <!-- 下線 -->
                             <BoxView Grid.Row="7" Grid.ColumnSpan="4"
                                      HeightRequest="2"
-                                     BackgroundColor="#bbb" />
-
+                                     BackgroundColor="#bbb"/>
 
                             <!-- 住所 -->
                             <Label Grid.Row="8" Grid.Column="0"
-                                   Text="住所"
+                                   Text="{Binding Reg_Address}"
                                    FontSize="22"
                                    FontAttributes="Bold"
                                    TextColor="#333"
@@ -129,7 +124,7 @@
                                    Text=" ： "
                                    FontSize="22"
                                    FontAttributes="Bold"
-                                   TextColor="#333" />
+                                   TextColor="#333"/>
 
                             <Entry Grid.Row="8" Grid.Column="2"
                                    Text="{Binding Addresstype}"
@@ -140,12 +135,11 @@
                             <Entry Grid.Row="8" Grid.Column="3"
                                    Text="{Binding Address}"
                                    FontSize="26"
-                                   TextColor="#000" />
+                                   TextColor="#000"/>
 
-                            <!-- 下線 -->
                             <BoxView Grid.Row="9" Grid.ColumnSpan="4"
                                      HeightRequest="2"
-                                     BackgroundColor="#bbb" />
+                                     BackgroundColor="#bbb"/>
 
                             <!-- 住所追加ボタン -->
                             <Button Grid.Row="8" Grid.Column="4"
@@ -159,12 +153,13 @@
                     </VerticalStackLayout>
                 </ScrollView>
 
+                <!-- 下部ボタン -->
                 <Grid Grid.Row="1"
                       Padding="20"
                       ColumnDefinitions="*,Auto,Auto,*">
-                    <!-- 破棄ボタン -->
+
                     <Button
-                        Text="破棄"
+                        Text="{Binding Btn_Discard}"
                         FontSize="20"
                         BackgroundColor="#2196F3"
                         TextColor="White"
@@ -173,9 +168,8 @@
                         WidthRequest="120"
                         Margin="10,0"/>
 
-                    <!-- 確定ボタン -->
                     <Button
-                        Text="確定"
+                        Text="{Binding Btn_Confirm}"
                         FontSize="20"
                         BackgroundColor="#2196F3"
                         TextColor="White"
@@ -184,7 +178,9 @@
                         WidthRequest="120"
                         Margin="10,0"/>
                 </Grid>
+
             </Grid>
+
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>

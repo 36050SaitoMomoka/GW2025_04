@@ -45,6 +45,8 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
         InitializeComponent();
         _db = db;
 
+        BindingContext = Shell.Current.BindingContext;
+
         Inner.BindingContext = this;
 
         LoadData();

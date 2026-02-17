@@ -1,3 +1,4 @@
+
 using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
@@ -18,6 +19,8 @@ public partial class TopPage : ContentPage {
     public TopPage(AppDatabase db) {
         InitializeComponent();
         _db = db;
+
+        BindingContext = Shell.Current.BindingContext;
     }
 
     protected override async void OnAppearing() {

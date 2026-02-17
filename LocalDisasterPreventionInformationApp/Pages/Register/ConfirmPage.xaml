@@ -8,7 +8,7 @@
 
         <!-- 上部バー -->
         <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#F5F5F5">
-            <Label Text="以下の内容でよろしいですか？"
+            <Label Text="{Binding Reg_Confirm}"
                    FontSize="24"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
@@ -26,10 +26,10 @@
                       RowSpacing="15">
 
                     <!-- 氏名 -->
-                    <Label Text="氏名"
+                    <Label Text="{Binding Reg_Name}"
                            FontAttributes="Bold"
                            FontSize="22"
-                          HorizontalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
                            Grid.Row="0" Grid.Column="0"/>
 
                     <Label x:Name="nameLabel"
@@ -39,10 +39,10 @@
                            Grid.Row="0" Grid.Column="1"/>
 
                     <!-- フリガナ -->
-                    <Label Text="フリガナ"
+                    <Label Text="{Binding Reg_Furigana}"
                            FontAttributes="Bold"
                            FontSize="22"
-                           HorizontalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
                            Grid.Row="1" Grid.Column="0"/>
 
                     <Label x:Name="furiganaLabel"
@@ -52,10 +52,10 @@
                            Grid.Row="1" Grid.Column="1"/>
 
                     <!-- メール -->
-                    <Label Text="メール"
+                    <Label Text="{Binding Reg_Email}"
                            FontAttributes="Bold"
                            FontSize="22"
-                           HorizontalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
                            Grid.Row="2" Grid.Column="0"/>
 
                     <Label x:Name="emailLabel"
@@ -65,10 +65,10 @@
                            Grid.Row="2" Grid.Column="1"/>
 
                     <!-- 電話番号 -->
-                    <Label Text="電話番号"
+                    <Label Text="{Binding Reg_Phone}"
                            FontAttributes="Bold"
                            FontSize="22"
-                           HorizontalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
                            Grid.Row="3" Grid.Column="0"/>
 
                     <Label x:Name="phoneLabel"
@@ -78,10 +78,10 @@
                            Grid.Row="3" Grid.Column="1"/>
 
                     <!-- 住所 -->
-                    <Label Text="住所"
+                    <Label Text="{Binding Reg_Address}"
                            FontAttributes="Bold"
                            FontSize="22"
-                           HorizontalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
                            Grid.Row="4" Grid.Column="0"/>
 
                     <Label x:Name="addressLabel"
@@ -93,23 +93,27 @@
                 </Grid>
 
                 <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                    <Button Text="戻る"
-                        BackgroundColor="#CCCCCC"
-                        TextColor="Black"
-                        CornerRadius="8"
-                        HeightRequest="50"
-                        WidthRequest="150"
-                        HorizontalOptions="Center"
-                        Clicked="OnBackClicked"/>
 
-                    <Button Text="登録"
-                        BackgroundColor="#2196F3"
-                        TextColor="White"
-                        CornerRadius="8"
-                        HeightRequest="50"
-                        WidthRequest="150"
-                        HorizontalOptions="Center"
-                        Clicked="OnSubmitClicked"/>
+                    <!-- 戻る -->
+                    <Button Text="{Binding Btn_Back}"
+                            BackgroundColor="#CCCCCC"
+                            TextColor="Black"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            WidthRequest="150"
+                            HorizontalOptions="Center"
+                            Clicked="OnBackClicked"/>
+
+                    <!-- 登録 -->
+                    <Button Text="{Binding Btn_Register}"
+                            BackgroundColor="#2196F3"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            WidthRequest="150"
+                            HorizontalOptions="Center"
+                            Clicked="OnSubmitClicked"/>
+
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

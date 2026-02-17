@@ -9,6 +9,8 @@ namespace LocalDisasterPreventionInformationApp.Pages.Register;
 public partial class RegisterPage : ContentPage {
     public RegisterPage() {
         InitializeComponent();
+
+        BindingContext = Shell.Current.BindingContext;
     }
 
     // —X•Ö”Ô†“ü—Í‚ÉAPI‚ğŒÄ‚Ô

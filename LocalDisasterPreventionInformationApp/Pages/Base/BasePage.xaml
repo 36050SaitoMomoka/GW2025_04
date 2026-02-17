@@ -16,7 +16,9 @@
 
             <!-- タイトル + 右上アイコン -->
             <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
-                <Label Text="地域防災情報アプリ"
+
+                <!-- ★ 固定文字 → 翻訳対応 -->
+                <Label Text="{Binding Header_AppTitle}"
                        FontSize="32"
                        FontAttributes="Bold"
                        VerticalOptions="Center" />
@@ -50,10 +52,12 @@
                                     ZIndex="100"/>
                         </Grid>
                     </Border>
+
                     <ImageButton Source="notification.png"
                                  BackgroundColor="Transparent"
                                  WidthRequest="60" HeightRequest="60"
                                  Command="{Binding FontCommand}" />
+
                     <ImageButton Source="my.png"
                                  BackgroundColor="Transparent"
                                  WidthRequest="60" HeightRequest="60"
@@ -70,13 +74,13 @@
                              WidthRequest="80" HeightRequest="80"
                              Command="{Binding OpenMenuCommand}" />
 
-                <!-- ページ名 -->
+                <!-- ページ名（これは各ページの ViewModel が設定する） -->
                 <Label Grid.Column="1"
                        Text="{Binding PageTitle}"
                        FontSize="20"
                        VerticalOptions="Center"
                        Margin="10,0,0,0" />
-                
+
                 <!-- 移動手段 Picker -->
                 <Picker Grid.Column="2"
                         WidthRequest="150"
@@ -85,9 +89,9 @@
                         ItemsSource="{Binding RouteModes}"
                         SelectedItem="{Binding SelectedRouteMode}" />
 
-                <!-- ルート検索ボタン -->
-                <Button Grid.Column="2"
-                        Text="ルート検索"
+                <!-- ★ 固定文字 → 翻訳対応 -->
+                <Button Grid.Column="3"
+                        Text="{Binding Header_RouteSearch}"
                         WidthRequest="150"
                         HeightRequest="40"
                         VerticalOptions="Center"

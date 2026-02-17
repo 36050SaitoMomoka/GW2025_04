@@ -29,9 +29,11 @@ namespace LocalDisasterPreventionInformationApp {
                 selectedLanguage = value;
                 OnPropertyChanged();
 
-                // 言語を保存
-                Preferences.Set("SelectedLanguage", selectedLanguage);
-                SetCulture(selectedLanguage);
+                // 言語切り替え
+                SetCulture(value);
+
+                // 翻訳プロパティを更新
+                OnPropertyChanged(null);
             }
         }
 
@@ -53,6 +55,66 @@ namespace LocalDisasterPreventionInformationApp {
             // UI更新
             OnPropertyChanged(nameof(PageTitle));
         }
+
+        #region 翻訳プロパティ
+        public string Btn_AddProduct => AppResources.Btn_AddProduct;
+        public string Btn_Back => AppResources.Btn_Back;
+        public string Btn_Edit => AppResources.Btn_Edit;
+        public string Btn_Next => AppResources.Btn_Next;
+        public string Btn_Register => AppResources.Btn_Register;
+        public string Btn_Discard => AppResources.Btn_Discard;
+        public string Btn_Confirm => AppResources.Btn_Confirm;
+
+        public string Header_AppTitle => AppResources.Header_AppTitle;
+        public string Header_Font => AppResources.Header_Font;
+        public string Header_HazardMap => AppResources.Header_HazardMap;
+        public string Header_MyPage => AppResources.Header_MyPage;
+        public string Header_RouteSearch => AppResources.Header_RouteSearch;
+        public string Header_Stock => AppResources.Header_Stock;
+        public string Header_Top => AppResources.Header_Top;
+
+        public string Menu_HazardMap => AppResources.Menu_HazardMap;
+        public string Menu_Stock => AppResources.Menu_Stock;
+        public string Menu_Top => AppResources.Menu_Top;
+
+        public string Reg_Address => AppResources.Reg_Address;
+        public string Reg_AutoFill => AppResources.Reg_AutoFill;
+        public string Reg_AutoFromZip => AppResources.Reg_AutoFromZip;
+        public string Reg_Building => AppResources.Reg_Building;
+        public string Reg_City => AppResources.Reg_City;
+        public string Reg_Confirm => AppResources.Reg_Confirm;
+        public string Reg_Email => AppResources.Reg_Email;
+        public string Reg_Empty => AppResources.Reg_Empty;
+        public string Reg_Furigana => AppResources.Reg_Furigana;
+        public string Reg_FuriganaHint => AppResources.Reg_FuriganaHint;
+        public string Reg_Name => AppResources.Reg_Name;
+        public string Reg_Optional => AppResources.Reg_Optional;
+        public string Reg_Phone => AppResources.Reg_Phone;
+        public string Reg_Prefecture => AppResources.Reg_Prefecture;
+        public string Reg_Town => AppResources.Reg_Town;
+        public string Reg_Welcome => AppResources.Reg_Welcome;
+        public string Reg_Zip => AppResources.Reg_Zip;
+        public string Reg_FuriganaLabel => AppResources.Reg_FuriganaLabel;
+        public string Reg_AddressType => AppResources.Reg_AddressType;
+
+        public string Stock_Category => AppResources.Stock_Category;
+        public string Stock_CategoryOrder => AppResources.Stock_CategoryOrder;
+        public string Stock_Delete => AppResources.Stock_Delete;
+        public string Stock_Expire => AppResources.Stock_Expire;
+        public string Stock_ExpireOrder => AppResources.Stock_ExpireOrder;
+        public string Stock_NameOrder => AppResources.Stock_NameOrder;
+        public string Stock_Others => AppResources.Stock_Others;
+        public string Stock_ProductName => AppResources.Stock_ProductName;
+        public string Stock_Quantity => AppResources.Stock_Quantity;
+        public string Stock_Sort => AppResources.Stock_Sort;
+
+        public string Top_ShelterList => AppResources.Top_ShelterList;
+
+        public string Hazard_Earthquake => AppResources.Hazard_Earthquake;
+        public string Hazard_Tsunami => AppResources.Hazard_Tsunami;
+        public string Hazard_FloodLandslide => AppResources.Hazard_FloodLandslide;
+        #endregion
+
 
         // ページタイトル
         private string pageTitle;

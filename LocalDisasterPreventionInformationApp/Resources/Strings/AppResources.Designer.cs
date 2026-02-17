@@ -79,6 +79,24 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   確定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Btn_Confirm {
+            get {
+                return ResourceManager.GetString("Btn_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   破棄 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Btn_Discard {
+            get {
+                return ResourceManager.GetString("Btn_Discard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   編集 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Btn_Edit {
@@ -102,6 +120,33 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         internal static string Btn_Register {
             get {
                 return ResourceManager.GetString("Btn_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   地震ハザードマップ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Hazard_Earthquake {
+            get {
+                return ResourceManager.GetString("Hazard_Earthquake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   土砂・洪水ハザードマップ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Hazard_FloodLandslide {
+            get {
+                return ResourceManager.GetString("Hazard_FloodLandslide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   津波ハザードマップ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Hazard_Tsunami {
+            get {
+                return ResourceManager.GetString("Hazard_Tsunami", resourceCulture);
             }
         }
         
@@ -205,6 +250,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   住所種別 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Reg_AddressType {
+            get {
+                return ResourceManager.GetString("Reg_AddressType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   自動入力 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Reg_AutoFill {
@@ -282,6 +336,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         internal static string Reg_FuriganaHint {
             get {
                 return ResourceManager.GetString("Reg_FuriganaHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   フリガナ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Reg_FuriganaLabel {
+            get {
+                return ResourceManager.GetString("Reg_FuriganaLabel", resourceCulture);
             }
         }
         
@@ -435,6 +498,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         internal static string Stock_Sort {
             get {
                 return ResourceManager.GetString("Stock_Sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   避難所リスト に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Top_ShelterList {
+            get {
+                return ResourceManager.GetString("Top_ShelterList", resourceCulture);
             }
         }
     }
