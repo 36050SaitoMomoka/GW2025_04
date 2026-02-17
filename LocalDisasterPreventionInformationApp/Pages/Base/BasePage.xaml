@@ -53,11 +53,6 @@
                         </Grid>
                     </Border>
 
-                    <ImageButton Source="notification.png"
-                                 BackgroundColor="Transparent"
-                                 WidthRequest="60" HeightRequest="60"
-                                 Command="{Binding FontCommand}" />
-
                     <ImageButton Source="my.png"
                                  BackgroundColor="Transparent"
                                  WidthRequest="60" HeightRequest="60"

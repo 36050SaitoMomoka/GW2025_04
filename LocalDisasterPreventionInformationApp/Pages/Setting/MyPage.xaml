@@ -8,7 +8,7 @@
     <base:BasePage>
         <base:BasePage.InnerContent>
 
-            <Grid x:Name="Inner">
+            <Grid>
 
                 <ScrollView>
                     <VerticalStackLayout Padding="20" Spacing="40">
@@ -21,7 +21,6 @@
                                     BackgroundColor="#2196F3"
                                     TextColor="White"
                                     CornerRadius="12"
-                                    Command="{Binding EditProfileCommand}"
                                     Clicked="OnEditButtonClick"/>
                         </HorizontalStackLayout>
 

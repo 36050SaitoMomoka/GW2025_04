@@ -128,7 +128,6 @@ namespace LocalDisasterPreventionInformationApp {
         }
 
         // ヘッダーのボタン用
-        public ICommand FontCommand { get; }
         public ICommand MyPageCommand { get; }
         public ICommand OpenMenuCommand { get; }
         public ICommand RouteSearchCommand { get; }
@@ -138,11 +137,6 @@ namespace LocalDisasterPreventionInformationApp {
             // 前回選んだ言語を復元（初期値：日本語）
             SelectedLanguage = Preferences.Get("SelectedLanguage", "　　日本語");
             SetCulture(SelectedLanguage);
-
-            //フォント選択ページへ
-            FontCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("fontpage");
-            });
 
             //マイページへ
             MyPageCommand = new Command(async () => {

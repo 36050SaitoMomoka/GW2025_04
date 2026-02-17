@@ -7,7 +7,7 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            <Grid>
+            <Grid x:Name="Inner">
                 <WebView x:Name="MapWebView"
                          Source="map.html" 
                          Navigated="MapWebView_Navigated"/>

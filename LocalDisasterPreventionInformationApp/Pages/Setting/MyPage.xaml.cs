@@ -38,6 +38,7 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
     private string _address;
     public string Address {
         get => _address;
+
         set { _address = value; OnPropertyChanged(); }
     }
 
@@ -46,8 +47,6 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
         _db = db;
 
         BindingContext = Shell.Current.BindingContext;
-
-        Inner.BindingContext = this;
 
         LoadData();
 
@@ -65,6 +64,9 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
 
     private async void LoadData() {
         var user = await _db.GetUserAsync();
+
+
+
         var addresses = await _db.GetAddressesAsync();
         var home = addresses.FirstOrDefault();
 

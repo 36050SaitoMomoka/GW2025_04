@@ -51,8 +51,8 @@
                   FlyoutItemIsVisible="False"
                   ContentTemplate="{DataTemplate register:ConfirmPage}" />
 
-    <!-- フォント選択ページ -->
-    <ShellContent Route="FontPage"
+    <!-- マイページ -->
+    <ShellContent Route="MyPage"
                   FlyoutItemIsVisible="False"
-                  ContentTemplate="{DataTemplate setting:FontPage}" />
+                  ContentTemplate="{DataTemplate setting:MyPage}" />
 </Shell>
