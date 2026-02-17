@@ -26,10 +26,12 @@ public partial class TopPage : ContentPage {
     protected override async void OnAppearing() {
         base.OnAppearing();
 
-        // WebView強制リロード
-        MapWebView.Source = null;
+        // WebView の内部キャッシュを完全に破棄
+        MapWebView.Reload();
+
+        // 必ず Navigated が発火する URL にする
         MapWebView.Source = new UrlWebViewSource {
-            Url = "map.html?ts=" + DateTime.Now.Ticks
+            Url = $"map.html?cachebuster={Guid.NewGuid()}"
         };
 
         // PageTitle を設定

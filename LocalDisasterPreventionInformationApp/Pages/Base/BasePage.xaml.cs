@@ -23,9 +23,6 @@ public partial class BasePage : ContentView {
     public BasePage() {
         InitializeComponent();
 
-
-
-
         // ƒy[ƒW‘¤‚Ì BindingContext ‚ð BasePage ‚É“`‚¦‚é
         //this.BindingContextChanged += (s, e) => {
         //    ContentArea.BindingContext = this.BindingContext;
