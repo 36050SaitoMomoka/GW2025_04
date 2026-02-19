@@ -1,9 +1,9 @@
-
+using System.Globalization;
 using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
-using System.Text;
 using Microsoft.Maui.Devices.Sensors;   // GPS
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;                 // JSON変換用
 
@@ -16,12 +16,28 @@ public partial class TopPage : ContentPage {
     private List<NearbyShelterItem> _nearest10;
     private List<NearbyShelterItem> _currentList;
 
+
+    public bool _isMapLoaded = false;
+    private string _pendingRouteMode = null;
+
     public TopPage(AppDatabase db) {
         InitializeComponent();
         _db = db;
 
         BindingContext = Shell.Current.BindingContext;
-    }
+
+        // RouteModeChangedイベントを取得
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+            // 移動手段ボタンからの呼び出し
+            vm.RouteModeChanged += async (mode) => {
+                if (_isMapLoaded && _nearest10?.Count > 0) {
+                    await RouteToNearestShelterAsync(mode);
+                } else {
+                    // 未ロードなら保留
+                    _pendingRouteMode = mode;
+                }
+            };
+        }
 
     protected override async void OnAppearing() {
         base.OnAppearing();
@@ -47,14 +63,15 @@ public partial class TopPage : ContentPage {
     }
 
     private async void MapWebView_Navigated(object sender, WebNavigatedEventArgs e) {
-        // 初回ロード時だけ地図を描写
         if (e.Url.Contains("map.html")) {
+            _isMapLoaded = true;
+
             // 現在地と避難所データを取得してleafletに渡す
             await LoadSheltersAndShowPinsAsync();
 
             // ルート検索フラグが立っていたら、このタイミングでだけ実行
             if (DoRouteSearch == "1") {
-                await RouteToNearestShelterAsync(((AppShellViewModel)BindingContext).SelectedRouteMode);
+                await RouteToNearestShelterAsync("driving");
                 DoRouteSearch = null;
             }
         }
@@ -66,6 +83,15 @@ public partial class TopPage : ContentPage {
         if (location == null)
             return;
 
+        if (!_isMapLoaded) return;
+
+        bool mapReady = false;
+        while (!mapReady) {
+            var result = await MapWebView.EvaluateJavaScriptAsync("window.mapReady");
+            mapReady = result == "true";
+            if (!mapReady) await Task.Delay(100);
+        }
+
         double currentLat = location.Latitude;
         double currentLng = location.Longitude;
 
@@ -76,11 +102,31 @@ public partial class TopPage : ContentPage {
         double toLat = nearest.Shelter.Latitude;
         double toLng = nearest.Shelter.Longitude;
 
-        await MapWebView.EvaluateJavaScriptAsync(
-            $"showRoute({currentLat}, {currentLng}, {toLat}, {toLng}, '{mode}');");
+        // JS に渡す値は小数点付きで固定
+        string js = $"showRoute({currentLat.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"{currentLng.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"{toLat.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"{toLng.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"'{mode}');";
+
+        await MapWebView.EvaluateJavaScriptAsync(js);
 
         NearbySheltersList.SelectedItem = nearest;
     }
+
+    // ルート削除
+    public async Task ClearRouteAsync() {
+        if (!_isMapLoaded) return;
+
+        bool mapReady = false;
+        while (!mapReady) {
+            var result = await MapWebView.EvaluateJavaScriptAsync("window.mapReady");
+            mapReady = result == "true";
+            if (!mapReady) await Task.Delay(100);
+        }
+        await MapWebView.EvaluateJavaScriptAsync("clearRoute();");
+    }
+
 
     // 都道府県読み込み
     private async Task LoadPrefecturesAsync() {

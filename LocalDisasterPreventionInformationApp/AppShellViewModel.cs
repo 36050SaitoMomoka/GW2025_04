@@ -8,6 +8,7 @@ using HtmlAgilityPack;
 using System.Globalization;
 using LocalDisasterPreventionInformationApp.Resources.Strings;
 using static System.Net.WebRequestMethods;
+using LocalDisasterPreventionInformationApp.Pages.Top;
 
 namespace LocalDisasterPreventionInformationApp {
     public class AppShellViewModel : INotifyPropertyChanged {
@@ -131,6 +132,12 @@ namespace LocalDisasterPreventionInformationApp {
         public ICommand MyPageCommand { get; }
         public ICommand OpenMenuCommand { get; }
         public ICommand RouteSearchCommand { get; }
+        public Command DrivingCommand => new(() => CurrentRouteMode = "driving");
+        public Command CyclingCommand => new(() => CurrentRouteMode = "bicycling");
+        public Command WalkingCommand => new(() => CurrentRouteMode = "walking");
+        public ICommand ClearRouteCommand { get; private set; }
+
+        public event Action<string> RouteModeChanged;
 
         public AppShellViewModel() {
 
@@ -150,7 +157,21 @@ namespace LocalDisasterPreventionInformationApp {
 
             //ルート検索をする（トップページへ遷移しルートを検索する）
             RouteSearchCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("//TopPage?route=1");
+                // トップページにいる場合は直接呼ぶ
+                var topPage = Shell.Current.CurrentPage as TopPage;
+                if(topPage != null) {
+                    await topPage.RouteToNearestShelterAsync("driving");
+                } else {
+                    await Shell.Current.GoToAsync("//TopPage?route=1");
+                }
+            });
+
+            // ルート削除
+            ClearRouteCommand = new Command(async () => {
+                var topPage = Shell.Current.CurrentPage as TopPage;
+                if (topPage != null) {
+                    await topPage.ClearRouteAsync();
+                }
             });
         }
 
@@ -162,14 +183,15 @@ namespace LocalDisasterPreventionInformationApp {
         }
 
         // ルート検索用
-        public List<string> RouteModes { get; } = new() { "driving", "walking", "cycling" };
-
-        private string selectedRouteMode = "driving";
-        public string SelectedRouteMode {
-            get => selectedRouteMode;
+        public List<string> RouteModes { get; } = new() { "driving", "walking", "bicycling" };
+        private string _currentRouteMode = "driving";
+        public string CurrentRouteMode {
+            get => _currentRouteMode;
             set {
-                selectedRouteMode = value;
-                OnPropertyChanged();
+                if (_currentRouteMode != value) {
+                    _currentRouteMode = value;
+                    RouteModeChanged?.Invoke(value);
+                }
             }
         }
     }
