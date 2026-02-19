@@ -96,8 +96,8 @@ public partial class ConfirmPage : ContentPage {
             AddressType = "Ž©‘î",
             PostalCode = PostalCode,
             Address = addressLabel.Text,
-            Longitude = lat,
-            Latitude = lon,
+            Longitude = lon,
+            Latitude = lat,
         };
         await _db.AddAddressIfNotExistsAsync(address);
 

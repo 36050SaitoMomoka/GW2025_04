@@ -59,6 +59,7 @@ public partial class StartupPage : ContentPage {
         var sw = new Stopwatch();
 
         //DB初期化（初回起動時のみ）
+        Preferences.Set("DbInitialized", false);  //開発時のみ
         if (!Preferences.Get("DbInitialized", false)) {
             sw.Restart();
             await _db.InitializeAsync();
@@ -68,6 +69,7 @@ public partial class StartupPage : ContentPage {
         }
 
         // 避難所データ追加
+        Preferences.Set("ShelterDataLoaded", true);  //タブレット用
         if (!Preferences.Get("ShelterDataLoaded",false)) {
 
             await Task.Run(async () => {

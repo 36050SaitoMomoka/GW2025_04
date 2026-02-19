@@ -16,7 +16,6 @@ namespace LocalDisasterPreventionInformationApp.Models {
         [NotNull]
         public string AddressType { get; set; }  //住所種類
 
-        [NotNull]
         public string PostalCode { get; set; }  //郵便番号
 
         [NotNull]

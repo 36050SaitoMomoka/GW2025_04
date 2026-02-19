@@ -127,10 +127,10 @@
                                    FontAttributes="Bold"
                                    TextColor="#333" />
 
-                            <Label Grid.Row="8" Grid.Column="2"
-                                   Text="{Binding Address}"
-                                   FontSize="26"
-                                   TextColor="#000" />
+                            <VerticalStackLayout Grid.Row="8" Grid.Column="2"
+                                                 x:Name="AddressContainer"
+                                                 Spacing="8">
+                            </VerticalStackLayout>
 
                             <!-- 下線 -->
                             <BoxView Grid.Row="9" Grid.ColumnSpan="3"

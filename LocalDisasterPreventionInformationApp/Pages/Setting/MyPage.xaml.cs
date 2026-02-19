@@ -56,21 +56,30 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
         }
     }
 
-    protected override void OnAppearing() {
+    protected override async void OnAppearing() {
         base.OnAppearing();
+        var addresses = await _db.GetAddressesAsync();
         LoadData();
     }
 
     private async void LoadData() {
         var user = await _db.GetUserAsync();
         var addresses = await _db.GetAddressesAsync();
-        var home = addresses.FirstOrDefault();
 
         UserName = user.Name;
         Furigana = user.Furigana;
-        Email = user.Email;
-        Phone = user.PhoneNumber;
-        Address = home.Address;
+        Email = string.IsNullOrWhiteSpace(user.Email) ? "---" : user.Email;
+        Phone = string.IsNullOrWhiteSpace(user.PhoneNumber) ? "---" : user.PhoneNumber;
+
+        AddressContainer.Children.Clear();
+
+        foreach (var addr in addresses) {
+            AddressContainer.Children.Add(new Label {
+                Text = $"  {addr.AddressType} ... {addr.Address}",
+                FontSize = 26,
+                TextColor = Colors.Black,
+            });
+        }
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

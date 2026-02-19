@@ -7,7 +7,7 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            <Grid RowDefinitions="*,Auto">
+            <Grid x:Name="Inner" RowDefinitions="*,Auto">
 
                 <ScrollView Grid.Row="0">
                     <VerticalStackLayout Padding="20" Spacing="40">
@@ -35,7 +35,8 @@
                                    Margin="0,0,0,-10"
                                    VerticalOptions="End"/>
 
-                            <Entry Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+                            <Entry x:Name="furiganaEntry"
+                                   Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Furigana}"
                                    FontSize="18"
                                    TextColor="#000" 
@@ -56,7 +57,8 @@
                                    FontAttributes="Bold"
                                    TextColor="#333" />
 
-                            <Entry Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
+                            <Entry x:Name="nameEntry"
+                                   Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding UserName}"
                                    FontSize="26"
                                    TextColor="#000" />
@@ -81,7 +83,8 @@
                                    FontAttributes="Bold"
                                    TextColor="#333" />
 
-                            <Entry Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
+                            <Entry x:Name="emailEntry"
+                                   Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Email}"
                                    FontSize="26"
                                    TextColor="#000" />
@@ -106,7 +109,8 @@
                                    FontAttributes="Bold"
                                    TextColor="#333" />
 
-                            <Entry Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"
+                            <Entry x:Name="phoneEntry"
+                                   Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"
                                    Text="{Binding Phone}"
                                    FontSize="26"
                                    TextColor="#000" />
@@ -116,46 +120,64 @@
                                      HeightRequest="2"
                                      BackgroundColor="#bbb" />
 
+                            <VerticalStackLayout x:Name="AddressContainer"
+                                                 Grid.Row="11" Grid.ColumnSpan="5" Spacing="20">
+                                <Grid ColumnDefinitions="Auto,Auto,*,Auto">
 
-                            <!-- 住所 -->
-                            <Label Grid.Row="8" Grid.Column="0"
-                                   Text="住所"
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333"
-                                   HorizontalOptions="Center"/>
+                                    <!-- 住所 -->
+                                    <Label Grid.Column="0"
+                                       Text="住所"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
 
-                            <Label Grid.Row="8" Grid.Column="1"
-                                   Text=" ： "
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" />
+                                    <Label Grid.Column="1"
+                                       Text=" ： "
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#333" 
+                                       VerticalOptions="Center"/>
 
-                            <Entry Grid.Row="8" Grid.Column="2"
-                                   Text="{Binding Addresstype}"
-                                   FontSize="26"
-                                   TextColor="#000"
-                                   WidthRequest="100"/>
+                                    <Grid Grid.Column="2"
+                                          ColumnDefinitions="Auto,10,*"
+                                          VerticalOptions="Center">
 
-                            <Entry Grid.Row="8" Grid.Column="3"
-                                   Text="{Binding Address}"
-                                   FontSize="26"
-                                   TextColor="#000" />
+                                        <Entry x:Name="addressTypeEntry"
+                                       Grid.Column="0"
+                                       Text="{Binding AddressType}"
+                                       FontSize="26"
+                                       TextColor="#000"
+                                       WidthRequest="100"/>
 
-                            <!-- 下線 -->
-                            <BoxView Grid.Row="9" Grid.ColumnSpan="4"
-                                     HeightRequest="2"
-                                     BackgroundColor="#bbb" />
+                                        <Entry x:Name="addressEntry"
+                                       Grid.Column="2"
+                                       Text="{Binding Address}"
+                                       FontSize="26"
+                                       TextColor="#000" />
 
-                            <!-- 住所追加ボタン -->
-                            <Button Grid.Row="8" Grid.Column="4"
-                                    Text="+"
-                                    FontSize="20"
-                                    BackgroundColor="#2196F3"
-                                    TextColor="White"
-                                    CornerRadius="10"
-                                    Margin="5,0,0,0"/>
+                                    </Grid>
+                                    
+                                    <!-- 住所追加ボタン -->
+                                    <Button Grid.Column="3"
+                                        Text="+"
+                                        FontSize="20"
+                                        BackgroundColor="#2196F3"
+                                        TextColor="White"
+                                        CornerRadius="10"
+                                        Margin="5,0,0,0"
+                                        Clicked="OnAddAddressClicked"/>
+                                </Grid>
+
+                                <BoxView HeightRequest="2"
+                                     BackgroundColor="#bbb"
+                                     HorizontalOptions="Fill"/>
+
+                            </VerticalStackLayout>
+
                         </Grid>
+
                     </VerticalStackLayout>
                 </ScrollView>
 
@@ -164,14 +186,15 @@
                       ColumnDefinitions="*,Auto,Auto,*">
                     <!-- 破棄ボタン -->
                     <Button
-                        Text="破棄"
+                        Text="キャンセル"
                         FontSize="20"
-                        BackgroundColor="#2196F3"
-                        TextColor="White"
+                        BackgroundColor="#CCCCCC"
+                        TextColor="Black"
                         Grid.Column="1"
                         CornerRadius="10"
                         WidthRequest="120"
-                        Margin="10,0"/>
+                        Margin="10,0"
+                        Clicked="OnBackClicked"/>
 
                     <!-- 確定ボタン -->
                     <Button
@@ -182,7 +205,8 @@
                         Grid.Column="2"
                         CornerRadius="10"
                         WidthRequest="120"
-                        Margin="10,0"/>
+                        Margin="10,0"
+                        Clicked="OnSubmitClicked"/>
                 </Grid>
             </Grid>
         </base:BasePage.InnerContent>
