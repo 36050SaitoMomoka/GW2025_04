@@ -21,6 +21,8 @@ public partial class HazardMapPage : ContentPage {
         LoadHazardTypes();
         LoadAddresses();
 
+        BindingContext = Shell.Current.BindingContext;
+
         //PageTitleを「ハザードマップ」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
