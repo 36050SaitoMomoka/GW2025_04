@@ -381,11 +381,11 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         // TEST データが入ったか確認
         await _db.RunUserDataChecks();
 
-        await Shell.Current.GoToAsync("/mypage");
+        await Shell.Current.GoToAsync("//MyPage");
     }
 
     //キャンセルボタン
     private async void OnBackClicked(object sender, EventArgs e) {
-        await Shell.Current.GoToAsync("/mypage");
+        await Shell.Current.GoToAsync("//MyPage");
     }
 }

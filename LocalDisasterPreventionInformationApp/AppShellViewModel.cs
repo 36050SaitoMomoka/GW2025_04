@@ -147,7 +147,7 @@ namespace LocalDisasterPreventionInformationApp {
 
             //マイページへ
             MyPageCommand = new Command(async () => {
-                await Shell.Current.GoToAsync("mypage");
+                await Shell.Current.GoToAsync("//MyPage");
             });
 
             //ハンバーガーメニューを開く

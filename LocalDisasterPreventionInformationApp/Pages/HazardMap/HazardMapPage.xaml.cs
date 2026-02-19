@@ -30,12 +30,34 @@ public partial class HazardMapPage : ContentPage {
         }
     }
 
-    //protected override void OnAppearing() {
-    //    base.OnAppearing();
+    protected override async void OnAppearing() {
+        base.OnAppearing();
 
-    //    //ページに戻ってきたらHTMLを再読み込み
-    //    HazardWebView.Source = "hazardmap.html";
-    //}
+        try {
+            // 現在地を取得
+            var location = await Geolocation.GetLocationAsync(
+                new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(5))
+            );
+
+            if (location != null) {
+                // WebView が読み込み済みなら現在地へ移動
+                if (_isWebViewReady) {
+                    await HazardWebView.EvaluateJavaScriptAsync(
+                        $"moveTo({location.Latitude}, {location.Longitude});"
+                    );
+                } else {
+                    // WebView がまだなら後で使うために保存
+                    _pendingLat = location.Latitude;
+                    _pendingLng = location.Longitude;
+                }
+            }
+        }
+        catch {
+            // 現在地が取れないときは東京駅
+            _pendingLat = 35.681236;
+            _pendingLng = 139.767125;
+        }
+    }
 
     //災害種別の読み込み
     private void LoadHazardTypes() {
@@ -84,8 +106,19 @@ public partial class HazardMapPage : ContentPage {
         public string TileUrl { get; set; }
     }
 
-    private void HazardWebView_Navigated(object sender,WebNavigatedEventArgs e) {
-        //WebViewが読み込み完了したタイミング　必要ならここに初期処理を書く
+    private bool _isWebViewReady = false;
+    private double? _pendingLat = null;
+    private double? _pendingLng = null;
+
+    private async void HazardWebView_Navigated(object sender, WebNavigatedEventArgs e) {
+        _isWebViewReady = true;
+
+        // OnAppearing で取得した現在地があればここで移動
+        if (_pendingLat != null && _pendingLng != null) {
+            await HazardWebView.EvaluateJavaScriptAsync(
+                $"moveTo({_pendingLat}, {_pendingLng});"
+            );
+        }
     }
 
 }
