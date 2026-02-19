@@ -23,13 +23,14 @@ public partial class BasePage : ContentView {
     public BasePage() {
         InitializeComponent();
 
-        // Shell の BindingContext を引き継ぐ
-        HeaderArea.BindingContext = Shell.Current.BindingContext;
-        FooterArea.BindingContext = Shell.Current.BindingContext;
+        this.BindingContextChanged += (s, e) =>
+        {
+            // ヘッダーとフッターは常に AppShellViewModel を参照
+            HeaderArea.BindingContext = Shell.Current.BindingContext;
+            FooterArea.BindingContext = Shell.Current.BindingContext;
 
-        // ページ側の BindingContext を BasePage に伝える
-        //this.BindingContextChanged += (s, e) => {
-        //    ContentArea.BindingContext = this.BindingContext;
-        //};
+            // 中央コンテンツだけページ固有の BindingContext を使う
+            ContentArea.BindingContext = this.BindingContext;
+        };
     }
 }

@@ -82,6 +82,14 @@
     <value>以下の内容でよろしですか？</value>
   </data>
 
+	<data name="Reg_FuriganaLabel" xml:space="preserve">
+  <value>フリガナ</value>
+</data>
+
+	<data name="Reg_AddressType" xml:space="preserve">
+  <value>住所種別</value>
+</data>
+
 	<!-- ヘッダー -->
 	<data name="Header_AppTitle" xml:space="preserve">
     <value>地域防災情報アプリ</value>
@@ -145,6 +153,15 @@
     <value>編集</value>
   </data>
 
+	<data name="Btn_Discard" xml:space="preserve">
+  <value>破棄</value>
+</data>
+
+	<data name="Btn_Confirm" xml:space="preserve">
+  <value>確定</value>
+</data>
+
+
 	<!-- 備蓄管理 -->
 	<data name="Stock_ExpireOrder" xml:space="preserve">
     <value>消費期限順</value>
@@ -185,5 +202,23 @@
 	<data name="Stock_Delete" xml:space="preserve">
     <value>削除</value>
   </data>
+	
+	<!-- トップページ -->
+	<data name="Top_ShelterList" xml:space="preserve">
+  <value>避難所リスト</value>
+</data>
+
+	<!-- ハザードマップページ -->
+	<data name="Hazard_Earthquake" xml:space="preserve">
+  <value>地震ハザードマップ</value>
+</data>
+
+	<data name="Hazard_Tsunami" xml:space="preserve">
+  <value>津波ハザードマップ</value>
+</data>
+
+	<data name="Hazard_FloodLandslide" xml:space="preserve">
+  <value>土砂・洪水ハザードマップ</value>
+</data>
 
 </root>

@@ -1,25 +1,54 @@
+using System.Globalization;
 using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
-using System.Text;
 using Microsoft.Maui.Devices.Sensors;   // GPS
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;                 // JSON変換用
 
 namespace LocalDisasterPreventionInformationApp.Pages.Top;
-
+[QueryProperty(nameof(DoRouteSearch), "route")]
 public partial class TopPage : ContentPage {
+    public string DoRouteSearch { get; set; }
+
     private readonly AppDatabase _db;
     private List<NearbyShelterItem> _nearest10;
     private List<NearbyShelterItem> _currentList;
 
+
+    public bool _isMapLoaded = false;
+    private string _pendingRouteMode = null;
+
     public TopPage(AppDatabase db) {
         InitializeComponent();
         _db = db;
-    }
+
+        BindingContext = Shell.Current.BindingContext;
+
+        // RouteModeChangedイベントを取得
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+            // 移動手段ボタンからの呼び出し
+            vm.RouteModeChanged += async (mode) => {
+                if (_isMapLoaded && _nearest10?.Count > 0) {
+                    await RouteToNearestShelterAsync(mode);
+                } else {
+                    // 未ロードなら保留
+                    _pendingRouteMode = mode;
+                }
+            };
+        }
 
     protected override async void OnAppearing() {
         base.OnAppearing();
+
+        // WebView の内部キャッシュを完全に破棄
+        MapWebView.Reload();
+
+        // 必ず Navigated が発火する URL にする
+        MapWebView.Source = new UrlWebViewSource {
+            Url = $"map.html?cachebuster={Guid.NewGuid()}"
+        };
 
         // PageTitle を設定
         if (Shell.Current.BindingContext is AppShellViewModel vm) {
@@ -34,12 +63,70 @@ public partial class TopPage : ContentPage {
     }
 
     private async void MapWebView_Navigated(object sender, WebNavigatedEventArgs e) {
-        // 初回ロード時だけ地図を描写
         if (e.Url.Contains("map.html")) {
+            _isMapLoaded = true;
+
             // 現在地と避難所データを取得してleafletに渡す
             await LoadSheltersAndShowPinsAsync();
+
+            // ルート検索フラグが立っていたら、このタイミングでだけ実行
+            if (DoRouteSearch == "1") {
+                await RouteToNearestShelterAsync("driving");
+                DoRouteSearch = null;
+            }
         }
     }
+
+    // 最寄り避難所へのルート検索
+    public async Task RouteToNearestShelterAsync(string mode = "driving") {
+        var location = await Geolocation.GetLocationAsync();
+        if (location == null)
+            return;
+
+        if (!_isMapLoaded) return;
+
+        bool mapReady = false;
+        while (!mapReady) {
+            var result = await MapWebView.EvaluateJavaScriptAsync("window.mapReady");
+            mapReady = result == "true";
+            if (!mapReady) await Task.Delay(100);
+        }
+
+        double currentLat = location.Latitude;
+        double currentLng = location.Longitude;
+
+        if (_nearest10 == null || _nearest10.Count == 0)
+            return;
+
+        var nearest = _nearest10.OrderBy(s => s.Distance).First();
+        double toLat = nearest.Shelter.Latitude;
+        double toLng = nearest.Shelter.Longitude;
+
+        // JS に渡す値は小数点付きで固定
+        string js = $"showRoute({currentLat.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"{currentLng.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"{toLat.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"{toLng.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"'{mode}');";
+
+        await MapWebView.EvaluateJavaScriptAsync(js);
+
+        NearbySheltersList.SelectedItem = nearest;
+    }
+
+    // ルート削除
+    public async Task ClearRouteAsync() {
+        if (!_isMapLoaded) return;
+
+        bool mapReady = false;
+        while (!mapReady) {
+            var result = await MapWebView.EvaluateJavaScriptAsync("window.mapReady");
+            mapReady = result == "true";
+            if (!mapReady) await Task.Delay(100);
+        }
+        await MapWebView.EvaluateJavaScriptAsync("clearRoute();");
+    }
+
 
     // 都道府県読み込み
     private async Task LoadPrefecturesAsync() {
@@ -194,7 +281,7 @@ public partial class TopPage : ContentPage {
 
         // リストを都道府県の避難所一覧に切り替える
         var listItems = filtered
-            .OrderBy(s=>s.Distance)
+            .OrderBy(s => s.Distance)
             .Select(s => new NearbyShelterItem {
                 Shelter = s,
                 Distance = s.Distance,
@@ -227,50 +314,5 @@ public partial class TopPage : ContentPage {
         // ボタンを無効化
         ExecuteButton.IsEnabled = false;
         ExitButton.IsEnabled = false;
-    }
-
-    // マーカークリック時
-    private void MapWebView_Navigating(object sender, WebNavigatingEventArgs e) {
-        if (e.Url.StartsWith("js://shelterClicked")) {
-            e.Cancel = true;
-
-            var uri = new Uri(e.Url);
-            var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
-
-            double lat = double.Parse(query["lat"]);
-            double lng = double.Parse(query["lng"]);
-
-            // リスト側を選択状態にする
-            SelectShelterInList(lat, lng);
-        }
-    }
-
-    // リストの選択を変更する
-    private void SelectShelterInList(double lat, double lng) {
-        if (_currentList == null && _nearest10 == null)
-            return;
-
-        // 現在表示しているリストを取得
-        var list = _currentList ?? _nearest10;
-
-        // 緯度・経度が一致する避難所を探す
-        var item = list.FirstOrDefault(s =>
-            Math.Abs(s.Shelter.Latitude - lat) < 0.00001 &&
-            Math.Abs(s.Shelter.Longitude - lng) < 0.00001);
-
-        if (item != null) {
-            // 選択状態を更新
-            foreach (var s in list)
-                s.IsSelected = (s == item);
-
-            NearbySheltersList.ItemsSource = null;
-            NearbySheltersList.ItemsSource = list;
-
-            // CollectionView の選択状態も変更
-            NearbySheltersList.SelectedItem = item;
-
-            // 地図も移動
-            _ = MapWebView.EvaluateJavaScriptAsync($"moveToShelter({lat},{lng});");
-        }
     }
 }

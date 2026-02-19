@@ -12,11 +12,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <!-- ルート検索と × の行 -->
+                <RowDefinition Height="Auto"/>
+                <!-- 移動手段の行 -->
             </Grid.RowDefinitions>
 
             <!-- タイトル + 右上アイコン -->
             <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
-                <Label Text="地域防災情報アプリ"
+                <Label Text="{Binding Header_AppTitle}"
                        FontSize="32"
                        FontAttributes="Bold"
                        VerticalOptions="Center" />
@@ -31,8 +34,6 @@
                             VerticalOptions="Center">
 
                         <Grid>
-
-                            <!-- アイコン -->
                             <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                                 <Image Source="language.png"
                                        WidthRequest="28"
@@ -40,7 +41,6 @@
                                        VerticalOptions="Center" />
                             </HorizontalStackLayout>
 
-                            <!-- 言語選択 -->
                             <Picker ItemsSource="{Binding LanguageList}"
                                     SelectedItem="{Binding SelectedLanguage}"
                                     BackgroundColor="#00FFFFFF"
@@ -50,10 +50,7 @@
                                     ZIndex="100"/>
                         </Grid>
                     </Border>
-                    <ImageButton Source="notification.png"
-                                 BackgroundColor="Transparent"
-                                 WidthRequest="60" HeightRequest="60"
-                                 Command="{Binding FontCommand}" />
+
                     <ImageButton Source="my.png"
                                  BackgroundColor="Transparent"
                                  WidthRequest="60" HeightRequest="60"
@@ -61,37 +58,72 @@
                 </HorizontalStackLayout>
             </Grid>
 
-            <!-- ハンバーガー + ページ名 + ルート検索 -->
-            <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" Margin="0,10,0,0">
+            <!-- ★ Row1：ハンバーガー + ページ名 + ルート検索 + × -->
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,10,0,0">
 
-                <!-- ハンバーガー -->
                 <ImageButton Source="hamburger.png"
                              BackgroundColor="Transparent"
                              WidthRequest="80" HeightRequest="80"
                              Command="{Binding OpenMenuCommand}" />
 
-                <!-- ページ名 -->
                 <Label Grid.Column="1"
                        Text="{Binding PageTitle}"
                        FontSize="20"
                        VerticalOptions="Center"
                        Margin="10,0,0,0" />
 
-                <!-- ルート検索ボタン -->
+                <!-- ルート検索 -->
                 <Button Grid.Column="2"
-                        Text="ルート検索"
+                        Text="{Binding Header_RouteSearch}"
                         WidthRequest="150"
                         HeightRequest="40"
                         VerticalOptions="Center"
-                        Margin="10,0,0,0"
                         Command="{Binding RouteSearchCommand}" />
+
+                <!-- ★ ルート検索の “真横” に ×（同じ行・同じ高さ） -->
+                <Button Grid.Column="3"
+                        Text="×"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        Background="#AAFFFFFF"
+                        VerticalOptions="Center"
+                        Command="{Binding ClearRouteCommand}" />
             </Grid>
+
+            <!-- ★ Row2：ルート検索の “真下” に移動手段3つ -->
+            <HorizontalStackLayout Grid.Row="2"
+                                   Spacing="10"
+                                   Margin="0,5,0,0"
+                                   HorizontalOptions="End">
+
+                <Button Text="🚗"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        Background="#AAFFFFFF"
+                        Command="{Binding DrivingCommand}"
+                        BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=driving}" />
+
+                <Button Text="🚲" 
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        Background="#AAFFFFFF"
+                        Command="{Binding CyclingCommand}"
+                        BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=bicycling}" />
+
+                <Button Text="🚶"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        Background="#AAFFFFFF"
+                        Command="{Binding WalkingCommand}"
+                        BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=walking}" />
+            </HorizontalStackLayout>
+
         </Grid>
 
         <!-- ページごとの中身 -->
-        <ContentPresenter x:Name="ContentArea"
-                          Grid.Row="1" 
-                          Content="{Binding Source={x:Reference BaseRoot}, Path=InnerContent}" />
+        <ContentView x:Name="ContentArea"
+             Grid.Row="1"
+             Content="{Binding Source={x:Reference BaseRoot}, Path=InnerContent}" />
 
         <!-- 共通フッター -->
         <Grid x:Name="FooterArea" Grid.Row="2" BackgroundColor="#F5F5F5" HeightRequest="80">

@@ -7,27 +7,25 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
-            <Grid>
+            <Grid x:Name="Inner">
                 <WebView x:Name="MapWebView"
                          Source="map.html" 
-                         Navigated="MapWebView_Navigated"
-                         Navigating="MapWebView_Navigating"/>
+                         Navigated="MapWebView_Navigated"/>
 
                 <!-- 通常時の操作パネル -->
                 <Border x:Name="RightPanel"
-                            Background="#AAFFFFFF"
-                            StrokeThickness="0"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start"
-                            Margin="10"
-                            Padding="20"
-                            WidthRequest="290"
-                            HeightRequest="500">
+                        Background="#AAFFFFFF"
+                        StrokeThickness="0"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Margin="10"
+                        Padding="20"
+                        WidthRequest="290"
+                        HeightRequest="500">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
-
 
                     <VerticalStackLayout Spacing="15">
 
@@ -39,15 +37,18 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            
-                            <Picker Title="都道府県を選択"
+
+                            <!-- ★ 固定文字 → 翻訳対応 -->
+                            <Picker Title="{Binding Reg_Prefecture}"
                                     x:Name="PrefecturePicker"
                                     HeightRequest="60"
                                     WidthRequest="150"
                                     HorizontalOptions="Start"
                                     Grid.Column="0"
                                     SelectedIndexChanged="PrefecturePicker_SelectedIndexChanged"/>
-                            <Picker Title="市区町村を選択"
+
+                            <!-- ★ 固定文字 → 翻訳対応 -->
+                            <Picker Title="{Binding Reg_City}"
                                     x:Name="CityPicker"
                                     HeightRequest="60"
                                     WidthRequest="150"
@@ -72,11 +73,11 @@
 
                                 <Grid HorizontalOptions="Center" VerticalOptions="Center">
                                     <Image x:Name="ExecuteButton"
-                                             Source="execute.png" 
-                                             WidthRequest="30"
-                                             HeightRequest="30"
-                                             BackgroundColor="Transparent" 
-                                             IsEnabled="False">
+                                           Source="execute.png" 
+                                           WidthRequest="30"
+                                           HeightRequest="30"
+                                           BackgroundColor="Transparent" 
+                                           IsEnabled="False">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="ExecuteButton_Clicked"/>
                                         </Image.GestureRecognizers>
@@ -113,7 +114,8 @@
 
                         <BoxView HeightRequest="1" BackgroundColor="#CCCCCC"/>
 
-                        <Label Text="避難所リスト" FontAttributes="Bold"/>
+                        <!-- ★ 固定文字 → 翻訳対応 -->
+                        <Label Text="{Binding Top_ShelterList}" FontAttributes="Bold"/>
 
                         <CollectionView x:Name="NearbySheltersList"
                                         SelectionMode="Single"
@@ -125,7 +127,7 @@
                                                  BackgroundColor="{Binding IsSelected,Converter={StaticResource BoolToColorConver}}">
                                         <Label Text="{Binding Shelter.Name}"/>
                                         <Label Text="{Binding Distance,StringFormat='{0:F2}km'}"
-                                                   FontSize="12" TextColor="Gray"/>
+                                               FontSize="12" TextColor="Gray"/>
                                     </StackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>

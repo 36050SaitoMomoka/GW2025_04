@@ -8,7 +8,7 @@
 
         <!-- 上部バー -->
         <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#F5F5F5">
-            <Label Text="地域防災情報アプリへようこそ！&#10;会員情報のご登録をお願いします。"
+            <Label Text="{Binding Reg_Welcome}"
                    FontSize="24"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
@@ -20,99 +20,99 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
 
-                <!-- 氏名（必須） -->
+                <!-- 氏名 -->
                 <VerticalStackLayout WidthRequest="300">
-                    <Label Text="氏名" FontSize="16"/>
+                    <Label Text="{Binding Reg_Name}" FontSize="16"/>
                     <Entry x:Name="nameEntry"/>
                     <Label x:Name="nameError" TextColor="Red" FontSize="12" IsVisible="False"/>
                 </VerticalStackLayout>
 
-                <!-- フリガナ（必須） -->
+                <!-- フリガナ -->
                 <VerticalStackLayout WidthRequest="300">
                     <HorizontalStackLayout>
-                    <Label Text="フリガナ" FontSize="16"/>
-                    <Label Text="カタカナで入力してください。" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                        <Label Text="{Binding Reg_Furigana}" FontSize="16"/>
+                        <Label Text="{Binding Reg_FuriganaHint}" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
                     <Entry x:Name="furiganaEntry"/>
                     <Label x:Name="furiganaError" TextColor="Red" FontSize="12" IsVisible="False"/>
                 </VerticalStackLayout>
 
-                <!-- メールアドレス（任意） -->
+                <!-- メールアドレス -->
                 <VerticalStackLayout WidthRequest="300">
                     <HorizontalStackLayout>
-                        <Label Text="メールアドレス" FontSize="16"/>
-                        <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                        <Label Text="{Binding Reg_Email}" FontSize="16"/>
+                        <Label Text="{Binding Reg_Optional}" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
                     <Entry x:Name="emailEntry" TextChanged="OnEmailFilter" Keyboard="Email"/>
                 </VerticalStackLayout>
 
-                <!-- 電話番号（任意） -->
+                <!-- 電話番号 -->
                 <VerticalStackLayout WidthRequest="300">
                     <HorizontalStackLayout>
-                        <Label Text="電話番号（ハイフンなし）" FontSize="16"/>
-                        <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                        <Label Text="{Binding Reg_Phone}" FontSize="16"/>
+                        <Label Text="{Binding Reg_Optional}" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
                     <Entry x:Name="phoneEntry" TextChanged="OnPhoneFilter" Keyboard="Telephone"/>
                 </VerticalStackLayout>
 
-                <!-- 郵便番号（必須） -->
+                <!-- 郵便番号 -->
                 <VerticalStackLayout WidthRequest="300">
-                    <Label Text="郵便番号（7桁）" FontSize="16"/>
+                    <Label Text="{Binding Reg_Zip}" FontSize="16"/>
                     <Entry x:Name="zipEntry" Keyboard="Numeric" TextChanged="onZipChanged"/>
                     <Label x:Name="zipError" TextColor="Red" FontSize="12" IsVisible="False"/>
                 </VerticalStackLayout>
 
-                <!-- 都道府県（自動入力・タップ不可） -->
+                <!-- 都道府県 -->
                 <VerticalStackLayout WidthRequest="300">
                     <HorizontalStackLayout>
-                        <Label Text="都道府県" FontSize="16"/>
-                        <Label Text="自動入力" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                        <Label Text="{Binding Reg_Prefecture}" FontSize="16"/>
+                        <Label Text="{Binding Reg_AutoFill}" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
                     <Entry x:Name="prefEntry"
                            IsEnabled="False"
                            BackgroundColor="White"
                            TextColor="Black"
-                           Placeholder="郵便番号から自動入力"/>
+                           Placeholder="{Binding Reg_AutoFromZip}"/>
                 </VerticalStackLayout>
 
-                <!-- 市区町村（自動入力・タップ不可） -->
+                <!-- 市区町村 -->
                 <VerticalStackLayout WidthRequest="300">
                     <HorizontalStackLayout>
-                        <Label Text="市区町村" FontSize="16"/>
-                        <Label Text="自動入力" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                        <Label Text="{Binding Reg_City}" FontSize="16"/>
+                        <Label Text="{Binding Reg_AutoFill}" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
                     <Entry x:Name="cityEntry"
                            IsEnabled="False"
                            BackgroundColor="White"
                            TextColor="Black"
-                           Placeholder="郵便番号から自動入力"/>
+                           Placeholder="{Binding Reg_AutoFromZip}"/>
                 </VerticalStackLayout>
 
-                <!-- 町域（必須） -->
+                <!-- 町域 -->
                 <VerticalStackLayout WidthRequest="300">
-                    <Label Text="町域" FontSize="16"/>
+                    <Label Text="{Binding Reg_Town}" FontSize="16"/>
                     <Entry x:Name="townEntry"/>
                     <Label x:Name="townError" TextColor="Red" FontSize="12" IsVisible="False"/>
                 </VerticalStackLayout>
 
-                <!-- 番地（必須） -->
+                <!-- 番地 -->
                 <VerticalStackLayout WidthRequest="300">
-                    <Label Text="番地" FontSize="16"/>
+                    <Label Text="{Binding Reg_Address}" FontSize="16"/>
                     <Entry x:Name="addressLineEntry"/>
                     <Label x:Name="addressError" TextColor="Red" FontSize="12" IsVisible="False"/>
                 </VerticalStackLayout>
 
-                <!-- 建物名（任意） -->
+                <!-- 建物名 -->
                 <VerticalStackLayout WidthRequest="300">
                     <HorizontalStackLayout>
-                        <Label Text="建物名・部屋番号" FontSize="16"/>
-                        <Label Text="任意" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
+                        <Label Text="{Binding Reg_Building}" FontSize="16"/>
+                        <Label Text="{Binding Reg_Optional}" FontSize="12" TextColor="#888" Margin="8,4,0,0"/>
                     </HorizontalStackLayout>
                     <Entry x:Name="buildingEntry"/>
                 </VerticalStackLayout>
 
-                <!-- 次へボタン -->
-                <Button Text="次へ"
+                <!-- 次へ -->
+                <Button Text="{Binding Btn_Next}"
                         Clicked="OnNextClicked"
                         BackgroundColor="#2196F3"
                         TextColor="White"

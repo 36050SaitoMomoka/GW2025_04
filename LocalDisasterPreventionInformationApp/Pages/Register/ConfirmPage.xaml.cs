@@ -46,6 +46,8 @@ public partial class ConfirmPage : ContentPage {
     public ConfirmPage(AppDatabase db) {
         InitializeComponent();
         _db = db;
+
+        BindingContext = Shell.Current.BindingContext;
     }
 
     //ZŠ‚©‚çˆÜ“xŒo“x‚ğ‹‚ß‚é

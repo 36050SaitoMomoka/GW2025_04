@@ -64,6 +64,14 @@
 		<data name="Reg_Confirm" xml:space="preserve">
 	<value>Is the following information correct?</value>
 	</data>
+
+	<data name="Reg_FuriganaLabel" xml:space="preserve">
+  <value>Furigana</value>
+</data>
+
+	<data name="Reg_AddressType" xml:space="preserve">
+  <value>Address Type</value>
+</data>
 		<!-- ヘッダー -->
 		<data name="Header_AppTitle" xml:space="preserve">
 	<value>Local Disaster Prevention Information App</value>
@@ -112,7 +120,16 @@
 		<data name="Btn_Edit" xml:space="preserve">
 	<value>Edit</value>
 	</data>
-		<!-- 備蓄管理 -->
+
+	<data name="Btn_Discard" xml:space="preserve">
+  <value>Discard</value>
+</data>
+
+	<data name="Btn_Confirm" xml:space="preserve">
+  <value>Confirm</value>
+</data>
+
+	<!-- 備蓄管理 -->
 		<data name="Stock_ExpireOrder" xml:space="preserve">
 	<value>By Expiration Date</value>
 	</data>
@@ -143,4 +160,20 @@
 		<data name="Stock_Delete" xml:space="preserve">
 	<value>Delete</value>
 	</data>
+<!-- トップページ -->
+	<data name="Top_ShelterList" xml:space="preserve">
+  <value>Shelter List</value>
+</data>
+<!-- ハザードマップ -->
+	<data name="Hazard_Earthquake" xml:space="preserve">
+  <value>Earthquake Hazard Map</value>
+</data>
+
+	<data name="Hazard_Tsunami" xml:space="preserve">
+  <value>Tsunami Hazard Map</value>
+</data>
+
+	<data name="Hazard_FloodLandslide" xml:space="preserve">
+  <value>Landslide / Flood Hazard Map</value>
+</data>
 </root>

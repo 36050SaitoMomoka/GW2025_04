@@ -13,12 +13,33 @@ public partial class ProductRegisterPage : ContentPage {
         InitializeComponent();
         _db = db;
 
+        // 翻訳用
+        BindingContext = Shell.Current.BindingContext;
+
         //PageTitleを「備蓄管理」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
+            vm.PropertyChanged += (s, e) => {
+                if (e.PropertyName == null || e.PropertyName == "SelectedLangage") {
+                    SetPickerItems(vm);
+                }
+            };
+            // 初回セット
+            SetPickerItems(vm);
+
             vm.PageTitle = "備蓄管理";
         }
     }
+    // Pickerの中身を翻訳
+    private void SetPickerItems(AppShellViewModel vm) {
+        CategoryPicker.ItemsSource = new List<string> {
+            vm.Stock_CategoryOrder,
+            vm.Stock_ExpireOrder,
+            vm.Stock_NameOrder,
+            vm.Stock_Others
+        };
+    }
+
 
     private async void OnSubmitClicked(object sender, EventArgs e) {
 
@@ -50,7 +71,7 @@ public partial class ProductRegisterPage : ContentPage {
                 null,
                 System.Globalization.DateTimeStyles.None,
                 out exp)) {
-            await DisplayAlert("エラー","日付が正しくありません","OK");
+            await DisplayAlert("エラー", "日付が正しくありません", "OK");
             return;
         }
 

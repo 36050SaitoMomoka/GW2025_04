@@ -21,8 +21,6 @@ namespace LocalDisasterPreventionInformationApp {
             //ページ遷移用
             Routing.RegisterRoute("product", typeof(Pages.Stock.ProductRegisterPage));          // 商品登録
 
-            Routing.RegisterRoute("fontpage", typeof(Pages.Setting.FontPage));                  // フォント選択
-
             Routing.RegisterRoute("mypage", typeof(Pages.Setting.MyPage));                      // マイページ
 
             Routing.RegisterRoute("editprofilepage", typeof(Pages.Setting.EditProfilePage));    // 編集ページ

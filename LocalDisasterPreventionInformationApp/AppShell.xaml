@@ -22,12 +22,6 @@
                       ContentTemplate="{DataTemplate top:TopPage}" />
     </FlyoutItem>
 
-    <!-- 災害速報 -->
-    <FlyoutItem Title="災害速報">
-        <ShellContent Route="DisasterPage"
-                       ContentTemplate="{DataTemplate disaster:DisasterPage}" />
-    </FlyoutItem>
-
     <!-- ハザードマップ -->
     <FlyoutItem Title="ハザードマップ">
         <ShellContent Route="HazardMapPage"
@@ -51,8 +45,8 @@
                   FlyoutItemIsVisible="False"
                   ContentTemplate="{DataTemplate register:ConfirmPage}" />
 
-    <!-- フォント選択ページ -->
-    <ShellContent Route="FontPage"
+    <!-- マイページ -->
+    <ShellContent Route="MyPage"
                   FlyoutItemIsVisible="False"
-                  ContentTemplate="{DataTemplate setting:FontPage}" />
+                  ContentTemplate="{DataTemplate setting:MyPage}" />
 </Shell>
