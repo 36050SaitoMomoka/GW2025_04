@@ -160,7 +160,7 @@ namespace LocalDisasterPreventionInformationApp {
                 // トップページにいる場合は直接呼ぶ
                 var topPage = Shell.Current.CurrentPage as TopPage;
                 if(topPage != null) {
-                    await topPage.RouteToNearestShelterAsync("driving");
+                    await topPage.RouteSearchBasedOnSelectionAsync();
                 } else {
                     await Shell.Current.GoToAsync("//TopPage?route=1");
                 }
