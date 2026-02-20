@@ -88,11 +88,6 @@ public partial class HazardMapPage : ContentPage {
     }
 
     //ínê}çXêV
-    //private async void UpdateMap(string tileUrl,double lat, double lon) {
-    //    await HazardWebView.EvaluateJavaScriptAsync($"setHazardTile('{tileUrl}');");
-    //    await HazardWebView.EvaluateJavaScriptAsync($"moveTo({lat},{lon});");
-    //}
-
     private async void UpdateMap(string tileUrl,double lat,double lon) {
         string js1 = "setHazardTile(\"" + tileUrl + "\");";
         await HazardWebView.EvaluateJavaScriptAsync(js1);
