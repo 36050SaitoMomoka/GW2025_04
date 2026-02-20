@@ -63,9 +63,9 @@ public partial class HazardMapPage : ContentPage {
     private void LoadHazardTypes() {
         _hazardList = new List<HazardType> {
             new HazardType { Name = "ç^êÖ", TileUrl = "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin/{z}/{x}/{y}.png"},
-            new HazardType { Name = "í√îg", TileUrl = "https://disaportaldata.gsi.go.jp/raster/02_tsunami/{z}/{x}/{y}.png" },
-            new HazardType { Name = "ínêk", TileUrl = "https://disaportaldata.gsi.go.jp/raster/05_jishindo_l2/{z}/{x}/{y}.png"},
-            new HazardType { Name = "ìyçªç–äQ", TileUrl = "https://disaportaldata.gsi.go.jp/raster/03_dosekiryu_keikaikuiki/{z}/{x}/{y}.png"},
+            new HazardType { Name = "í√îg", TileUrl = "https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_data/{z}/{x}/{y}.png" },
+            new HazardType { Name = "çÇí™", TileUrl = "https://disaportaldata.gsi.go.jp/raster/03_hightide_l2_shinsuishin_data/{z}/{x}/{y}.png"},
+            new HazardType { Name = "ìyçªç–äQ", TileUrl = "https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeikaikuiki/{z}/{x}/{y}.png"},
         };
 
         HazardPicker.ItemsSource = _hazardList;

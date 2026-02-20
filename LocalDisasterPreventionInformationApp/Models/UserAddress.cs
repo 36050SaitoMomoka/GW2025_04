@@ -24,5 +24,7 @@ namespace LocalDisasterPreventionInformationApp.Models {
         public double? Longitude { get; set; }  //経度
 
         public double? Latitude { get; set; }  //緯度
+
+        public string DisplayName => $"{AddressType}：{Address}";
     }
 }

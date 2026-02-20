@@ -295,7 +295,7 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
-        ///   以下の内容でよろしですか？ に類似しているローカライズされた文字列を検索します。
+        ///   以下の内容でよろしいですか？ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Reg_Confirm {
             get {

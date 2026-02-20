@@ -79,7 +79,7 @@
   </data>
 
 	<data name="Reg_Confirm" xml:space="preserve">
-    <value>以下の内容でよろしですか？</value>
+    <value>以下の内容でよろしいですか？</value>
   </data>
 
 	<data name="Reg_FuriganaLabel" xml:space="preserve">

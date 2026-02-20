@@ -7,76 +7,52 @@
 
     <base:BasePage>
         <base:BasePage.InnerContent>
+
+            <!-- ★ WebView とパネルを重ねるための Grid -->
             <Grid>
-                <Grid RowDefinitions="Auto, *" Padding="10">
 
-                    <!-- 上部バー -->
-                    <Grid
-                    ColumnDefinitions="*, Auto, Auto"
-                    Padding="5"
-                    BackgroundColor="#F5F5F5"
-                    Margin="0,0,0,10">
+                <!-- 地図（WebView） -->
+                <WebView
+                    x:Name="HazardWebView"
+                    Source="hazardmap.html"
+                    Navigated="HazardWebView_Navigated" />
 
-                        <!-- ハザードマップ名 -->
-                        <Label
-                        Text="{Binding HazardMapTitle}"
-                        FontSize="20"
-                        VerticalOptions="Center"
-                        TextColor="Black" />
+                <!-- ★ 地図の上に重ねるパネル -->
+                <Border
+                    Background="#AAFFFFFF"
+                    StrokeThickness="0"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Margin="10"
+                    Padding="20"
+                    WidthRequest="260"
+                    HeightRequest="200">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="10">
 
                         <!-- 災害種別ピッカー -->
                         <Picker
-                        x:Name="HazardPicker"
-                        Grid.Column="1"
-                        Title="災害種別"
-                        ItemsSource="{Binding HazardList}"
-                        ItemDisplayBinding="{Binding Name}"
-                        SelectedItem="{Binding SelectedHazard}"
-                        WidthRequest="160"
-                        HorizontalOptions="End" 
-                        SelectedIndexChanged="OnSelectionChanged"/>
+                            x:Name="HazardPicker"
+                            Title="災害種別"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndexChanged="OnSelectionChanged" />
 
                         <!-- 住所ピッカー -->
                         <Picker
-                        x:Name="AddressPicker"
-                        Grid.Column="2"
-                        Title="住所種別"
-                        ItemDisplayBinding="{Binding AddressType}"
-                        WidthRequest="160"
-                        HorizontalOptions="End" 
-                        SelectedIndexChanged="OnSelectionChanged"/>
-                    </Grid>
+                            x:Name="AddressPicker"
+                            Title="住所"
+                            ItemDisplayBinding="{Binding DisplayName}"
+                            SelectedIndexChanged="OnSelectionChanged" />
 
-                    <!-- 地図 -->
-                    <Border
-                    Grid.Row="1"
-                    Stroke="Gray"
-                    StrokeThickness="2"
-                    BackgroundColor="White"
-                    Padding="10"
-                    Margin="0,0,0,10"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Fill">
-
-                        <!-- 後で地図を入れる -->
-                        <!--Grid BackgroundColor="#DDDDDD">
-                            <Label
-                            Text="ここに地図が表示されます"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            TextColor="Black" />
-                        </Grid-->
-
-                        <WebView
-                            x:Name="HazardWebView"
-                            Source="hazardmap.html"
-                            Navigated="HazardWebView_Navigated" />
-                        
-                    </Border>
-
-                </Grid>
+                    </VerticalStackLayout>
+                </Border>
 
             </Grid>
+
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>
