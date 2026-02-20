@@ -21,7 +21,7 @@
                         Margin="10"
                         Padding="20"
                         WidthRequest="290"
-                        HeightRequest="500">
+                        HeightRequest="620">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
@@ -132,6 +132,47 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
+
+                        <Button Text="{Binding Header_RouteSearch}"
+        Command="{Binding RouteSearchCommand}"
+        HeightRequest="45"
+        CornerRadius="8"
+        BackgroundColor="#4A90E2"
+        TextColor="White" />
+
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+
+                            <Button Text="🚗"
+            WidthRequest="45"
+            HeightRequest="45"
+            CornerRadius="8"
+            Command="{Binding DrivingCommand}"
+            BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=driving}" />
+
+                            <Button Text="🚲"
+            WidthRequest="45"
+            HeightRequest="45"
+            CornerRadius="8"
+            Command="{Binding CyclingCommand}"
+            BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=bicycling}" />
+
+                            <Button Text="🚶"
+            WidthRequest="45"
+            HeightRequest="45"
+            CornerRadius="8"
+            Command="{Binding WalkingCommand}"
+            BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=walking}" />
+
+                            <Button Text="×"
+            WidthRequest="45"
+            HeightRequest="45"
+            CornerRadius="8"
+            BackgroundColor="#DDDDDD"
+            Command="{Binding ClearRouteCommand}" />
+
+                        </HorizontalStackLayout>
+
+
                     </VerticalStackLayout>
                 </Border>
 

@@ -51,6 +51,9 @@
 
         // 現在地を中心にする
         function setCurrentLocation(lat, lng) {
+            window.currentLat = lat;
+            window.currentLng = lng;
+
             // 地図の中心を現在地に移動
             map.setView([lat, lng], 15);
 
@@ -166,6 +169,16 @@
                     map.fitBounds(routeControl.getBounds());
                 })
                 .catch(err => console.error(err));
+        }
+
+        // 現在地からルート検索
+        function showRouteFromCurrent(toLat, toLng, mode) {
+            if (!window.currentLat || !window.currentLng) {
+                console.error("現在地が未設定です");
+                return;
+            }
+
+            showRoute(window.currentLat, window.currentLng, toLat, toLng, mode);
         }
 
         // ルート削除

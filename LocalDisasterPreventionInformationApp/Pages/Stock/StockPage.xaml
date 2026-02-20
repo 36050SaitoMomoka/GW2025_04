@@ -1,35 +1,54 @@
 <ContentPage
+
     x:Class="LocalDisasterPreventionInformationApp.Pages.Stock.StockPage"
+
     x:Name="ThisPage"
+
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
     xmlns:base="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Base"
+
     Shell.NavBarIsVisible="False">
 
     <base:BasePage>
         <base:BasePage.InnerContent>
 
             <Grid x:Name="Inner"
+
                   RowDefinitions="Auto,Auto,*,Auto"
+
                   Padding="10">
 
                 <!-- 期限が近い・期限切れ商品 -->
                 <Border Stroke="Gray"
+
                         StrokeThickness="1"
+
                         BackgroundColor="Transparent"
+
                         Padding="10"
+
                         StrokeShape="RoundRectangle 8"
+
                         HeightRequest="130">
 
                     <VerticalStackLayout Grid.Row="0"
+
                                          HorizontalOptions="Center"
+
                                          VerticalOptions="Start"
+
                                          Spacing="4">
 
                         <!-- タイトル（消費期限順） -->
                         <Label Text="{Binding Stock_ExpireOrder}"
+
                                FontAttributes="Bold"
+
                                FontSize="18"
+
                                HorizontalOptions="Center"/>
 
                         <BindableLayout.ItemsSource>
@@ -39,9 +58,13 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <Label Text="{Binding Message}"
+
                                        TextColor="Red"
+
                                        FontSize="16"
+
                                        Margin="0,2"
+
                                        HorizontalOptions="Start"/>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -54,21 +77,30 @@
 
                     <!-- 選択中の並べ替え名 -->
                     <Label Text="{Binding SelectedSortName}"
+
                            VerticalOptions="Center"
+
                            FontSize="25"
+
                            Margin="100,0,40,0"/>
 
                     <!-- 並べ替え Picker -->
                     <Picker x:Name="SortPicker"
+
                             Grid.Column="1"
+
                             WidthRequest="150"
+
                             SelectedIndexChanged="OnSortChanged"/>
                 </Grid>
 
                 <!-- 商品一覧 -->
                 <CollectionView Grid.Row="2"
+
                                 ItemsSource="{Binding Items}"
+
                                 HorizontalOptions="Center"
+
                                 WidthRequest="900">
 
                     <CollectionView.Header>
@@ -76,37 +108,56 @@
 
                             <!-- ヘッダー行 -->
                             <Grid ColumnDefinitions="1.66*,2.55*,2.55*,2.22*,1*"
+
                                   Padding="5"
+
                                   BackgroundColor="#EEEEEE">
 
                                 <Label Grid.Column="0"
+
                                        Text="{Binding Stock_ProductName}"
+
                                        FontAttributes="Bold"
+
                                        HorizontalOptions="Center"/>
 
                                 <Label Grid.Column="1"
+
                                        Text="{Binding Stock_Quantity}"
+
                                        FontAttributes="Bold"
+
                                        HorizontalOptions="Center"/>
 
                                 <Label Grid.Column="2"
+
                                        Text="{Binding Stock_Expire}"
+
                                        FontAttributes="Bold"
+
                                        HorizontalOptions="Center"/>
 
                                 <Label Grid.Column="3"
+
                                        Text="{Binding Stock_Category}"
+
                                        FontAttributes="Bold"
+
                                        HorizontalOptions="Center"/>
 
                                 <Label Grid.Column="4"
+
                                        Text="{Binding Stock_Delete}"
+
                                        FontAttributes="Bold"
+
                                        HorizontalOptions="Center"/>
                             </Grid>
 
                             <BoxView HeightRequest="1"
+
                                      BackgroundColor="Black"
+
                                      HorizontalOptions="Fill"/>
                         </VerticalStackLayout>
                     </CollectionView.Header>
@@ -116,6 +167,7 @@
                             <VerticalStackLayout Spacing="0">
 
                                 <Grid ColumnDefinitions="1.66*,2.55*,2.55*,2.22*,1*"
+
                                       Padding="5">
 
                                     <!-- 縦線 -->
@@ -126,91 +178,138 @@
 
                                     <!-- 商品名 -->
                                     <Label Grid.Column="0"
+
                                            Text="{Binding ProductName}"
+
                                            VerticalOptions="Center"
+
                                            HorizontalOptions="Center"/>
 
                                     <!-- 数量（増減ボタン付き） -->
                                     <Grid Grid.Column="1"
+
                                           ColumnDefinitions="100,30,100"
+
                                           HorizontalOptions="Center"
+
                                           ColumnSpacing="4">
 
                                         <!-- －ボタン -->
                                         <Border Grid.Column="0"
+
                                                 WidthRequest="24"
+
                                                 HeightRequest="24"
+
                                                 Padding="0"
+
                                                 BackgroundColor="White"
+
                                                 Stroke="Black"
+
                                                 StrokeThickness="1"
+
                                                 StrokeShape="RoundRectangle 4">
 
                                             <Border.GestureRecognizers>
                                                 <TapGestureRecognizer
+
                                                     Command="{Binding Source={x:Reference ThisPage},Path=DecreaseCommand}"
+
                                                     CommandParameter="{Binding}"/>
                                             </Border.GestureRecognizers>
 
                                             <Label Text="－"
+
                                                    FontSize="20"
+
                                                    HorizontalOptions="Center"
+
                                                    VerticalOptions="Center"/>
                                         </Border>
 
                                         <!-- 数量 -->
                                         <Label Grid.Column="1"
+
                                                Text="{Binding Quantity}"
+
                                                VerticalOptions="Center"
+
                                                HorizontalOptions="Center"
+
                                                Margin="4,0"/>
 
                                         <!-- ＋ボタン -->
                                         <Border Grid.Column="2"
+
                                                 WidthRequest="24"
+
                                                 HeightRequest="24"
+
                                                 Padding="0"
+
                                                 BackgroundColor="White"
+
                                                 Stroke="Black"
+
                                                 StrokeThickness="1"
+
                                                 StrokeShape="RoundRectangle 4">
 
                                             <Border.GestureRecognizers>
                                                 <TapGestureRecognizer
+
                                                     Command="{Binding Source={x:Reference ThisPage},Path=IncreaseCommand}"
+
                                                     CommandParameter="{Binding}"/>
                                             </Border.GestureRecognizers>
 
                                             <Label Text="＋"
+
                                                    FontSize="20"
+
                                                    HorizontalOptions="Center"
+
                                                    VerticalOptions="Center"/>
                                         </Border>
                                     </Grid>
 
                                     <!-- 消費期限 -->
                                     <Label Grid.Column="2"
+
                                            Text="{Binding ExpireDate}"
+
                                            VerticalOptions="Center"
+
                                            HorizontalOptions="Center"/>
 
                                     <!-- カテゴリ -->
                                     <Label Grid.Column="3"
+
                                            Text="{Binding Category}"
+
                                            VerticalOptions="Center"
+
                                            HorizontalOptions="Center"/>
 
                                     <!-- 削除 -->
                                     <ImageButton Grid.Column="4"
+
                                                  Source="delete.png"
+
                                                  WidthRequest="30"
+
                                                  HeightRequest="30"
+
                                                  Command="{Binding Source={x:Reference ThisPage}, Path=DeleteCommand}"
+
                                                  CommandParameter="{Binding}"/>
                                 </Grid>
 
                                 <BoxView HeightRequest="0.5"
+
                                          BackgroundColor="Black"
+
                                          HorizontalOptions="Fill"/>
                             </VerticalStackLayout>
                         </DataTemplate>
@@ -220,9 +319,13 @@
                 <!-- 商品登録ボタン -->
                 <Grid Grid.Row="3">
                     <Button Text="{Binding Btn_AddProduct}"
+
                             HorizontalOptions="End"
+
                             WidthRequest="120"
+
                             Margin="0,10,0,0"
+
                             Clicked="OnRegisterClicked"/>
                 </Grid>
 
@@ -231,3 +334,4 @@
         </base:BasePage.InnerContent>
     </base:BasePage>
 </ContentPage>
+ 

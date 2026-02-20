@@ -28,16 +28,31 @@ public partial class TopPage : ContentPage {
 
         // RouteModeChangedイベントを取得
         var vm = Shell.Current.BindingContext as AppShellViewModel;
-            // 移動手段ボタンからの呼び出し
-            vm.RouteModeChanged += async (mode) => {
-                if (_isMapLoaded && _nearest10?.Count > 0) {
-                    await RouteToNearestShelterAsync(mode);
-                } else {
-                    // 未ロードなら保留
-                    _pendingRouteMode = mode;
-                }
-            };
-        }
+        // 移動手段ボタンからの呼び出し
+        vm.RouteModeChanged += async (mode) =>
+        {
+            if (!_isMapLoaded) {
+                _pendingRouteMode = mode;
+                return;
+            }
+
+            // 選択中の避難所がある場合 → その避難所へルート検索
+            if (_selectedItem != null) {
+                var s = _selectedItem.Shelter;
+
+                string js = $"showRouteFromCurrent({s.Latitude.ToString(CultureInfo.InvariantCulture)}, " +
+                            $"{s.Longitude.ToString(CultureInfo.InvariantCulture)}, '{mode}');";
+
+                await MapWebView.EvaluateJavaScriptAsync(js);
+                return;
+            }
+
+            // 選択されていない場合 → 最寄り避難所へ
+            if (_nearest10?.Count > 0) {
+                await RouteToNearestShelterAsync(mode);
+            }
+        };
+    }
 
     protected override async void OnAppearing() {
         base.OnAppearing();
@@ -112,6 +127,40 @@ public partial class TopPage : ContentPage {
         await MapWebView.EvaluateJavaScriptAsync(js);
 
         NearbySheltersList.SelectedItem = nearest;
+        _selectedItem = nearest;
+    }
+
+    // リスト対応ルート検索
+    private NearbyShelterItem _selectedItem;
+
+    public async Task RouteSearchBasedOnSelectionAsync() {
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+        string mode = vm?.CurrentRouteMode ?? "driving";
+
+        // 選択されている場合 → その避難所へ
+        if (_selectedItem != null) {
+            var s = _selectedItem.Shelter;
+
+            string js = $"showRouteFromCurrent({s.Latitude.ToString(CultureInfo.InvariantCulture)}, " +
+                        $"{s.Longitude.ToString(CultureInfo.InvariantCulture)}, '{mode}');";
+
+            await MapWebView.EvaluateJavaScriptAsync(js);
+            return;
+        }
+
+        // 選択されていない場合 → 最寄り避難所へ
+        if (_nearest10 != null && _nearest10.Count > 0) {
+            var nearest = _nearest10.OrderBy(s => s.Distance).First();
+            var s = nearest.Shelter;
+
+            string js = $"showRouteFromCurrent({s.Latitude.ToString(CultureInfo.InvariantCulture)}, " +
+                        $"{s.Longitude.ToString(CultureInfo.InvariantCulture)}, '{mode}');";
+
+            await MapWebView.EvaluateJavaScriptAsync(js);
+
+            NearbySheltersList.SelectedItem = nearest;
+            _selectedItem = nearest;
+        }
     }
 
     // ルート削除
@@ -199,6 +248,8 @@ public partial class TopPage : ContentPage {
 
     private async void NearbySheltersList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
         if (e.CurrentSelection.FirstOrDefault() is NearbyShelterItem item) {
+            _selectedItem = item;
+
             double lat = item.Shelter.Latitude;
             double lng = item.Shelter.Longitude;
 
