@@ -16,23 +16,23 @@ namespace LocalDisasterPreventionInformationApp {
             _appShell = appShell;
             _db = db;
 
-            Task.Run(LoadAddressDictionaryAsync).Wait();
+            //Task.Run(LoadAddressDictionaryAsync).Wait();
         }
 
         protected override Window CreateWindow(IActivationState? activationState) {
             return new Window(_appShell);
         }
 
-        private async Task LoadAddressDictionaryAsync() {
-            var shelters = await _db.GetSheltersAsync();
+        //private async Task LoadAddressDictionaryAsync() {
+        //    var shelters = await _db.GetSheltersAsync();
 
-            PrefectureDictionary = shelters.Select(s => s.Prefecture)
-                                        .Distinct()
-                                        .ToList();
+        //    PrefectureDictionary = shelters.Select(s => s.Prefecture)
+        //                                .Distinct()
+        //                                .ToList();
 
-            CityDictionary = shelters.Select(s => s.City)
-                                        .Distinct()
-                                        .ToList();
-        }
+        //    CityDictionary = shelters.Select(s => s.City)
+        //                                .Distinct()
+        //                                .ToList();
+        //}
     }
 }

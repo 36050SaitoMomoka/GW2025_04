@@ -21,24 +21,24 @@ public partial class ProductRegisterPage : ContentPage {
         if (vm != null) {
             vm.PropertyChanged += (s, e) => {
                 if (e.PropertyName == null || e.PropertyName == "SelectedLangage") {
-                    SetPickerItems(vm);
+                    //SetPickerItems(vm);
                 }
             };
             // 初回セット
-            SetPickerItems(vm);
+            //etPickerItems(vm);
 
             vm.PageTitle = "備蓄管理";
         }
     }
     // Pickerの中身を翻訳
-    private void SetPickerItems(AppShellViewModel vm) {
-        CategoryPicker.ItemsSource = new List<string> {
-            vm.Stock_CategoryOrder,
-            vm.Stock_ExpireOrder,
-            vm.Stock_NameOrder,
-            vm.Stock_Others
-        };
-    }
+    //private void SetPickerItems(AppShellViewModel vm) {
+    //    CategoryPicker.ItemsSource = new List<string> {
+    //        vm.Stock_CategoryOrder,
+    //        vm.Stock_ExpireOrder,
+    //        vm.Stock_NameOrder,
+    //        vm.Stock_Others
+    //    };
+    //}
 
 
     private async void OnSubmitClicked(object sender, EventArgs e) {

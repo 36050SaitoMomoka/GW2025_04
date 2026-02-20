@@ -68,12 +68,12 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
         vm.Stock_CategoryOrder,
         vm.Stock_ExpireOrder,
         vm.Stock_NameOrder,
-        vm.Stock_Others
+        //vm.Stock_Others
         };
 
         // 最初から一つ選ばれた状態にする
         if(SortPicker.ItemsSource is IList list && list.Count > 0) {
-            SortPicker.SelectedIndex = 0;
+            SortPicker.SelectedIndex = 1;
         }
     }
 
@@ -93,18 +93,18 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
         IEnumerable<Models.Stock> sortedStocks = stocks;
 
         switch (_currentSort) {
-            case "商品名":
+            case "商品名別":
                 sortedStocks = stocks
                     .OrderBy(s => products.First(p => p.ProductId == s.ProductId).Name,
                     StringComparer.Create(new System.Globalization.CultureInfo("ja-JP"), true));
                 break;
 
-            case "カテゴリ":
+            case "カテゴリ別":
                 sortedStocks = stocks
                     .OrderBy(s => products.First(p => p.ProductId == s.ProductId).Category);
                 break;
 
-            case "消費期限":
+            case "消費期限順":
             default:
                 sortedStocks = stocks.OrderBy(s => s.ExpirationDate);
                 break;
@@ -236,9 +236,9 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
         _currentSort = picker.SelectedItem?.ToString() ?? "消費期限";
 
         //タイトル更新
-        if (_currentSort == "商品名") {
-            SelectedSortName = "商品別";
-        } else if (_currentSort == "カテゴリ") {
+        if (_currentSort == "商品名別") {
+            SelectedSortName = "商品名別";
+        } else if (_currentSort == "カテゴリ別") {
             SelectedSortName = "カテゴリ別";
         } else {
             SelectedSortName = "消費期限順";

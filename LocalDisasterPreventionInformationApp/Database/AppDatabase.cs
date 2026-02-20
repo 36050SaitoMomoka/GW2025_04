@@ -16,16 +16,11 @@ namespace LocalDisasterPreventionInformationApp.Database {
         }
 
         public async Task InitializeAsync() {
-            //テーブル作成
-            await _db.DropTableAsync<User>();
-            await _db.DropTableAsync<UserAddress>();
-
             await _db.CreateTableAsync<User>();
             await _db.CreateTableAsync<UserAddress>();
             await _db.CreateTableAsync<Product>();
             await _db.CreateTableAsync<Stock>();
             await _db.CreateTableAsync<Shelter>();
-            //テーブル削除するときはフルパスで指定
         }
 
         //=====================

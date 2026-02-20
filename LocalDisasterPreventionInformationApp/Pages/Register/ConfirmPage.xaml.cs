@@ -103,6 +103,8 @@ public partial class ConfirmPage : ContentPage {
         };
         await _db.AddAddressIfNotExistsAsync(address);
 
+        Preferences.Set("IsRegistered", true);
+
         //Preferences.Set("IsRegistered", true);
         await Shell.Current.GoToAsync("//TopPage");
 

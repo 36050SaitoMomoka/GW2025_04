@@ -36,6 +36,21 @@ public partial class StartupPage : ContentPage {
     //    await RunStartupProcessAsync();
     //}
 
+    public static List<string> PrefectureDictionary { get; private set; } = new();
+    public static List<string> CityDictionary { get; private set; } = new();
+
+    private async Task LoadAddressDictionaryAsync() {
+        var shelters = await _db.GetSheltersAsync();
+
+        PrefectureDictionary = shelters.Select(s => s.Prefecture)
+                                    .Distinct()
+                                    .ToList();
+
+        CityDictionary = shelters.Select(s => s.City)
+                                    .Distinct()
+                                    .ToList();
+    }
+
     private bool _startupRunning = false;
 
     protected override async void OnAppearing() {
@@ -59,7 +74,7 @@ public partial class StartupPage : ContentPage {
         var sw = new Stopwatch();
 
         //DB初期化（初回起動時のみ）
-        Preferences.Set("DbInitialized", false);  //開発時のみ
+        //Preferences.Set("DbInitialized", false);  //開発時のみ
         if (!Preferences.Get("DbInitialized", false)) {
             sw.Restart();
             await _db.InitializeAsync();
@@ -69,7 +84,7 @@ public partial class StartupPage : ContentPage {
         }
 
         // 避難所データ追加
-        Preferences.Set("ShelterDataLoaded", true);  //タブレット用
+        //Preferences.Set("ShelterDataLoaded", true);  //タブレット用
         if (!Preferences.Get("ShelterDataLoaded",false)) {
 
             await Task.Run(async () => {
@@ -119,7 +134,12 @@ public partial class StartupPage : ContentPage {
         Debug.WriteLine($"[TEST] Shelter 件数： {shelters.Count}");
 
         //TEST
-        Preferences.Set("IsRegistered", false);
+        //Preferences.Set("IsRegistered", false);
+
+        //Task.Run(LoadAddressDictionaryAsync);
+
+        //辞書作成
+        await LoadAddressDictionaryAsync();
 
         // 遷移
         bool isRegistered = Preferences.Get("IsRegistered", false);
