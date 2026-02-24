@@ -207,6 +207,14 @@
     <value>削除</value>
   </data>
 
+	<data name="Stock_Pass" xml:space="preserve">
+    <value>の期限が切れています</value>
+  </data>
+
+	<data name="Stock_Approach" xml:space="preserve">
+    <value>の期限が近いです</value>
+  </data>
+
 	<!-- 商品登録ページ -->
 	<data name="Product_Food" xml:space="preserve">
   <value>食品</value>

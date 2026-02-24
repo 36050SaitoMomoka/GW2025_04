@@ -204,6 +204,14 @@
 	<data name="Stock_Delete" xml:space="preserve">
     <value>删除</value>
   </data>
+	
+		<data name="Stock_Pass" xml:space="preserve">
+    <value> 保质期已过</value>
+  </data>
+
+	<data name="Stock_Approach" xml:space="preserve">
+    <value> 保质期即将到期</value>
+  </data>
 
 	<!-- 商品登録ページ -->
 	<data name="Product_Food" xml:space="preserve">

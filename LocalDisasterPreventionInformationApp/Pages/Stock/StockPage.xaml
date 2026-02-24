@@ -87,9 +87,9 @@
                     <!-- 並べ替え Picker -->
                     <Picker x:Name="SortPicker"
 
-                            Grid.Column="1"
+                            Grid.Column="0"
 
-                            WidthRequest="150"
+                            WidthRequest="170"
 
                             SelectedIndexChanged="OnSortChanged"/>
                 </Grid>
@@ -107,7 +107,7 @@
                         <VerticalStackLayout Spacing="0">
 
                             <!-- 9カラム構成に変更 -->
-                            <Grid ColumnDefinitions="150,1,230,1,230,1,200,1,90"
+                            <Grid ColumnDefinitions="2*,1,3*,1,2*,1,2*,1,*"
                                     Padding="5" BackgroundColor="#EEEEEE">
 
                                 <!-- 商品名 -->
@@ -174,7 +174,7 @@
                             <VerticalStackLayout Spacing="0">
 
                                 <!-- ★ 9カラム構成（縦線専用カラムを追加） -->
-                                <Grid ColumnDefinitions="150,1,230,1,230,1,200,1,90" Padding="5">
+                                <Grid ColumnDefinitions="2*,1,3*,1,2*,1,2*,1,*" Padding="5">
 
                                     <!-- 縦線（商品名と数量の間） -->
                                     <BoxView Grid.Column="1"

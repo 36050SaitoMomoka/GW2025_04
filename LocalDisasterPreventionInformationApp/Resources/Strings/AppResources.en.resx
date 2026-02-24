@@ -138,33 +138,50 @@
 		<data name="Stock_ExpireOrder" xml:space="preserve">
 	<value>By Expiration Date</value>
 	</data>
+	
 		<data name="Stock_CategoryOrder" xml:space="preserve">
 	<value>By Category</value>
 	</data>
+	
 		<data name="Stock_NameOrder" xml:space="preserve">
 	<value>By Product Name</value>
 	</data>
+	
 		<data name="Stock_Others" xml:space="preserve">
 	<value>Other</value>
 	</data>
+	
 		<data name="Stock_Sort" xml:space="preserve">
 	<value>Sort</value>
 	</data>
+	
 		<data name="Stock_ProductName" xml:space="preserve">
 	<value>Product Name</value>
 	</data>
+	
 		<data name="Stock_Quantity" xml:space="preserve">
 	<value>Quantity</value>
 	</data>
+	
 		<data name="Stock_Expire" xml:space="preserve">
 	<value>Expiration Date</value>
 	</data>
+	
 		<data name="Stock_Category" xml:space="preserve">
 	<value>Category</value>
 	</data>
+	
 		<data name="Stock_Delete" xml:space="preserve">
 	<value>Delete</value>
 	</data>
+
+	<data name="Stock_Pass" xml:space="preserve">
+    <value> Expiration date passed</value>
+  </data>
+
+	<data name="Stock_Approach" xml:space="preserve">
+    <value> Expiration date approaching</value>
+  </data>
 
 	<!-- 商品登録ページ -->
 	<data name="Product_Food" xml:space="preserve">
