@@ -110,11 +110,17 @@ namespace LocalDisasterPreventionInformationApp {
         public string Stock_Quantity => AppResources.Stock_Quantity;
         public string Stock_Sort => AppResources.Stock_Sort;
 
+        public string Product_Food => AppResources.Product_Food;
+        public string Product_Beverages => AppResources.Product_Beverages;
+        public string Product_Consumables => AppResources.Product_Consumables;
+        public string Product_Other => AppResources.Product_Other;
+
         public string Top_ShelterList => AppResources.Top_ShelterList;
 
-        public string Hazard_Earthquake => AppResources.Hazard_Earthquake;
+        public string Hazard_Flood => AppResources.Hazard_Flood;
         public string Hazard_Tsunami => AppResources.Hazard_Tsunami;
-        public string Hazard_FloodLandslide => AppResources.Hazard_FloodLandslide;
+        public string Hazard_HighTide => AppResources.Hazard_HighTide;
+        public string Hazard_Landslide => AppResources.Hazard_Landslide;
         public string Hazard_DisasterType => AppResources.Hazard_DisasterType;
         public string Hazard_Address => AppResources.Hazard_Address;
 

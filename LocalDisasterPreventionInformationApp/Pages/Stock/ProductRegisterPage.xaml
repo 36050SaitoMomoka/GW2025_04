@@ -10,13 +10,15 @@
 
             <VerticalStackLayout Padding="20"
                                  Spacing="15"
-                                 HorizontalOptions="Center">
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center">
 
-                <Grid ColumnDefinitions="120,Auto"
+                <Grid ColumnDefinitions="*,Auto"
                       RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                      ColumnSpacing="0"
+                      ColumnSpacing="10"
                       RowSpacing="20"
-                      HorizontalOptions="Center">
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center">
 
                     <!-- 商品名 -->
                     <Label Text="{Binding Stock_ProductName}"
@@ -74,12 +76,14 @@
                             BackgroundColor="#CCCCCC"
                             TextColor="Black"
                             HorizontalOptions="Center"
+                            VerticalOptions="Center"
                             WidthRequest="120"
                             Clicked="OnBackClicked"/>
 
                     <!-- 登録ボタン -->
                     <Button Text="{Binding Btn_Register}"
                             HorizontalOptions="Center"
+                            VerticalOptions="Center"
                             WidthRequest="120"
                             Clicked="OnSubmitClicked"/>
 

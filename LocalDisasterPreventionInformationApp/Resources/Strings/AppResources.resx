@@ -206,6 +206,23 @@
 	<data name="Stock_Delete" xml:space="preserve">
     <value>削除</value>
   </data>
+
+	<!-- 商品登録ページ -->
+	<data name="Product_Food" xml:space="preserve">
+  <value>食品</value>
+</data>
+
+	<data name="Product_Beverages" xml:space="preserve">
+  <value>飲料</value>
+</data>
+
+	<data name="Product_Consumables" xml:space="preserve">
+  <value>消耗品</value>
+</data>
+
+	<data name="Product_Other" xml:space="preserve">
+  <value>その他</value>
+</data>
 	
 	<!-- トップページ -->
 	<data name="Top_ShelterList" xml:space="preserve">
@@ -213,16 +230,20 @@
 </data>
 
 	<!-- ハザードマップページ -->
-	<data name="Hazard_Earthquake" xml:space="preserve">
-  <value>地震ハザードマップ</value>
+	<data name="Hazard_Flood" xml:space="preserve">
+  <value>洪水</value>
 </data>
 
 	<data name="Hazard_Tsunami" xml:space="preserve">
-  <value>津波ハザードマップ</value>
+  <value>津波</value>
 </data>
 
-	<data name="Hazard_FloodLandslide" xml:space="preserve">
-  <value>土砂・洪水ハザードマップ</value>
+	<data name="Hazard_HighTide" xml:space="preserve">
+  <value>高潮</value>
+</data>
+
+	<data name="Hazard_Landslide" xml:space="preserve">
+  <value>土砂災害</value>
 </data>
 
 	<data name="Hazard_DisasterType" xml:space="preserve">

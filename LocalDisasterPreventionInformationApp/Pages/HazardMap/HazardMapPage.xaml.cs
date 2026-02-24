@@ -18,15 +18,50 @@ public partial class HazardMapPage : ContentPage {
         InitializeComponent();
         _db = db;
 
+        BindingContext = Shell.Current.BindingContext;
+
         LoadHazardTypes();
         LoadAddresses();
-
-        BindingContext = Shell.Current.BindingContext;
 
         //PageTitleを「ハザードマップ」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
             vm.PageTitle = "ハザードマップ";
+
+            // 言語切り替え時にも Picker を更新
+            vm.PropertyChanged += (s, e) => {
+                if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
+                    SetPickerItems(vm);
+                }
+            };
+
+            // 初回セット
+            SetPickerItems(vm);
+        }
+    }
+
+    // Pickerの中身を翻訳
+    private void SetPickerItems(AppShellViewModel vm) {
+        if (_hazardList == null || _hazardList.Count < 4) return;
+
+        //今の選択を保存
+        var selected = HazardPicker.SelectedItem as HazardType;
+
+        //名前だけ更新
+        _hazardList[0].Name = vm.Hazard_Flood;
+        _hazardList[1].Name = vm.Hazard_Tsunami;
+        _hazardList[2].Name = vm.Hazard_HighTide;
+        _hazardList[3].Name = vm.Hazard_Landslide;
+
+        //再描画
+        HazardPicker.ItemsSource = null;
+        HazardPicker.ItemsSource = _hazardList;
+
+        //選択を復元
+        if(selected != null) {
+            //
+            var restored = _hazardList.FirstOrDefault(x => x.TileUrl == selected.TileUrl);
+            HazardPicker.SelectedItem = restored;
         }
     }
 

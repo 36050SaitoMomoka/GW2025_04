@@ -37,14 +37,14 @@
                         <!-- 災害種別ピッカー -->
                         <Picker
                             x:Name="HazardPicker"
-                            Title="災害種別"
+                            Title="{Binding Hazard_DisasterType}"
                             ItemDisplayBinding="{Binding Name}"
                             SelectedIndexChanged="OnSelectionChanged" />
 
                         <!-- 住所ピッカー -->
                         <Picker
                             x:Name="AddressPicker"
-                            Title="住所"
+                            Title="{Binding Hazard_Address}"
                             ItemDisplayBinding="{Binding DisplayName}"
                             SelectedIndexChanged="OnSelectionChanged" />
 

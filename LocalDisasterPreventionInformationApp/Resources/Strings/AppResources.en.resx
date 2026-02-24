@@ -165,21 +165,44 @@
 		<data name="Stock_Delete" xml:space="preserve">
 	<value>Delete</value>
 	</data>
-<!-- トップページ -->
+
+	<!-- 商品登録ページ -->
+	<data name="Product_Food" xml:space="preserve">
+  <value>Food</value>
+</data>
+
+	<data name="Product_Beverages" xml:space="preserve">
+  <value>Beverages</value>
+</data>
+
+	<data name="Product_Consumables" xml:space="preserve">
+  <value>Consumables</value>
+</data>
+
+	<data name="Product_Other" xml:space="preserve">
+  <value>Other</value>
+</data>
+
+	<!-- トップページ -->
 	<data name="Top_ShelterList" xml:space="preserve">
   <value>Shelter List</value>
 </data>
+	
 <!-- ハザードマップ -->
-	<data name="Hazard_Earthquake" xml:space="preserve">
-  <value>Earthquake Hazard Map</value>
+	<data name="Hazard_Flood" xml:space="preserve">
+  <value>Flood</value>
 </data>
 
 	<data name="Hazard_Tsunami" xml:space="preserve">
-  <value>Tsunami Hazard Map</value>
+  <value>Tsunami</value>
 </data>
 
-	<data name="Hazard_FloodLandslide" xml:space="preserve">
-  <value>Landslide / Flood Hazard Map</value>
+	<data name="Hazard_HighTide" xml:space="preserve">
+  <value>HighTide</value>
+</data>
+
+	<data name="Hazard_Landslide" xml:space="preserve">
+  <value>Landslide</value>
 </data>
 
 	<data name="Hazard_DisasterType" xml:space="preserve">

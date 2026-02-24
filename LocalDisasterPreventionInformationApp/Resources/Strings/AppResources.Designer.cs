@@ -196,25 +196,34 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
-        ///   地震ハザードマップ に類似しているローカライズされた文字列を検索します。
+        ///   洪水 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Hazard_Earthquake {
+        internal static string Hazard_Flood {
             get {
-                return ResourceManager.GetString("Hazard_Earthquake", resourceCulture);
+                return ResourceManager.GetString("Hazard_Flood", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   土砂・洪水ハザードマップ に類似しているローカライズされた文字列を検索します。
+        ///   高潮 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Hazard_FloodLandslide {
+        internal static string Hazard_HighTide {
             get {
-                return ResourceManager.GetString("Hazard_FloodLandslide", resourceCulture);
+                return ResourceManager.GetString("Hazard_HighTide", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   津波ハザードマップ に類似しているローカライズされた文字列を検索します。
+        ///   土砂災害 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Hazard_Landslide {
+            get {
+                return ResourceManager.GetString("Hazard_Landslide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   津波 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Hazard_Tsunami {
             get {
@@ -345,6 +354,42 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         internal static string My_Phone {
             get {
                 return ResourceManager.GetString("My_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   飲料 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Product_Beverages {
+            get {
+                return ResourceManager.GetString("Product_Beverages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   消耗品 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Product_Consumables {
+            get {
+                return ResourceManager.GetString("Product_Consumables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   食品 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Product_Food {
+            get {
+                return ResourceManager.GetString("Product_Food", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   その他 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Product_Other {
+            get {
+                return ResourceManager.GetString("Product_Other", resourceCulture);
             }
         }
         

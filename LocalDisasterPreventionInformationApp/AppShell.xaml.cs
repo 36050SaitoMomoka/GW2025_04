@@ -30,5 +30,18 @@ namespace LocalDisasterPreventionInformationApp {
 
             base.OnAppearing();
         }
+
+
+        // 必ずStockPageを最初に開くようにする
+        protected override async void OnNavigated(ShellNavigatedEventArgs args) {
+            base.OnNavigated(args);
+
+            if(args.Source == ShellNavigationSource.ShellItemChanged) {
+                if(CurrentItem?.Route == "StockPage") {
+                    await Shell.Current.GoToAsync("//StockPage");
+                }
+            }
+        }
+
     }
 }

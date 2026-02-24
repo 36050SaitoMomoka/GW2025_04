@@ -29,8 +29,8 @@
     </FlyoutItem>
 
     <!-- 備蓄管理 -->
-    <FlyoutItem Title="備蓄管理">
-        <ShellContent Route="StockPage"
+    <FlyoutItem Title="備蓄管理" Route="StockPage" >
+        <ShellContent
                        ContentTemplate="{DataTemplate stock:StockPage}" />
     </FlyoutItem>
 

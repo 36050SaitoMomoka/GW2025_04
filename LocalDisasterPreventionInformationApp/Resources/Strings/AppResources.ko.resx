@@ -205,21 +205,43 @@
 	<data name="Stock_Delete" xml:space="preserve">
     <value>삭제</value>
   </data>
+
+	<!-- 商品登録ページ -->
+	<data name="Product_Food" xml:space="preserve">
+  <value>식품</value>
+</data>
+
+	<data name="Product_Beverages" xml:space="preserve">
+  <value>음료</value>
+</data>
+
+	<data name="Product_Consumables" xml:space="preserve">
+  <value>소모품</value>
+</data>
+
+	<data name="Product_Other" xml:space="preserve">
+  <value>기타</value>
+</data>
+	
 <!-- トップページ -->
 	<data name="Top_ShelterList" xml:space="preserve">
   <value>대피소 목록</value>
 </data>
 <!-- ハザードマップ -->
-	<data name="Hazard_Earthquake" xml:space="preserve">
-  <value>지진 위험 지도</value>
+	<data name="Hazard_Flood" xml:space="preserve">
+  <value>홍수</value>
 </data>
 
 	<data name="Hazard_Tsunami" xml:space="preserve">
-  <value>쓰나미 위험 지도</value>
+  <value>쓰나미</value>
 </data>
 
-	<data name="Hazard_FloodLandslide" xml:space="preserve">
-  <value>산사태·홍수 위험 지도</value>
+	<data name="Hazard_HighTide" xml:space="preserve">
+  <value>고조</value>
+</data>
+
+	<data name="Hazard_Landslide" xml:space="preserve">
+  <value>토사 재해</value>
 </data>
 
 	<data name="Hazard_DisasterType" xml:space="preserve">
