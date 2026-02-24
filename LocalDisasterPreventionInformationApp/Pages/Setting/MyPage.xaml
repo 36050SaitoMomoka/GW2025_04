@@ -10,136 +10,145 @@
             <Grid x:Name="Inner">
 
                 <ScrollView>
-                    <VerticalStackLayout Padding="20" Spacing="40">
+                    <VerticalStackLayout Padding="20" Spacing="30">
 
                         <!-- 編集ボタン -->
                         <HorizontalStackLayout HorizontalOptions="End">
                             <Button Text="編集"
-                                    FontSize="20"
-                                    Padding="16,8"
-                                    BackgroundColor="#2196F3"
+                                    HeightRequest="45"
+                                    CornerRadius="8"
+                                    BackgroundColor="#B2BEB5"
                                     TextColor="White"
-                                    CornerRadius="12"
-                                    Command="{Binding EditProfileCommand}" 
+                                    FontSize="18"
+                                    Command="{Binding EditProfileCommand}"
                                     Clicked="OnEditButtonClick"/>
                         </HorizontalStackLayout>
 
-                        <!-- 情報一覧 -->
-                        <Grid WidthRequest="700"
-                              ColumnDefinitions="Auto,Auto,*"
-                              RowDefinitions="Auto,20,Auto,20,Auto,20,Auto,20,Auto,20">
+                        <!-- 情報一覧（大枠） -->
+                        <Border BackgroundColor="White"
+                                Stroke="#5C4033"
+                                StrokeThickness="3"
+                                Padding="40"
+                                Margin="20"
+                                StrokeShape="RoundRectangle 20"
+                                WidthRequest="520"
+                                HorizontalOptions="Center">
 
-                            <!-- フリガナ -->
-                            <!-- 後で変更→Text="{Binding Furigana}"　フリガナを入れるときに半角スペースを頭に入れてほしい -->
-                            <Label Grid.Row="0" Grid.Column="2"
-                                   Text="{Binding Furigana}"
-                                   FontSize="18"
-                                   TextColor="#666"
-                                   Margin="0,0,0,-20"
-                                   VerticalOptions="End"/>
+                            <Grid WidthRequest="420"
+                                  ColumnDefinitions="Auto,Auto,*"
+                                  RowDefinitions="Auto,30,Auto,30,Auto,30,Auto">
 
-                            <!-- 氏名 -->
-                            <Label Grid.Row="2" Grid.Column="0"
-                                   Text="氏名"
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" 
-                                   HorizontalOptions="Center"/>
+                                <!-- 氏名（中央配置） -->
+                                <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="3"
+                                                     HorizontalOptions="Center"
+                                                     VerticalOptions="Center"
+                                                     Spacing="2">
 
-                            <Label Grid.Row="2" Grid.Column="1"
-                                   Text=" ： "
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" />
+                                    <Label Text="{Binding UserName}"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           TextColor="#000"
+                                           HorizontalOptions="Center"/>
 
-                            <Label Grid.Row="2" Grid.Column="2"
-                                   Text="{Binding UserName}"
-                                   FontSize="26"
-                                   TextColor="#000" />
+                                    <Label Text="{Binding Furigana}"
+                                           FontSize="14"
+                                           TextColor="#555"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
 
-                            <!-- 下線 -->
-                            <BoxView Grid.Row="3" Grid.ColumnSpan="3"
-                                     HeightRequest="2"
-                                     BackgroundColor="#bbb" />
+                                <!-- メール + 電話 -->
+                                <Grid Grid.Row="2" Grid.ColumnSpan="3"
+                                      ColumnDefinitions="*,*"
+                                      ColumnSpacing="12">
 
+                                    <!-- メール枠 -->
+                                    <Grid Grid.Column="0" HeightRequest="100">
 
-                            <!-- メールアドレス -->
-                            <Label Grid.Row="4" Grid.Column="0"
-                                   Text="メールアドレス"
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" 
-                                   HorizontalOptions="Center"/>
+                                        <Border BackgroundColor="White"
+                                                Stroke="#5C4033"
+                                                StrokeThickness="3"
+                                                Padding="12"
+                                                StrokeShape="RoundRectangle 15"/>
 
-                            <Label Grid.Row="4" Grid.Column="1"
-                                   Text=" ： "
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" />
+                                        <Label Text="メールアドレス"
+                                               BackgroundColor="White"
+                                               Padding="6,0"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               TextColor="Black"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Start"
+                                               Margin="12,-10,0,0"/>
 
-                            <Label Grid.Row="4" Grid.Column="2"
-                                   Text="{Binding Email}"
-                                   FontSize="26"
-                                   TextColor="#000" />
+                                        <Label Text="{Binding Email}"
+                                               FontSize="20"
+                                               TextColor="#000"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Grid>
 
-                            <!-- 下線 -->
-                            <BoxView Grid.Row="5" Grid.ColumnSpan="3"
-                                     HeightRequest="2"
-                                     BackgroundColor="#bbb" />
+                                    <!-- 電話枠 -->
+                                    <Grid Grid.Column="1" HeightRequest="100">
 
+                                        <Border BackgroundColor="White"
+                                                Stroke="#5C4033"
+                                                StrokeThickness="3"
+                                                Padding="12"
+                                                StrokeShape="RoundRectangle 15"/>
 
-                            <!-- 電話番号 -->
-                            <Label Grid.Row="6" Grid.Column="0"
-                                   Text="電話番号"
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" 
-                                   HorizontalOptions="Center"/>
+                                        <Label Text="電話番号"
+                                               BackgroundColor="White"
+                                               Padding="6,0"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               TextColor="Black"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Start"
+                                               Margin="12,-10,0,0"/>
 
-                            <Label Grid.Row="6" Grid.Column="1"
-                                   Text=" ： "
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" />
+                                        <Label Text="{Binding Phone}"
+                                               FontSize="20"
+                                               TextColor="#000"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Grid>
 
-                            <Label Grid.Row="6" Grid.Column="2"
-                                   Text="{Binding Phone}"
-                                   FontSize="26"
-                                   TextColor="#000" />
+                                </Grid>
 
-                            <!-- 下線 -->
-                            <BoxView Grid.Row="7" Grid.ColumnSpan="3"
-                                     HeightRequest="2"
-                                     BackgroundColor="#bbb" />
+                                <!-- 住所 -->
+                                <Grid Grid.Row="4" Grid.ColumnSpan="3">
 
+                                    <Border BackgroundColor="White"
+                                            Stroke="#5C4033"
+                                            StrokeThickness="3"
+                                            Padding="12"
+                                            StrokeShape="RoundRectangle 15"/>
 
-                            <!-- 住所 -->
-                            <Label Grid.Row="8" Grid.Column="0"
-                                   Text="住所"
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333"
-                                   HorizontalOptions="Center"/>
+                                    <Label Text="住所"
+                                           BackgroundColor="White"
+                                           Padding="6,0"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Start"
+                                           Margin="12,-10,0,0"/>
 
-                            <Label Grid.Row="8" Grid.Column="1"
-                                   Text=" ： "
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="#333" />
+                                    <VerticalStackLayout x:Name="AddressContainer"
+                                                         Padding="12"
+                                                         Spacing="6"
+                                                         HorizontalOptions="Center"
+                                                         VerticalOptions="Start"/>
+                                </Grid>
 
-                            <VerticalStackLayout Grid.Row="8" Grid.Column="2"
-                                                 x:Name="AddressContainer"
-                                                 Spacing="8">
-                            </VerticalStackLayout>
+                            </Grid>
+                        </Border>
 
-                            <!-- 下線 -->
-                            <BoxView Grid.Row="9" Grid.ColumnSpan="3"
-                                     HeightRequest="2"
-                                     BackgroundColor="#bbb" />
-                        </Grid>
                     </VerticalStackLayout>
                 </ScrollView>
+
             </Grid>
         </base:BasePage.InnerContent>
     </base:BasePage>
+
 </ContentPage>
