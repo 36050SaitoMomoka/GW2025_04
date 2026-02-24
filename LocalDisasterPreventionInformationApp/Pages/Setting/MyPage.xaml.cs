@@ -13,6 +13,9 @@ namespace LocalDisasterPreventionInformationApp.Pages.Setting;
 public partial class MyPage : ContentPage, INotifyPropertyChanged {
     private readonly AppDatabase _db;
 
+    //翻訳用に仮追加
+    public AppShellViewModel ShellVM => Shell.Current.BindingContext as AppShellViewModel;
+
     private string _userName;
     public string UserName {
         get => _userName;
@@ -58,12 +61,22 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
         BindingContext = this;
         Inner.BindingContext = this;
 
+        //翻訳のために仮追加
+        Resources["ShellVM"] = ShellVM;
+
         LoadData();
 
         //PageTitleを「マイページ」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
-            vm.PageTitle = "マイページ";
+            vm.PageTitle = vm.Header_MyPage;
+
+            // 言語切り替え時にも Picker を更新
+            vm.PropertyChanged += (s, e) => {
+                if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
+                    vm.PageTitle = vm.Header_MyPage;
+                }
+            };
         }
     }
 

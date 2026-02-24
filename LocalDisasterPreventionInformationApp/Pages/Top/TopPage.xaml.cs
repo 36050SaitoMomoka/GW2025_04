@@ -28,6 +28,17 @@ public partial class TopPage : ContentPage {
 
         // RouteModeChangedイベントを取得
         var vm = Shell.Current.BindingContext as AppShellViewModel;
+        if (vm != null) {
+            vm.PageTitle = vm.Header_Top;
+
+            // 言語切り替え時にも Picker を更新
+            vm.PropertyChanged += (s, e) => {
+                if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
+                    vm.PageTitle = vm.Header_Top;
+                }
+            };
+        }
+
         // 移動手段ボタンからの呼び出し
         vm.RouteModeChanged += async (mode) =>
         {
@@ -67,7 +78,7 @@ public partial class TopPage : ContentPage {
 
         // PageTitle を設定
         if (Shell.Current.BindingContext is AppShellViewModel vm) {
-            vm.PageTitle = "トップページ";
+            vm.PageTitle = vm.Header_Top;
         }
 
         // 都道府県をPickerにセット

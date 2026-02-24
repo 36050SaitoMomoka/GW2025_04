@@ -219,6 +219,7 @@
                                             BorderColor="Black"
                                             BorderWidth="1"
                                             CornerRadius="4"
+                                            Padding="0"
                                             Command="{Binding Source={x:Reference ThisPage},Path=DecreaseCommand}"
                                             CommandParameter="{Binding}"/>
 
@@ -240,6 +241,7 @@
                                             BorderColor="Black"
                                             BorderWidth="1"
                                             CornerRadius="4"
+                                            Padding="0"
                                             Command="{Binding Source={x:Reference ThisPage},Path=IncreaseCommand}"
                                             CommandParameter="{Binding}"/>
                                     </Grid>

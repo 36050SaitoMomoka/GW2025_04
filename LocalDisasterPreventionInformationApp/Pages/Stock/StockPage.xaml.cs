@@ -54,6 +54,7 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
             vm.PropertyChanged += (s, e) => {
                 if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
                     SetSortPickerItems(vm);
+                    vm.PageTitle = vm.Header_Stock;
                 }
             };
 
