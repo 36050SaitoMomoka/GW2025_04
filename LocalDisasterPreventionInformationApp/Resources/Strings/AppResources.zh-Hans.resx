@@ -153,12 +153,17 @@
   </data>
 
 	<data name="Btn_Discard" xml:space="preserve">
-  <value>丢弃</value>
+    <value>丢弃</value>
 </data>
 
 	<data name="Btn_Confirm" xml:space="preserve">
-  <value>确定</value>
-</data>
+    <value>确定</value>
+  </data>
+
+	<data name="Btn_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+	
 	<!-- 備蓄管理 -->
 	<data name="Stock_ExpireOrder" xml:space="preserve">
     <value>按保质期排序</value>
@@ -218,4 +223,50 @@
   <value>泥石流·洪水灾害地图</value>
 </data>
 
+	<data name="Hazard_DisasterType" xml:space="preserve">
+  <value>灾害类别</value>
+</data>
+
+	<data name="Hazard_Address" xml:space="preserve">
+  <value>地址</value>
+</data>
+
+	<!-- マイページ -->
+	<data name="My_Name" xml:space="preserve">
+  <value>姓名</value>
+</data>
+
+	<data name="My_Email" xml:space="preserve">
+  <value>电子邮箱</value>
+</data>
+
+	<data name="My_Phone" xml:space="preserve">
+  <value>电话号码</value>
+</data>
+
+	<data name="My_Address" xml:space="preserve">
+  <value>地址</value>
+</data>
+
+	<!-- 編集ページ -->
+	<data name="Edit_Furigana" xml:space="preserve">
+  <value>注音</value>
+</data>
+
+	<data name="Edit_Name" xml:space="preserve">
+  <value>姓名</value>
+</data>
+
+	<data name="Edit_Email" xml:space="preserve">
+  <value>电子邮箱</value>
+</data>
+
+	<data name="Edit_Phone" xml:space="preserve">
+  <value>电话号码</value>
+</data>
+
+	<data name="Edit_Address" xml:space="preserve">
+  <value>地址</value>
+</data>
+	
 </root>

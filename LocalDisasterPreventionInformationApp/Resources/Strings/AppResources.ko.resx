@@ -154,12 +154,16 @@
   </data>
 
 	<data name="Btn_Discard" xml:space="preserve">
-  <value>폐기</value>
-</data>
+    <value>폐기</value>
+  </data>
 
 	<data name="Btn_Confirm" xml:space="preserve">
-  <value>확정</value>
-</data>
+    <value>확정</value>
+  </data>
+
+	<data name="Btn_Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
 
 	<!-- 備蓄管理 -->
 	<data name="Stock_ExpireOrder" xml:space="preserve">
@@ -217,4 +221,51 @@
 	<data name="Hazard_FloodLandslide" xml:space="preserve">
   <value>산사태·홍수 위험 지도</value>
 </data>
+
+	<data name="Hazard_DisasterType" xml:space="preserve">
+  <value>재해 종류</value>
+</data>
+
+	<data name="Hazard_Address" xml:space="preserve">
+  <value>주소</value>
+</data>
+
+	<!-- マイページ -->
+	<data name="My_Name" xml:space="preserve">
+  <value>성명</value>
+</data>
+
+	<data name="My_Email" xml:space="preserve">
+  <value>이메일 주소</value>
+</data>
+
+	<data name="My_Phone" xml:space="preserve">
+  <value>전화번호</value>
+</data>
+
+	<data name="My_Address" xml:space="preserve">
+  <value>주소</value>
+</data>
+
+	<!-- 編集ページ -->
+	<data name="Edit_Furigana" xml:space="preserve">
+  <value>후리가나</value>
+</data>
+
+	<data name="Edit_Name" xml:space="preserve">
+  <value>성명</value>
+</data>
+
+	<data name="Edit_Email" xml:space="preserve">
+  <value>이메일 주소</value>
+</data>
+
+	<data name="Edit_Phone" xml:space="preserve">
+  <value>전화번호</value>
+</data>
+
+	<data name="Edit_Address" xml:space="preserve">
+  <value>주소</value>
+</data>
+	
 </root>

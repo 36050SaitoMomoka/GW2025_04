@@ -104,6 +104,7 @@
 		<data name="Menu_Stock" xml:space="preserve">
 	<value>Stockpile Management</value>
 	</data>
+	
 		<!-- ボタン -->
 		<data name="Btn_Next" xml:space="preserve">
 	<value>Next</value>
@@ -122,12 +123,16 @@
 	</data>
 
 	<data name="Btn_Discard" xml:space="preserve">
-  <value>Discard</value>
-</data>
+    <value>Discard</value>
+  </data>
 
 	<data name="Btn_Confirm" xml:space="preserve">
-  <value>Confirm</value>
-</data>
+    <value>Confirm</value>
+  </data>
+
+	<data name="Btn_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 
 	<!-- 備蓄管理 -->
 		<data name="Stock_ExpireOrder" xml:space="preserve">
@@ -176,4 +181,51 @@
 	<data name="Hazard_FloodLandslide" xml:space="preserve">
   <value>Landslide / Flood Hazard Map</value>
 </data>
+
+	<data name="Hazard_DisasterType" xml:space="preserve">
+  <value>Disaster Type</value>
+</data>
+
+	<data name="Hazard_Address" xml:space="preserve">
+  <value>Address</value>
+</data>
+
+	<!-- マイページ -->
+	<data name="My_Name" xml:space="preserve">
+  <value>Name</value>
+</data>
+
+	<data name="My_Email" xml:space="preserve">
+  <value>Email Address</value>
+</data>
+
+	<data name="My_Phone" xml:space="preserve">
+  <value>Phone Number</value>
+</data>
+
+	<data name="My_Address" xml:space="preserve">
+  <value>Address</value>
+</data>
+
+	<!-- 編集ページ -->
+	<data name="Edit_Furigana" xml:space="preserve">
+  <value>Furigana</value>
+</data>
+
+	<data name="Edit_Name" xml:space="preserve">
+  <value>Name</value>
+</data>
+
+	<data name="Edit_Email" xml:space="preserve">
+  <value>Email Address</value>
+</data>
+
+	<data name="Edit_Phone" xml:space="preserve">
+  <value>Phone Number</value>
+</data>
+
+	<data name="Edit_Address" xml:space="preserve">
+  <value>Address</value>
+</data>
+	
 </root>

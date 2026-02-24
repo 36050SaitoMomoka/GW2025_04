@@ -65,6 +65,7 @@ namespace LocalDisasterPreventionInformationApp {
         public string Btn_Register => AppResources.Btn_Register;
         public string Btn_Discard => AppResources.Btn_Discard;
         public string Btn_Confirm => AppResources.Btn_Confirm;
+        public string Btn_Cancel => AppResources.Btn_Cancel;
 
         public string Header_AppTitle => AppResources.Header_AppTitle;
         public string Header_Font => AppResources.Header_Font;
@@ -114,6 +115,19 @@ namespace LocalDisasterPreventionInformationApp {
         public string Hazard_Earthquake => AppResources.Hazard_Earthquake;
         public string Hazard_Tsunami => AppResources.Hazard_Tsunami;
         public string Hazard_FloodLandslide => AppResources.Hazard_FloodLandslide;
+        public string Hazard_DisasterType => AppResources.Hazard_DisasterType;
+        public string Hazard_Address => AppResources.Hazard_Address;
+
+        public string My_Name => AppResources.My_Name;
+        public string My_Email => AppResources.My_Email;
+        public string My_Phone => AppResources.My_Phone;
+        public string My_Address => AppResources.My_Address;
+
+        public string Edit_Name => AppResources.Edit_Name;
+        public string Edit_Email => AppResources.Edit_Email;
+        public string Edit_Phone => AppResources.Edit_Phone;
+        public string Edit_Address => AppResources.Edit_Address;
+        public string Edit_Furigana => AppResources.Edit_Furigana;
         #endregion
 
 

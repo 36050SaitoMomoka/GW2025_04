@@ -37,7 +37,7 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
         DecreaseCommand = new Command<object>(DecreaseQuantity);
         DeleteCommand = new Command<object>(DeleteRecord);
 
-        Inner.BindingContext = this;
+        //Inner.BindingContext = this;
 
         //Pickerの初期選択を「消費期限」にする
         SortPicker.SelectedIndex = 2;
@@ -92,19 +92,19 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
         // 並べ替え
         IEnumerable<Models.Stock> sortedStocks = stocks;
 
-        switch (_currentSort) {
-            case "商品名別":
+        switch (SortPicker.SelectedIndex) {
+            case 2:
                 sortedStocks = stocks
                     .OrderBy(s => products.First(p => p.ProductId == s.ProductId).Name,
                     StringComparer.Create(new System.Globalization.CultureInfo("ja-JP"), true));
                 break;
 
-            case "カテゴリ別":
+            case 0:
                 sortedStocks = stocks
                     .OrderBy(s => products.First(p => p.ProductId == s.ProductId).Category);
                 break;
 
-            case "消費期限順":
+            case 1:
             default:
                 sortedStocks = stocks.OrderBy(s => s.ExpirationDate);
                 break;

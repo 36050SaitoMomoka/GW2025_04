@@ -5,8 +5,8 @@ using LocalDisasterPreventionInformationApp.Database;
 
 namespace LocalDisasterPreventionInformationApp {
     public partial class App : Application {
-        public static List<string> PrefectureDictionary { get; private set; } = new();
-        public static List<string> CityDictionary { get; private set; } = new();
+        //public static List<string> PrefectureDictionary { get; private set; } = new();
+        //public static List<string> CityDictionary { get; private set; } = new();
 
         private readonly AppShell _appShell;
         private readonly AppDatabase _db;

@@ -79,6 +79,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   キャンセル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Btn_Cancel {
+            get {
+                return ResourceManager.GetString("Btn_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   確定 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Btn_Confirm {
@@ -120,6 +129,69 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         internal static string Btn_Register {
             get {
                 return ResourceManager.GetString("Btn_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   住所 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Edit_Address {
+            get {
+                return ResourceManager.GetString("Edit_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   メールアドレス に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Edit_Email {
+            get {
+                return ResourceManager.GetString("Edit_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   フリガナ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Edit_Furigana {
+            get {
+                return ResourceManager.GetString("Edit_Furigana", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   氏名 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Edit_Name {
+            get {
+                return ResourceManager.GetString("Edit_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   電話番号 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Edit_Phone {
+            get {
+                return ResourceManager.GetString("Edit_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   住所 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Hazard_Address {
+            get {
+                return ResourceManager.GetString("Hazard_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   災害種別 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Hazard_DisasterType {
+            get {
+                return ResourceManager.GetString("Hazard_DisasterType", resourceCulture);
             }
         }
         
@@ -237,6 +309,42 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         internal static string Menu_Top {
             get {
                 return ResourceManager.GetString("Menu_Top", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   住所 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string My_Address {
+            get {
+                return ResourceManager.GetString("My_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   メールアドレス に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string My_Email {
+            get {
+                return ResourceManager.GetString("My_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   氏名 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string My_Name {
+            get {
+                return ResourceManager.GetString("My_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   電話番号 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string My_Phone {
+            get {
+                return ResourceManager.GetString("My_Phone", resourceCulture);
             }
         }
         
