@@ -610,6 +610,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   例：2026/01/01 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Stock_Expire_Place {
+            get {
+                return ResourceManager.GetString("Stock_Expire_Place", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   消費期限順 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Stock_ExpireOrder {

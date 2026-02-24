@@ -129,32 +129,30 @@ public partial class ProductRegisterPage : ContentPage {
         _isEditing = true;
 
         var entry = (Entry)sender;
-        string text = entry.Text;
+        string raw = e.NewTextValue;
 
-        if (string.IsNullOrEmpty(text)) {
-            _isEditing = false;
-            return;
-        }
+        if (string.IsNullOrEmpty(raw)) return;
 
         // ”Žš‚¾‚¯Žæ‚èo‚·
-        string digits = new string(text.Where(char.IsDigit).ToArray());
+        string digits = new string(raw.Where(char.IsDigit).ToArray());
 
         if (digits.Length > 8)
             digits = digits.Substring(0, 8);
 
+        string formatted = digits;
+
         // yyyy/MM/dd ‚ÌŒ`‚É®Œ`
+        if (digits.Length >= 4)
+            formatted = digits.Substring(0, 4);
+
         if (digits.Length >= 5)
-            text = $"{digits.Substring(0, 4)}/{digits.Substring(4)}";
-        else if (digits.Length >= 4)
-            text = $"{digits.Substring(0, 4)}/";
-        else
-            text = digits;
+            formatted += "/" + digits.Substring(4, Math.Min(2, digits.Length - 4));
 
         if (digits.Length >= 7)
-            text = $"{digits.Substring(0, 4)}/{digits.Substring(4, 2)}/{digits.Substring(6)}";
+            formatted += "/" + digits.Substring(6, Math.Min(2, digits.Length - 6));
 
-        entry.Text = text;
-
+        _isEditing = true;
+        entry.Text = formatted;
         _isEditing = false;
     }
 

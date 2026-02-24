@@ -213,6 +213,10 @@
     <value> 保质期即将到期</value>
   </data>
 
+	<data name="Stock_Expire_Place" xml:space="preserve">
+    <value>例：2026/01/01</value>
+  </data>
+
 	<!-- 商品登録ページ -->
 	<data name="Product_Food" xml:space="preserve">
   <value>食品</value>

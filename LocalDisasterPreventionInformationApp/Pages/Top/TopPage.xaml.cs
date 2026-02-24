@@ -69,7 +69,7 @@ public partial class TopPage : ContentPage {
         base.OnAppearing();
 
         // WebView の内部キャッシュを完全に破棄
-        MapWebView.Reload();
+        //MapWebView.Reload();
 
         // 必ず Navigated が発火する URL にする
         MapWebView.Source = new UrlWebViewSource {
