@@ -78,17 +78,22 @@ public partial class HazardMapPage : ContentPage {
     }
 
     //災害種類または住所が選ばれたらハザード更新
-    private void OnSelectionChanged(object sender,EventArgs e) {
+    private void OnSelectionChanged(object sender, EventArgs e) {
         var hazard = HazardPicker.SelectedItem as HazardType;
         var address = AddressPicker.SelectedItem as Models.UserAddress;
 
         if (hazard == null || address == null) return;
 
-        UpdateMap(hazard.TileUrl, address.Latitude ?? 35.0, address.Longitude ?? 135.0);
+        double lat = address.Latitude ?? 35.0;
+        double lon = address.Longitude ?? 135.0;
+
+        UpdateMap(hazard.TileUrl, lat, lon);
+
+        UpdateMarker(lat, lon);
     }
 
     //地図更新
-    private async void UpdateMap(string tileUrl,double lat,double lon) {
+    private async void UpdateMap(string tileUrl, double lat, double lon) {
         string js1 = "setHazardTile(\"" + tileUrl + "\");";
         await HazardWebView.EvaluateJavaScriptAsync(js1);
 
@@ -113,7 +118,15 @@ public partial class HazardMapPage : ContentPage {
             await HazardWebView.EvaluateJavaScriptAsync(
                 $"moveTo({_pendingLat}, {_pendingLng});"
             );
+
+            await HazardWebView.EvaluateJavaScriptAsync(
+                $"addMarker({_pendingLat},{_pendingLng});"
+                );
         }
     }
 
+    private async void UpdateMarker(double lat, double lon) {
+        await HazardWebView.EvaluateJavaScriptAsync("clearMarker();");
+        await HazardWebView.EvaluateJavaScriptAsync($"addMarker({lat}, {lon});");
+    }
 }

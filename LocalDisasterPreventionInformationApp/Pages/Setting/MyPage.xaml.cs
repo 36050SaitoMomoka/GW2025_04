@@ -3,7 +3,9 @@ using LocalDisasterPreventionInformationApp.Pages.Base;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace LocalDisasterPreventionInformationApp.Pages.Setting;
 
@@ -32,7 +34,14 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
     private string _phone;
     public string Phone {
         get => _phone;
-        set { _phone = value; OnPropertyChanged(); }
+        set {
+            if (string.IsNullOrWhiteSpace(value)) {
+                _phone = "---";
+            } else {
+                _phone = NormalizePhone(value);
+            }
+            OnPropertyChanged();
+        }
     }
 
     private string _address;
@@ -77,11 +86,27 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
         AddressContainer.Children.Clear();
 
         foreach (var addr in addresses) {
-            AddressContainer.Children.Add(new Label {
-                Text = $"  {addr.AddressType} ... {addr.Address}",
-                FontSize = 26,
-                TextColor = Colors.Black,
+            var stack = new VerticalStackLayout {
+                Spacing = 4,
+                Margin = new Thickness(0,10,0,10)
+            };
+
+            // 種別（1行目）
+            stack.Children.Add(new Label {
+                Text = $"【{addr.AddressType}】",
+                FontSize = 17,
+                TextColor = Colors.Black
             });
+
+            // 住所（2行目）
+            stack.Children.Add(new Label {
+                Text = addr.Address,
+                FontSize = 17,
+                TextColor = Colors.Black,
+                LineBreakMode = LineBreakMode.WordWrap
+            });
+
+            AddressContainer.Children.Add(stack);
         }
     }
 
@@ -92,5 +117,38 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
     // 編集ボタン
     private async void OnEditButtonClick(object sender, EventArgs e) {
         await Shell.Current.GoToAsync("editprofilepage");
+    }
+
+    private string NormalizePhone(string input) {
+        if (string.IsNullOrWhiteSpace(input)) return "";
+
+        string num = input.Normalize(NormalizationForm.FormKC);
+        num = new string(num.Where(char.IsDigit).ToArray());
+
+        if (num.StartsWith("0120") && num.Length == 10)
+            return $"{num[..4]}-{num.Substring(4, 3)}-{num.Substring(7)}";
+
+        if (num.StartsWith("0570") && num.Length == 10)
+            return $"{num[..4]}-{num.Substring(4, 2)}-{num.Substring(6)}";
+
+        if ((num.StartsWith("090") || num.StartsWith("080") ||
+             num.StartsWith("070") || num.StartsWith("060")) && num.Length == 11)
+            return $"{num[..3]}-{num.Substring(3, 4)}-{num.Substring(7)}";
+
+        if (num.StartsWith("050") && num.Length == 11)
+            return $"{num[..3]}-{num.Substring(3, 4)}-{num.Substring(7)}";
+
+        string[] area4 = { "0276", "0285", "0297", "0299", "0466", "0476", "0479" };
+        if (num.Length == 10 && area4.Any(a => num.StartsWith(a)))
+            return $"{num[..4]}-{num.Substring(4, 2)}-{num.Substring(6)}";
+
+        string[] area3 = { "027", "028", "029", "03", "04", "045", "046", "047", "048", "049" };
+        if (num.Length == 10 && area3.Any(a => num.StartsWith(a)))
+            return $"{num[..3]}-{num.Substring(3, 3)}-{num.Substring(6)}";
+
+        if (num.Length == 10 && (num.StartsWith("03") || num.StartsWith("06")))
+            return $"{num[..2]}-{num.Substring(2, 4)}-{num.Substring(6)}";
+
+        return num;
     }
 }

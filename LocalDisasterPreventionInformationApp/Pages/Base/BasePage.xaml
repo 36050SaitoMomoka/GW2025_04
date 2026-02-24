@@ -8,56 +8,65 @@
     <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- 共通ヘッダー -->
-        <Border x:Name="HeaderArea" Grid.Row="0"
-        BackgroundColor="#F5F5F5"
-        Padding="10">
+        <Border x:Name="HeaderArea"
+                Grid.Row="0"
+                BackgroundColor="#74847F"
+                Padding="10">
 
             <Grid ColumnDefinitions="Auto,*,Auto,Auto"
-          HeightRequest="60">
+                  HeightRequest="60">
 
                 <!-- ハンバーガーメニュー -->
                 <ImageButton Grid.Column="0"
-                     Source="hamburger.png"
-                     BackgroundColor="Transparent"
-                     WidthRequest="40"
-                     HeightRequest="40"
-                     Command="{Binding OpenMenuCommand}" />
+                             Source="hamburger.png"
+                             BackgroundColor="Transparent"
+                             WidthRequest="40"
+                             HeightRequest="40"
+                             Command="{Binding OpenMenuCommand}" />
 
-                <!-- ページ名（左寄せのまま） -->
+                <!-- ページ名 -->
                 <Label Grid.Column="1"
-               Text="{Binding PageTitle}"
-               FontSize="20"
-               VerticalOptions="Center"
-               HorizontalOptions="Start"
-               Margin="10,0,0,0" />
+                       Text="{Binding PageTitle}"
+                       FontSize="22"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Margin="10,0,0,0" />
 
-                <!-- 言語選択（既存のまま） -->
+                <!-- 言語選択 -->
                 <Border Grid.Column="2"
-                Stroke="#CCCCCC"
-                StrokeThickness="1"
-                Background="Transparent"
-                StrokeShape="RoundRectangle 25"
-                WidthRequest="140"
-                HeightRequest="35"
-                VerticalOptions="Center"
-                HorizontalOptions="End"
-                Margin="10,0">
+                        Stroke="#FFFFFF"
+                        StrokeThickness="2"
+                        BackgroundColor="#74847F"
+                        StrokeShape="RoundRectangle 28"
+                        WidthRequest="170"
+                        HeightRequest="45"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Margin="10,0">
 
-                    <Grid>
-                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Grid Padding="8,0">
+
+                        <HorizontalStackLayout Spacing="10"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start">
+
                             <Image Source="language.png"
-                           WidthRequest="28"
-                           HeightRequest="35"
-                           VerticalOptions="Center" />
+                                   WidthRequest="26"
+                                   HeightRequest="26"
+                                   VerticalOptions="Center" />
+
                         </HorizontalStackLayout>
 
                         <Picker ItemsSource="{Binding LanguageList}"
-                        SelectedItem="{Binding SelectedLanguage}"
-                        BackgroundColor="#00FFFFFF"
-                        TextColor="Black"
-                        WidthRequest="140"
-                        HeightRequest="35"
-                        ZIndex="100"/>
+                                SelectedItem="{Binding SelectedLanguage}"
+                                BackgroundColor="#00FFFFFF"
+                                TextColor="White"
+                                FontSize="16"
+                                HorizontalTextAlignment="Center"
+                                WidthRequest="170"
+                                HeightRequest="45"
+                            ZIndex="100"/>
                     </Grid>
                 </Border>
 
@@ -74,11 +83,12 @@
 
         <!-- ページごとの中身 -->
         <ContentView x:Name="ContentArea"
+                     BackgroundColor="#40C3D5C7"
              Grid.Row="1"
              Content="{Binding Source={x:Reference BaseRoot}, Path=InnerContent}" />
 
         <!-- 共通フッター -->
-        <Grid x:Name="FooterArea" Grid.Row="2" BackgroundColor="#F5F5F5" HeightRequest="30">
+        <Grid x:Name="FooterArea" Grid.Row="2" BackgroundColor="#74847F" HeightRequest="30">
             <Label Text="{Binding NewsText}"
                    FontSize="16"
                    VerticalOptions="Center"

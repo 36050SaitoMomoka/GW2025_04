@@ -134,41 +134,48 @@
                         </CollectionView>
 
                         <Button Text="{Binding Header_RouteSearch}"
-        Command="{Binding RouteSearchCommand}"
-        HeightRequest="45"
-        CornerRadius="8"
-        BackgroundColor="#4A90E2"
-        TextColor="White" />
+                                Command="{Binding RouteSearchCommand}"
+                                HeightRequest="45"
+                                CornerRadius="8"
+                                BackgroundColor="#B2BEB5"
+                                TextColor="White" />
 
                         <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
 
                             <Button Text="🚗"
-            WidthRequest="45"
-            HeightRequest="45"
-            CornerRadius="8"
-            Command="{Binding DrivingCommand}"
-            BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=driving}" />
+                                    WidthRequest="45"
+                                    HeightRequest="45"
+                                    CornerRadius="8"
+                                    Command="{Binding DrivingCommand}"
+                                    BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=driving}"
+                                    BorderColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToBorderColor}, ConverterParameter=driving}"
+                                    BorderWidth="3" />
 
                             <Button Text="🚲"
-            WidthRequest="45"
-            HeightRequest="45"
-            CornerRadius="8"
-            Command="{Binding CyclingCommand}"
-            BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=bicycling}" />
+                                    WidthRequest="45"
+                                    HeightRequest="45"
+                                    CornerRadius="8"
+                                    Command="{Binding CyclingCommand}"
+                                    BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=bicycling}" 
+                                    BorderColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToBorderColor}, ConverterParameter=driving}"
+                                    BorderWidth="3" />
 
                             <Button Text="🚶"
-            WidthRequest="45"
-            HeightRequest="45"
-            CornerRadius="8"
-            Command="{Binding WalkingCommand}"
-            BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=walking}" />
+                                    WidthRequest="45"
+                                    HeightRequest="45"
+                                    CornerRadius="8"
+                                    Command="{Binding WalkingCommand}"
+                                    BackgroundColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToColor}, ConverterParameter=walking}" 
+                                    BorderColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToBorderColor}, ConverterParameter=driving}"
+                                    BorderWidth="3" />
 
                             <Button Text="×"
-            WidthRequest="45"
-            HeightRequest="45"
-            CornerRadius="8"
-            BackgroundColor="#DDDDDD"
-            Command="{Binding ClearRouteCommand}" />
+                                    FontSize="30"
+                                    WidthRequest="45"
+                                    HeightRequest="45"
+                                    CornerRadius="8"
+                                    BackgroundColor="#DDDDDD"
+                                    Command="{Binding ClearRouteCommand}" />
 
                         </HorizontalStackLayout>
 
