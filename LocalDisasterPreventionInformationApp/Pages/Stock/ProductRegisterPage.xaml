@@ -37,12 +37,11 @@
                            VerticalOptions="Center"
                            HorizontalTextAlignment="End"/>
 
-                    <Entry x:Name="ExpirationEntry"
-                           Grid.Row="1" Grid.Column="1"
-                           Placeholder="{Binding Stock_Expire_Place}"
-                           WidthRequest="200"
-                           MaxLength="10"
-                           TextChanged="OnExpirationChanged"/>
+                    <DatePicker x:Name="ExpirationPicker"
+                                Grid.Row="1" Grid.Column="1"
+                                WidthRequest="200"
+                                Format="yyyy/MM/dd" />
+
 
                     <!-- 数量 -->
                     <Label Text="{Binding Stock_Quantity}"
