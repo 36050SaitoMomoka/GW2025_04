@@ -280,8 +280,8 @@
                 <Grid Grid.Row="3">
                     <Button Text="{Binding Btn_AddProduct}"
                             HorizontalOptions="End"
-                            WidthRequest="180"
-                            FontSize="20"
+                            WidthRequest="200"
+                            FontSize="15"
                             CornerRadius="10"
                             BackgroundColor="#B2BEB5"
                             TextColor="White"

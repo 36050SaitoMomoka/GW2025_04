@@ -69,12 +69,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Resources\Images\chat.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Resource>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <AndroidAsset Update="Platforms\Android\Assets\mergefromcity_2.geojson">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
