@@ -134,13 +134,25 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
             var row = CreateExistingAddressRow();
 
             // 値をセット
-            row.Children.OfType<Grid>().First().Children.OfType<Entry>().First().Text = addr.AddressType;
-            row.Children.OfType<Grid>().First().Children.OfType<Entry>().Last().Text = addr.Address;
+            var typeEntry = row.Children.OfType<Grid>().First().Children.OfType<Entry>().First();
+            var addressEntry = row.Children.OfType<Grid>().First().Children.OfType<Entry>().Last();
 
-            // 最後の行以外は＋ボタンを消す
-            if (i != addresses.Count - 1) {
-                RemovePlusButton(row);
-            }
+            typeEntry.Text = addr.AddressType;
+            addressEntry.Text = addr.Address;
+
+            row.BindingContext = addr;
+
+            var dummyZip = new Entry { Text = "" };
+            var dummyAuto = new Entry { Text = "" };
+
+            // ★ 既存住所行も _addressRows に登録する（null を入れない）
+            _addressRows.Add((
+                ZipEntry: dummyZip,
+                TypeEntry: typeEntry,
+                AutoAddressEntry: dummyAuto,
+                AddressLineEntry: addressEntry
+            ));
+
 
             AddressContainer.Add(row);
         }
@@ -229,7 +241,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
             ColumnDefinitions =
             {
             new ColumnDefinition { Width = GridLength.Auto }, // inner（住所種別＋住所）
-            new ColumnDefinition { Width = GridLength.Auto }  // ＋ボタン
+            new ColumnDefinition { Width = GridLength.Auto }  // -ボタン
         }
         };
 
@@ -256,21 +268,21 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         grid.Add(inner, 0, 0);
         Grid.SetRowSpan(inner, 2);
 
-        // ★ ＋ボタン（住所の横 & 正方形 & 高さを住所と揃える）
-        var addButton = new Button {
-            Text = "+",
+        // ★ マイナスボタン（住所セット削除）
+        var removeButton = new Button {
+            Text = "-",
             FontSize = 26,
-            WidthRequest = addressEntry.HeightRequest, // ← 正方形にするため高さと同じ幅
-            HeightRequest = addressEntry.HeightRequest, // ← 住所欄と同じ高さ
-            BackgroundColor = Color.FromArgb("#8CAFA4"),
+            WidthRequest = 45,
+            HeightRequest = 45,
+            BackgroundColor = Colors.Red,
             TextColor = Colors.White,
             CornerRadius = 10,
             Margin = new Thickness(5, 15, 0, 0)
         };
-        addButton.Clicked += OnAddAddressClicked;
+        removeButton.Clicked += OnRemoveAddressClicked;
 
-        // ★ Row=1（住所の行）に置く
-        grid.Add(addButton, 2, 0);
+        // 住所セットの右側に配置
+        grid.Add(removeButton, 1, 0);
 
         // 区切り線（住所エリアだけ）
         var line = new BoxView {
@@ -340,20 +352,21 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         };
         grid.Add(addressLineEntry, 0, 3); // ★ col0 のみに置く
 
-        // ⑤ ＋ボタン（番地の横）
-        var addButton = new Button {
-            Text = "+",
+        // ★ マイナスボタン（住所セット削除）
+        var removeButton = new Button {
+            Text = "-",
             FontSize = 20,
-            BackgroundColor = Color.FromArgb("#8CAFA4"),
+            BackgroundColor = Colors.Red,
             TextColor = Colors.White,
             CornerRadius = 10,
             WidthRequest = 45,
             HeightRequest = 45,
             Margin = new Thickness(5, 0, 0, 0)
         };
-        addButton.Clicked += OnAddAddressClicked;
+        removeButton.Clicked += OnRemoveAddressClicked;
 
-        grid.Add(addButton, 1, 3); // col1（650 の外側）
+        // 番地の横に配置
+        grid.Add(removeButton, 1, 3);
 
         // 保持
         _addressRows.Add((zipEntry, typeEntry, autoAddressEntry, addressLineEntry));
@@ -366,11 +379,21 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         var button = sender as Button;
         if (button == null) return;
 
-        var parentGrid = button.Parent as Grid;
-        parentGrid.Remove(button);
+        // 住所ラベル横の＋ボタンは Grid.Row=16 にあるので消さない
+        if (button.Parent is Grid parentGrid && Grid.GetRow(button) == 16) {
+            // 新しい住所行を追加するだけ
+            var newRow = CreateAddressRow();
+            AddressContainer.Add(newRow);
+            return;
+        }
 
-        var newRow = CreateAddressRow();
-        AddressContainer.Add(newRow);
+        // それ以外（住所行の＋ボタン）は消す
+        var grid = button.Parent as Grid;
+        grid?.Children.Remove(button);
+
+
+        var rowFromAddress = CreateAddressRow();
+        AddressContainer.Add(rowFromAddress);
     }
 
     //確定ボタン
@@ -418,5 +441,40 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
     //キャンセルボタン
     private async void OnBackClicked(object sender, EventArgs e) {
         await Shell.Current.GoToAsync("//MyPage");
+    }
+
+    private async void OnRemoveAddressClicked(object sender, EventArgs e) {
+        if (sender is not Button btn) return;
+
+        bool confirm = await DisplayAlert(
+            "確認",
+            "この住所を削除しますか？",
+            "削除する",
+            "キャンセル"
+        );
+
+        if (!confirm)
+            return;
+
+        if (btn.Parent is Grid row) {
+            // UI から削除
+            AddressContainer.Children.Remove(row);
+
+            // _addressRows から削除（新規・既存どちらも）
+            var target = _addressRows.FirstOrDefault(r =>
+                r.ZipEntry?.Parent?.Parent == row ||
+                r.TypeEntry?.Parent?.Parent == row ||
+                r.AutoAddressEntry?.Parent?.Parent == row ||
+                r.AddressLineEntry?.Parent?.Parent == row
+            );
+
+            if (target.TypeEntry != null)
+                _addressRows.Remove(target);
+
+            // ★ 既存住所行なら DB から削除（UserAddress をそのまま渡す）
+            if (row.BindingContext is Models.UserAddress addr) {
+                await _db.DeleteAddressAsync(addr);
+            }
+        }
     }
 }

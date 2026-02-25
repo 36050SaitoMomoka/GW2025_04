@@ -97,6 +97,19 @@
                                    TextColor="#333"
                                    HorizontalOptions="Start"/>
 
+                            <Button Grid.Row="16"
+                                    Grid.Column="1"
+                                    Text="+"
+                                    FontSize="20"
+                                    BackgroundColor="#8CAFA4"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    WidthRequest="40"
+                                    HeightRequest="40"
+                                    HorizontalOptions="End"
+                                    Margin="5,0,50,0"
+                                    Clicked="OnAddAddressClicked"/>
+
                             <!-- AddressContainer（名前そのまま） -->
                             <VerticalStackLayout x:Name="AddressContainer"
                                                  Grid.Row="18"
@@ -117,14 +130,6 @@
                                            FontSize="26"
                                            TextColor="#000"/>
 
-                                    <Button Grid.Column="4"
-                                            Text="+"
-                                            FontSize="20"
-                                            BackgroundColor="#2196F3"
-                                            TextColor="White"
-                                            CornerRadius="10"
-                                            Margin="5,0,0,0"
-                                            Clicked="OnAddAddressClicked"/>
                                 </Grid>
 
                                 <BoxView HeightRequest="2"
@@ -146,7 +151,7 @@
                             TextColor="White"
                             Grid.Column="1"
                             CornerRadius="10"
-                            WidthRequest="120"
+                            WidthRequest="170"
                             Margin="10,0"
                             Clicked="OnBackClicked"/>
 
@@ -157,7 +162,7 @@
                             TextColor="White"
                             Grid.Column="2"
                             CornerRadius="10"
-                            WidthRequest="120"
+                            WidthRequest="170"
                             Margin="10,0"
                             Clicked="OnSubmitClicked"/>
                 </Grid>
