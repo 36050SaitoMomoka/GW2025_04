@@ -261,6 +261,8 @@
                                     <!-- 削除ボタン -->
                                     <ImageButton Grid.Column="8"
                                          Source="delete.png"
+                                                 BackgroundColor="Transparent"
+                                                 BorderWidth="0"
                                          WidthRequest="30"
                                          HeightRequest="30"
                                          Command="{Binding Source={x:Reference ThisPage}, Path=DeleteCommand}"
