@@ -115,8 +115,8 @@
     <value>マイページ</value>
   </data>
 
-	<data name="Header_Font" xml:space="preserve">
-    <value>フォント選択</value>
+	<data name="Header_Edit" xml:space="preserve">
+    <value>編集ページ</value>
   </data>
 
 	<!-- メニュー -->

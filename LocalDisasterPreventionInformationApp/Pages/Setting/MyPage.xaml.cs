@@ -83,6 +83,19 @@ public partial class MyPage : ContentPage, INotifyPropertyChanged {
     protected override async void OnAppearing() {
         base.OnAppearing();
         var addresses = await _db.GetAddressesAsync();
+
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+        if (vm != null) {
+            vm.PageTitle = vm.Header_MyPage;
+
+            // Œ¾ŒêØ‚è‘Ö‚¦Žž‚É‚à Picker ‚ðXV
+            vm.PropertyChanged += (s, e) => {
+                if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
+                    vm.PageTitle = vm.Header_MyPage;
+                }
+            };
+        }
+
         LoadData();
     }
 

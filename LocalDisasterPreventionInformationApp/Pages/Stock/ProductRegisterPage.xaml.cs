@@ -19,6 +19,7 @@ public partial class ProductRegisterPage : ContentPage {
         //PageTitleを「備蓄管理」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
+            vm.PageTitle = vm.Header_Stock;
             vm.PropertyChanged += (s, e) => {
                 if (e.PropertyName == null || e.PropertyName == "SelectedLangage") {
                     SetPickerItems(vm);
@@ -27,7 +28,7 @@ public partial class ProductRegisterPage : ContentPage {
             // 初回セット
             SetPickerItems(vm);
 
-            vm.PageTitle = "備蓄管理";
+            vm.PageTitle = vm.Header_Stock;
         }
     }
 

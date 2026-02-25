@@ -115,8 +115,8 @@
     <value>마이페이지</value>
   </data>
 
-	<data name="Header_Font" xml:space="preserve">
-    <value>글꼴 선택</value>
+	<data name="Header_Edit" xml:space="preserve">
+    <value>편집 페이지</value>
   </data>
 
 	<!-- メニュー -->

@@ -17,19 +17,19 @@
 
     <!-- ハンバーガーメニュー用 -->
     <!-- トップページ -->
-    <FlyoutItem Title="トップページ">
+    <FlyoutItem Title="{Binding Header_Top}">
         <ShellContent Route="TopPage"
                       ContentTemplate="{DataTemplate top:TopPage}" />
     </FlyoutItem>
 
     <!-- ハザードマップ -->
-    <FlyoutItem Title="ハザードマップ">
+    <FlyoutItem Title="{Binding Header_HazardMap}">
         <ShellContent Route="HazardMapPage"
                   ContentTemplate="{DataTemplate hazard:HazardMapPage}" />
     </FlyoutItem>
 
     <!-- 備蓄管理 -->
-    <FlyoutItem Title="備蓄管理" Route="StockPage" >
+    <FlyoutItem Title="{Binding Header_Stock}" Route="StockPage" >
         <ShellContent
                        ContentTemplate="{DataTemplate stock:StockPage}" />
     </FlyoutItem>
