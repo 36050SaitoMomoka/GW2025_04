@@ -24,7 +24,7 @@ public partial class StartupPage : ContentPage {
 
         // š ƒQ[ƒW‚Ì‰Šú•`‰æ‚ðŠ®‘S‚É‰B‚·iÂ‚¢ƒQ[ƒW‚ªŒ©‚¦‚é–â‘è‚Ì‘Îôj
         GaugePath.Opacity = 0;                 // ƒQ[ƒW‘S‘Ì‚ð“§–¾‚É‚·‚é
-        ArcSegment.Point = new Point(75, 10);  // 0% ‚ÌˆÊ’u‚É‚µ‚È‚¢i‰Šú•`‰æ‚ð–h‚®j
+        ArcSegment.Point = new Point(125, 10);  // 0% ‚ÌˆÊ’u‚É‚µ‚È‚¢i‰Šú•`‰æ‚ð–h‚®j
         ArcSegment.IsLargeArc = false;
     }
 
@@ -191,8 +191,12 @@ public partial class StartupPage : ContentPage {
             double angle = percent * 3.6;
             double radians = (Math.PI / 180) * (angle - 90);
 
-            double x = 75 + 65 * Math.Cos(radians);
-            double y = 75 + 65 * Math.Sin(radians);
+            double centerX = 125;
+            double centerY = 125;
+            double radius = 115;
+
+            double x = centerX + radius * Math.Cos(radians);
+            double y = centerY + radius * Math.Sin(radians);
 
             ArcSegment.Point = new Point(x, y);
             ArcSegment.IsLargeArc = angle > 180;

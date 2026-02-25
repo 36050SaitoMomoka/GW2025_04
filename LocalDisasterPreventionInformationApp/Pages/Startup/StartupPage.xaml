@@ -11,25 +11,25 @@
 
             <!-- 外枠の円 -->
             <Ellipse
-                WidthRequest="150"
-                HeightRequest="150"
-                Stroke="LightGray"
-                StrokeThickness="10"/>
+                WidthRequest="250"
+                HeightRequest="250"
+                Stroke="#F0F0F0"
+                StrokeThickness="20"/>
 
             <!-- アニメーションする円弧（ゲージ） -->
             <Path
                 x:Name="GaugePath"
-                Stroke="DodgerBlue"
-                StrokeThickness="10"
+                Stroke="#A6E1CA"
+                StrokeThickness="18"
                 StrokeLineCap="Round">
                 <Path.Data>
                     <PathGeometry>
                         <PathFigure x:Name="ArcFigure"
-                                    StartPoint="75,10">
+                                    StartPoint="125,10">
                             <ArcSegment x:Name="ArcSegment"
-                                        Size="65,65"
+                                        Size="115,115"
                                         SweepDirection="Clockwise"
-                                        Point="75,10"
+                                        Point="125,10"
                                         IsLargeArc="False"/>
                         </PathFigure>
                     </PathGeometry>
@@ -48,7 +48,7 @@
 
         <!-- 下部のLOADING... -->
         <Label Text="LOADING..."
-               FontSize="18"
+               FontSize="22"
                HorizontalOptions="Center"
                VerticalOptions="End"
                Margin="0,0,0,80"
