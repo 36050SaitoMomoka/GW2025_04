@@ -45,34 +45,14 @@ public partial class ProductRegisterPage : ContentPage {
     private async void OnSubmitClicked(object sender, EventArgs e) {
 
         string name = ProductNameEntry.Text?.Trim();
-        string expire = ExpirationEntry.Text?.Trim();
+        DateTime expire = ExpirationPicker.Date;
         string quantity = QuantityEntry.Text?.Trim();
         string category = CategoryPicker.SelectedItem?.ToString();
 
         if (string.IsNullOrEmpty(name) ||
-            string.IsNullOrEmpty(expire) ||
             string.IsNullOrEmpty(quantity) ||
             string.IsNullOrEmpty(category)) {
             await DisplayAlert("エラー", "すべての項目を入力してください。", "OK");
-            return;
-        }
-
-        // 正規化処理
-        string expireNormalized = NormalizeDate(expire);
-        if (expireNormalized == null) {
-            await DisplayAlert("エラー", "日付の形式が正しくありません。", "OK");
-            return;
-        }
-
-        //日付チェック(存在しない日付はエラー)
-        DateTime exp;
-        if (!DateTime.TryParseExact(
-                expire,
-                "yyyyMMdd",
-                null,
-                System.Globalization.DateTimeStyles.None,
-                out exp)) {
-            await DisplayAlert("エラー", "日付が正しくありません", "OK");
             return;
         }
 
@@ -91,7 +71,7 @@ public partial class ProductRegisterPage : ContentPage {
 
         var stock = new Models.Stock {
             ProductId = product.ProductId,
-            ExpirationDate = exp,
+            ExpirationDate = expire,
             Quantity = qty,
         };
 
@@ -102,59 +82,6 @@ public partial class ProductRegisterPage : ContentPage {
 
     private async void OnBackClicked(object sender, EventArgs e) {
         await Shell.Current.GoToAsync("//StockPage");
-    }
-
-    // 消費期限正規化
-    private string NormalizeDate(string input) {
-        // 全角→半角
-        input = input.Normalize(System.Text.NormalizationForm.FormKC);
-        if (string.IsNullOrWhiteSpace(input))
-            return null;
-
-        // 数字以外をすべて除去（例: 2024/02/01 → 20240201）
-        var digits = new string(input.Where(char.IsDigit).ToArray());
-
-        if (digits.Length != 8)
-            return null;
-
-        // yyyy/MM/dd に整形
-        return $"{digits.Substring(0, 4)}/{digits.Substring(4, 2)}/{digits.Substring(6, 2)}";
-    }
-
-    // 消費期限自動フォーマット
-    private bool _isEditing = false;
-
-    private void OnExpirationChanged(object sender, TextChangedEventArgs e) {
-        if (_isEditing) return;
-
-        _isEditing = true;
-
-        var entry = (Entry)sender;
-        string raw = e.NewTextValue;
-
-        if (string.IsNullOrEmpty(raw)) return;
-
-        // 数字だけ取り出す
-        string digits = new string(raw.Where(char.IsDigit).ToArray());
-
-        if (digits.Length > 8)
-            digits = digits.Substring(0, 8);
-
-        string formatted = digits;
-
-        // yyyy/MM/dd の形に整形
-        if (digits.Length >= 4)
-            formatted = digits.Substring(0, 4);
-
-        if (digits.Length >= 5)
-            formatted += "/" + digits.Substring(4, Math.Min(2, digits.Length - 4));
-
-        if (digits.Length >= 7)
-            formatted += "/" + digits.Substring(6, Math.Min(2, digits.Length - 6));
-
-        _isEditing = true;
-        entry.Text = formatted;
-        _isEditing = false;
     }
 
     // 数量→数字以外入力させない
