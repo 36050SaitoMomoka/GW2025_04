@@ -169,13 +169,16 @@
                                          BorderColor="{Binding CurrentRouteMode, Converter={StaticResource ModeToBorderColor}, ConverterParameter=driving}"
                                          BorderWidth="3" />
 
-                            <Button Text="×"
-                                    FontSize="30"
-                                    WidthRequest="45"
-                                    HeightRequest="45"
-                                    CornerRadius="8"
-                                    BackgroundColor="#DDDDDD"
-                                    Command="{Binding ClearRouteCommand}" />
+                            <ImageButton Source="exit.png"
+                                         WidthRequest="45"
+                                         HeightRequest="45"
+                                         CornerRadius="8"
+                                         Padding="0"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center"
+                                         Aspect="AspectFit"
+                                         BackgroundColor="#DDDDDD"
+                                         Command="{Binding ClearRouteCommand}" />
 
                         </HorizontalStackLayout>
 

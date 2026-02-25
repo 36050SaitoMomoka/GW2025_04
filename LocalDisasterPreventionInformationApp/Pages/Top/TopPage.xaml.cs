@@ -275,6 +275,7 @@ public partial class TopPage : ContentPage {
             NearbySheltersList.ItemsSource = null;
             NearbySheltersList.ItemsSource = current;
         }
+        NearbySheltersList.SelectedItem = null;
     }
 
     public class NearbyShelterItem {
