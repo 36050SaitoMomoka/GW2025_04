@@ -69,7 +69,14 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         //PageTitleを「マイページ」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
-            vm.PageTitle = "マイページ";
+            vm.PageTitle = vm.Header_Edit;
+
+            // 言語切り替え時にも Picker を更新
+            vm.PropertyChanged += (s, e) => {
+                if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
+                    vm.PageTitle = vm.Header_Edit;
+                }
+            };
         }
     }
 

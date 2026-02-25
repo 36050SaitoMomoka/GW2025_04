@@ -68,7 +68,7 @@ namespace LocalDisasterPreventionInformationApp {
         public string Btn_Cancel => AppResources.Btn_Cancel;
 
         public string Header_AppTitle => AppResources.Header_AppTitle;
-        public string Header_Font => AppResources.Header_Font;
+        public string Header_Edit => AppResources.Header_Edit;
         public string Header_HazardMap => AppResources.Header_HazardMap;
         public string Header_MyPage => AppResources.Header_MyPage;
         public string Header_RouteSearch => AppResources.Header_RouteSearch;

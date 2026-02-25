@@ -241,11 +241,11 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
-        ///   フォント選択 に類似しているローカライズされた文字列を検索します。
+        ///   編集ページ に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Header_Font {
+        internal static string Header_Edit {
             get {
-                return ResourceManager.GetString("Header_Font", resourceCulture);
+                return ResourceManager.GetString("Header_Edit", resourceCulture);
             }
         }
         
