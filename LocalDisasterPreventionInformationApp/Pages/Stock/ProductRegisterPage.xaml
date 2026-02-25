@@ -39,8 +39,9 @@
 
                     <Entry x:Name="ExpirationEntry"
                            Grid.Row="1" Grid.Column="1"
-                           Placeholder="{Binding Stock_Expire}"
+                           Placeholder="{Binding Stock_Expire_Place}"
                            WidthRequest="200"
+                           MaxLength="10"
                            TextChanged="OnExpirationChanged"/>
 
                     <!-- 数量 -->

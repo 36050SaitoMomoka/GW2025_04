@@ -26,12 +26,13 @@ public partial class HazardMapPage : ContentPage {
         //PageTitleを「ハザードマップ」にする
         var vm = Shell.Current.BindingContext as AppShellViewModel;
         if (vm != null) {
-            vm.PageTitle = "ハザードマップ";
+            vm.PageTitle = vm.Header_HazardMap;
 
             // 言語切り替え時にも Picker を更新
             vm.PropertyChanged += (s, e) => {
                 if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
                     SetPickerItems(vm);
+                    vm.PageTitle = vm.Header_HazardMap;
                 }
             };
 

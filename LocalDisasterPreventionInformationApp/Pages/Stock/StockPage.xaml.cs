@@ -54,11 +54,37 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
             vm.PropertyChanged += (s, e) => {
                 if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
                     SetSortPickerItems(vm);
+                    vm.PageTitle = vm.Header_Stock;
+                    RefreshExpiringItems();
                 }
             };
 
             // 初回セット
             SetSortPickerItems(vm);
+        }
+    }
+
+    //期限のメッセージ翻訳
+    private async void RefreshExpiringItems() {
+        var products = await _db.GetProductsAsync();
+        var stocks = await _db.GetStocksAsync();
+        ExpiringItems.Clear();
+
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+        var today = DateTime.Today;
+
+        foreach (var s in stocks) {
+            var p = products.First(x => x.ProductId == s.ProductId);
+
+            if (s.ExpirationDate < today) {
+                ExpiringItems.Add(new {
+                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}{vm.Stock_Pass}"
+                });
+            } else if ((s.ExpirationDate - today).TotalDays <= 30) {
+                ExpiringItems.Add(new {
+                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}{vm.Stock_Approach}"
+                });
+            }
         }
     }
 
@@ -68,7 +94,6 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
         vm.Stock_CategoryOrder,
         vm.Stock_ExpireOrder,
         vm.Stock_NameOrder,
-        //vm.Stock_Others
         };
 
         // 最初から一つ選ばれた状態にする
@@ -126,15 +151,17 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
 
             var today = DateTime.Today;
 
+            var vm = Shell.Current.BindingContext as AppShellViewModel;
+
             //期限切れ(今日より前)
             if (s.ExpirationDate < today) {
                 ExpiringItems.Add(new {
-                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}の期限が切れています"
+                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}{vm.Stock_Pass}"
                 });
                 //期限が近い商品
             } else if ((s.ExpirationDate - today).TotalDays <= 30) {
                 ExpiringItems.Add(new {
-                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}の期限が近いです"
+                    Message = $"{s.ExpirationDate:yyyy/MM/dd}：{p.Name}{vm.Stock_Approach}"
                 });
             }
         }

@@ -565,6 +565,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   の期限が近いです に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Stock_Approach {
+            get {
+                return ResourceManager.GetString("Stock_Approach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   カテゴリ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Stock_Category {
@@ -601,6 +610,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   例：2026/01/01 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Stock_Expire_Place {
+            get {
+                return ResourceManager.GetString("Stock_Expire_Place", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   消費期限順 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Stock_ExpireOrder {
@@ -624,6 +642,15 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         internal static string Stock_Others {
             get {
                 return ResourceManager.GetString("Stock_Others", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   の期限が切れています に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Stock_Pass {
+            get {
+                return ResourceManager.GetString("Stock_Pass", resourceCulture);
             }
         }
         

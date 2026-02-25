@@ -1,9 +1,13 @@
 <ContentPage
     x:Class="LocalDisasterPreventionInformationApp.Pages.Setting.MyPage"
+    x:Name="ThisPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:base="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Base"
     Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+    </ContentPage.Resources>
 
     <base:BasePage>
         <base:BasePage.InnerContent>
@@ -14,7 +18,7 @@
 
                         <!-- 編集ボタン -->
                         <HorizontalStackLayout HorizontalOptions="End">
-                            <Button Text="編集"
+                            <Button Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Btn_Edit}"
                                     HeightRequest="45"
                                     CornerRadius="8"
                                     BackgroundColor="#B2BEB5"
@@ -70,7 +74,7 @@
                                                 Padding="12"
                                                 StrokeShape="RoundRectangle 15"/>
 
-                                        <Label Text="メールアドレス"
+                                        <Label Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.My_Email}"
                                                BackgroundColor="White"
                                                Padding="6,0"
                                                FontSize="16"
@@ -96,7 +100,7 @@
                                                 Padding="12"
                                                 StrokeShape="RoundRectangle 15"/>
 
-                                        <Label Text="電話番号"
+                                        <Label Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.My_Phone}"
                                                BackgroundColor="White"
                                                Padding="6,0"
                                                FontSize="16"
@@ -124,7 +128,7 @@
                                             Padding="12"
                                             StrokeShape="RoundRectangle 15"/>
 
-                                    <Label Text="住所"
+                                    <Label Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.My_Address}"
                                            BackgroundColor="White"
                                            Padding="6,0"
                                            FontSize="16"

@@ -206,6 +206,18 @@
     <value>삭제</value>
   </data>
 
+	<data name="Stock_Pass" xml:space="preserve">
+    <value> 유통기한이 지났습니다</value>
+  </data>
+
+	<data name="Stock_Approach" xml:space="preserve">
+    <value> 유통기한이 임박했습니다</value>
+  </data>
+
+	<data name="Stock_Expire_Place" xml:space="preserve">
+    <value>예：2026/01/01</value>
+  </data>
+
 	<!-- 商品登録ページ -->
 	<data name="Product_Food" xml:space="preserve">
   <value>식품</value>

@@ -109,6 +109,9 @@ namespace LocalDisasterPreventionInformationApp {
         public string Stock_ProductName => AppResources.Stock_ProductName;
         public string Stock_Quantity => AppResources.Stock_Quantity;
         public string Stock_Sort => AppResources.Stock_Sort;
+        public string Stock_Pass => AppResources.Stock_Pass;
+        public string Stock_Approach => AppResources.Stock_Approach;
+        public string Stock_Expire_Place => AppResources.Stock_Expire_Place;
 
         public string Product_Food => AppResources.Product_Food;
         public string Product_Beverages => AppResources.Product_Beverages;
