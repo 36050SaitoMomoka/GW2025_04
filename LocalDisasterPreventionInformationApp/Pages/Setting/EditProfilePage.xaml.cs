@@ -255,7 +255,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
             FontSize = 26,
             WidthRequest = addressEntry.HeightRequest, // ← 正方形にするため高さと同じ幅
             HeightRequest = addressEntry.HeightRequest, // ← 住所欄と同じ高さ
-            BackgroundColor = Color.FromArgb("#B2BEB5"),
+            BackgroundColor = Color.FromArgb("#8CAFA4"),
             TextColor = Colors.White,
             CornerRadius = 10,
             Margin = new Thickness(5, 15, 0, 0)
@@ -337,7 +337,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         var addButton = new Button {
             Text = "+",
             FontSize = 20,
-            BackgroundColor = Color.FromArgb("#B2BEB5"),
+            BackgroundColor = Color.FromArgb("#8CAFA4"),
             TextColor = Colors.White,
             CornerRadius = 10,
             WidthRequest = 45,

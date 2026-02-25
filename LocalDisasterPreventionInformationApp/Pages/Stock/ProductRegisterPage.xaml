@@ -73,18 +73,26 @@
 
                     <!-- 戻るボタン -->
                     <Button Text="{Binding Btn_Back}"
-                            BackgroundColor="#CCCCCC"
-                            TextColor="Black"
+                            BackgroundColor="#B2BEB5"
+                            TextColor="White"
+                            FontSize="20"
+                            CornerRadius="10"
+                            WidthRequest="120"
+                            Margin="10,0"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            WidthRequest="120"
                             Clicked="OnBackClicked"/>
 
                     <!-- 登録ボタン -->
                     <Button Text="{Binding Btn_Register}"
+                            BackgroundColor="#8CAFA4"
+                            TextColor="White"
+                            FontSize="20"
+                            CornerRadius="10"
+                            WidthRequest="120"
+                            Margin="10,0"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            WidthRequest="120"
                             Clicked="OnSubmitClicked"/>
 
                 </HorizontalStackLayout>

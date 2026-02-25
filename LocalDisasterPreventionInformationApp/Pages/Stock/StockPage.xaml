@@ -277,13 +277,13 @@
                 <!-- 商品登録ボタン -->
                 <Grid Grid.Row="3">
                     <Button Text="{Binding Btn_AddProduct}"
-
                             HorizontalOptions="End"
-
                             WidthRequest="180"
-
-                            Margin="0,10,0,0"
-
+                            FontSize="20"
+                            CornerRadius="10"
+                            BackgroundColor="#B2BEB5"
+                            TextColor="White"
+                            Margin="10,0"
                             Clicked="OnRegisterClicked"/>
                 </Grid>
 
