@@ -58,11 +58,11 @@ public partial class ProductRegisterPage : ContentPage {
         }
 
         // 正規化処理
-        string expireNormalized = NormalizeDate(expire);
-        if (expireNormalized == null) {
-            await DisplayAlert("エラー", "日付の形式が正しくありません。", "OK");
-            return;
-        }
+        //string expireNormalized = NormalizeDate(expire);
+        //if (expireNormalized == null) {
+        //    await DisplayAlert("エラー", "日付の形式が正しくありません。", "OK");
+        //    return;
+        //}
 
         //日付チェック(存在しない日付はエラー)
         DateTime exp;
@@ -105,21 +105,21 @@ public partial class ProductRegisterPage : ContentPage {
     }
 
     // 消費期限正規化
-    private string NormalizeDate(string input) {
-        // 全角→半角
-        input = input.Normalize(System.Text.NormalizationForm.FormKC);
-        if (string.IsNullOrWhiteSpace(input))
-            return null;
+    //private string NormalizeDate(string input) {
+    //    // 全角→半角
+    //    input = input.Normalize(System.Text.NormalizationForm.FormKC);
+    //    if (string.IsNullOrWhiteSpace(input))
+    //        return null;
 
-        // 数字以外をすべて除去（例: 2024/02/01 → 20240201）
-        var digits = new string(input.Where(char.IsDigit).ToArray());
+    //    // 数字以外をすべて除去（例: 2024/02/01 → 20240201）
+    //    var digits = new string(input.Where(char.IsDigit).ToArray());
 
-        if (digits.Length != 8)
-            return null;
+    //    if (digits.Length != 8)
+    //        return null;
 
-        // yyyy/MM/dd に整形
-        return $"{digits.Substring(0, 4)}/{digits.Substring(4, 2)}/{digits.Substring(6, 2)}";
-    }
+    //    // yyyy/MM/dd に整形
+    //    return $"{digits.Substring(0, 4)}/{digits.Substring(4, 2)}/{digits.Substring(6, 2)}";
+    //}
 
     // 消費期限自動フォーマット
     private bool _isEditing = false;
@@ -127,7 +127,7 @@ public partial class ProductRegisterPage : ContentPage {
     private void OnExpirationChanged(object sender, TextChangedEventArgs e) {
         if (_isEditing) return;
 
-        _isEditing = true;
+        //_isEditing = true;
 
         var entry = (Entry)sender;
         string raw = e.NewTextValue;
