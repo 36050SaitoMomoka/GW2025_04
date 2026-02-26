@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace LocalDisasterPreventionInformationApp.Pages.Setting;
+namespace LocalDisasterPreventionInformationApp.Pages.Setting;//test
 
 //ContentPageを継承
 public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
