@@ -2,6 +2,7 @@ using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
 using Microsoft.Maui.Devices.Sensors;   // GPS
+using System.ComponentModel;
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
@@ -304,18 +305,24 @@ public partial class TopPage : ContentPage {
             // リストの背景色を更新
             foreach (var s in _nearest10)
                 s.IsSelected = (s == item);
-
-            var current = NearbySheltersList.ItemsSource;
-            NearbySheltersList.ItemsSource = null;
-            NearbySheltersList.ItemsSource = current;
         }
-        NearbySheltersList.SelectedItem = null;
     }
 
-    public class NearbyShelterItem {
+    public class NearbyShelterItem : INotifyPropertyChanged {
         public Shelter Shelter { get; set; }
         public double Distance { get; set; }
-        public bool IsSelected { get; set; }
+
+        private bool _isSelected;
+        public bool IsSelected {
+            get => _isSelected;
+            set {
+                if (_isSelected == value) return;
+                _isSelected = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSelected)));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     private async void PrefecturePicker_SelectedIndexChanged(object sender, EventArgs e) {
