@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:LocalDisasterPreventionInformationApp"
              xmlns:converters="clr-namespace:LocalDisasterPreventionInformationApp.Converters"
-             x:Class="LocalDisasterPreventionInformationApp.App">
+             x:Class="LocalDisasterPreventionInformationApp.App"
+>
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
