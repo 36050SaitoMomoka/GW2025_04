@@ -19,7 +19,7 @@
                 <!-- ハンバーガーメニュー -->
                 <ImageButton Grid.Column="0"
                              Source="hamburger.png"
-                             BackgroundColor="Transparent"
+                             BackgroundColor="#40C3D5C7"
                              WidthRequest="40"
                              HeightRequest="40"
                              Command="{Binding OpenMenuCommand}" />

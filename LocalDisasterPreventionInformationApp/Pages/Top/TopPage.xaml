@@ -121,10 +121,28 @@
                                         SelectionMode="Single"
                                         SelectionChanged="NearbySheltersList_SelectionChanged"
                                         HeightRequest="250">
+
+                            <CollectionView.Resources>
+                                <Style TargetType="VisualElement">
+                                    <Setter Property="VisualStateManager.VisualStateGroups">
+                                        <VisualStateGroupList>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="Transparent" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                    </Setter>
+                                </Style>
+                            </CollectionView.Resources>
+
+
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout Padding="5"
-                                                 BackgroundColor="{Binding IsSelected,Converter={StaticResource BoolToColorConverter}}">
+                                                 BackgroundColor="{Binding IsSelected,Converter={StaticResource BoolToColorConver}}">
                                         <Label Text="{Binding Shelter.Name}"/>
                                         <Label Text="{Binding Distance,StringFormat='{0:F2}km'}"
                                                FontSize="12" TextColor="Gray"/>
