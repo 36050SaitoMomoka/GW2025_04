@@ -50,6 +50,7 @@ namespace LocalDisasterPreventionInformationApp.Services {
 
                 await _db.SaveShelterAsync(s);
                 count++;
+                if (count > 2000) break;
             }
 
             return count;

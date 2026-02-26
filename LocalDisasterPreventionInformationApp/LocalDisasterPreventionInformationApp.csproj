@@ -69,6 +69,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidAsset Update="Platforms\Android\Assets\leaflet-routing-machine.css">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidAsset>
+	  <AndroidAsset Update="Platforms\Android\Assets\leaflet-routing-machine.js">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidAsset>
+	  <AndroidAsset Update="Platforms\Android\Assets\leaflet.css">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidAsset>
+	  <AndroidAsset Update="Platforms\Android\Assets\leaflet.js">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidAsset>
+	  <AndroidAsset Update="Platforms\Android\Assets\map.html">
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </AndroidAsset>
 	  <AndroidAsset Update="Platforms\Android\Assets\mergefromcity_2.geojson">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
