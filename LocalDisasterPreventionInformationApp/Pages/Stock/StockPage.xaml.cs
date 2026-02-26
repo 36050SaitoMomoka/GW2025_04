@@ -212,12 +212,14 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
         if (stock == null)
             return;
 
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+
         // 確認ダイアログ
         bool answer = await DisplayAlert(
-            "確認",
-            $"{stock.ProductName}（{stock.ExpireDate}）を削除しますか？",
-            "キャンセル",
-            "ＯＫ"
+            vm.Dialog_Confirm,
+            $"{stock.ProductName}（{stock.ExpireDate}）{vm.Dialog_Message2}",
+            vm.Dialog_Cancel,
+            vm.Dialog_Ok
         );
 
         if (answer)

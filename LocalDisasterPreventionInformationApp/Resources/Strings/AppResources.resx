@@ -304,4 +304,25 @@
   <value>住所</value>
 </data>
 
+	<!-- ダイアログ -->
+	<data name="Dialog_Confirm" xml:space="preserve">
+  <value>確認</value>
+</data>
+
+	<data name="Dialog_Cancel" xml:space="preserve">
+  <value>キャンセル</value>
+</data>
+
+	<data name="Dialog_Message" xml:space="preserve">
+  <value>この住所を削除しますか？</value>
+</data>
+
+	<data name="Dialog_Message2" xml:space="preserve">
+  <value>を削除しますか？</value>
+</data>
+
+	<data name="Dialog_Ok" xml:space="preserve">
+  <value>ＯＫ</value>
+</data>
+
 </root>

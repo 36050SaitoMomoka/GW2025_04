@@ -301,5 +301,26 @@
 	<data name="Edit_Address" xml:space="preserve">
   <value>地址</value>
 </data>
+
+	<!-- ダイアログ -->
+	<data name="Dialog_Confirm" xml:space="preserve">
+  <value>确认</value>
+</data>
+
+	<data name="Dialog_Cancel" xml:space="preserve">
+  <value>取消</value>
+</data>
+
+	<data name="Dialog_Message" xml:space="preserve">
+  <value>是否删除此地址？</value>
+</data>
+
+	<data name="Dialog_Message2" xml:space="preserve">
+  <value>是否删除？</value>
+</data>
+
+	<data name="Dialog_Ok" xml:space="preserve">
+  <value>确定</value>
+</data>
 	
 </root>

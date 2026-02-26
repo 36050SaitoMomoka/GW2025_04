@@ -133,6 +133,51 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   キャンセル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Dialog_Cancel {
+            get {
+                return ResourceManager.GetString("Dialog_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   確認 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Dialog_Confirm {
+            get {
+                return ResourceManager.GetString("Dialog_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   この住所を削除しますか？ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Dialog_Message {
+            get {
+                return ResourceManager.GetString("Dialog_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   を削除しますか？ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Dialog_Message2 {
+            get {
+                return ResourceManager.GetString("Dialog_Message2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ＯＫ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Dialog_Ok {
+            get {
+                return ResourceManager.GetString("Dialog_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   住所 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Edit_Address {

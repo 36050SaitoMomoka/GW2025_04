@@ -271,5 +271,26 @@
 	<data name="Edit_Address" xml:space="preserve">
   <value>Address</value>
 </data>
+
+	<!-- ダイアログ -->
+	<data name="Dialog_Confirm" xml:space="preserve">
+  <value>Confirm</value>
+</data>
+
+	<data name="Dialog_Cancel" xml:space="preserve">
+  <value>Cancel</value>
+</data>
+
+	<data name="Dialog_Message" xml:space="preserve">
+  <value>Delete this Address?</value>
+</data>
+
+	<data name="Dialog_Message2" xml:space="preserve">
+  <value>Delete?</value>
+</data>
+
+	<data name="Dialog_Ok" xml:space="preserve">
+  <value>ＯＫ</value>
+</data>
 	
 </root>

@@ -449,11 +449,13 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
     private async void OnRemoveAddressClicked(object sender, EventArgs e) {
         if (sender is not Button btn) return;
 
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+
         bool answer = await DisplayAlert(
-            "確認",
-            "この住所を削除しますか？",
-            "キャンセル",
-            "ＯＫ"
+            vm.Dialog_Confirm,
+            vm.Dialog_Message,
+            vm.Dialog_Cancel,
+            vm.Dialog_Ok
         );
 
         if (answer)

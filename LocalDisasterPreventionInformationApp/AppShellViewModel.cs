@@ -137,6 +137,12 @@ namespace LocalDisasterPreventionInformationApp {
         public string Edit_Phone => AppResources.Edit_Phone;
         public string Edit_Address => AppResources.Edit_Address;
         public string Edit_Furigana => AppResources.Edit_Furigana;
+
+        public string Dialog_Confirm => AppResources.Dialog_Confirm;
+        public string Dialog_Cancel => AppResources.Dialog_Cancel;
+        public string Dialog_Message => AppResources.Dialog_Message;
+        public string Dialog_Message2 => AppResources.Dialog_Message2;
+        public string Dialog_Ok => AppResources.Dialog_Ok;
         #endregion
 
 
