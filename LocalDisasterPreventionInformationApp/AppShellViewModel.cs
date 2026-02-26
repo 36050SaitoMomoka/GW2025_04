@@ -143,6 +143,11 @@ namespace LocalDisasterPreventionInformationApp {
         public string Dialog_Message => AppResources.Dialog_Message;
         public string Dialog_Message2 => AppResources.Dialog_Message2;
         public string Dialog_Ok => AppResources.Dialog_Ok;
+
+        public string Add_AddressType => AppResources.Add_AddressType;
+        public string Add_PostalCode => AppResources.Add_PostalCode;
+        public string Add_Pre_City => AppResources.Add_Pre_City;
+        public string Add_Street => AppResources.Add_Street;
         #endregion
 
 

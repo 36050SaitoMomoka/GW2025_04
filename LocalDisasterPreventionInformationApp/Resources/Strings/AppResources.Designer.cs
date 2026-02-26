@@ -61,6 +61,42 @@ namespace LocalDisasterPreventionInformationApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   住所種類（例：自宅・実家・職場） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Add_AddressType {
+            get {
+                return ResourceManager.GetString("Add_AddressType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   郵便番号（7桁） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Add_PostalCode {
+            get {
+                return ResourceManager.GetString("Add_PostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   都道府県 市区町村 町域（自動入力） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Add_Pre_City {
+            get {
+                return ResourceManager.GetString("Add_Pre_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   番地（例：1-1） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Add_Street {
+            get {
+                return ResourceManager.GetString("Add_Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   商品登録→ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Btn_AddProduct {
