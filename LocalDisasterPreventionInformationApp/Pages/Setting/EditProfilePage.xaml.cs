@@ -465,35 +465,43 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
 
         var vm = Shell.Current.BindingContext as AppShellViewModel;
 
+        if (btn.Parent is not Grid row)
+            return;
+
+        // 対象行を取得
+        var target = _addressRows.FirstOrDefault(r =>
+            r.ZipEntry?.Parent?.Parent == row ||
+            r.TypeEntry?.Parent?.Parent == row ||
+            r.AutoAddressEntry?.Parent?.Parent == row ||
+            r.AddressLineEntry?.Parent?.Parent == row
+        );
+
+        // DeleteRecord と同じ構造でメッセージを作る
+        string addressName =
+            $"{target.AutoAddressEntry.Text} {target.AddressLineEntry.Text}".Trim();
+
+        string message = $"{addressName}{vm.Dialog_Message2}";
+
         bool answer = await DisplayAlert(
             vm.Dialog_Confirm,
-            vm.Dialog_Message,
+            message,
             vm.Dialog_Cancel,
             vm.Dialog_Ok
         );
 
+        // OK が押されたときだけ削除（あなたのロジックに合わせて反転）
         if (answer)
             return;
 
-        if (btn.Parent is Grid row) {
-            // UI から削除
-            AddressContainer.Children.Remove(row);
+        // UI から削除
+        AddressContainer.Children.Remove(row);
 
-            // _addressRows から削除（新規・既存どちらも）
-            var target = _addressRows.FirstOrDefault(r =>
-                r.ZipEntry?.Parent?.Parent == row ||
-                r.TypeEntry?.Parent?.Parent == row ||
-                r.AutoAddressEntry?.Parent?.Parent == row ||
-                r.AddressLineEntry?.Parent?.Parent == row
-            );
+        // _addressRows から削除
+        if (target.TypeEntry != null)
+            _addressRows.Remove(target);
 
-            if (target.TypeEntry != null)
-                _addressRows.Remove(target);
-
-            // ★ 既存住所行なら DB から削除（UserAddress をそのまま渡す）
-            if (row.BindingContext is Models.UserAddress addr) {
-                await _db.DeleteAddressAsync(addr);
-            }
-        }
+        // DB から削除（既存住所の場合）
+        if (row.BindingContext is Models.UserAddress addr)
+            await _db.DeleteAddressAsync(addr);
     }
 }
