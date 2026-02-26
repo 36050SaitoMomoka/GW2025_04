@@ -316,7 +316,7 @@
 </data>
 
 	<data name="Dialog_Message2" xml:space="preserve">
-  <value>是否删除？</value>
+  <value> 是否删除？</value>
 </data>
 
 	<data name="Dialog_Ok" xml:space="preserve">

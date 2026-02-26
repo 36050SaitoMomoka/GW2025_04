@@ -339,7 +339,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
             TextColor = Colors.Black,
             WidthRequest = 650
         };
-        grid.Add(typeEntry, 0, 0); // ★ col0 のみに置く
+        grid.Add(typeEntry, 0, 0); // col0 のみに置く
 
         // ② 郵便番号
         var zipEntry = new Entry {
@@ -350,7 +350,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
             WidthRequest = 650
         };
         zipEntry.TextChanged += OnZipChanged;
-        grid.Add(zipEntry, 0, 1); // ★ col0 のみに置く
+        grid.Add(zipEntry, 0, 1); // col0 のみに置く
 
         // ③ 自動住所
         var autoAddressEntry = new Entry {
@@ -360,7 +360,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
             TextColor = Colors.Black,
             WidthRequest = 650
         };
-        grid.Add(autoAddressEntry, 0, 2); // ★ col0 のみに置く
+        grid.Add(autoAddressEntry, 0, 2); // col0 のみに置く
 
         // ④ 番地
         var addressLineEntry = new Entry {
@@ -369,7 +369,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
             TextColor = Colors.Black,
             WidthRequest = 650
         };
-        grid.Add(addressLineEntry, 0, 3); // ★ col0 のみに置く
+        grid.Add(addressLineEntry, 0, 3); // col0 のみに置く
 
         // ★ マイナスボタン（住所セット削除）
         var removeButton = new Button {

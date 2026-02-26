@@ -316,7 +316,7 @@
 </data>
 
 	<data name="Dialog_Message2" xml:space="preserve">
-  <value>를 삭제하시겠습니까?</value>
+  <value> 를 삭제하시겠습니까?</value>
 </data>
 
 	<data name="Dialog_Ok" xml:space="preserve">
