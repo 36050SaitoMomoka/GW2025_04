@@ -118,14 +118,23 @@ public partial class HazardMapPage : ContentPage {
         var hazard = HazardPicker.SelectedItem as HazardType;
         var address = AddressPicker.SelectedItem as Models.UserAddress;
 
-        if (hazard == null || address == null) return;
+        //災害種別だけでもタイル表示する
+        if (hazard != null) {
+            //住所選択されてたらフォーカス
+            if(address != null) {
+                double lat = address.Latitude ?? 35.0;
+                double lon = address.Longitude ?? 135.0;
 
-        double lat = address.Latitude ?? 35.0;
-        double lon = address.Longitude ?? 135.0;
+                UpdateMap(hazard.TileUrl, lat, lon);
+                UpdateMarker(lat, lon);
+            } else {
+                //住所選択されてなかったら現在地または固定値
+                double lat = _pendingLat ?? 35.681236;
+                double lon = _pendingLng ?? 139.767125;
 
-        UpdateMap(hazard.TileUrl, lat, lon);
-
-        UpdateMarker(lat, lon);
+                UpdateMap(hazard.TileUrl, lat, lon);
+            }
+        }
     }
 
     //地図更新
