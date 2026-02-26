@@ -1,8 +1,8 @@
-using System.Globalization;
 using LocalDisasterPreventionInformationApp.Database;
 using LocalDisasterPreventionInformationApp.Models;
 using LocalDisasterPreventionInformationApp.Pages.Base;
 using Microsoft.Maui.Devices.Sensors;   // GPS
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;                 // JSON変換用
@@ -16,15 +16,37 @@ public partial class TopPage : ContentPage {
     private List<NearbyShelterItem> _nearest10;
     private List<NearbyShelterItem> _currentList;
 
-
     public bool _isMapLoaded = false;
     private string _pendingRouteMode = null;
+
+    private double? _pendingLat = null;
+    private double? _pendingLng = null;
+
+    private WebView MapWebView;
 
     public TopPage(AppDatabase db) {
         InitializeComponent();
         _db = db;
 
+        //ここから追加
+        MapWebView = new WebView {
+#if ANDROID
+            Source = new UrlWebViewSource {
+                Url = $"file:///android_asset/map.html?cb={Guid.NewGuid()}"
+
+            }
+#else
+            Source = "map.html"
+#endif
+        };
+
+        MapWebView.Navigated += MapWebView_Navigated;
+        Inner.Children.Insert(0,MapWebView);
+
+
+
         BindingContext = Shell.Current.BindingContext;
+
 
         // RouteModeChangedイベントを取得
         var vm = Shell.Current.BindingContext as AppShellViewModel;
@@ -42,6 +64,8 @@ public partial class TopPage : ContentPage {
         // 移動手段ボタンからの呼び出し
         vm.RouteModeChanged += async (mode) =>
         {
+            await WaitForMapReadyAsync();
+
             if (!_isMapLoaded) {
                 _pendingRouteMode = mode;
                 return;
@@ -72,9 +96,9 @@ public partial class TopPage : ContentPage {
         //MapWebView.Reload();
 
         // 必ず Navigated が発火する URL にする
-        MapWebView.Source = new UrlWebViewSource {
-            Url = $"map.html?cachebuster={Guid.NewGuid()}"
-        };
+        //MapWebView.Source = new UrlWebViewSource {
+        //    Url = $"file:///android_asset/map.html?cb={Guid.NewGuid()}"
+        //};
 
         // PageTitle を設定
         if (Shell.Current.BindingContext is AppShellViewModel vm) {
@@ -92,6 +116,14 @@ public partial class TopPage : ContentPage {
         if (e.Url.Contains("map.html")) {
             _isMapLoaded = true;
 
+            await WaitForMapReadyAsync();
+
+            if(_pendingLat != null && _pendingLng != null) {
+                await MapWebView.EvaluateJavaScriptAsync(
+                    $"setCurrentLocation({_pendingLat},{_pendingLng});"
+                );
+            }
+
             // 現在地と避難所データを取得してleafletに渡す
             await LoadSheltersAndShowPinsAsync();
 
@@ -103,6 +135,15 @@ public partial class TopPage : ContentPage {
         }
     }
 
+    private async Task WaitForMapReadyAsync() {
+        for(int i = 0; i < 50; i++) {
+            var result = await MapWebView.EvaluateJavaScriptAsync("window.mapReady");
+            if (result == "true") return;
+
+            await Task.Delay(100);
+        }
+    }
+
     // 最寄り避難所へのルート検索
     public async Task RouteToNearestShelterAsync(string mode = "driving") {
         var location = await Geolocation.GetLocationAsync();
@@ -111,12 +152,7 @@ public partial class TopPage : ContentPage {
 
         if (!_isMapLoaded) return;
 
-        bool mapReady = false;
-        while (!mapReady) {
-            var result = await MapWebView.EvaluateJavaScriptAsync("window.mapReady");
-            mapReady = result == "true";
-            if (!mapReady) await Task.Delay(100);
-        }
+        await WaitForMapReadyAsync();
 
         double currentLat = location.Latitude;
         double currentLng = location.Longitude;
@@ -178,12 +214,8 @@ public partial class TopPage : ContentPage {
     public async Task ClearRouteAsync() {
         if (!_isMapLoaded) return;
 
-        bool mapReady = false;
-        while (!mapReady) {
-            var result = await MapWebView.EvaluateJavaScriptAsync("window.mapReady");
-            mapReady = result == "true";
-            if (!mapReady) await Task.Delay(100);
-        }
+        await WaitForMapReadyAsync();
+
         await MapWebView.EvaluateJavaScriptAsync("clearRoute();");
     }
 
@@ -203,6 +235,8 @@ public partial class TopPage : ContentPage {
 
     //現在地取得 → DB取得 → 距離計算 → 上位10件 → leafletに渡す
     private async Task LoadSheltersAndShowPinsAsync() {
+        await WaitForMapReadyAsync();
+
         // GPSで現在地を取得
         var location = await Geolocation.GetLocationAsync();
         double currentLat = location.Latitude;
@@ -317,6 +351,8 @@ public partial class TopPage : ContentPage {
     }
 
     private async void ExecuteButton_Clicked(object sender, TappedEventArgs e) {
+        await WaitForMapReadyAsync();
+
         if (PrefecturePicker.SelectedItem is not string selectedPrefecture)
             return;
 
@@ -363,6 +399,8 @@ public partial class TopPage : ContentPage {
     }
 
     private async void ExitButton_Clicked(object sender, TappedEventArgs e) {
+        await WaitForMapReadyAsync();
+
         // 都道府県ピンを削除
         await MapWebView.EvaluateJavaScriptAsync("clearPrefectureMarkers();");
 

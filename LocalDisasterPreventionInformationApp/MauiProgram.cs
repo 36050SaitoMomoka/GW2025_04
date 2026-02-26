@@ -44,6 +44,12 @@ namespace LocalDisasterPreventionInformationApp
             builder.Services.AddTransient<MyPage>();
             builder.Services.AddTransient<EditProfilePage>();
 
+            builder.ConfigureMauiHandlers(handlers => {
+#if ANDROID
+                handlers.AddHandler<WebView, LocalDisasterPreventionInformationApp.Platforms.Android.CustomWebViewHandler>();
+#endif
+            });
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

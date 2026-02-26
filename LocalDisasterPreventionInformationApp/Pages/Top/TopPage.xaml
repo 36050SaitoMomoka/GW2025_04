@@ -8,9 +8,9 @@
     <base:BasePage>
         <base:BasePage.InnerContent>
             <Grid x:Name="Inner">
-                <WebView x:Name="MapWebView"
+                <!--WebView x:Name="MapWebView"
                          Source="map.html" 
-                         Navigated="MapWebView_Navigated"/>
+                         Navigated="MapWebView_Navigated"/-->
 
                 <!-- 通常時の操作パネル -->
                 <Border x:Name="RightPanel"

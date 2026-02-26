@@ -108,7 +108,8 @@
 
                             <!-- 9カラム構成に変更 -->
                             <Grid ColumnDefinitions="2*,1,3*,1,2*,1,2*,1,*"
-                                    Padding="5" BackgroundColor="#EEEEEE">
+                                  MaximumWidthRequest="750"
+                                  Padding="5" BackgroundColor="#EEEEEE">
 
                                 <!-- 商品名 -->
                                 <Label Grid.Column="0"
@@ -164,7 +165,7 @@
                             <!-- 黒い線 -->
                             <BoxView HeightRequest="1"
                                  BackgroundColor="Black"
-                                 HorizontalOptions="Fill" />
+                                 MaximumWidthRequest="750" />
                         </VerticalStackLayout>
                     </CollectionView.Header>
 
@@ -174,7 +175,9 @@
                             <VerticalStackLayout Spacing="0">
 
                                 <!-- ★ 9カラム構成（縦線専用カラムを追加） -->
-                                <Grid ColumnDefinitions="2*,1,3*,1,2*,1,2*,1,*" Padding="5">
+                                <Grid ColumnDefinitions="2*,1,3*,1,2*,1,2*,1,*"
+                                      MaximumWidthRequest="750"
+                                      Padding="5">
 
                                     <!-- 縦線（商品名と数量の間） -->
                                     <BoxView Grid.Column="1"
@@ -272,7 +275,7 @@
                                 <!-- 商品間の区切り線 -->
                                 <BoxView HeightRequest="0.5"
                                      BackgroundColor="Black"
-                                     HorizontalOptions="Fill"/>
+                                     MaximumWidthRequest="750"/>
                             </VerticalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
