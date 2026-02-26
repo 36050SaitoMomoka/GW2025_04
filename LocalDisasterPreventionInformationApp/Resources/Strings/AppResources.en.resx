@@ -290,7 +290,24 @@
 </data>
 
 	<data name="Dialog_Ok" xml:space="preserve">
-  <value>ＯＫ</value>
+  <value>OK</value>
+</data>
+
+	<!-- 編集の住所追加 -->
+	<data name="Add_AddressType" xml:space="preserve">
+  <value>Address Type (ex：Home, Parents' Home, Workplace)</value>
+</data>
+
+	<data name="Add_PostalCode" xml:space="preserve">
+  <value>Postal Code (7 digits)</value>
+</data>
+
+	<data name="Add_Pre_City" xml:space="preserve">
+  <value>Prefecture City/Town/Village Neighborhood (Auto-filled)</value>
+</data>
+
+	<data name="Add_Street" xml:space="preserve">
+  <value>Street Address (ex：1-1)</value>
 </data>
 	
 </root>

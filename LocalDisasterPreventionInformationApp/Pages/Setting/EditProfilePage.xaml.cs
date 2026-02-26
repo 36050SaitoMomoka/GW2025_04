@@ -74,12 +74,24 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         if (vm != null) {
             vm.PageTitle = vm.Header_Edit;
 
-            // 言語切り替え時にも Picker を更新
+            // 言語切り替え時にも PageTitle、 を更新
             vm.PropertyChanged += (s, e) => {
                 if (e.PropertyName == null || e.PropertyName == "SelectedLanguage") {
                     vm.PageTitle = vm.Header_Edit;
+
+                    //住所のプレースホルダー翻訳
+                    UpdateAddressRowPlaceholders(vm);
                 }
             };
+        }
+    }
+
+    private void UpdateAddressRowPlaceholders(AppShellViewModel vm) {
+        foreach (var row in _addressRows) {
+            row.TypeEntry.Placeholder = vm.Add_AddressType;
+            row.ZipEntry.Placeholder = vm.Add_PostalCode;
+            row.AutoAddressEntry.Placeholder = vm.Add_Pre_City;
+            row.AddressLineEntry.Placeholder = vm.Add_Street;
         }
     }
 
@@ -316,9 +328,11 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         }
         };
 
+        var vm = Shell.Current.BindingContext as AppShellViewModel;
+
         // ① 住所種類
         var typeEntry = new Entry {
-            Placeholder = "住所種類（例：自宅・実家・職場）",
+            Placeholder = vm.Add_AddressType,
             FontSize = 20,
             TextColor = Colors.Black,
             WidthRequest = 650
@@ -327,7 +341,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
 
         // ② 郵便番号
         var zipEntry = new Entry {
-            Placeholder = "郵便番号（7桁）",
+            Placeholder = vm.Add_PostalCode,
             Keyboard = Keyboard.Numeric,
             FontSize = 20,
             Margin = new Thickness(0, 5, 0, 5),
@@ -338,7 +352,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
 
         // ③ 自動住所
         var autoAddressEntry = new Entry {
-            Placeholder = "都道府県 市区町村 町域（自動入力）",
+            Placeholder = vm.Add_Pre_City,
             FontSize = 20,
             IsReadOnly = true,
             TextColor = Colors.Black,
@@ -348,7 +362,7 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
 
         // ④ 番地
         var addressLineEntry = new Entry {
-            Placeholder = "番地（例：1-1）",
+            Placeholder = vm.Add_Street,
             FontSize = 20,
             TextColor = Colors.Black,
             WidthRequest = 650

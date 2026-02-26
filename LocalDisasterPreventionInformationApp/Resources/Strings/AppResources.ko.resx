@@ -322,5 +322,22 @@
 	<data name="Dialog_Ok" xml:space="preserve">
   <value>확인</value>
 </data>
+
+	<!-- 編集の住所追加 -->
+	<data name="Add_AddressType" xml:space="preserve">
+  <value>주소 종류(예: 자택·본가·직장)</value>
+</data>
+
+	<data name="Add_PostalCode" xml:space="preserve">
+  <value>우편번호(7자리)</value>
+</data>
+
+	<data name="Add_Pre_City" xml:space="preserve">
+  <value>도도부현 시구정촌 마을(자동 입력)</value>
+</data>
+
+	<data name="Add_Street" xml:space="preserve">
+  <value>번지(예: 1-1)</value>
+</data>
 	
 </root>

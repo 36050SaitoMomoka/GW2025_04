@@ -322,5 +322,22 @@
 	<data name="Dialog_Ok" xml:space="preserve">
   <value>确定</value>
 </data>
+
+	<!-- 編集の住所追加 -->
+	<data name="Add_AddressType" xml:space="preserve">
+  <value>住址类型（例如：自宅・娘家・职场）</value>
+</data>
+
+	<data name="Add_PostalCode" xml:space="preserve">
+  <value>邮政编码（7位数）</value>
+</data>
+
+	<data name="Add_Pre_City" xml:space="preserve">
+  <value>都道府县 市区町村 街道区域（自动填充）</value>
+</data>
+
+	<data name="Add_Street" xml:space="preserve">
+  <value>门牌号（例如：1-1）</value>
+</data>
 	
 </root>
