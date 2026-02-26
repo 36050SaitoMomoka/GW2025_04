@@ -14,6 +14,9 @@ namespace LocalDisasterPreventionInformationApp.Pages.Setting;//test
 public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
     private readonly AppDatabase _db;
 
+    //翻訳用
+    public AppShellViewModel ShellVM => Shell.Current.BindingContext as AppShellViewModel;
+
     //住所行のEntryを保持するリスト
     private List<(Entry ZipEntry, Entry TypeEntry,
                   Entry AutoAddressEntry, Entry AddressLineEntry)> _addressRows = new();
@@ -446,14 +449,14 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
     private async void OnRemoveAddressClicked(object sender, EventArgs e) {
         if (sender is not Button btn) return;
 
-        bool confirm = await DisplayAlert(
+        bool answer = await DisplayAlert(
             "確認",
             "この住所を削除しますか？",
-            "削除する",
-            "キャンセル"
+            "キャンセル",
+            "ＯＫ"
         );
 
-        if (!confirm)
+        if (answer)
             return;
 
         if (btn.Parent is Grid row) {

@@ -217,7 +217,7 @@ public partial class StockPage : ContentPage, INotifyPropertyChanged {
             "確認",
             $"{stock.ProductName}（{stock.ExpireDate}）を削除しますか？",
             "キャンセル",
-            "削除する"
+            "ＯＫ"
         );
 
         if (answer)

@@ -1,5 +1,6 @@
 <ContentPage
     x:Class="LocalDisasterPreventionInformationApp.Pages.Setting.EditProfilePage"
+    x:Name="ThisPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:base="clr-namespace:LocalDisasterPreventionInformationApp.Pages.Base"
@@ -23,7 +24,7 @@
 
                             <!-- 氏名 -->
                             <Label Grid.Row="0"
-                                   Text="氏名"
+                                   Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Edit_Name}"
                                    FontSize="26"
                                    FontAttributes="Bold"
                                    TextColor="#333"
@@ -40,7 +41,7 @@
 
                             <!-- フリガナ（氏名の下に移動 & サイズ統一） -->
                             <Label Grid.Row="4"
-                                   Text="フリガナ"
+                                   Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Edit_Furigana}"
                                    FontSize="26"
                                    FontAttributes="Bold"
                                    TextColor="#333"
@@ -57,7 +58,7 @@
 
                             <!-- メールアドレス -->
                             <Label Grid.Row="8"
-                                   Text="メールアドレス"
+                                   Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Edit_Email}"
                                    FontSize="26"
                                    FontAttributes="Bold"
                                    TextColor="#333"
@@ -74,7 +75,7 @@
 
                             <!-- 電話番号 -->
                             <Label Grid.Row="12"
-                                   Text="電話番号"
+                                   Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Edit_Phone}"
                                    FontSize="26"
                                    FontAttributes="Bold"
                                    TextColor="#333"
@@ -91,7 +92,7 @@
 
                             <!-- 住所 -->
                             <Label Grid.Row="16"
-                                   Text="住所"
+                                   Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Edit_Address}"
                                    FontSize="26"
                                    FontAttributes="Bold"
                                    TextColor="#333"
@@ -145,7 +146,7 @@
                       Padding="20"
                       ColumnDefinitions="*,Auto,Auto,*">
                     <!-- 破棄ボタン -->
-                    <Button Text="キャンセル"
+                    <Button Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Btn_Cancel}"
                             FontSize="20"
                             BackgroundColor="#B2BEB5"
                             TextColor="White"
@@ -156,7 +157,7 @@
                             Clicked="OnBackClicked"/>
 
                     <!-- 確定ボタン -->
-                    <Button Text="確定"
+                    <Button Text="{Binding Source={x:Reference ThisPage}, Path=ShellVM.Btn_Confirm}"
                             FontSize="20"
                             BackgroundColor="#8CAFA4"
                             TextColor="White"
