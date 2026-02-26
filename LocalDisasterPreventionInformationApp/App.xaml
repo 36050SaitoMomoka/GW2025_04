@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary>
                     <converters:ModeToBorderColorConverter x:Key="ModeToBorderColor" />
+                    <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

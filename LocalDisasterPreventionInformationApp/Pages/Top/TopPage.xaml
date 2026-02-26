@@ -124,7 +124,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout Padding="5"
-                                                 BackgroundColor="{Binding IsSelected,Converter={StaticResource BoolToColorConver}}">
+                                                 BackgroundColor="{Binding IsSelected,Converter={StaticResource BoolToColorConverter}}">
                                         <Label Text="{Binding Shelter.Name}"/>
                                         <Label Text="{Binding Distance,StringFormat='{0:F2}km'}"
                                                FontSize="12" TextColor="Gray"/>
