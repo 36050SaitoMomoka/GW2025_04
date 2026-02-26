@@ -26,13 +26,13 @@
                     Margin="10"
                     Padding="20"
                     WidthRequest="260"
-                    HeightRequest="200">
+                    HeightRequest="190">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
 
-                    <VerticalStackLayout Spacing="10">
+                    <VerticalStackLayout Spacing="30">
 
                         <!-- 災害種別ピッカー -->
                         <Picker

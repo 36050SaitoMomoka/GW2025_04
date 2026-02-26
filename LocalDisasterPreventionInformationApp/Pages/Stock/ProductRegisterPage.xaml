@@ -15,8 +15,8 @@
 
                 <Grid ColumnDefinitions="*,Auto"
                       RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                      ColumnSpacing="10"
-                      RowSpacing="20"
+                      ColumnSpacing="30"
+                      RowSpacing="50"
                       HorizontalOptions="Center"
                       VerticalOptions="Center">
 
@@ -24,22 +24,26 @@
                     <Label Text="{Binding Stock_ProductName}"
                            Grid.Row="0" Grid.Column="0"
                            VerticalOptions="Center"
+                           FontSize="20"
                            HorizontalTextAlignment="End"/>
 
                     <Entry x:Name="ProductNameEntry"
                            Grid.Row="0" Grid.Column="1"
                            Placeholder="{Binding Stock_ProductName}"
-                           WidthRequest="200"/>
+                           FontSize="17"
+                           WidthRequest="250"/>
 
                     <!-- 消費期限 -->
                     <Label Text="{Binding Stock_Expire}"
                            Grid.Row="1" Grid.Column="0"
                            VerticalOptions="Center"
+                           FontSize="20"
                            HorizontalTextAlignment="End"/>
 
                     <DatePicker x:Name="ExpirationPicker"
                                 Grid.Row="1" Grid.Column="1"
-                                WidthRequest="200"
+                                FontSize="17"
+                                WidthRequest="250"
                                 Format="yyyy/MM/dd" />
 
 
@@ -47,12 +51,14 @@
                     <Label Text="{Binding Stock_Quantity}"
                            Grid.Row="2" Grid.Column="0"
                            VerticalOptions="Center"
+                           FontSize="20"
                            HorizontalTextAlignment="End"/>
 
                     <Entry x:Name="QuantityEntry"
                            Grid.Row="2" Grid.Column="1"
                            Placeholder="{Binding Stock_Quantity}"
-                           WidthRequest="200"
+                           FontSize="17"
+                           WidthRequest="250"
                            Keyboard="Numeric"
                            TextChanged="OnQuantityChanged"/>
 
@@ -60,12 +66,23 @@
                     <Label Text="{Binding Stock_Category}"
                            Grid.Row="3" Grid.Column="0"
                            VerticalOptions="Center"
+                           FontSize="20"
                            HorizontalTextAlignment="End"/>
 
                     <Picker x:Name="CategoryPicker"
                             Grid.Row="3" Grid.Column="1"
-                            WidthRequest="200">
+                            FontSize="17"
+                            WidthRequest="250">
                     </Picker>
+
+                    <Label Text="v"
+                           Grid.Row="3" Grid.Column="1"
+                           FontSize="20"
+                           TextColor="gray"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           Margin="5,0,20,0"/>
+
 
                 </Grid>
 

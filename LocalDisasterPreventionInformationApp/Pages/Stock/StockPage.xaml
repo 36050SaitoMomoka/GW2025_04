@@ -84,11 +84,11 @@
                             SelectedIndexChanged="OnSortChanged"/>
 
                     <Label Text="v"
-                           FontSize="28"
+                           FontSize="25"
                            TextColor="gray"
                            HorizontalOptions="End"
                            VerticalOptions="Center"
-                           Margin="5,0"/>
+                           Margin="5,0,20,0"/>
                 </Grid>
 
                 <!-- 商品一覧 -->

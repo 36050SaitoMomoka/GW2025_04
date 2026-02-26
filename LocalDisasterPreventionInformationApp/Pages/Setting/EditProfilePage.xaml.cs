@@ -286,13 +286,15 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         // ★ マイナスボタン（住所セット削除）
         var removeButton = new Button {
             Text = "-",
-            FontSize = 26,
+            FontSize = 20,
             WidthRequest = 45,
             HeightRequest = 45,
-            BackgroundColor = Colors.Red,
+            BackgroundColor = Color.FromArgb("#FF9999"),
             TextColor = Colors.White,
             CornerRadius = 10,
-            Margin = new Thickness(5, 15, 0, 0)
+            Margin = new Thickness(5, 0, 0, 0),
+            VerticalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Center
         };
         removeButton.Clicked += OnRemoveAddressClicked;
 
@@ -373,13 +375,16 @@ public partial class EditProfilePage : ContentPage, INotifyPropertyChanged {
         var removeButton = new Button {
             Text = "-",
             FontSize = 20,
-            BackgroundColor = Colors.Red,
+            BackgroundColor = Color.FromArgb("#FF9999"),
             TextColor = Colors.White,
             CornerRadius = 10,
             WidthRequest = 45,
             HeightRequest = 45,
-            Margin = new Thickness(5, 0, 0, 0)
+            Margin = new Thickness(5, 0, 0, 0),
+            VerticalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Center
         };
+
         removeButton.Clicked += OnRemoveAddressClicked;
 
         // 番地の横に配置
